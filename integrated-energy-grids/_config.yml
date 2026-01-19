@@ -7,7 +7,7 @@
 # Book settings
 title: integrated-energy-grids  # The title of the book. Will be placed in the left navbar.
 author: Marta Victoria, Aleksander Grochowicz          # The author of the book
-copyright: "2025"               # Copyright year to be placed in the footer
+copyright: "2026"               # Copyright year to be placed in the footer
 logo: DTUlogo.jpg               # A path to the book logo
 
 # Force re-execution of notebooks on each build.
@@ -26,7 +26,7 @@ latex:
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/martavp/integrated-energy-grids  # Online location of your book
+  url: https://github.com/aleks-g/integrated-energy-grids  # Online location of your book
   path_to_book: integrated-energy-grids  # Optional path to your book, relative to the repository root
   branch: main  # Which branch of the repository should be used when creating links (optional)
 
