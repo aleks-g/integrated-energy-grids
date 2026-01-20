@@ -63,8 +63,8 @@ Requirement already satisfied: cloudpickle>=3.0.0 in /opt/homebrew/Caskroom/mini
 Requirement already satisfied: fsspec>=2021.09.0 in /opt/homebrew/Caskroom/miniforge/base/envs/integrated-energy-grids/lib/python3.12/site-packages (from dask>=0.18.0->linopy>=0.2.1->pypsa) (2024.12.0)
 Requirement already satisfied: partd>=1.4.0 in /opt/homebrew/Caskroom/miniforge/base/envs/integrated-energy-grids/lib/python3.12/site-packages (from dask>=0.18.0->linopy>=0.2.1->pypsa) (1.4.2)
 Requirement already satisfied: pyyaml>=5.3.1 in /opt/homebrew/Caskroom/miniforge/base/envs/integrated-energy-grids/lib/python3.12/site-packages (from dask>=0.18.0->linopy>=0.2.1->pypsa) (6.0.2)
-Requirement already satisfied: six>=1.5 in /opt/homebrew/Caskroom/miniforge/base/envs/integrated-energy-grids/lib/python3.12/site-packages (from python-dateutil>=2.8.2->pandas>=0.24->pypsa) (1.17.0)
 ----- stdout -----
+Requirement already satisfied: six>=1.5 in /opt/homebrew/Caskroom/miniforge/base/envs/integrated-energy-grids/lib/python3.12/site-packages (from python-dateutil>=2.8.2->pandas>=0.24->pypsa) (1.17.0)
 Requirement already satisfied: locket in /opt/homebrew/Caskroom/miniforge/base/envs/integrated-energy-grids/lib/python3.12/site-packages (from partd>=1.4.0->dask>=0.18.0->linopy>=0.2.1->pypsa) (1.0.0)
 ------------------
 
