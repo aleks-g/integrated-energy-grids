@@ -2,7 +2,7 @@
 
 This repository includes relevant tutorials and solutions to problems proposed in the MSc course [Integrated Energy Grids](https://kurser.dtu.dk/course/2024-2025/46770?menulanguage=en) at DTU.. 
 
-If you detect any error, please [open an issue](https://github.com/martavp/integrated-energy-grids/issues) and we will try to fix it. Ideally, you can also pull request the fix.
+If you detect any error, please [open an issue](https://github.com/martavp/integrated-energy-grids/issues) and we will try to fix it. Ideally, you can also pull request the fix. 
 
 ## Usage
 
