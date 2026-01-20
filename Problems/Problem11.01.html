@@ -1,0 +1,1425 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Problem 11.1 &#8212; integrated-energy-grids</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Problems/Problem11.01';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Problem 11.2" href="Problem11.02.html" />
+    <link rel="prev" title="Problem 10.2" href="Problem10.02.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/DTUlogo.jpg" class="logo__image only-light" alt="integrated-energy-grids - Home"/>
+    <img src="../_static/DTUlogo.jpg" class="logo__image only-dark pst-js-only" alt="integrated-energy-grids - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../intro-install.html">Python and Conda</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../intro-gurobi.html">Gurobi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro-python.html">Introduction to <code class="docutils literal notranslate"><span class="pre">Python</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro-numpy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">numpy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro-matplotlib.html">Introduction to <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro-pandas.html">Introduction to <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem01.01.html">Problem 1.1</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Problem01.03.html">Problem 1.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem01.04.html">Problem 1.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem01.05.html">Problem 1.5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem02.01.html">Problem 2.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro-linopy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">linopy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem02.02.html">Problem 2.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem02.03.html">Problem 2.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem03.01.html">Problem 3.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem03.02.html">Problem 3.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro-networkx.html">Introduction to <code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem03.03.html">Problem 3.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem03.04.html">Problem 3.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro-pypsa.html">Introduction to <code class="docutils literal notranslate"><span class="pre">pypsa</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.01.html">Problem 4.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.02.html">Problem 4.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.03.html">Problem 4.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.04.html">Problem 4.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem05.01.html">Problem 5.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem05.02.html">Problem 5.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem05.03.html">Problem 5.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem05.04.html">Problem 5.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem06.01.html">Problem 6.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem06.02.html">Problem 6.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro-gurobipy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">gurobipy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem06.03.html">Problem 6.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem07.01.html">Problem 7.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem07.02.html">Problem 7.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem07.03.html">Problem 7.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem07.04.html">Problem 7.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem08.01.html">Problem 8.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem08.02.html">Problem 8.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem09.02.html">Problem 9.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem09.03.html">Problem 9.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem10.01.html">Problem 10.1</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Problem10.02.html">Problem 10.2</a></li>
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Problem 11.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem11.02.html">Problem 11.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem12.01.html">Problem 12.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem12.02.html">Problem 12.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IEG_course_project.html">Course project</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/aleks-g/integrated-energy-grids/blob/main/integrated-energy-grids/Problems/Problem11.01.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/aleks-g/integrated-energy-grids" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/aleks-g/integrated-energy-grids/issues/new?title=Issue%20on%20page%20%2FProblems/Problem11.01.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Problems/Problem11.01.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Problem 11.1</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites-handling-technology-data-and-costs">Prerequisites: handling technology data and costs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retrieving-time-series-data">Retrieving time series data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#join-capacity-and-dispatch-optimization">Join capacity and dispatch optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-run">Model Run</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="problem-11-1">
+<h1>Problem 11.1<a class="headerlink" href="#problem-11-1" title="Link to this heading">#</a></h1>
+<p><strong>Integrated Energy Grids</strong></p>
+<p><strong>Problem 11.1. Join capacity and dispatch optimization.</strong></p>
+<p>This is an extension of Problem 8.1 from Lecture 8 in which only the electricity sector was included.</p>
+<p><strong>Optimize the capacity and dispatch of solar PV, onshore wind, battery, and heat pumps to supply the inelastic electricity and heating demand throughout one year. Assume that a Combined Heat and Power (CHP) unit with capacity of 1GW exist in the system. To do this, take the time series for the <a class="reference external" href="https://zenodo.org/record/3253876#.XSiVOEdS8l0">wind</a> and <a class="reference external" href="https://zenodo.org/record/2613651#.X0kbhDVS-uV">solar</a> capacity factors for Portugal in 2015 and the <a class="reference external" href="https://github.com/martavp/integrated-energy-grids/tree/main/integrated-energy-grids/Problems/data">electricity demand</a>.</strong></p>
+<p><strong>To estimate the hourly heating demand, consider the <a class="reference external" href="https://github.com/martavp/integrated-energy-grids/tree/main/integrated-energy-grids/Problems/data">population-weighted temperature time series</a>. Assume an annual heating demand for space heating and hot water of of 11,500 GWh/a and 8760 GWh/a respectively and a threshold temperature <span class="math notranslate nohighlight">\(T_{th}\)</span>=17<span class="math notranslate nohighlight">\(^{\circ}\)</span>C.</strong></p>
+<p><strong>Consider the annualized capital costs and marginal generation costs for the different technologies in the table.</strong></p>
+<p><strong>The annualized capital cost of the battery comprises  12,894 EUR/MWh/a for the energy capacity and 24,678 EUR/MW/a for the inverter. The inverter efficiency is 0.96 and the battery is assumed to have a fixed energy-to-power ratio of 2 hours. The Coefficient of Performance (COP) of heat pumps can be estimated as <span class="math notranslate nohighlight">\(COP (\Delta T) = 6.81 - 0.121 \Delta T + 0.00063 \Delta T^2\)</span> where  <span class="math notranslate nohighlight">\(\Delta T = T_{sink} - T_{source}\)</span> and <span class="math notranslate nohighlight">\(T_{sink}\)</span>=55 <span class="math notranslate nohighlight">\(^{\circ}\)</span>C. The  CHP unit can be modelled usig a multilink and assuming an efficiency of 0.4 when producing electricity and 0.4 when producing heat, assuming a marginal cost of 80 EUR/MWh and adding a gas store to the gas bus that represents an unlimited supply of gas.</strong></p>
+<p><strong>Calculate the total system cost, the optimal installed capacities, the annual generation per technology, and plot the hourly generation and demand of electricity and heat during January.</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you have not yet set up Python on your computer, you can execute this tutorial in your browser via <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>. Click on the rocket in the top right corner and launch “Colab”. If that doesn’t work download the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file and import it in <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>.</p>
+<p>Then install <code class="docutils literal notranslate"><span class="pre">pandas</span></code> and <code class="docutils literal notranslate"><span class="pre">numpy</span></code> by executing the following command in a Jupyter cell at the top of the notebook.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>!pip<span class="w"> </span>install<span class="w"> </span>pandas<span class="w"> </span>pypsa
+</pre></div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pypsa</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">homebrew</span><span class="o">/</span><span class="n">Caskroom</span><span class="o">/</span><span class="n">miniforge</span><span class="o">/</span><span class="n">base</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">integrated</span><span class="o">-</span><span class="n">energy</span><span class="o">-</span><span class="n">grids</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.12</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">numpy</span><span class="o">/</span><span class="n">_core</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">23</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">23</span>     <span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">multiarray</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">homebrew</span><span class="o">/</span><span class="n">Caskroom</span><span class="o">/</span><span class="n">miniforge</span><span class="o">/</span><span class="n">base</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">integrated</span><span class="o">-</span><span class="n">energy</span><span class="o">-</span><span class="n">grids</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.12</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">numpy</span><span class="o">/</span><span class="n">_core</span><span class="o">/</span><span class="n">multiarray</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">10</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">import</span><span class="w"> </span><span class="nn">functools</span>
+<span class="ne">---&gt; </span><span class="mi">10</span> <span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">overrides</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">_multiarray_umath</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">homebrew</span><span class="o">/</span><span class="n">Caskroom</span><span class="o">/</span><span class="n">miniforge</span><span class="o">/</span><span class="n">base</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">integrated</span><span class="o">-</span><span class="n">energy</span><span class="o">-</span><span class="n">grids</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.12</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">numpy</span><span class="o">/</span><span class="n">_core</span><span class="o">/</span><span class="n">overrides</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">7</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">from</span><span class="w"> </span><span class="nn">.._utils._inspect</span><span class="w"> </span><span class="kn">import</span> <span class="n">getargspec</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="kn">from</span><span class="w"> </span><span class="nn">numpy._core._multiarray_umath</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">add_docstring</span><span class="p">,</span>  <span class="n">_get_implementing_args</span><span class="p">,</span> <span class="n">_ArrayFunctionDispatcher</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">ARRAY_FUNCTIONS</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+<span class="ne">ImportError</span>: dlopen(/opt/homebrew/Caskroom/miniforge/base/envs/integrated-energy-grids/lib/python3.12/site-packages/numpy/_core/_multiarray_umath.cpython-312-darwin.so, 0x0002): Library not loaded: @rpath/libgfortran.5.dylib
+  <span class="n">Referenced</span> <span class="n">from</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">C435405B</span><span class="o">-</span><span class="n">BFF1</span><span class="o">-</span><span class="mi">399</span><span class="n">F</span><span class="o">-</span><span class="n">A1EC</span><span class="o">-</span><span class="n">BD43418F546A</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">homebrew</span><span class="o">/</span><span class="n">Caskroom</span><span class="o">/</span><span class="n">miniforge</span><span class="o">/</span><span class="n">base</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">integrated</span><span class="o">-</span><span class="n">energy</span><span class="o">-</span><span class="n">grids</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libopenblas</span><span class="mf">.0</span><span class="o">.</span><span class="n">dylib</span>
+  <span class="n">Reason</span><span class="p">:</span> <span class="n">tried</span><span class="p">:</span> <span class="s1">&#39;/opt/homebrew/Caskroom/miniforge/base/envs/integrated-energy-grids/lib/libgfortran.5.dylib&#39;</span> <span class="p">(</span><span class="n">duplicate</span> <span class="n">LC_RPATH</span> <span class="s1">&#39;@loader_path&#39;</span><span class="p">),</span> <span class="s1">&#39;/opt/homebrew/Caskroom/miniforge/base/envs/integrated-energy-grids/lib/libgfortran.5.dylib&#39;</span> <span class="p">(</span><span class="n">duplicate</span> <span class="n">LC_RPATH</span> <span class="s1">&#39;@loader_path&#39;</span><span class="p">),</span> <span class="s1">&#39;/opt/homebrew/Caskroom/miniforge/base/envs/integrated-energy-grids/lib/python3.12/site-packages/numpy/_core/../../../../libgfortran.5.dylib&#39;</span> <span class="p">(</span><span class="n">duplicate</span> <span class="n">LC_RPATH</span> <span class="s1">&#39;@loader_path&#39;</span><span class="p">),</span> <span class="s1">&#39;/opt/homebrew/Caskroom/miniforge/base/envs/integrated-energy-grids/lib/python3.12/site-packages/numpy/_core/../../../../libgfortran.5.dylib&#39;</span> <span class="p">(</span><span class="n">duplicate</span> <span class="n">LC_RPATH</span> <span class="s1">&#39;@loader_path&#39;</span><span class="p">),</span> <span class="s1">&#39;/opt/homebrew/Caskroom/miniforge/base/envs/integrated-energy-grids/bin/../lib/libgfortran.5.dylib&#39;</span> <span class="p">(</span><span class="n">duplicate</span> <span class="n">LC_RPATH</span> <span class="s1">&#39;@loader_path&#39;</span><span class="p">),</span> <span class="s1">&#39;/opt/homebrew/Caskroom/miniforge/base/envs/integrated-energy-grids/bin/../lib/libgfortran.5.dylib&#39;</span> <span class="p">(</span><span class="n">duplicate</span> <span class="n">LC_RPATH</span> <span class="s1">&#39;@loader_path&#39;</span><span class="p">),</span> <span class="s1">&#39;/usr/local/lib/libgfortran.5.dylib&#39;</span> <span class="p">(</span><span class="n">no</span> <span class="n">such</span> <span class="n">file</span><span class="p">),</span> <span class="s1">&#39;/usr/lib/libgfortran.5.dylib&#39;</span> <span class="p">(</span><span class="n">no</span> <span class="n">such</span> <span class="n">file</span><span class="p">,</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dyld</span> <span class="n">cache</span><span class="p">)</span>
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">homebrew</span><span class="o">/</span><span class="n">Caskroom</span><span class="o">/</span><span class="n">miniforge</span><span class="o">/</span><span class="n">base</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">integrated</span><span class="o">-</span><span class="n">energy</span><span class="o">-</span><span class="n">grids</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.12</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">numpy</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">114</span>
+<span class="g g-Whitespace">    </span><span class="mi">113</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">114</span>     <span class="kn">from</span><span class="w"> </span><span class="nn">numpy.__config__</span><span class="w"> </span><span class="kn">import</span> <span class="n">show_config</span>
+<span class="g g-Whitespace">    </span><span class="mi">115</span> <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">homebrew</span><span class="o">/</span><span class="n">Caskroom</span><span class="o">/</span><span class="n">miniforge</span><span class="o">/</span><span class="n">base</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">integrated</span><span class="o">-</span><span class="n">energy</span><span class="o">-</span><span class="n">grids</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.12</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">numpy</span><span class="o">/</span><span class="n">__config__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="kn">from</span><span class="w"> </span><span class="nn">numpy._core._multiarray_umath</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">__cpu_features__</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">__cpu_baseline__</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">__cpu_dispatch__</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;show_config&quot;</span><span class="p">]</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">homebrew</span><span class="o">/</span><span class="n">Caskroom</span><span class="o">/</span><span class="n">miniforge</span><span class="o">/</span><span class="n">base</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">integrated</span><span class="o">-</span><span class="n">energy</span><span class="o">-</span><span class="n">grids</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.12</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">numpy</span><span class="o">/</span><span class="n">_core</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">49</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span>     <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span><span class="s2"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">28</span><span class="s2"> IMPORTANT: PLEASE READ THIS FOR ADVICE ON HOW TO SOLVE THIS ISSUE!</span>
+<span class="s2">   (...)</span>
+<span class="g g-Whitespace">     </span><span class="mi">47</span><span class="s2"> &quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">48</span>         <span class="n">__version__</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">49</span>     <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">50</span> <span class="k">finally</span><span class="p">:</span>
+
+<span class="ne">ImportError</span>: 
+
+<span class="ne">IMPORTANT</span>: PLEASE READ THIS FOR ADVICE ON HOW TO SOLVE THIS ISSUE!
+
+<span class="n">Importing</span> <span class="n">the</span> <span class="n">numpy</span> <span class="n">C</span><span class="o">-</span><span class="n">extensions</span> <span class="n">failed</span><span class="o">.</span> <span class="n">This</span> <span class="n">error</span> <span class="n">can</span> <span class="n">happen</span> <span class="k">for</span>
+<span class="n">many</span> <span class="n">reasons</span><span class="p">,</span> <span class="n">often</span> <span class="n">due</span> <span class="n">to</span> <span class="n">issues</span> <span class="k">with</span> <span class="n">your</span> <span class="n">setup</span> <span class="ow">or</span> <span class="n">how</span> <span class="n">NumPy</span> <span class="n">was</span>
+<span class="n">installed</span><span class="o">.</span>
+
+<span class="n">We</span> <span class="n">have</span> <span class="n">compiled</span> <span class="n">some</span> <span class="n">common</span> <span class="n">reasons</span> <span class="ow">and</span> <span class="n">troubleshooting</span> <span class="n">tips</span> <span class="n">at</span><span class="p">:</span>
+
+    <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">numpy</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">devdocs</span><span class="o">/</span><span class="n">user</span><span class="o">/</span><span class="n">troubleshooting</span><span class="o">-</span><span class="n">importerror</span><span class="o">.</span><span class="n">html</span>
+
+<span class="n">Please</span> <span class="n">note</span> <span class="ow">and</span> <span class="n">check</span> <span class="n">the</span> <span class="n">following</span><span class="p">:</span>
+
+  <span class="o">*</span> <span class="n">The</span> <span class="n">Python</span> <span class="n">version</span> <span class="ow">is</span><span class="p">:</span> <span class="n">Python3</span><span class="mf">.12</span> <span class="kn">from</span><span class="w"> </span><span class="s2">&quot;/opt/homebrew/Caskroom/miniforge/base/envs/integrated-energy-grids/bin/python&quot;</span>
+  <span class="o">*</span> <span class="n">The</span> <span class="n">NumPy</span> <span class="n">version</span> <span class="ow">is</span><span class="p">:</span> <span class="s2">&quot;2.2.1&quot;</span>
+
+<span class="ow">and</span> <span class="n">make</span> <span class="n">sure</span> <span class="n">that</span> <span class="n">they</span> <span class="n">are</span> <span class="n">the</span> <span class="n">versions</span> <span class="n">you</span> <span class="n">expect</span><span class="o">.</span>
+<span class="n">Please</span> <span class="n">carefully</span> <span class="n">study</span> <span class="n">the</span> <span class="n">documentation</span> <span class="n">linked</span> <span class="n">above</span> <span class="k">for</span> <span class="n">further</span> <span class="n">help</span><span class="o">.</span>
+
+<span class="n">Original</span> <span class="n">error</span> <span class="n">was</span><span class="p">:</span> <span class="n">dlopen</span><span class="p">(</span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">homebrew</span><span class="o">/</span><span class="n">Caskroom</span><span class="o">/</span><span class="n">miniforge</span><span class="o">/</span><span class="n">base</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">integrated</span><span class="o">-</span><span class="n">energy</span><span class="o">-</span><span class="n">grids</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.12</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">numpy</span><span class="o">/</span><span class="n">_core</span><span class="o">/</span><span class="n">_multiarray_umath</span><span class="o">.</span><span class="n">cpython</span><span class="o">-</span><span class="mi">312</span><span class="o">-</span><span class="n">darwin</span><span class="o">.</span><span class="n">so</span><span class="p">,</span> <span class="mh">0x0002</span><span class="p">):</span> <span class="n">Library</span> <span class="ow">not</span> <span class="n">loaded</span><span class="p">:</span> <span class="nd">@rpath</span><span class="o">/</span><span class="n">libgfortran</span><span class="mf">.5</span><span class="o">.</span><span class="n">dylib</span>
+  <span class="n">Referenced</span> <span class="n">from</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">C435405B</span><span class="o">-</span><span class="n">BFF1</span><span class="o">-</span><span class="mi">399</span><span class="n">F</span><span class="o">-</span><span class="n">A1EC</span><span class="o">-</span><span class="n">BD43418F546A</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">homebrew</span><span class="o">/</span><span class="n">Caskroom</span><span class="o">/</span><span class="n">miniforge</span><span class="o">/</span><span class="n">base</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">integrated</span><span class="o">-</span><span class="n">energy</span><span class="o">-</span><span class="n">grids</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libopenblas</span><span class="mf">.0</span><span class="o">.</span><span class="n">dylib</span>
+  <span class="n">Reason</span><span class="p">:</span> <span class="n">tried</span><span class="p">:</span> <span class="s1">&#39;/opt/homebrew/Caskroom/miniforge/base/envs/integrated-energy-grids/lib/libgfortran.5.dylib&#39;</span> <span class="p">(</span><span class="n">duplicate</span> <span class="n">LC_RPATH</span> <span class="s1">&#39;@loader_path&#39;</span><span class="p">),</span> <span class="s1">&#39;/opt/homebrew/Caskroom/miniforge/base/envs/integrated-energy-grids/lib/libgfortran.5.dylib&#39;</span> <span class="p">(</span><span class="n">duplicate</span> <span class="n">LC_RPATH</span> <span class="s1">&#39;@loader_path&#39;</span><span class="p">),</span> <span class="s1">&#39;/opt/homebrew/Caskroom/miniforge/base/envs/integrated-energy-grids/lib/python3.12/site-packages/numpy/_core/../../../../libgfortran.5.dylib&#39;</span> <span class="p">(</span><span class="n">duplicate</span> <span class="n">LC_RPATH</span> <span class="s1">&#39;@loader_path&#39;</span><span class="p">),</span> <span class="s1">&#39;/opt/homebrew/Caskroom/miniforge/base/envs/integrated-energy-grids/lib/python3.12/site-packages/numpy/_core/../../../../libgfortran.5.dylib&#39;</span> <span class="p">(</span><span class="n">duplicate</span> <span class="n">LC_RPATH</span> <span class="s1">&#39;@loader_path&#39;</span><span class="p">),</span> <span class="s1">&#39;/opt/homebrew/Caskroom/miniforge/base/envs/integrated-energy-grids/bin/../lib/libgfortran.5.dylib&#39;</span> <span class="p">(</span><span class="n">duplicate</span> <span class="n">LC_RPATH</span> <span class="s1">&#39;@loader_path&#39;</span><span class="p">),</span> <span class="s1">&#39;/opt/homebrew/Caskroom/miniforge/base/envs/integrated-energy-grids/bin/../lib/libgfortran.5.dylib&#39;</span> <span class="p">(</span><span class="n">duplicate</span> <span class="n">LC_RPATH</span> <span class="s1">&#39;@loader_path&#39;</span><span class="p">),</span> <span class="s1">&#39;/usr/local/lib/libgfortran.5.dylib&#39;</span> <span class="p">(</span><span class="n">no</span> <span class="n">such</span> <span class="n">file</span><span class="p">),</span> <span class="s1">&#39;/usr/lib/libgfortran.5.dylib&#39;</span> <span class="p">(</span><span class="n">no</span> <span class="n">such</span> <span class="n">file</span><span class="p">,</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dyld</span> <span class="n">cache</span><span class="p">)</span>
+
+
+<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
+
+<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pypsa</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">homebrew</span><span class="o">/</span><span class="n">Caskroom</span><span class="o">/</span><span class="n">miniforge</span><span class="o">/</span><span class="n">base</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">integrated</span><span class="o">-</span><span class="n">energy</span><span class="o">-</span><span class="n">grids</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.12</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">161</span>
+<span class="g g-Whitespace">    </span><span class="mi">157</span> <span class="kn">from</span><span class="w"> </span><span class="nn">packaging.version</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse</span> <span class="k">as</span> <span class="n">parse_version</span>
+<span class="g g-Whitespace">    </span><span class="mi">159</span> <span class="c1"># cbook must import matplotlib only within function</span>
+<span class="g g-Whitespace">    </span><span class="mi">160</span> <span class="c1"># definitions, so it is safe to import from it here.</span>
+<span class="ne">--&gt; </span><span class="mi">161</span> <span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">_api</span><span class="p">,</span> <span class="n">_version</span><span class="p">,</span> <span class="n">cbook</span><span class="p">,</span> <span class="n">_docstring</span><span class="p">,</span> <span class="n">rcsetup</span>
+<span class="g g-Whitespace">    </span><span class="mi">162</span> <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib._api</span><span class="w"> </span><span class="kn">import</span> <span class="n">MatplotlibDeprecationWarning</span>
+<span class="g g-Whitespace">    </span><span class="mi">163</span> <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.rcsetup</span><span class="w"> </span><span class="kn">import</span> <span class="n">cycler</span>  <span class="c1"># noqa: F401</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">homebrew</span><span class="o">/</span><span class="n">Caskroom</span><span class="o">/</span><span class="n">miniforge</span><span class="o">/</span><span class="n">base</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">integrated</span><span class="o">-</span><span class="n">energy</span><span class="o">-</span><span class="n">grids</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.12</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">cbook</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">24</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="kn">import</span><span class="w"> </span><span class="nn">types</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="kn">import</span><span class="w"> </span><span class="nn">weakref</span>
+<span class="ne">---&gt; </span><span class="mi">24</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span>     <span class="kn">from</span><span class="w"> </span><span class="nn">numpy.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">VisibleDeprecationWarning</span>  <span class="c1"># numpy &gt;= 1.25</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">homebrew</span><span class="o">/</span><span class="n">Caskroom</span><span class="o">/</span><span class="n">miniforge</span><span class="o">/</span><span class="n">base</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">integrated</span><span class="o">-</span><span class="n">energy</span><span class="o">-</span><span class="n">grids</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.12</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">numpy</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">119</span>
+<span class="g g-Whitespace">    </span><span class="mi">115</span> <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">116</span>     <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Error importing numpy: you should not try to import numpy from</span>
+<span class="g g-Whitespace">    </span><span class="mi">117</span><span class="s2">     its source directory; please exit the numpy source tree, and relaunch</span>
+<span class="g g-Whitespace">    </span><span class="mi">118</span><span class="s2">     your python interpreter from there.&quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">119</span>     <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+<span class="g g-Whitespace">    </span><span class="mi">121</span> <span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">_core</span>
+<span class="g g-Whitespace">    </span><span class="mi">122</span> <span class="kn">from</span><span class="w"> </span><span class="nn">._core</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">123</span>     <span class="n">False_</span><span class="p">,</span> <span class="n">ScalarType</span><span class="p">,</span> <span class="n">True_</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">124</span>     <span class="nb">abs</span><span class="p">,</span> <span class="n">absolute</span><span class="p">,</span> <span class="n">acos</span><span class="p">,</span> <span class="n">acosh</span><span class="p">,</span> <span class="n">add</span><span class="p">,</span> <span class="nb">all</span><span class="p">,</span> <span class="n">allclose</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">169</span>     <span class="n">vecmat</span><span class="p">,</span> <span class="n">void</span><span class="p">,</span> <span class="n">vstack</span><span class="p">,</span> <span class="n">where</span><span class="p">,</span> <span class="n">zeros</span><span class="p">,</span> <span class="n">zeros_like</span>
+<span class="g g-Whitespace">    </span><span class="mi">170</span> <span class="p">)</span>
+
+<span class="ne">ImportError</span>: Error importing numpy: you should not try to import numpy from
+        <span class="n">its</span> <span class="n">source</span> <span class="n">directory</span><span class="p">;</span> <span class="n">please</span> <span class="n">exit</span> <span class="n">the</span> <span class="n">numpy</span> <span class="n">source</span> <span class="n">tree</span><span class="p">,</span> <span class="ow">and</span> <span class="n">relaunch</span>
+        <span class="n">your</span> <span class="n">python</span> <span class="n">interpreter</span> <span class="kn">from</span><span class="w"> </span><span class="nn">there.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="prerequisites-handling-technology-data-and-costs">
+<h2>Prerequisites: handling technology data and costs<a class="headerlink" href="#prerequisites-handling-technology-data-and-costs" title="Link to this heading">#</a></h2>
+<p>We maintain a database (<a class="github reference external" href="https://github.com/PyPSA/technology-data">PyPSA/technology-data</a>) which collects assumptions and projections for energy system technologies (such as costs, efficiencies, lifetimes, etc.) for given years, which we can load into a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>. This requires some pre-processing to load (e.g. converting units, setting defaults, re-arranging dimensions):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">year</span> <span class="o">=</span> <span class="mi">2030</span>
+<span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://raw.githubusercontent.com/PyPSA/technology-data/master/outputs/costs_</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">.csv&quot;</span>
+<span class="n">costs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">costs</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">costs</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;/kW&quot;</span><span class="p">),</span> <span class="s2">&quot;value&quot;</span><span class="p">]</span> <span class="o">*=</span> <span class="mf">1e3</span>
+<span class="n">costs</span><span class="o">.</span><span class="n">unit</span> <span class="o">=</span> <span class="n">costs</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;/kW&quot;</span><span class="p">,</span> <span class="s2">&quot;/MW&quot;</span><span class="p">)</span>
+
+<span class="n">defaults</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;FOM&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;VOM&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;efficiency&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;fuel&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;investment&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;lifetime&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+    <span class="s2">&quot;CO2 intensity&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;discount rate&quot;</span><span class="p">:</span> <span class="mf">0.07</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">costs</span> <span class="o">=</span> <span class="n">costs</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">defaults</span><span class="p">)</span>
+
+<span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;OCGT&quot;</span><span class="p">,</span> <span class="s2">&quot;fuel&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;gas&quot;</span><span class="p">,</span> <span class="s2">&quot;fuel&quot;</span><span class="p">]</span>
+<span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;OCGT&quot;</span><span class="p">,</span> <span class="s2">&quot;CO2 intensity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;gas&quot;</span><span class="p">,</span> <span class="s2">&quot;CO2 intensity&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s also write a small utility function that calculates the <strong>annuity</strong> to annualise investment costs. The formula is</p>
+<div class="math notranslate nohighlight">
+\[
+a(r, n) = \frac{r}{1-(1+r)^{-n}}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(r\)</span> is the discount rate and <span class="math notranslate nohighlight">\(n\)</span> is the lifetime.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">annuity</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">r</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">r</span><span class="p">)</span> <span class="o">**</span> <span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">annuity</span><span class="p">(</span><span class="mf">0.07</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.09439292574325567
+</pre></div>
+</div>
+</div>
+</div>
+<p>Based on this, we can calculate the marginal generation costs (€/MWh):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">costs</span><span class="p">[</span><span class="s2">&quot;marginal_cost&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">costs</span><span class="p">[</span><span class="s2">&quot;VOM&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">costs</span><span class="p">[</span><span class="s2">&quot;fuel&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">costs</span><span class="p">[</span><span class="s2">&quot;efficiency&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>and the annualised investment costs (<code class="docutils literal notranslate"><span class="pre">capital_cost</span></code> in PyPSA terms, €/MW/a):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">annuity</span> <span class="o">=</span> <span class="n">costs</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">annuity</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;discount rate&quot;</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;lifetime&quot;</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">costs</span><span class="p">[</span><span class="s2">&quot;capital_cost&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">annuity</span> <span class="o">+</span> <span class="n">costs</span><span class="p">[</span><span class="s2">&quot;FOM&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span> <span class="o">*</span> <span class="n">costs</span><span class="p">[</span><span class="s2">&quot;investment&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now read the capital and marginal cost of onshore wind and solar.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;onwind&quot;</span><span class="p">,</span> <span class="s2">&quot;capital_cost&quot;</span><span class="p">]</span> <span class="c1">#EUR/MW/a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>101644.12332388277
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;solar&quot;</span><span class="p">,</span> <span class="s2">&quot;capital_cost&quot;</span><span class="p">]</span> <span class="c1">#EUR/MW/a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>51346.82981964593
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="retrieving-time-series-data">
+<h2>Retrieving time series data<a class="headerlink" href="#retrieving-time-series-data" title="Link to this heading">#</a></h2>
+<p>In this example, wind data from <a class="reference external" href="https://zenodo.org/record/3253876#.XSiVOEdS8l0">https://zenodo.org/record/3253876#.XSiVOEdS8l0</a> and solar PV data from <a class="reference external" href="https://zenodo.org/record/3253876#.XSiVOEdS8l0">https://zenodo.org/record/2613651#.X0kbhDVS-uV</a> is used. The data is downloaded in csv format and saved in the ‘data’ folder.
+The Pandas package is used as a convenient way of managing the datasets.</p>
+<p>For convenience, the column including date information is converted into Datetime and set as index</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_solar</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/pv_optimal.csv&#39;</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+<span class="n">data_solar</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">data_solar</span><span class="p">[</span><span class="s1">&#39;utc_time&#39;</span><span class="p">])</span>
+
+<span class="n">data_wind</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/onshore_wind_1979-2017.csv&#39;</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+<span class="n">data_wind</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">data_wind</span><span class="p">[</span><span class="s1">&#39;utc_time&#39;</span><span class="p">])</span>
+
+<span class="n">data_el</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/electricity_demand.csv&#39;</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+<span class="n">data_el</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">data_el</span><span class="p">[</span><span class="s1">&#39;utc_time&#39;</span><span class="p">])</span>
+
+<span class="n">data_T</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/temperature.csv&#39;</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+<span class="n">data_T</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">data_el</span><span class="p">[</span><span class="s1">&#39;utc_time&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The data format can now be analyzed using the .head() function to show the first lines of the data set</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_T</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>utc_time</th>
+      <th>PRT</th>
+    </tr>
+    <tr>
+      <th>utc_time</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2015-01-01 00:00:00+00:00</th>
+      <td>2015-01-01T00:00:00Z</td>
+      <td>5.8</td>
+    </tr>
+    <tr>
+      <th>2015-01-01 01:00:00+00:00</th>
+      <td>2015-01-01T01:00:00Z</td>
+      <td>5.4</td>
+    </tr>
+    <tr>
+      <th>2015-01-01 02:00:00+00:00</th>
+      <td>2015-01-01T02:00:00Z</td>
+      <td>5.2</td>
+    </tr>
+    <tr>
+      <th>2015-01-01 03:00:00+00:00</th>
+      <td>2015-01-01T03:00:00Z</td>
+      <td>4.9</td>
+    </tr>
+    <tr>
+      <th>2015-01-01 04:00:00+00:00</th>
+      <td>2015-01-01T04:00:00Z</td>
+      <td>4.5</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We will use timeseries for Portugal in this excercise</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">country</span> <span class="o">=</span> <span class="s1">&#39;PRT&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="join-capacity-and-dispatch-optimization">
+<h3>Join capacity and dispatch optimization<a class="headerlink" href="#join-capacity-and-dispatch-optimization" title="Link to this heading">#</a></h3>
+<p>For building the model, we start again by initialising an empty network, adding the snapshots, the electricity and the heating bus.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="n">pypsa</span><span class="o">.</span><span class="n">Network</span><span class="p">()</span>
+<span class="n">hours_in_2015</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2015-01-01 00:00Z&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;2015-12-31 23:00Z&#39;</span><span class="p">,</span>
+                              <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;h&#39;</span><span class="p">)</span>
+
+<span class="n">n</span><span class="o">.</span><span class="n">set_snapshots</span><span class="p">(</span><span class="n">hours_in_2015</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Bus&quot;</span><span class="p">,</span> <span class="s2">&quot;electricity&quot;</span><span class="p">)</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Bus&quot;</span><span class="p">,</span> <span class="s2">&quot;heat&quot;</span><span class="p">)</span>
+
+<span class="n">n</span><span class="o">.</span><span class="n">snapshots</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DatetimeIndex([&#39;2015-01-01 00:00:00&#39;, &#39;2015-01-01 01:00:00&#39;,
+               &#39;2015-01-01 02:00:00&#39;, &#39;2015-01-01 03:00:00&#39;,
+               &#39;2015-01-01 04:00:00&#39;, &#39;2015-01-01 05:00:00&#39;,
+               &#39;2015-01-01 06:00:00&#39;, &#39;2015-01-01 07:00:00&#39;,
+               &#39;2015-01-01 08:00:00&#39;, &#39;2015-01-01 09:00:00&#39;,
+               ...
+               &#39;2015-12-31 14:00:00&#39;, &#39;2015-12-31 15:00:00&#39;,
+               &#39;2015-12-31 16:00:00&#39;, &#39;2015-12-31 17:00:00&#39;,
+               &#39;2015-12-31 18:00:00&#39;, &#39;2015-12-31 19:00:00&#39;,
+               &#39;2015-12-31 20:00:00&#39;, &#39;2015-12-31 21:00:00&#39;,
+               &#39;2015-12-31 22:00:00&#39;, &#39;2015-12-31 23:00:00&#39;],
+              dtype=&#39;datetime64[ns]&#39;, name=&#39;snapshot&#39;, length=8760, freq=None)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we add the demand time series to the model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># add load to the bus</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Load&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;electricity demand&quot;</span><span class="p">,</span>
+      <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;electricity&quot;</span><span class="p">,</span>
+      <span class="n">p_set</span><span class="o">=</span><span class="n">data_el</span><span class="p">[</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;electricity demand&#39;], dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s have a check whether the data was read-in correctly.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">loads_t</span><span class="o">.</span><span class="n">p_set</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;MW&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;snapshot&#39;, ylabel=&#39;MW&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/029d8a139d80a4b808f7c11906ebf754d79d138500c35400d3101f359e6d713b.png" src="../_images/029d8a139d80a4b808f7c11906ebf754d79d138500c35400d3101f359e6d713b.png" />
+</div>
+</div>
+<p>We estimate now the hourly heating demand, based on the annual demand, the population-weighted temperature and the threshold temperature.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T_th</span><span class="o">=</span><span class="mi">17</span> <span class="c1">#ºC</span>
+<span class="n">annual_space_heating</span> <span class="o">=</span> <span class="mi">11500000</span> <span class="c1">#GWh/a </span>
+<span class="n">annual_hot_water</span> <span class="o">=</span> <span class="mi">8760000</span> <span class="c1">#GWh/a</span>
+
+<span class="n">HDH</span><span class="o">=</span><span class="n">T_th</span><span class="o">-</span><span class="n">data_T</span><span class="p">[</span><span class="s1">&#39;PRT&#39;</span><span class="p">]</span>
+<span class="n">HDH</span><span class="p">[</span><span class="n">HDH</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
+
+<span class="n">scale</span><span class="o">=</span><span class="n">annual_space_heating</span><span class="o">/</span><span class="n">HDH</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">heating_demand</span><span class="o">=</span><span class="n">scale</span><span class="o">*</span><span class="n">HDH</span><span class="o">+</span><span class="n">annual_hot_water</span><span class="o">/</span><span class="mi">8760</span>
+<span class="n">heating_demand</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;utc_time&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/cb9193d3fba9579bdf27f7a9fc791e56ae8265fa18d9203033daaef3882d8ce8.png" src="../_images/cb9193d3fba9579bdf27f7a9fc791e56ae8265fa18d9203033daaef3882d8ce8.png" />
+</div>
+</div>
+<p>We can add the heating demand to the model and plot it to check that it was properly added.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># add load to the bus</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Load&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;heat demand&quot;</span><span class="p">,</span>
+      <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;heat&quot;</span><span class="p">,</span>
+      <span class="n">p_set</span><span class="o">=</span><span class="n">heating_demand</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="n">n</span><span class="o">.</span><span class="n">loads_t</span><span class="o">.</span><span class="n">p_set</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;MW&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;snapshot&#39;, ylabel=&#39;MW&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/5e3b19643abf23a33ce10e394442a59133add55fe6a2008d92cc9f8f8f4aa831.png" src="../_images/5e3b19643abf23a33ce10e394442a59133add55fe6a2008d92cc9f8f8f4aa831.png" />
+</div>
+</div>
+<p>We add now the generators and set up their capacities to be extendable so that they can be optimized together with the dispatch time series. For the wind and solar generator, we need to indicate the capacity factor or maximum power per unit ‘p_max_pu’</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">CF_wind</span> <span class="o">=</span> <span class="n">data_wind</span><span class="p">[</span><span class="n">country</span><span class="p">][[</span><span class="n">hour</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%SZ&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">hour</span> <span class="ow">in</span> <span class="n">n</span><span class="o">.</span><span class="n">snapshots</span><span class="p">]]</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+        <span class="s2">&quot;Generator&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;onwind&quot;</span><span class="p">,</span>
+        <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;electricity&quot;</span><span class="p">,</span>
+        <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;onwind&quot;</span><span class="p">,</span>
+        <span class="n">p_max_pu</span><span class="o">=</span><span class="n">CF_wind</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+        <span class="n">capital_cost</span><span class="o">=</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;onwind&quot;</span><span class="p">,</span> <span class="s2">&quot;capital_cost&quot;</span><span class="p">],</span>
+        <span class="n">marginal_cost</span><span class="o">=</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;onwind&quot;</span><span class="p">,</span> <span class="s2">&quot;marginal_cost&quot;</span><span class="p">],</span>
+        <span class="n">efficiency</span><span class="o">=</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;onwind&quot;</span><span class="p">,</span> <span class="s2">&quot;efficiency&quot;</span><span class="p">],</span>
+        <span class="n">p_nom_extendable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="n">CF_solar</span> <span class="o">=</span> <span class="n">data_solar</span><span class="p">[</span><span class="n">country</span><span class="p">][[</span><span class="n">hour</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%SZ&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">hour</span> <span class="ow">in</span> <span class="n">n</span><span class="o">.</span><span class="n">snapshots</span><span class="p">]]</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+        <span class="s2">&quot;Generator&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;solar&quot;</span><span class="p">,</span>
+        <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;electricity&quot;</span><span class="p">,</span>
+        <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;solar&quot;</span><span class="p">,</span>
+        <span class="n">p_max_pu</span><span class="o">=</span> <span class="n">CF_solar</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+        <span class="n">capital_cost</span><span class="o">=</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;solar&quot;</span><span class="p">,</span> <span class="s2">&quot;capital_cost&quot;</span><span class="p">],</span>
+        <span class="n">marginal_cost</span><span class="o">=</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;solar&quot;</span><span class="p">,</span> <span class="s2">&quot;marginal_cost&quot;</span><span class="p">],</span>
+        <span class="n">efficiency</span><span class="o">=</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;solar&quot;</span><span class="p">,</span> <span class="s2">&quot;efficiency&quot;</span><span class="p">],</span>
+        <span class="n">p_nom_extendable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;solar&#39;], dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>So let’s make sure the capacity factors are read-in correctly.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">generators_t</span><span class="o">.</span><span class="n">p_max_pu</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;2015-01&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;CF&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;snapshot&#39;, ylabel=&#39;CF&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/23387b54bc61c0e43649ec96489530ade55c1f5aaa134b11b0a246602fda641b.png" src="../_images/23387b54bc61c0e43649ec96489530ade55c1f5aaa134b11b0a246602fda641b.png" />
+</div>
+</div>
+<p>We add the battery storage, assuming a fixed energy-to-power ratio of 2 hours, i.e. if fully charged, the battery can discharge at full capacity for 2 hours.</p>
+<p>For capital costs, we have to factor in both the capacity and energy costs of storage.</p>
+<p>We include the charging and discharging efficiencies we enforce a cyclic state-of-charge condition, i.e. the state of charge at the beginning of the optimisation period must equal the final state of charge.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;StorageUnit&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;battery storage&quot;</span><span class="p">,</span>
+    <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;electricity&quot;</span><span class="p">,</span>
+    <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;battery storage&quot;</span><span class="p">,</span>
+    <span class="n">max_hours</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">capital_cost</span><span class="o">=</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;battery inverter&quot;</span><span class="p">,</span> <span class="s2">&quot;capital_cost&quot;</span><span class="p">]</span>
+    <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;battery storage&quot;</span><span class="p">,</span> <span class="s2">&quot;capital_cost&quot;</span><span class="p">],</span>
+    <span class="n">efficiency_store</span><span class="o">=</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;battery inverter&quot;</span><span class="p">,</span> <span class="s2">&quot;efficiency&quot;</span><span class="p">],</span>
+    <span class="n">efficiency_dispatch</span><span class="o">=</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;battery inverter&quot;</span><span class="p">,</span> <span class="s2">&quot;efficiency&quot;</span><span class="p">],</span>
+    <span class="n">p_nom_extendable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">cyclic_state_of_charge</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;battery storage&#39;], dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We add now the CPH unit assuming a constant efficiency for power and heat generator using a multilink and a store of gas with unlimited capacity</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Bus&quot;</span><span class="p">,</span> <span class="s2">&quot;gas&quot;</span><span class="p">)</span>
+
+<span class="c1"># We add a gas store with energy capacity and an initial filling level much higher than the required gas consumption, </span>
+<span class="c1"># this way gas supply is unlimited</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Store&quot;</span><span class="p">,</span> <span class="s2">&quot;gas&quot;</span><span class="p">,</span> <span class="n">e_initial</span><span class="o">=</span><span class="mf">1e6</span><span class="p">,</span> <span class="n">e_nom</span><span class="o">=</span><span class="mf">1e6</span><span class="p">,</span> <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;gas&quot;</span><span class="p">)</span> 
+
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;Link&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CHP&quot;</span><span class="p">,</span>
+    <span class="n">bus0</span><span class="o">=</span><span class="s2">&quot;gas&quot;</span><span class="p">,</span>
+    <span class="n">bus1</span><span class="o">=</span><span class="s2">&quot;electricity&quot;</span><span class="p">,</span>
+    <span class="n">bus2</span><span class="o">=</span><span class="s2">&quot;heat&quot;</span><span class="p">,</span>
+    <span class="n">p_nom</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">marginal_cost</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span>
+    <span class="n">efficiency</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
+    <span class="n">efficiency2</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;CHP&#39;], dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>In order to add the air heat pumps to the network.</p>
+<p>We calculate their time-dependent COP with a sink temperature of 55° C and the population-weighted ambient temperature profile for Portugal.</p>
+<p>The heat pump performance is given by the following function:</p>
+<div class="math notranslate nohighlight">
+\[
+COP(\Delta T) = 6.81 - 0.121 \Delta T + 0.00063 \Delta T^2
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Delta T = T_{sink} - T_{source}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">cop</span><span class="p">(</span><span class="n">t_source</span><span class="p">,</span> <span class="n">t_sink</span><span class="o">=</span><span class="mi">55</span><span class="p">):</span>
+    <span class="n">delta_t</span> <span class="o">=</span> <span class="n">t_sink</span> <span class="o">-</span> <span class="n">t_source</span>
+    <span class="k">return</span> <span class="mf">6.81</span> <span class="o">-</span> <span class="mf">0.121</span> <span class="o">*</span> <span class="n">delta_t</span> <span class="o">+</span> <span class="mf">0.00063</span> <span class="o">*</span> <span class="n">delta_t</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="n">temp</span><span class="o">=</span><span class="n">data_T</span><span class="p">[</span><span class="n">country</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We add the heat pump to the network and plot to check that it was propoerly added.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;Link&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;heat pump&quot;</span><span class="p">,</span>
+    <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;heat pump&quot;</span><span class="p">,</span>
+    <span class="n">bus0</span><span class="o">=</span><span class="s2">&quot;electricity&quot;</span><span class="p">,</span>
+    <span class="n">bus1</span><span class="o">=</span><span class="s2">&quot;heat&quot;</span><span class="p">,</span>
+    <span class="n">efficiency</span><span class="o">=</span><span class="n">cop</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+    <span class="n">p_nom_extendable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">capital_cost</span><span class="o">=</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;central air-sourced heat pump&quot;</span><span class="p">,</span> <span class="s2">&quot;capital_cost&quot;</span><span class="p">],</span>  <span class="c1"># €/MWe/a</span>
+<span class="p">)</span>
+
+<span class="n">n</span><span class="o">.</span><span class="n">links_t</span><span class="o">.</span><span class="n">efficiency</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;COP&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;snapshot&#39;, ylabel=&#39;COP&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/cb0ff0dd718830d68e0ccb63667b00b0c5bf8d7df77789ac3be6213304d12012.png" src="../_images/cb0ff0dd718830d68e0ccb63667b00b0c5bf8d7df77789ac3be6213304d12012.png" />
+</div>
+</div>
+</section>
+<section id="model-run">
+<h3>Model Run<a class="headerlink" href="#model-run" title="Link to this heading">#</a></h3>
+<p>We can already solved the model using the open-solver “highs” or the commercial solver “gurobi” with the academic license</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">solver_name</span><span class="o">=</span><span class="s2">&quot;highs&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.consistency:The following buses have carriers which are not defined:
+Index([&#39;electricity&#39;, &#39;heat&#39;, &#39;gas&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
+WARNING:pypsa.consistency:The following generators have carriers which are not defined:
+Index([&#39;onwind&#39;, &#39;solar&#39;], dtype=&#39;object&#39;, name=&#39;Generator&#39;)
+WARNING:pypsa.consistency:The following stores have carriers which are not defined:
+Index([&#39;gas&#39;], dtype=&#39;object&#39;, name=&#39;Store&#39;)
+WARNING:pypsa.consistency:The following links have carriers which are not defined:
+Index([&#39;CHP&#39;, &#39;heat pump&#39;], dtype=&#39;object&#39;, name=&#39;Link&#39;)
+WARNING:pypsa.consistency:The following storage_units have carriers which are not defined:
+Index([&#39;battery storage&#39;], dtype=&#39;object&#39;, name=&#39;StorageUnit&#39;)
+WARNING:pypsa.consistency:The following buses have carriers which are not defined:
+Index([&#39;electricity&#39;, &#39;heat&#39;, &#39;gas&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
+WARNING:pypsa.consistency:The following generators have carriers which are not defined:
+Index([&#39;onwind&#39;, &#39;solar&#39;], dtype=&#39;object&#39;, name=&#39;Generator&#39;)
+WARNING:pypsa.consistency:The following stores have carriers which are not defined:
+Index([&#39;gas&#39;], dtype=&#39;object&#39;, name=&#39;Store&#39;)
+WARNING:pypsa.consistency:The following links have carriers which are not defined:
+Index([&#39;CHP&#39;, &#39;heat pump&#39;], dtype=&#39;object&#39;, name=&#39;Link&#39;)
+WARNING:pypsa.consistency:The following storage_units have carriers which are not defined:
+Index([&#39;battery storage&#39;], dtype=&#39;object&#39;, name=&#39;StorageUnit&#39;)
+INFO:linopy.model: Solve problem using Highs solver
+INFO:linopy.io:Writing objective.
+Writing constraints.: 100%|██████████| 23/23 [00:01&lt;00:00, 12.91it/s]
+Writing continuous variables.: 100%|██████████| 10/10 [00:00&lt;00:00, 25.43it/s]
+INFO:linopy.io: Writing time: 2.28s
+INFO:linopy.constants: Optimization successful: 
+Status: ok
+Termination condition: optimal
+Solution: 78844 primals, 183964 duals
+Objective: 7.45e+09
+Solver model: available
+Solver message: optimal
+
+INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-ext-p-lower, Generator-ext-p-upper, Link-fix-p-lower, Link-fix-p-upper, Link-ext-p-lower, Link-ext-p-upper, Store-fix-e-lower, Store-fix-e-upper, StorageUnit-ext-p_dispatch-lower, StorageUnit-ext-p_dispatch-upper, StorageUnit-ext-p_store-lower, StorageUnit-ext-p_store-upper, StorageUnit-ext-state_of_charge-lower, StorageUnit-ext-state_of_charge-upper, StorageUnit-energy_balance, Store-energy_balance were not assigned to the network.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;ok&#39;, &#39;optimal&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we can look at the results and evaluate the total system cost (in billion Euros per year)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">objective</span> <span class="o">/</span> <span class="mf">1e9</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.445154948946167
+</pre></div>
+</div>
+</div>
+</div>
+<p>The optimised capacities in GW, notice that we are representing some technologies using generator components and other using link components, so we need to check both.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">generators</span><span class="o">.</span><span class="n">p_nom_opt</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="mf">1e3</span><span class="p">)</span>  <span class="c1"># MW -&gt; GW</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generator
+onwind    17.646024
+solar     47.929947
+Name: p_nom_opt, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">p_nom_opt</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="mf">1e3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Link
+CHP          1.000000
+heat pump    3.407656
+Name: p_nom_opt, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>The total energy generation by technology in TWh:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">generators_t</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="mf">1e6</span><span class="p">)</span>  <span class="c1"># MWh -&gt; TWh</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generator
+onwind     6.131049
+solar     52.108982
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Electricity generation CHP</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">n</span><span class="o">.</span><span class="n">links_t</span><span class="o">.</span><span class="n">p1</span><span class="p">[</span><span class="s1">&#39;CHP&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mf">0.000001</span>  <span class="c1"># MWh -&gt; TWh</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.1559091618395015
+</pre></div>
+</div>
+</div>
+</div>
+<p>Heat generation from CHP and heat pumps</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">n</span><span class="o">.</span><span class="n">links_t</span><span class="o">.</span><span class="n">p2</span><span class="p">[</span><span class="s1">&#39;CHP&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mf">0.000001</span>  <span class="c1"># MWh -&gt; TWh</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.1559091618395015
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">n</span><span class="o">.</span><span class="n">links_t</span><span class="o">.</span><span class="n">p1</span><span class="p">[</span><span class="s1">&#39;heat pump&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mf">0.000001</span>  <span class="c1"># MWh -&gt; TWh</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20.104090838163273
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can plot the dispatch of electricity from every generator throughout January</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="o">-</span><span class="n">n</span><span class="o">.</span><span class="n">links_t</span><span class="o">.</span><span class="n">p1</span><span class="p">[</span><span class="s1">&#39;CHP&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;2015-01&quot;</span><span class="p">],</span> <span class="n">n</span><span class="o">.</span><span class="n">generators_t</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;2015-01&quot;</span><span class="p">],],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">area</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;dispatch&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;snapshot&#39;, ylabel=&#39;dispatch&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/fb6dcda33e79cdada04ae4bfe391a073b65ce6e4614133f78ba3d12bf501999b.png" src="../_images/fb6dcda33e79cdada04ae4bfe391a073b65ce6e4614133f78ba3d12bf501999b.png" />
+</div>
+</div>
+<p>We can also plot the dispatch of heating from every generator throughout January</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="o">-</span><span class="n">n</span><span class="o">.</span><span class="n">links_t</span><span class="o">.</span><span class="n">p2</span><span class="p">[</span><span class="s1">&#39;CHP&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;2015-01&quot;</span><span class="p">],</span><span class="o">-</span><span class="n">n</span><span class="o">.</span><span class="n">links_t</span><span class="o">.</span><span class="n">p1</span><span class="p">[</span><span class="s1">&#39;heat pump&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;2015-01&quot;</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">area</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;dispatch&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;snapshot&#39;, ylabel=&#39;dispatch&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/5b2dde99c04f93bf888da7638afac51f8d526e2b92fabd5d7906a67b0b50f078.png" src="../_images/5b2dde99c04f93bf888da7638afac51f8d526e2b92fabd5d7906a67b0b50f078.png" />
+</div>
+</div>
+<p>We can also plot the annual electricity mix and heating mix</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="o">-</span><span class="n">n</span><span class="o">.</span><span class="n">links_t</span><span class="o">.</span><span class="n">p1</span><span class="p">[</span><span class="s1">&#39;CHP&#39;</span><span class="p">],</span> <span class="n">n</span><span class="o">.</span><span class="n">generators_t</span><span class="o">.</span><span class="n">p</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Electricity&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: title={&#39;center&#39;: &#39;Electricity&#39;}&gt;
+</pre></div>
+</div>
+<img alt="../_images/896cdf94cb5fbe29e2f0b45beeeb4bfa24ced448c054efb81f965277cce17e76.png" src="../_images/896cdf94cb5fbe29e2f0b45beeeb4bfa24ced448c054efb81f965277cce17e76.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="o">-</span><span class="n">n</span><span class="o">.</span><span class="n">links_t</span><span class="o">.</span><span class="n">p2</span><span class="p">[</span><span class="s1">&#39;CHP&#39;</span><span class="p">],</span><span class="o">-</span><span class="n">n</span><span class="o">.</span><span class="n">links_t</span><span class="o">.</span><span class="n">p1</span><span class="p">[</span><span class="s1">&#39;heat pump&#39;</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Heat&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: title={&#39;center&#39;: &#39;Heat&#39;}&gt;
+</pre></div>
+</div>
+<img alt="../_images/a6aec40c34083fa6f849a701f39446e2af0c613ad1a51b39e1142418f7dfc92e.png" src="../_images/a6aec40c34083fa6f849a701f39446e2af0c613ad1a51b39e1142418f7dfc92e.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Problems"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Problem10.02.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Problem 10.2</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Problem11.02.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Problem 11.2</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites-handling-technology-data-and-costs">Prerequisites: handling technology data and costs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retrieving-time-series-data">Retrieving time series data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#join-capacity-and-dispatch-optimization">Join capacity and dispatch optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-run">Model Run</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Marta Victoria, Aleksander Grochowicz
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

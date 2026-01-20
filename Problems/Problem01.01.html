@@ -1,0 +1,1546 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Problem 1.1 &#8212; integrated-energy-grids</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Problems/Problem01.01';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Problem 1.3" href="Problem01.03.html" />
+    <link rel="prev" title="Introduction to pandas" href="../intro-pandas.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/DTUlogo.jpg" class="logo__image only-light" alt="integrated-energy-grids - Home"/>
+    <img src="../_static/DTUlogo.jpg" class="logo__image only-dark pst-js-only" alt="integrated-energy-grids - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../intro-install.html">Python and Conda</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../intro-gurobi.html">Gurobi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro-python.html">Introduction to <code class="docutils literal notranslate"><span class="pre">Python</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro-numpy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">numpy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro-matplotlib.html">Introduction to <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro-pandas.html">Introduction to <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Problem 1.1</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Problem01.03.html">Problem 1.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem01.04.html">Problem 1.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem01.05.html">Problem 1.5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem02.01.html">Problem 2.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro-linopy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">linopy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem02.02.html">Problem 2.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem02.03.html">Problem 2.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem03.01.html">Problem 3.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem03.02.html">Problem 3.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro-networkx.html">Introduction to <code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem03.03.html">Problem 3.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem03.04.html">Problem 3.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro-pypsa.html">Introduction to <code class="docutils literal notranslate"><span class="pre">pypsa</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.01.html">Problem 4.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.02.html">Problem 4.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.03.html">Problem 4.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.04.html">Problem 4.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem05.01.html">Problem 5.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem05.02.html">Problem 5.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem05.03.html">Problem 5.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem05.04.html">Problem 5.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem06.01.html">Problem 6.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem06.02.html">Problem 6.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro-gurobipy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">gurobipy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem06.03.html">Problem 6.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem07.01.html">Problem 7.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem07.02.html">Problem 7.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem07.03.html">Problem 7.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem07.04.html">Problem 7.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem08.01.html">Problem 8.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem08.02.html">Problem 8.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem09.02.html">Problem 9.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem09.03.html">Problem 9.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem10.01.html">Problem 10.1</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Problem10.02.html">Problem 10.2</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Problem11.01.html">Problem 11.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem11.02.html">Problem 11.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem12.01.html">Problem 12.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem12.02.html">Problem 12.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IEG_course_project.html">Course project</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/aleks-g/integrated-energy-grids/blob/main/integrated-energy-grids/Problems/Problem01.01.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/aleks-g/integrated-energy-grids" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/aleks-g/integrated-energy-grids/issues/new?title=Issue%20on%20page%20%2FProblems/Problem01.01.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Problems/Problem01.01.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Problem 1.1</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Problem 1.1</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-import">Data import</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solar-pv">Solar PV</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#onshore-wind">Onshore wind</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Solar PV</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Onshore wind</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Data import</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-of-demand-throughout-two-weeks">1) Plot of demand throughout two weeks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-fourier-power-spectra">Fast Fourier power spectra</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#duration-curves">Duration curves</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ramps">Ramps</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="problem-1-1">
+<h1>Problem 1.1<a class="headerlink" href="#problem-1-1" title="Link to this heading">#</a></h1>
+<p><strong>Integrated Energy Grids</strong></p>
+<p><strong>Problem 1.1. Analyzing solar and wind generation time series.</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you have not yet set up Python on your computer, you can execute this tutorial in your browser via <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>. Click on the rocket in the top right corner and launch “Colab”. If that doesn’t work download the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file and import it in <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>.</p>
+<p>Then install <code class="docutils literal notranslate"><span class="pre">pandas</span></code> and <code class="docutils literal notranslate"><span class="pre">numpy</span></code> by executing the following command in a Jupyter cell at the top of the notebook.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>!pip<span class="w"> </span>install<span class="w"> </span>pandas<span class="w"> </span>numpy<span class="w"> </span>scipy
+</pre></div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">fftpack</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">fftpack</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">homebrew</span><span class="o">/</span><span class="n">Caskroom</span><span class="o">/</span><span class="n">miniforge</span><span class="o">/</span><span class="n">base</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">integrated</span><span class="o">-</span><span class="n">energy</span><span class="o">-</span><span class="n">grids</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.12</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">pandas</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">19</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>         <span class="n">_missing_dependencies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_dependency</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">_e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="k">if</span> <span class="n">_missing_dependencies</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+<span class="ne">---&gt; </span><span class="mi">19</span>     <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span>         <span class="s2">&quot;Unable to import required dependencies:</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_missing_dependencies</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span>     <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="k">del</span> <span class="n">_hard_dependencies</span><span class="p">,</span> <span class="n">_dependency</span><span class="p">,</span> <span class="n">_missing_dependencies</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span>     <span class="c1"># numpy compat</span>
+
+<span class="ne">ImportError</span>: Unable to import required dependencies:
+<span class="ne">numpy</span>: Error importing numpy: you should not try to import numpy from
+        <span class="n">its</span> <span class="n">source</span> <span class="n">directory</span><span class="p">;</span> <span class="n">please</span> <span class="n">exit</span> <span class="n">the</span> <span class="n">numpy</span> <span class="n">source</span> <span class="n">tree</span><span class="p">,</span> <span class="ow">and</span> <span class="n">relaunch</span>
+        <span class="n">your</span> <span class="n">python</span> <span class="n">interpreter</span> <span class="kn">from</span><span class="w"> </span><span class="nn">there.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="data-import">
+<h1>Data import<a class="headerlink" href="#data-import" title="Link to this heading">#</a></h1>
+<p>In this example, wind data from <a class="reference external" href="https://zenodo.org/record/3253876#.XSiVOEdS8l0">https://zenodo.org/record/3253876#.XSiVOEdS8l0</a> and solar PV data from <a class="reference external" href="https://zenodo.org/record/3253876#.XSiVOEdS8l0">https://zenodo.org/record/2613651#.X0kbhDVS-uV</a> is used. The data is downloaded in csv format and saved in the ‘data’ folder.
+The Pandas package is used as a convenient way of managing the datasets.</p>
+<p>For convenience, the column including date information is converted into Datetime and set as index</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_pv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/pv_optimal.csv&#39;</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+<span class="n">data_pv</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">data_pv</span><span class="p">[</span><span class="s1">&#39;utc_time&#39;</span><span class="p">])</span>
+<span class="n">data_wind</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/onshore_wind_1979-2017.csv&#39;</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+<span class="n">data_wind</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">data_wind</span><span class="p">[</span><span class="s1">&#39;utc_time&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The data format can now be analyzed using the .head() function to show the first lines of the data set</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_pv</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>utc_time</th>
+      <th>AUT</th>
+      <th>BEL</th>
+      <th>BGR</th>
+      <th>BIH</th>
+      <th>CHE</th>
+      <th>CYP</th>
+      <th>CZE</th>
+      <th>DEU</th>
+      <th>DNK</th>
+      <th>...</th>
+      <th>MLT</th>
+      <th>NLD</th>
+      <th>NOR</th>
+      <th>POL</th>
+      <th>PRT</th>
+      <th>ROU</th>
+      <th>SRB</th>
+      <th>SVK</th>
+      <th>SVN</th>
+      <th>SWE</th>
+    </tr>
+    <tr>
+      <th>utc_time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1979-01-01 00:00:00+00:00</th>
+      <td>1979-01-01T00:00:00Z</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1979-01-01 01:00:00+00:00</th>
+      <td>1979-01-01T01:00:00Z</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1979-01-01 02:00:00+00:00</th>
+      <td>1979-01-01T02:00:00Z</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1979-01-01 03:00:00+00:00</th>
+      <td>1979-01-01T03:00:00Z</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1979-01-01 04:00:00+00:00</th>
+      <td>1979-01-01T04:00:00Z</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 33 columns</p>
+</div></div></div>
+</div>
+<p>We will use Denmark as an example for this solution</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">country</span> <span class="o">=</span> <span class="s1">&#39;DNK&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>1) Start by plotting the capacity factors for wind and solar throughout the first two weeks in January and the first two weeks in July. Do this for the most recent year for which you have available data.</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_pv</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2017-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2017-01-14&#39;</span><span class="p">][</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Capacity Factor solar PV&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;utc_time&#39;, ylabel=&#39;Capacity Factor solar PV&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/982051f57e5a3c663fa66df140290f2ce203b77177031b5ee40d38774beee309.png" src="../_images/982051f57e5a3c663fa66df140290f2ce203b77177031b5ee40d38774beee309.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_pv</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2017-06-01&#39;</span><span class="p">:</span><span class="s1">&#39;2017-06-14&#39;</span><span class="p">][</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Capacity Factor solar PV&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;utc_time&#39;, ylabel=&#39;Capacity Factor solar PV&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/f43dba691054c5c55efac9072cdf9dcd0409c51876e496ce16b0ca512ea595d1.png" src="../_images/f43dba691054c5c55efac9072cdf9dcd0409c51876e496ce16b0ca512ea595d1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_wind</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2017-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2017-01-14&#39;</span><span class="p">][</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Capacity Factor Onshore Wind&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;utc_time&#39;, ylabel=&#39;Capacity Factor Onshore Wind&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/dc9b014f50da5d5a0a6166ca875bfd396c64e0cd522c029c6ff73513d208b5a9.png" src="../_images/dc9b014f50da5d5a0a6166ca875bfd396c64e0cd522c029c6ff73513d208b5a9.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_wind</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2017-06-01&#39;</span><span class="p">:</span><span class="s1">&#39;2017-06-14&#39;</span><span class="p">][</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Capacity Factor Onshore Wind&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;utc_time&#39;, ylabel=&#39;Capacity Factor Onshore Wind&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/f7e17c4946b7e461c22510c964f63f0dec36df1874b0fc27665c39aea3d2edf1.png" src="../_images/f7e17c4946b7e461c22510c964f63f0dec36df1874b0fc27665c39aea3d2edf1.png" />
+</div>
+</div>
+<p><strong>2)Calculate the average capacity factor for every day of the year and plot them. Do the same for capacity factors averaged by week and month. Based on steps 1 and 2, what are the dominant frequencies for every technology?</strong></p>
+<p>Daily, weekly and monthly means are calculated using the pandas .groupby function combined with the pandas.Grouper automaticly creationg groups with the desired size.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Daily</span>
+<span class="n">daily_mean_pv</span> <span class="o">=</span> <span class="n">data_pv</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2017-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2017-12-31&#39;</span><span class="p">][</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">daily_mean_wind</span> <span class="o">=</span> <span class="n">data_wind</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2017-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2017-12-31&#39;</span><span class="p">][</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="c1"># Weekly</span>
+<span class="n">weekly_mean_pv</span> <span class="o">=</span> <span class="n">data_pv</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2017-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2017-12-31&#39;</span><span class="p">][</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">weekly_mean_wind</span> <span class="o">=</span> <span class="n">data_wind</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2017-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2017-12-31&#39;</span><span class="p">][</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="c1"># Monthly</span>
+<span class="n">monthly_mean_pv</span> <span class="o">=</span> <span class="n">data_pv</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2017-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2017-12-31&#39;</span><span class="p">][</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;ME&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">monthly_mean_wind</span> <span class="o">=</span> <span class="n">data_wind</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2017-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2017-12-31&#39;</span><span class="p">][</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;ME&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">daily_mean_pv</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Capacity Factor solar PV&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;utc_time&#39;, ylabel=&#39;Capacity Factor solar PV&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/0c091cff6317586a89fbe75cc75b0f3c8c040585760a630d1baafbaa0a79c7a8.png" src="../_images/0c091cff6317586a89fbe75cc75b0f3c8c040585760a630d1baafbaa0a79c7a8.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weekly_mean_pv</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Capacity Factor solar PV&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;utc_time&#39;, ylabel=&#39;Capacity Factor solar PV&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/bb4d853a9e4f644594819028fce45e0e2902afa211362eb970371ffadafb8f7f.png" src="../_images/bb4d853a9e4f644594819028fce45e0e2902afa211362eb970371ffadafb8f7f.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">monthly_mean_pv</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Capacity Factor solar PV&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;utc_time&#39;, ylabel=&#39;Capacity Factor solar PV&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/4c7abfeeb0f9f09673a20828c8b4b09794a58dc7706ffb34f10a59227ec60ba8.png" src="../_images/4c7abfeeb0f9f09673a20828c8b4b09794a58dc7706ffb34f10a59227ec60ba8.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">daily_mean_wind</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Capacity Factor onshore wind&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;utc_time&#39;, ylabel=&#39;Capacity Factor onshore wind&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/10def18448b0b520a6732d30f38f49e3f83c8c0e0f2ee48d2f863bb4af8a4566.png" src="../_images/10def18448b0b520a6732d30f38f49e3f83c8c0e0f2ee48d2f863bb4af8a4566.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weekly_mean_wind</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Capacity Factor onshore wind&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;utc_time&#39;, ylabel=&#39;Capacity Factor onshore wind&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/2b5210067724ce9e5a0ed91e96517ec5ac72a482df58668973acd9cfcdd8c2c4.png" src="../_images/2b5210067724ce9e5a0ed91e96517ec5ac72a482df58668973acd9cfcdd8c2c4.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">monthly_mean_wind</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Capacity Factor onshore wind&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;utc_time&#39;, ylabel=&#39;Capacity Factor onshore wind&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/8d1168ef8ea9cc31196fde18441af38ecc16ac7b5041e22d36d34e9124a2168a.png" src="../_images/8d1168ef8ea9cc31196fde18441af38ecc16ac7b5041e22d36d34e9124a2168a.png" />
+</div>
+</div>
+<p>Based on the figures shown above the following trends are seen:</p>
+<ul class="simple">
+<li><p>Solar PV has a clear daily pattern seen on the capacity factor plot for the first two weeks of the year. High capacity factors are seen in the middle of the day and zero at night.</p></li>
+<li><p>Solar PV furthermore, has a clearly seasonal pattern, with high capacity factors in summer, and lower in winter.</p></li>
+<li><p>Analyzing the daily average capacity factor of wind, fluctuations showing approximately a weekly period are seen.</p></li>
+<li><p>A slightly seasonal pattern is also seen for wind, with more wind in the winter and less in the summer.</p></li>
+</ul>
+<p><strong>3)One useful way of investigating the previous question is by calculating the Fast Fourier Transform (FTT) power spectra of the time series. Do so and plot the power spectra for wind and solar capacity factor time series. Are these results in agreement with Sections 1 and 2?</strong></p>
+<p>The function fft.fft() is used to calculate the Fast Fourier Transform <span class="math notranslate nohighlight">\(a_{\omega}=\int^T_0 X(t) e^{i \omega t}dt\)</span> where <span class="math notranslate nohighlight">\(X(t)\)</span> is the time series (wind or solar) that we are analyzing.</p>
+<p>The power spectra <span class="math notranslate nohighlight">\(\| a_{\omega}\|^2\)</span> is plotted to identify the dominant frequencies.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t_sampling</span><span class="o">=</span><span class="mi">1</span> <span class="c1"># sampling rate, 1 data per hour</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">8761</span><span class="p">,</span> <span class="n">t_sampling</span><span class="p">)</span> 
+<span class="n">y</span> <span class="o">=</span> <span class="n">data_pv</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2017-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2017-12-31&#39;</span><span class="p">][</span><span class="n">country</span><span class="p">]</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y_fft</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="n">n</span> <span class="c1">#n for normalization    </span>
+<span class="n">frq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="n">t_sampling</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">t_sampling</span><span class="o">*</span><span class="n">n</span><span class="p">))</span>        
+<span class="n">period</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="o">/</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">frq</span><span class="p">])</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\34620\AppData\Local\Temp\ipykernel_24488\3780475453.py:7: RuntimeWarning: divide by zero encountered in scalar divide
+  period = np.array([1/f for f in frq])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We plot the power spectra as a function of the period (1/frequency).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">period</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="o">//</span><span class="mi">2</span><span class="p">],</span>
+             <span class="nb">abs</span><span class="p">(</span><span class="n">y_fft</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="o">//</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">y_fft</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="o">//</span><span class="mi">2</span><span class="p">])),</span> 
+             <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span>
+             <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;cycling period (hours)&#39;</span><span class="p">)</span>
+
+<span class="c1">#We add lines indicating day, week, month </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgrey&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">24</span><span class="o">*</span><span class="mi">7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgrey&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">24</span><span class="o">*</span><span class="mi">30</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgrey&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">8760</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgrey&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">26</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dimgrey&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">24</span><span class="o">*</span><span class="mi">7</span><span class="o">+</span><span class="mi">20</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="s1">&#39;week&#39;</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dimgrey&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">24</span><span class="o">*</span><span class="mi">30</span><span class="o">+</span><span class="mi">20</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dimgrey&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(740, 0.95, &#39;month&#39;)
+</pre></div>
+</div>
+<img alt="../_images/4a2f6cee7e0e03ba36be5d7fa80ffffb81a0701c4b723e7c9e5d1ebca84f0d5b.png" src="../_images/4a2f6cee7e0e03ba36be5d7fa80ffffb81a0701c4b723e7c9e5d1ebca84f0d5b.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t_sampling</span><span class="o">=</span><span class="mi">1</span> <span class="c1"># sampling rate, 1 data per hour</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">8761</span><span class="p">,</span> <span class="n">t_sampling</span><span class="p">)</span> 
+<span class="n">y</span> <span class="o">=</span> <span class="n">data_wind</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2017-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2017-12-31&#39;</span><span class="p">][</span><span class="n">country</span><span class="p">]</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y_fft</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="n">n</span> <span class="c1">#n for normalization    </span>
+<span class="n">frq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="n">t_sampling</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">t_sampling</span><span class="o">*</span><span class="n">n</span><span class="p">))</span>        
+<span class="n">period</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="o">/</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">frq</span><span class="p">])</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\34620\AppData\Local\Temp\ipykernel_24488\2483825668.py:7: RuntimeWarning: divide by zero encountered in scalar divide
+  period = np.array([1/f for f in frq])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">period</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="o">//</span><span class="mi">2</span><span class="p">],</span>
+             <span class="nb">abs</span><span class="p">(</span><span class="n">y_fft</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="o">//</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">y_fft</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="o">//</span><span class="mi">2</span><span class="p">])),</span> 
+             <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;cycling period (hours)&#39;</span><span class="p">)</span>
+
+<span class="c1">#We add lines indicating day, week, month </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgrey&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">24</span><span class="o">*</span><span class="mi">7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgrey&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">24</span><span class="o">*</span><span class="mi">30</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgrey&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">8760</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgrey&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">26</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dimgrey&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">24</span><span class="o">*</span><span class="mi">7</span><span class="o">+</span><span class="mi">20</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="s1">&#39;week&#39;</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dimgrey&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">24</span><span class="o">*</span><span class="mi">30</span><span class="o">+</span><span class="mi">20</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dimgrey&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(740, 0.95, &#39;month&#39;)
+</pre></div>
+</div>
+<img alt="../_images/a5b78dd7d23a2d53d01bdbd39574324114656fa84a3e6f6e292e7f0f183397b5.png" src="../_images/a5b78dd7d23a2d53d01bdbd39574324114656fa84a3e6f6e292e7f0f183397b5.png" />
+</div>
+</div>
+<p>Solar PV main fluctuations show a daily cycle, while onshore wind shows significant fluctuations in the synoptic timescale (with a frequency of around one week)</p>
+<p><strong>4)Plot the duration curve (sorted capacity factors values) for every technology. What percentage of the potential wind and solar energy will be lost if the potential generation is curtailed for the 100 hours with the highest capacity factors? What about if curtailment affects the 1000 hours with the highest capacity factors?</strong></p>
+<section id="solar-pv">
+<h2>Solar PV<a class="headerlink" href="#solar-pv" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">duration_pv</span> <span class="o">=</span> <span class="n">data_pv</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2017-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2017-12-31&#39;</span><span class="p">][</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">duration_pv</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Capacity Factor solar PV&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: ylabel=&#39;Capacity Factor solar PV&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/317414eac993054a1508dbf070d393fae26d696bace30a8fbb806a887f3059fd.png" src="../_images/317414eac993054a1508dbf070d393fae26d696bace30a8fbb806a887f3059fd.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">curtailment_loss</span><span class="p">(</span><span class="n">duration_data</span><span class="p">,</span> <span class="n">hours</span><span class="p">):</span>
+    <span class="n">full_load_hours_per_year</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">duration_data</span><span class="p">)</span>
+    <span class="n">curtailment_loss</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">duration_data</span><span class="p">[:</span><span class="n">hours</span><span class="p">])</span><span class="o">/</span><span class="n">full_load_hours_per_year</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:.1f}</span><span class="s1"> </span><span class="si">% a</span><span class="s1">nnual production is lost if the </span><span class="si">{}</span><span class="s1"> hours with highest capacity factor are curtailed&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">curtailment_loss</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="n">hours</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;PV curtailment loss&#39;</span><span class="p">)</span>
+<span class="n">curtailment_loss</span><span class="p">(</span><span class="n">duration_pv</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">curtailment_loss</span><span class="p">(</span><span class="n">duration_pv</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PV curtailment loss
+0.8 % annual production is lost if the 10 hours with highest capacity factor are curtailed
+7.6 % annual production is lost if the 100 hours with highest capacity factor are curtailed
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="onshore-wind">
+<h2>Onshore wind<a class="headerlink" href="#onshore-wind" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">duration_wind</span> <span class="o">=</span> <span class="n">data_wind</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2017-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2017-12-31&#39;</span><span class="p">][</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">duration_wind</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Capacity Factor onshore wind&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: ylabel=&#39;Capacity Factor onshore wind&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/ce4c004baafc3575860ce6fdebe05048bacaade1003b3f5a1e3a70dc0fc7f4d3.png" src="../_images/ce4c004baafc3575860ce6fdebe05048bacaade1003b3f5a1e3a70dc0fc7f4d3.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Wind curtailment loss&#39;</span><span class="p">)</span>
+<span class="n">curtailment_loss</span><span class="p">(</span><span class="n">duration_wind</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">curtailment_loss</span><span class="p">(</span><span class="n">duration_wind</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wind curtailment loss
+3.5 % annual production is lost if the 100 hours with highest capacity factor are curtailed
+29.4 % annual production is lost if the 1000 hours with highest capacity factor are curtailed
+</pre></div>
+</div>
+</div>
+</div>
+<p>The duration curves for solar and wind are fundamentally different. Solar PV includes more than 4000 hours of zero capacity factors (the nights!) and the maximum capacity factor is 0.7 (It is very difficult for the entire Denmark to have a clear sky simultaneously). Wind duration curve includes a very low number of hours with zero capacity factor and a maximum of 0.9</p>
+<p><strong>5) Calculate the ramps for every technology for every hour of the year. We define ramp as the difference between the capacity factor in an hour and the capacity factor in the previous hour. Plot the distribution of ramps for wind and solar. Which technology has the higher variation?</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ramps_pv</span> <span class="o">=</span> <span class="n">data_pv</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2017-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2017-12-31&#39;</span><span class="p">][</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span>
+<span class="n">ramps_pv</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;hist&#39;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;ramps solar PV&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;ramps solar PV&#39;, ylabel=&#39;Frequency&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/c77a48dcd65141d9810406a223e7c6ffaae7e444fb91bc0e9bed134a9da11053.png" src="../_images/c77a48dcd65141d9810406a223e7c6ffaae7e444fb91bc0e9bed134a9da11053.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ramps_wind</span> <span class="o">=</span> <span class="n">data_wind</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2017-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2017-12-31&#39;</span><span class="p">][</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span>
+<span class="n">ramps_wind</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;hist&#39;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;ramps wind&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;ramps wind&#39;, ylabel=&#39;Frequency&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/f91b8e19bfc2a6946bf9c35f039a6596e4ba5500b196b825539945e6a3718563.png" src="../_images/f91b8e19bfc2a6946bf9c35f039a6596e4ba5500b196b825539945e6a3718563.png" />
+</div>
+</div>
+<p><strong>Let’s look now at the interannual variability. For every technology, calculate the annual average capacity factor for the most recent year for which you have data. Then, calculate the annual capacity factor for every year for which you have data. Estimate the average value for all the years and the year-to-year variance.</strong></p>
+</section>
+<section id="id1">
+<h2>Solar PV<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">annual_mean_pv</span> <span class="o">=</span> <span class="n">data_pv</span><span class="p">[</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;YE&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">annual_mean_pv</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Capacity Factor solar PV&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;utc_time&#39;, ylabel=&#39;Capacity Factor solar PV&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/3a4e649f4d298539ed6cf3aedfbadc3d903f70447600d698c53794cb6ab813a5.png" src="../_images/3a4e649f4d298539ed6cf3aedfbadc3d903f70447600d698c53794cb6ab813a5.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Average annual mean </span><span class="si">{:.2f}</span><span class="s1">, </span><span class="se">\n</span><span class="s1">Normalized Standar deviation </span><span class="si">{:.2f}</span><span class="s1"> %&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">annual_mean_pv</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="n">annual_mean_pv</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">/</span><span class="n">annual_mean_pv</span><span class="o">.</span><span class="n">mean</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average annual mean 0.10, 
+Normalized Standar deviation 0.05 %
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id2">
+<h2>Onshore wind<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">annual_mean_wind</span> <span class="o">=</span> <span class="n">data_wind</span><span class="p">[</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;YE&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">annual_mean_wind</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Capacity Factor onshore wind&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;utc_time&#39;, ylabel=&#39;Capacity Factor onshore wind&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/75e87680cb4505ae10df971eb41ff157eb40569cbf7ef6583260aee9bd655700.png" src="../_images/75e87680cb4505ae10df971eb41ff157eb40569cbf7ef6583260aee9bd655700.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Average annual mean </span><span class="si">{:.2f}</span><span class="s1">, </span><span class="se">\n</span><span class="s1">Normalized Standar deviation </span><span class="si">{:.2f}</span><span class="s1"> %&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">annual_mean_wind</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="n">annual_mean_wind</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">/</span><span class="n">annual_mean_wind</span><span class="o">.</span><span class="n">mean</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average annual mean 0.27, 
+Normalized Standar deviation 0.07 %
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Repeat steps 1 to 5 for the electricity and heating demand time series.</strong></p>
+</section>
+<section id="id3">
+<h2>Data import<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_el</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/electricity_demand.csv&#39;</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+<span class="n">data_el</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">data_el</span><span class="p">[</span><span class="s1">&#39;utc_time&#39;</span><span class="p">])</span>
+<span class="n">data_heat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/heat_demand.csv&#39;</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+<span class="n">data_heat</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">data_heat</span><span class="p">[</span><span class="s1">&#39;utc_time&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-of-demand-throughout-two-weeks">
+<h2>1) Plot of demand throughout two weeks<a class="headerlink" href="#plot-of-demand-throughout-two-weeks" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_el</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2015-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2015-01-14&#39;</span><span class="p">][</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Electricity demand&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;utc_time&#39;, ylabel=&#39;Electricity demand&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/f185112894f359577763586dd5470f5b0aed40426816a5b63cdcd5255a383d29.png" src="../_images/f185112894f359577763586dd5470f5b0aed40426816a5b63cdcd5255a383d29.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_heat</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2015-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2015-01-14&#39;</span><span class="p">][</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Electricity demand&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;utc_time&#39;, ylabel=&#39;Electricity demand&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/afafe9e067d8a1d0c93baef008f33715082a159808d0e90134c73b4e4b57f2db.png" src="../_images/afafe9e067d8a1d0c93baef008f33715082a159808d0e90134c73b4e4b57f2db.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### 1) Plot of daily, weekly, annual demand</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Daily</span>
+<span class="n">daily_mean_el</span> <span class="o">=</span> <span class="n">data_el</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2015-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2015-12-31&#39;</span><span class="p">][</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">daily_mean_heat</span> <span class="o">=</span> <span class="n">data_heat</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2015-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2015-12-31&#39;</span><span class="p">][</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="c1"># Weekly</span>
+<span class="n">weekly_mean_el</span> <span class="o">=</span> <span class="n">data_el</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2015-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2015-12-31&#39;</span><span class="p">][</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">weekly_mean_heat</span> <span class="o">=</span> <span class="n">data_heat</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2015-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2015-12-31&#39;</span><span class="p">][</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="c1"># Monthly</span>
+<span class="n">monthly_mean_el</span> <span class="o">=</span> <span class="n">data_el</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2015-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2015-12-31&#39;</span><span class="p">][</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;ME&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">monthly_mean_heat</span> <span class="o">=</span> <span class="n">data_heat</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2015-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2015-12-31&#39;</span><span class="p">][</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;ME&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">daily_mean_el</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;demand&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">daily_mean_heat</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;utc_time&#39;, ylabel=&#39;demand&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/9084d263dfcd2c2e434bf66700da6559030b561eeb1ae8f8fb7de380e4ea977a.png" src="../_images/9084d263dfcd2c2e434bf66700da6559030b561eeb1ae8f8fb7de380e4ea977a.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weekly_mean_el</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;demand&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">weekly_mean_heat</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;utc_time&#39;, ylabel=&#39;demand&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/70791c2087b6e3500b2da260980564539124f84e31bffbe99103a01678ef3de5.png" src="../_images/70791c2087b6e3500b2da260980564539124f84e31bffbe99103a01678ef3de5.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">monthly_mean_el</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;demand&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">monthly_mean_heat</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;utc_time&#39;, ylabel=&#39;demand&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/d2fbaa51fbd3b05e16dec3cc32128c78ae293396673207175346b0564382d8ac.png" src="../_images/d2fbaa51fbd3b05e16dec3cc32128c78ae293396673207175346b0564382d8ac.png" />
+</div>
+</div>
+</section>
+<section id="fast-fourier-power-spectra">
+<h2>Fast Fourier power spectra<a class="headerlink" href="#fast-fourier-power-spectra" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t_sampling</span><span class="o">=</span><span class="mi">1</span> <span class="c1"># sampling rate, 1 data per hour</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">8761</span><span class="p">,</span> <span class="n">t_sampling</span><span class="p">)</span> 
+<span class="n">y</span> <span class="o">=</span> <span class="n">data_el</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2015-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2015-12-31&#39;</span><span class="p">][</span><span class="n">country</span><span class="p">]</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y_fft</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="n">n</span> <span class="c1">#n for normalization    </span>
+<span class="n">frq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="n">t_sampling</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">t_sampling</span><span class="o">*</span><span class="n">n</span><span class="p">))</span>        
+<span class="n">period</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="o">/</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">frq</span><span class="p">])</span> 
+
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">period</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="o">//</span><span class="mi">2</span><span class="p">],</span>
+             <span class="nb">abs</span><span class="p">(</span><span class="n">y_fft</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="o">//</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">y_fft</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="o">//</span><span class="mi">2</span><span class="p">])),</span> 
+             <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+             <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;cycling period (hours)&#39;</span><span class="p">)</span>
+
+<span class="c1">#We add lines indicating day, week, month </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgrey&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">24</span><span class="o">*</span><span class="mi">7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgrey&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">24</span><span class="o">*</span><span class="mi">30</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgrey&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">8760</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgrey&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">26</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dimgrey&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">24</span><span class="o">*</span><span class="mi">7</span><span class="o">+</span><span class="mi">20</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="s1">&#39;week&#39;</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dimgrey&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">24</span><span class="o">*</span><span class="mi">30</span><span class="o">+</span><span class="mi">20</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dimgrey&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\34620\AppData\Local\Temp\ipykernel_24488\1496012896.py:7: RuntimeWarning: divide by zero encountered in scalar divide
+  period = np.array([1/f for f in frq])
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(740, 0.95, &#39;month&#39;)
+</pre></div>
+</div>
+<img alt="../_images/739c6a4011e315cb0682d936f7194bcb0a03ada64ac6099958b553de62b4555c.png" src="../_images/739c6a4011e315cb0682d936f7194bcb0a03ada64ac6099958b553de62b4555c.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t_sampling</span><span class="o">=</span><span class="mi">1</span> <span class="c1"># sampling rate, 1 data per hour</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">8761</span><span class="p">,</span> <span class="n">t_sampling</span><span class="p">)</span> 
+<span class="n">y</span> <span class="o">=</span> <span class="n">data_heat</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2015-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2015-12-31&#39;</span><span class="p">][</span><span class="n">country</span><span class="p">]</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y_fft</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="n">n</span> <span class="c1">#n for normalization    </span>
+<span class="n">frq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="n">t_sampling</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">t_sampling</span><span class="o">*</span><span class="n">n</span><span class="p">))</span>        
+<span class="n">period</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="o">/</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">frq</span><span class="p">])</span> 
+
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">period</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="o">//</span><span class="mi">2</span><span class="p">],</span>
+             <span class="nb">abs</span><span class="p">(</span><span class="n">y_fft</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="o">//</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">y_fft</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="o">//</span><span class="mi">2</span><span class="p">])),</span> 
+             <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>
+             <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;cycling period (hours)&#39;</span><span class="p">)</span>
+
+<span class="c1">#We add lines indicating day, week, month </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgrey&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">24</span><span class="o">*</span><span class="mi">7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgrey&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">24</span><span class="o">*</span><span class="mi">30</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgrey&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">8760</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgrey&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">26</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dimgrey&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">24</span><span class="o">*</span><span class="mi">7</span><span class="o">+</span><span class="mi">20</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="s1">&#39;week&#39;</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dimgrey&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">24</span><span class="o">*</span><span class="mi">30</span><span class="o">+</span><span class="mi">20</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dimgrey&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\34620\AppData\Local\Temp\ipykernel_24488\3748597511.py:7: RuntimeWarning: divide by zero encountered in scalar divide
+  period = np.array([1/f for f in frq])
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(740, 0.95, &#39;month&#39;)
+</pre></div>
+</div>
+<img alt="../_images/0f505fe15f80b02f237c26e13976d95e798e1d7ab924a85f4f331ea8eb6fdb57.png" src="../_images/0f505fe15f80b02f237c26e13976d95e798e1d7ab924a85f4f331ea8eb6fdb57.png" />
+</div>
+</div>
+</section>
+<section id="duration-curves">
+<h2>Duration curves<a class="headerlink" href="#duration-curves" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">duration_el</span> <span class="o">=</span> <span class="n">data_el</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2015-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2015-12-31&#39;</span><span class="p">][</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">duration_heat</span> <span class="o">=</span> <span class="n">data_heat</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2015-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2015-12-31&#39;</span><span class="p">][</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">duration_el</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;demand&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">duration_heat</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;demand&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: ylabel=&#39;demand&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/a3e8e6dba07d07cdf6a436d91963fac1f2bf908c90af2cf014fcb01f56210f3b.png" src="../_images/a3e8e6dba07d07cdf6a436d91963fac1f2bf908c90af2cf014fcb01f56210f3b.png" />
+</div>
+</div>
+</section>
+<section id="ramps">
+<h2>Ramps<a class="headerlink" href="#ramps" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ramps_el</span> <span class="o">=</span> <span class="n">data_el</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2015-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2015-12-31&#39;</span><span class="p">][</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span>
+<span class="n">ramps_el</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;hist&#39;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;electricity demand ramps (MWh)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;electricity demand ramps (MWh)&#39;, ylabel=&#39;Frequency&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/e0839ce1812f1308c598627f8edcfc20871b328110c2856e81f82664e92bfe73.png" src="../_images/e0839ce1812f1308c598627f8edcfc20871b328110c2856e81f82664e92bfe73.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ramps_heat</span> <span class="o">=</span> <span class="n">data_heat</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2015-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2015-12-31&#39;</span><span class="p">][</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span>
+<span class="n">ramps_heat</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;hist&#39;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;heating demand ramps (MWh)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;heating demand ramps (MWh)&#39;, ylabel=&#39;Frequency&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/0bba91c0ffc9caf84f32556209466bb846808f65c1bf9529961adeddff15beb9.png" src="../_images/0bba91c0ffc9caf84f32556209466bb846808f65c1bf9529961adeddff15beb9.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Problems"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../intro-pandas.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to <code class="docutils literal notranslate"><span class="pre">pandas</span></code></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Problem01.03.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Problem 1.3</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Problem 1.1</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-import">Data import</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solar-pv">Solar PV</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#onshore-wind">Onshore wind</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Solar PV</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Onshore wind</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Data import</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-of-demand-throughout-two-weeks">1) Plot of demand throughout two weeks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-fourier-power-spectra">Fast Fourier power spectra</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#duration-curves">Duration curves</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ramps">Ramps</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Marta Victoria, Aleksander Grochowicz
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
