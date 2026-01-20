@@ -16,7 +16,7 @@ dependencies:
 - geopy
 - cartopy
 - highspy>=1.5.3
-- gurobipy
+# - gurobipy
 
   # interactive python
 - ipython
@@ -30,5 +30,7 @@ dependencies:
 
   # publishing
 - jupyter-book
+
+- gurobi
 
 
