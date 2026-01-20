@@ -16,33 +16,30 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
-  <!-- So that users can add custom icons -->
-  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
@@ -53,7 +50,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/togglebutton.js?v=1ae7504c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -70,7 +67,6 @@
     <link rel="prev" title="Problem 3.4" href="Problems/Problem03.04.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -86,8 +82,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -95,6 +102,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -102,8 +110,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -119,8 +127,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -149,18 +156,22 @@
       
     
     
-    <img src="_static/DTUlogo.jpg" class="logo__image only-light" alt="integrated-energy-grids - Home"/>
-    <img src="_static/DTUlogo.jpg" class="logo__image only-dark pst-js-only" alt="integrated-energy-grids - Home"/>
+    <img src="_static/DTUlogo_red.png" class="logo__image only-light" alt="integrated-energy-grids - Home"/>
+    <script>document.write(`<img src="_static/DTUlogo_red.png" class="logo__image only-dark" alt="integrated-energy-grids - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -245,14 +256,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -427,16 +433,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -603,13 +617,13 @@
 <h2>From structured data to optimisation<a class="headerlink" href="#from-structured-data-to-optimisation" title="Link to this heading">#</a></h2>
 <p>The design principle of PyPSA is that basically each component is associated with a set of variables and constraints that will be added to the optimisation model based on the input data stored for the components.</p>
 <p>For an <em>hourly</em> electricity market simulation, PyPSA will solve an optimisation problem that looks like this</p>
-<div class="amsmath math notranslate nohighlight" id="equation-91d2742f-ec12-4b54-a376-ca81e04da329">
-<span class="eqno">(1)<a class="headerlink" href="#equation-91d2742f-ec12-4b54-a376-ca81e04da329" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-823f3063-d370-4947-a9a8-adb8323b50aa">
+<span class="eqno">(1)<a class="headerlink" href="#equation-823f3063-d370-4947-a9a8-adb8323b50aa" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \min_{g_{i,s,t}; f_{\ell,t}; g_{i,r,t,\text{charge}}; g_{i,r,t,\text{discharge}}; e_{i,r,t}} \sum_s o_{s} g_{i,s,t}
 \end{equation}\]</div>
 <p>such that</p>
-<div class="amsmath math notranslate nohighlight" id="equation-59f41768-a6ff-4e80-8405-699fb6f33d9e">
-<span class="eqno">(2)<a class="headerlink" href="#equation-59f41768-a6ff-4e80-8405-699fb6f33d9e" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-811c1371-0f02-405a-a128-585720045fb5">
+<span class="eqno">(2)<a class="headerlink" href="#equation-811c1371-0f02-405a-a128-585720045fb5" title="Permalink to this equation">#</a></span>\[\begin{align}
 0 &amp; \leq g_{i,s,t} \leq \hat{g}_{i,s,t} G_{i,s}  &amp; \text{generation limits : generator} \\
 -P_\ell &amp;\leq p_{\ell,t} \leq P_\ell &amp; \text{transmission limits : line}  \\
 d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{i,r,t,\text{charge}} - \sum_\ell K_{i\ell} p_{\ell,t} &amp; \text{KCL : bus} \\
@@ -646,13 +660,13 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
 <section id="simple-electricity-market-economic-dispatch-example">
 <h2>Simple electricity market (economic dispatch) example<a class="headerlink" href="#simple-electricity-market-economic-dispatch-example" title="Link to this heading">#</a></h2>
 <p>Let’s assume we want to minimize the operational cost of an electricity system representing South Africa and Mozambique subject to generator limits and meeting the loads:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a5e1b2b7-c224-4d4f-ae36-487409225177">
-<span class="eqno">(3)<a class="headerlink" href="#equation-a5e1b2b7-c224-4d4f-ae36-487409225177" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b5bc8f4a-5a74-455d-9a76-99a5d419c102">
+<span class="eqno">(3)<a class="headerlink" href="#equation-b5bc8f4a-5a74-455d-9a76-99a5d419c102" title="Permalink to this equation">#</a></span>\[\begin{equation}
   \min_{g_s} \sum_s o_s g_s
 \end{equation}\]</div>
 <p>such that</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b62f12b4-9477-4d31-929f-e2c0ad8fc2fb">
-<span class="eqno">(4)<a class="headerlink" href="#equation-b62f12b4-9477-4d31-929f-e2c0ad8fc2fb" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-a00aeb8d-7af7-4cac-982b-6b52a0194724">
+<span class="eqno">(4)<a class="headerlink" href="#equation-a00aeb8d-7af7-4cac-982b-6b52a0194724" title="Permalink to this equation">#</a></span>\[\begin{align}
   \sum_s g_s &amp;= d \\
   g_s &amp;\leq G_s \\
   g_s &amp;\geq 0 
@@ -713,6 +727,13 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set parameter Username
+Set parameter LicenseID to value 2767832
+Academic license - for non-commercial use only - expires 2027-01-20
+</pre></div>
+</div>
+</div>
 </div>
 <p>First, we create a new network object which serves as the overall container for all components.</p>
 <div class="cell docutils container">
@@ -729,11 +750,6 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Bus&quot;</span><span class="p">,</span> <span class="s2">&quot;SA&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=-</span><span class="mf">30.5</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">v_nom</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;AC&quot;</span><span class="p">)</span>
 <span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Bus&quot;</span><span class="p">,</span> <span class="s2">&quot;MZ&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=-</span><span class="mf">18.5</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mf">35.5</span><span class="p">,</span> <span class="n">v_nom</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;AC&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;MZ&#39;], dtype=&#39;object&#39;)
 </pre></div>
 </div>
 </div>
@@ -770,6 +786,7 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
       <th>y</th>
       <th>carrier</th>
       <th>unit</th>
+      <th>location</th>
       <th>v_mag_pu_set</th>
       <th>v_mag_pu_min</th>
       <th>v_mag_pu_max</th>
@@ -778,7 +795,8 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
       <th>sub_network</th>
     </tr>
     <tr>
-      <th>Bus</th>
+      <th>name</th>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -802,6 +820,7 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
       <td>-30.5</td>
       <td>AC</td>
       <td></td>
+      <td></td>
       <td>1.0</td>
       <td>0.0</td>
       <td>inf</td>
@@ -816,6 +835,7 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
       <td>35.5</td>
       <td>-18.5</td>
       <td>AC</td>
+      <td></td>
       <td></td>
       <td>1.0</td>
       <td>0.0</td>
@@ -843,11 +863,6 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;electricity&#39;, &#39;AC&#39;], dtype=&#39;object&#39;)
-</pre></div>
-</div>
-</div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">n.add()</span></code> function is very general. It lets you add any component to the network object <code class="docutils literal notranslate"><span class="pre">n</span></code>. For instance, in the next step we add <strong>generators</strong> for all the different power plants.</p>
 <p>In Mozambique:</p>
@@ -861,11 +876,6 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
     <span class="n">p_nom</span><span class="o">=</span><span class="mi">1200</span><span class="p">,</span>  <span class="c1"># MW</span>
     <span class="n">marginal_cost</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>  <span class="c1"># default</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;MZ hydro&#39;], dtype=&#39;object&#39;)
 </pre></div>
 </div>
 </div>
@@ -920,8 +930,8 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
       <th>p_nom_extendable</th>
       <th>p_nom_min</th>
       <th>p_nom_max</th>
+      <th>p_nom_set</th>
       <th>p_min_pu</th>
-      <th>p_max_pu</th>
       <th>...</th>
       <th>min_up_time</th>
       <th>min_down_time</th>
@@ -935,7 +945,7 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
       <th>p_nom_opt</th>
     </tr>
     <tr>
-      <th>Generator</th>
+      <th>name</th>
       <th></th>
       <th></th>
       <th></th>
@@ -970,8 +980,8 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
       <td>False</td>
       <td>0.0</td>
       <td>inf</td>
+      <td>NaN</td>
       <td>0.0</td>
-      <td>1.0</td>
       <td>...</td>
       <td>0</td>
       <td>0</td>
@@ -994,8 +1004,8 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
       <td>False</td>
       <td>0.0</td>
       <td>inf</td>
+      <td>NaN</td>
       <td>0.0</td>
-      <td>1.0</td>
       <td>...</td>
       <td>0</td>
       <td>0</td>
@@ -1018,8 +1028,8 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
       <td>False</td>
       <td>0.0</td>
       <td>inf</td>
+      <td>NaN</td>
       <td>0.0</td>
-      <td>1.0</td>
       <td>...</td>
       <td>0</td>
       <td>0</td>
@@ -1042,8 +1052,8 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
       <td>False</td>
       <td>0.0</td>
       <td>inf</td>
+      <td>NaN</td>
       <td>0.0</td>
-      <td>1.0</td>
       <td>...</td>
       <td>0</td>
       <td>0</td>
@@ -1066,8 +1076,8 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
       <td>False</td>
       <td>0.0</td>
       <td>inf</td>
+      <td>NaN</td>
       <td>0.0</td>
-      <td>1.0</td>
       <td>...</td>
       <td>0</td>
       <td>0</td>
@@ -1082,7 +1092,7 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
     </tr>
   </tbody>
 </table>
-<p>5 rows × 37 columns</p>
+<p>5 rows × 38 columns</p>
 </div></div></div>
 </div>
 <p>Next, we’re going to add the electricity demand.</p>
@@ -1099,11 +1109,6 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;SA electricity demand&#39;], dtype=&#39;object&#39;)
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1114,11 +1119,6 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
     <span class="n">p_set</span><span class="o">=</span><span class="n">loads</span><span class="p">[</span><span class="s2">&quot;MZ&quot;</span><span class="p">],</span>
     <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;electricity&quot;</span><span class="p">,</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;MZ electricity demand&#39;], dtype=&#39;object&#39;)
 </pre></div>
 </div>
 </div>
@@ -1157,7 +1157,7 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
       <th>active</th>
     </tr>
     <tr>
-      <th>Load</th>
+      <th>name</th>
       <th></th>
       <th></th>
       <th></th>
@@ -1204,11 +1204,6 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
     <span class="n">x</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">r</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;SA-MZ&#39;], dtype=&#39;object&#39;)
 </pre></div>
 </div>
 </div>
@@ -1261,7 +1256,7 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
       <th>s_nom_opt</th>
     </tr>
     <tr>
-      <th>Line</th>
+      <th>name</th>
       <th></th>
       <th></th>
       <th></th>
@@ -1312,7 +1307,7 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
     </tr>
   </tbody>
 </table>
-<p>1 rows × 31 columns</p>
+<p>1 rows × 32 columns</p>
 </div></div></div>
 </div>
 <p>We can have a sneak peek at the network we built with the <code class="docutils literal notranslate"><span class="pre">n.plot()</span></code> function. More details on this in a bit.</p>
@@ -1323,11 +1318,7 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\34620\.conda\envs\integrated-energy-grids\Lib\site-packages\cartopy\mpl\feature_artist.py:144: UserWarning: facecolor will have no effect as it has been defined as &quot;never&quot;.
-  warnings.warn(&#39;facecolor will have no effect as it has been &#39;
-</pre></div>
-</div>
-<img alt="_images/0efe03b3ca1cf22dd0295bebc24c5bb2fbea74b5d335bccfa1d108393f7c289e.png" src="_images/0efe03b3ca1cf22dd0295bebc24c5bb2fbea74b5d335bccfa1d108393f7c289e.png" />
+<img alt="_images/8f5241743a30d464ea866cdb5ac3a3cbbad5ba57f401fc95219be35e1ffa04e4.png" src="_images/8f5241743a30d464ea866cdb5ac3a3cbbad5ba57f401fc95219be35e1ffa04e4.png" />
 </div>
 </div>
 </section>
@@ -1341,10 +1332,10 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
 </pre></div>
 </div>
 </div>
-<details class="hide below-input">
+<details class="admonition hide below-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell output</span>
-<span class="expanded">Hide code cell output</span>
+<p class="collapsed admonition-title">Show code cell output</p>
+<p class="expanded admonition-title">Hide code cell output</p>
 </summary>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:linopy.model: Solve problem using Highs solver
@@ -1355,9 +1346,30 @@ Termination condition: optimal
 Solution: 6 primals, 14 duals
 Objective: 1.26e+06
 Solver model: available
-Solver message: optimal
+Solver message: Optimal
 
 INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-fix-p-lower, Generator-fix-p-upper, Line-fix-s-lower, Line-fix-s-upper were not assigned to the network.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.12.0 (git hash: n/a): Copyright (c) 2025 HiGHS under MIT licence terms
+LP linopy-problem-mt2iodbp has 14 rows; 6 cols; 19 nonzeros
+Coefficient ranges:
+  Matrix  [1e+00, 1e+00]
+  Cost    [3e+01, 8e+01]
+  Bound   [0e+00, 0e+00]
+  RHS     [5e+02, 4e+04]
+Presolving model
+1 rows, 3 cols, 3 nonzeros  0s
+0 rows, 0 cols, 0 nonzeros  0s
+Presolve reductions: rows 0(-14); columns 0(-6); nonzeros 0(-19) - Reduced to empty
+Performed postsolve
+Solving the original LP from the solution after postsolve
+
+Model name          : linopy-problem-mt2iodbp
+Model status        : Optimal
+Objective value     :  1.2600000000e+06
+P-D objective error :  0.0000000000e+00
+HiGHS run time      :          0.00
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;ok&#39;, &#39;optimal&#39;)
@@ -1392,7 +1404,7 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
-      <th>Generator</th>
+      <th>name</th>
       <th>MZ hydro</th>
       <th>SA coal</th>
       <th>SA wind</th>
@@ -1446,7 +1458,7 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
-      <th>Generator</th>
+      <th>name</th>
       <th>MZ hydro</th>
       <th>SA coal</th>
       <th>SA wind</th>
@@ -1501,7 +1513,7 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
-      <th>Line</th>
+      <th>name</th>
       <th>SA-MZ</th>
     </tr>
     <tr>
@@ -1542,7 +1554,7 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
-      <th>Line</th>
+      <th>name</th>
       <th>SA-MZ</th>
     </tr>
     <tr>
@@ -1585,7 +1597,7 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
-      <th>Bus</th>
+      <th>name</th>
       <th>SA</th>
       <th>MZ</th>
     </tr>
@@ -1625,15 +1637,12 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\34620\.conda\envs\integrated-energy-grids\Lib\site-packages\cartopy\mpl\feature_artist.py:144: UserWarning: facecolor will have no effect as it has been defined as &quot;never&quot;.
-  warnings.warn(&#39;facecolor will have no effect as it has been &#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;nodes&#39;: {&#39;Bus&#39;: &lt;matplotlib.collections.PatchCollection at 0x304bdb390&gt;},
+ &#39;branches&#39;: {&#39;Line&#39;: &lt;matplotlib.collections.LineCollection at 0x304bdb4d0&gt;},
+ &#39;flows&#39;: {}}
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;matplotlib.collections.PatchCollection at 0x15b4f062330&gt;,
- &lt;matplotlib.collections.LineCollection at 0x15b4f1e10a0&gt;)
-</pre></div>
-</div>
-<img alt="_images/ca80906d038b3027f334830353d2baeb4f76b7e1c9206c6314e0d30875eff71c.png" src="_images/ca80906d038b3027f334830353d2baeb4f76b7e1c9206c6314e0d30875eff71c.png" />
+<img alt="_images/8d6f9756f3936341f52d85c8a7fb7294de12aace13dd97afae0a27700b77c07b.png" src="_images/8d6f9756f3936341f52d85c8a7fb7294de12aace13dd97afae0a27700b77c07b.png" />
 </div>
 </div>
 <p>Since we have provided <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> coordinates for our buses, <code class="docutils literal notranslate"><span class="pre">n.plot()</span></code> will try to plot the network on a map by default. Of course, there’s an option to deactivate this behaviour:</p>
@@ -1644,7 +1653,7 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/0bf2d37b4a5a4b5e5578146b538b4cb751590eec81f1e4b6b88d714704208c11.png" src="_images/0bf2d37b4a5a4b5e5578146b538b4cb751590eec81f1e4b6b88d714704208c11.png" />
+<img alt="_images/6990aecdb80081c99ff1c187db76b38a485ba890f897410f12ae91684a6d8dfe.png" src="_images/6990aecdb80081c99ff1c187db76b38a485ba890f897410f12ae91684a6d8dfe.png" />
 </div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">n.plot()</span></code> function has a variety of styling arguments to tweak the appearance of the buses, the lines and the map in the background:</p>
@@ -1655,7 +1664,7 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
     <span class="n">bus_sizes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
     <span class="n">bus_colors</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span>
     <span class="n">bus_alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
-    <span class="n">color_geomap</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">geomap_color</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">line_colors</span><span class="o">=</span><span class="s2">&quot;orchid&quot;</span><span class="p">,</span>
     <span class="n">line_widths</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
     <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Test&quot;</span><span class="p">,</span>
@@ -1664,11 +1673,7 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\34620\.conda\envs\integrated-energy-grids\Lib\site-packages\cartopy\mpl\feature_artist.py:144: UserWarning: facecolor will have no effect as it has been defined as &quot;never&quot;.
-  warnings.warn(&#39;facecolor will have no effect as it has been &#39;
-</pre></div>
-</div>
-<img alt="_images/9f8d93592966af3133a30542a26d7c5a151e72734934686ee54c03a6d9618c38.png" src="_images/9f8d93592966af3133a30542a26d7c5a151e72734934686ee54c03a6d9618c38.png" />
+<img alt="_images/3099278288d79236cdfa7670b8492bbe8d5d0fe0c9e4317f84fc58da73b65e51.png" src="_images/3099278288d79236cdfa7670b8492bbe8d5d0fe0c9e4317f84fc58da73b65e51.png" />
 </div>
 </div>
 <p>Just like with <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> we can also control the projection of the network plot:</p>
@@ -1682,11 +1687,7 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\34620\.conda\envs\integrated-energy-grids\Lib\site-packages\cartopy\mpl\feature_artist.py:144: UserWarning: facecolor will have no effect as it has been defined as &quot;never&quot;.
-  warnings.warn(&#39;facecolor will have no effect as it has been &#39;
-</pre></div>
-</div>
-<img alt="_images/a2c53efa531e214c441cfe1c7d7f586c5c343bf1ab537706542d3887465b9511.png" src="_images/a2c53efa531e214c441cfe1c7d7f586c5c343bf1ab537706542d3887465b9511.png" />
+<img alt="_images/7c9d0381d3de9c3f54c71350e31cd2a421995b53eb95135f69af04b8bdc35026.png" src="_images/7c9d0381d3de9c3f54c71350e31cd2a421995b53eb95135f69af04b8bdc35026.png" />
 </div>
 </div>
 <p>We can use the <code class="docutils literal notranslate"><span class="pre">bus_sizes</span></code> argument of <code class="docutils literal notranslate"><span class="pre">n.plot()</span></code> to display the regional distribution of load. First, we calculate the total load per bus:</p>
@@ -1720,11 +1721,7 @@ Name: p_set, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\34620\.conda\envs\integrated-energy-grids\Lib\site-packages\cartopy\mpl\feature_artist.py:144: UserWarning: facecolor will have no effect as it has been defined as &quot;never&quot;.
-  warnings.warn(&#39;facecolor will have no effect as it has been &#39;
-</pre></div>
-</div>
-<img alt="_images/cab66457b6c4beec190a6f5c01fe440f8a9e28a244af6868982dcdb9d1e4d893.png" src="_images/cab66457b6c4beec190a6f5c01fe440f8a9e28a244af6868982dcdb9d1e4d893.png" />
+<img alt="_images/ebf01546a2a6eaa780cbb7ec06fed4f65133f8261ecd7da8de284b5c93195d74.png" src="_images/ebf01546a2a6eaa780cbb7ec06fed4f65133f8261ecd7da8de284b5c93195d74.png" />
 </div>
 </div>
 <p>The important point here is, that <code class="docutils literal notranslate"><span class="pre">s</span></code> needs to have entries for all buses, i.e. its index needs to match <code class="docutils literal notranslate"><span class="pre">n.buses.index</span></code>.</p>
@@ -1737,7 +1734,7 @@ Name: p_set, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generator
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>name
 MZ hydro     1150.0
 SA coal     35000.0
 SA wind      3000.0
@@ -1783,11 +1780,7 @@ Name: now, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\34620\.conda\envs\integrated-energy-grids\Lib\site-packages\cartopy\mpl\feature_artist.py:144: UserWarning: facecolor will have no effect as it has been defined as &quot;never&quot;.
-  warnings.warn(&#39;facecolor will have no effect as it has been &#39;
-</pre></div>
-</div>
-<img alt="_images/41be3df27b33389ce067a6dd4bc7bec68c481d4b37e7f87a2edd226a6a844cc0.png" src="_images/41be3df27b33389ce067a6dd4bc7bec68c481d4b37e7f87a2edd226a6a844cc0.png" />
+<img alt="_images/26264bab419056a6b446c715dec543993029cb1dd76bdd33e2de863c27c706f5.png" src="_images/26264bab419056a6b446c715dec543993029cb1dd76bdd33e2de863c27c706f5.png" />
 </div>
 </div>
 <p><strong>How does this magic work?</strong> The plotting function will look up the colors specified in <code class="docutils literal notranslate"><span class="pre">n.carriers</span></code> for each carrier and match it with the second index-level of <code class="docutils literal notranslate"><span class="pre">s</span></code>.</p>
@@ -1850,7 +1843,7 @@ Name: now, dtype: float64
       <th>v_nom</th>
     </tr>
     <tr>
-      <th>Line</th>
+      <th>name</th>
       <th></th>
       <th></th>
       <th></th>
@@ -1901,7 +1894,7 @@ Name: now, dtype: float64
     </tr>
   </tbody>
 </table>
-<p>1 rows × 32 columns</p>
+<p>1 rows × 33 columns</p>
 </div></div></div>
 </div>
 <div class="cell tag_hide-output docutils container">
@@ -1910,23 +1903,44 @@ Name: now, dtype: float64
 </pre></div>
 </div>
 </div>
-<details class="hide below-input">
+<details class="admonition hide below-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell output</span>
-<span class="expanded">Hide code cell output</span>
+<p class="collapsed admonition-title">Show code cell output</p>
+<p class="expanded admonition-title">Hide code cell output</p>
 </summary>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:linopy.model: Solve problem using Highs solver
-INFO:linopy.io: Writing time: 0.03s
+INFO:linopy.io: Writing time: 0.01s
 INFO:linopy.constants: Optimization successful: 
 Status: ok
 Termination condition: optimal
 Solution: 6 primals, 14 duals
 Objective: 1.27e+06
 Solver model: available
-Solver message: optimal
+Solver message: Optimal
 
 INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-fix-p-lower, Generator-fix-p-upper, Line-fix-s-lower, Line-fix-s-upper were not assigned to the network.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.12.0 (git hash: n/a): Copyright (c) 2025 HiGHS under MIT licence terms
+LP linopy-problem-jg2og8om has 14 rows; 6 cols; 19 nonzeros
+Coefficient ranges:
+  Matrix  [1e+00, 1e+00]
+  Cost    [3e+01, 8e+01]
+  Bound   [0e+00, 0e+00]
+  RHS     [4e+02, 4e+04]
+Presolving model
+1 rows, 3 cols, 3 nonzeros  0s
+0 rows, 0 cols, 0 nonzeros  0s
+Presolve reductions: rows 0(-14); columns 0(-6); nonzeros 0(-19) - Reduced to empty
+Performed postsolve
+Solving the original LP from the solution after postsolve
+
+Model name          : linopy-problem-jg2og8om
+Model status        : Optimal
+Objective value     :  1.2660000000e+06
+P-D objective error :  0.0000000000e+00
+HiGHS run time      :          0.00
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;ok&#39;, &#39;optimal&#39;)
@@ -1960,7 +1974,7 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
-      <th>Generator</th>
+      <th>name</th>
       <th>MZ hydro</th>
       <th>SA coal</th>
       <th>SA wind</th>
@@ -2009,8 +2023,8 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.io:Directory tmp does not exist, creating it
-INFO:pypsa.io:Exported network &#39;tmp&#39; contains: carriers, generators, buses, loads, lines
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.network.io:Directory tmp does not exist, creating it
+INFO:pypsa.network.io:Exported network &#39;Unnamed Network&#39; saved to &#39;tmp contains: loads, lines, buses, generators, carriers, sub_networks
 </pre></div>
 </div>
 </div>
@@ -2022,7 +2036,7 @@ INFO:pypsa.io:Exported network &#39;tmp&#39; contains: carriers, generators, bus
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.io:Imported network tmp has buses, carriers, generators, lines, loads
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.io:Imported network &#39;Unnamed Network&#39; has buses, carriers, generators, lines, loads, sub_networks
 </pre></div>
 </div>
 </div>
@@ -2034,7 +2048,7 @@ INFO:pypsa.io:Exported network &#39;tmp&#39; contains: carriers, generators, bus
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.io:Exported network &#39;tmp.nc&#39; contains: carriers, generators, buses, loads, lines
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.io:Exported network &#39;Unnamed Network&#39; saved to &#39;tmp.nc contains: loads, lines, buses, generators, carriers, sub_networks
 </pre></div>
 </div>
 </div>
@@ -2046,7 +2060,7 @@ INFO:pypsa.io:Exported network &#39;tmp&#39; contains: carriers, generators, bus
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.io:Imported network tmp.nc has buses, carriers, generators, lines, loads
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.io:Imported network &#39;Unnamed Network&#39; has buses, carriers, generators, lines, loads, sub_networks
 </pre></div>
 </div>
 </div>
@@ -2058,13 +2072,13 @@ INFO:pypsa.io:Exported network &#39;tmp&#39; contains: carriers, generators, bus
 <p><a class="reference external" href="https://www.scigrid.de/pages/general-information.html">SciGRID</a> is a project that provides an open reference model of the European transmission network. The network comprises time series for loads and the availability of renewable generation at an hourly resolution for January 1, 2011 as well as approximate generation capacities in 2014. This dataset is a little out of date and only intended to demonstrate the capabilities of PyPSA.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="n">pypsa</span><span class="o">.</span><span class="n">examples</span><span class="o">.</span><span class="n">scigrid_de</span><span class="p">(</span><span class="n">from_master</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="n">pypsa</span><span class="o">.</span><span class="n">examples</span><span class="o">.</span><span class="n">scigrid_de</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.io:Importing network from PyPSA version v0.17.1 while current version is v0.32.0. Read the release notes at https://pypsa.readthedocs.io/en/latest/release_notes.html to prepare your network for import.
-INFO:pypsa.io:Imported network scigrid-de.nc has buses, generators, lines, loads, storage_units, transformers
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.io:Retrieving network data from https://github.com/PyPSA/PyPSA/raw/v1.0.7/examples/networks/scigrid-de/scigrid-de.nc.
+INFO:pypsa.network.io:Imported network &#39;SciGrid-DE&#39; has buses, carriers, generators, lines, loads, storage_units, transformers
 </pre></div>
 </div>
 </div>
@@ -2128,7 +2142,7 @@ INFO:pypsa.io:Imported network scigrid-de.nc has buses, generators, lines, loads
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
-      <th>Load</th>
+      <th>name</th>
       <th>1</th>
       <th>3</th>
       <th>4</th>
@@ -2265,7 +2279,7 @@ INFO:pypsa.io:Imported network scigrid-de.nc has buses, generators, lines, loads
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;snapshot&#39;, ylabel=&#39;MW&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/d7279df9bdb4a5ec86eaeadf76e6b7f6cf127dcbfafbe00cdc704287706fc4fc.png" src="_images/d7279df9bdb4a5ec86eaeadf76e6b7f6cf127dcbfafbe00cdc704287706fc4fc.png" />
+<img alt="_images/31290f2691ff6c2c0c7a452173869fc77b567013fcdd3aca3fbb081c66f44d6a.png" src="_images/31290f2691ff6c2c0c7a452173869fc77b567013fcdd3aca3fbb081c66f44d6a.png" />
 </div>
 </div>
 <p>… and the capacity factor time series:</p>
@@ -2279,7 +2293,7 @@ INFO:pypsa.io:Imported network scigrid-de.nc has buses, generators, lines, loads
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;snapshot&#39;, ylabel=&#39;p.u.&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/a35bb1a13a7d0c236c54f5cb3cfa47fc4d993711a42c9b51463b0e419016c163.png" src="_images/a35bb1a13a7d0c236c54f5cb3cfa47fc4d993711a42c9b51463b0e419016c163.png" />
+<img alt="_images/0143ff7d4cab005e73c3c1551045efc060cbc503056a6548542534588654b4bd.png" src="_images/0143ff7d4cab005e73c3c1551045efc060cbc503056a6548542534588654b4bd.png" />
 </div>
 </div>
 <p>We can also inspect the total power plant capacities per technology…</p>
@@ -2294,7 +2308,7 @@ INFO:pypsa.io:Imported network scigrid-de.nc has buses, generators, lines, loads
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;GW&#39;)
 </pre></div>
 </div>
-<img alt="_images/7949ab4d659c5ae10eb6ad2c7ad1ad869764bf7c3be5fbb4b9391487692228d0.png" src="_images/7949ab4d659c5ae10eb6ad2c7ad1ad869764bf7c3be5fbb4b9391487692228d0.png" />
+<img alt="_images/ff4941fb8afd5770889d5f1aa8027b8881eab6d86bbbce6ff6105736e9d987be.png" src="_images/ff4941fb8afd5770889d5f1aa8027b8881eab6d86bbbce6ff6105736e9d987be.png" />
 </div>
 </div>
 <p>… and plot the regional distribution of loads…</p>
@@ -2318,11 +2332,7 @@ INFO:pypsa.io:Imported network scigrid-de.nc has buses, generators, lines, loads
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\34620\.conda\envs\integrated-energy-grids\Lib\site-packages\cartopy\mpl\feature_artist.py:144: UserWarning: facecolor will have no effect as it has been defined as &quot;never&quot;.
-  warnings.warn(&#39;facecolor will have no effect as it has been &#39;
-</pre></div>
-</div>
-<img alt="_images/0160d89f37a7a3c947efe46c61c2c86c26c8a5b8172e26bb24097b77ee715955.png" src="_images/0160d89f37a7a3c947efe46c61c2c86c26c8a5b8172e26bb24097b77ee715955.png" />
+<img alt="_images/a8923a971c445aaecad933e73dc7ea95dd4a3ed7e15dddd5e8dc2beda940e06c.png" src="_images/a8923a971c445aaecad933e73dc7ea95dd4a3ed7e15dddd5e8dc2beda940e06c.png" />
 </div>
 </div>
 <p>… and power plant capacities:</p>
@@ -2341,14 +2351,6 @@ INFO:pypsa.io:Imported network scigrid-de.nc has buses, generators, lines, loads
 <span class="n">carriers</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">generators</span><span class="o">.</span><span class="n">carrier</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">storage_units</span><span class="o">.</span><span class="n">carrier</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
 <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;#</span><span class="si">%06x</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mh">0xFFFFFF</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">carriers</span><span class="p">]</span>
 <span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Carrier&quot;</span><span class="p">,</span> <span class="n">carriers</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;Gas&#39;, &#39;Hard Coal&#39;, &#39;Run of River&#39;, &#39;Waste&#39;, &#39;Brown Coal&#39;, &#39;Oil&#39;,
-       &#39;Storage Hydro&#39;, &#39;Other&#39;, &#39;Multiple&#39;, &#39;Nuclear&#39;, &#39;Geothermal&#39;,
-       &#39;Wind Offshore&#39;, &#39;Wind Onshore&#39;, &#39;Solar&#39;, &#39;Pumped Hydro&#39;],
-      dtype=&#39;object&#39;)
 </pre></div>
 </div>
 </div>
@@ -2373,11 +2375,10 @@ INFO:pypsa.io:Imported network scigrid-de.nc has buses, generators, lines, loads
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\34620\.conda\envs\integrated-energy-grids\Lib\site-packages\cartopy\mpl\feature_artist.py:144: UserWarning: facecolor will have no effect as it has been defined as &quot;never&quot;.
-  warnings.warn(&#39;facecolor will have no effect as it has been &#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x318bf3250&gt;
 </pre></div>
 </div>
-<img alt="_images/d062eb635a96be4625c705451cae5ef9ce4cba88c9ecc84fe2cea3f8565c179e.png" src="_images/d062eb635a96be4625c705451cae5ef9ce4cba88c9ecc84fe2cea3f8565c179e.png" />
+<img alt="_images/05d4e523504658400312aeb46281af52706268c562d17e0c86cae023e7f16757.png" src="_images/05d4e523504658400312aeb46281af52706268c562d17e0c86cae023e7f16757.png" />
 </div>
 </div>
 <p>This dataset also includes a few hydro storage units:</p>
@@ -2414,8 +2415,8 @@ INFO:pypsa.io:Imported network scigrid-de.nc has buses, generators, lines, loads
       <th>p_nom_extendable</th>
       <th>p_nom_min</th>
       <th>p_nom_max</th>
+      <th>p_nom_set</th>
       <th>p_min_pu</th>
-      <th>p_max_pu</th>
       <th>...</th>
       <th>state_of_charge_initial_per_period</th>
       <th>state_of_charge_set</th>
@@ -2429,7 +2430,7 @@ INFO:pypsa.io:Imported network scigrid-de.nc has buses, generators, lines, loads
       <th>p_nom_opt</th>
     </tr>
     <tr>
-      <th>StorageUnit</th>
+      <th>name</th>
       <th></th>
       <th></th>
       <th></th>
@@ -2464,13 +2465,13 @@ INFO:pypsa.io:Imported network scigrid-de.nc has buses, generators, lines, loads
       <td>False</td>
       <td>0.0</td>
       <td>inf</td>
+      <td>NaN</td>
       <td>-1.0</td>
-      <td>1.0</td>
       <td>...</td>
       <td>False</td>
       <td>NaN</td>
       <td>False</td>
-      <td>True</td>
+      <td>False</td>
       <td>6.0</td>
       <td>0.95</td>
       <td>0.95</td>
@@ -2488,13 +2489,13 @@ INFO:pypsa.io:Imported network scigrid-de.nc has buses, generators, lines, loads
       <td>False</td>
       <td>0.0</td>
       <td>inf</td>
+      <td>NaN</td>
       <td>-1.0</td>
-      <td>1.0</td>
       <td>...</td>
       <td>False</td>
       <td>NaN</td>
       <td>False</td>
-      <td>True</td>
+      <td>False</td>
       <td>6.0</td>
       <td>0.95</td>
       <td>0.95</td>
@@ -2512,13 +2513,13 @@ INFO:pypsa.io:Imported network scigrid-de.nc has buses, generators, lines, loads
       <td>False</td>
       <td>0.0</td>
       <td>inf</td>
+      <td>NaN</td>
       <td>-1.0</td>
-      <td>1.0</td>
       <td>...</td>
       <td>False</td>
       <td>NaN</td>
       <td>False</td>
-      <td>True</td>
+      <td>False</td>
       <td>6.0</td>
       <td>0.95</td>
       <td>0.95</td>
@@ -2528,7 +2529,7 @@ INFO:pypsa.io:Imported network scigrid-de.nc has buses, generators, lines, loads
     </tr>
   </tbody>
 </table>
-<p>3 rows × 33 columns</p>
+<p>3 rows × 36 columns</p>
 </div></div></div>
 </div>
 <p>So let’s solve the electricity market simulation for January 1, 2011. It’ll take a short moment.</p>
@@ -2538,10 +2539,10 @@ INFO:pypsa.io:Imported network scigrid-de.nc has buses, generators, lines, loads
 </pre></div>
 </div>
 </div>
-<details class="hide below-input">
+<details class="admonition hide below-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell output</span>
-<span class="expanded">Hide code cell output</span>
+<p class="collapsed admonition-title">Show code cell output</p>
+<p class="expanded admonition-title">Hide code cell output</p>
 </summary>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.consistency:The following transformers have zero r, which could break the linear load flow:
@@ -2555,33 +2556,60 @@ Index([&#39;2&#39;, &#39;5&#39;, &#39;10&#39;, &#39;12&#39;, &#39;13&#39;, &#39;
        &#39;315&#39;, &#39;317&#39;, &#39;322&#39;, &#39;332&#39;, &#39;334&#39;, &#39;336&#39;, &#39;338&#39;, &#39;351&#39;, &#39;353&#39;, &#39;360&#39;,
        &#39;362&#39;, &#39;382&#39;, &#39;384&#39;, &#39;385&#39;, &#39;391&#39;, &#39;403&#39;, &#39;404&#39;, &#39;413&#39;, &#39;421&#39;, &#39;450&#39;,
        &#39;458&#39;],
-      dtype=&#39;object&#39;, name=&#39;Transformer&#39;)
-WARNING:pypsa.consistency:The following transformers have zero r, which could break the linear load flow:
-Index([&#39;2&#39;, &#39;5&#39;, &#39;10&#39;, &#39;12&#39;, &#39;13&#39;, &#39;15&#39;, &#39;18&#39;, &#39;20&#39;, &#39;22&#39;, &#39;24&#39;, &#39;26&#39;, &#39;30&#39;,
-       &#39;32&#39;, &#39;37&#39;, &#39;42&#39;, &#39;46&#39;, &#39;52&#39;, &#39;56&#39;, &#39;61&#39;, &#39;68&#39;, &#39;69&#39;, &#39;74&#39;, &#39;78&#39;, &#39;86&#39;,
-       &#39;87&#39;, &#39;94&#39;, &#39;95&#39;, &#39;96&#39;, &#39;99&#39;, &#39;100&#39;, &#39;104&#39;, &#39;105&#39;, &#39;106&#39;, &#39;107&#39;, &#39;117&#39;,
-       &#39;120&#39;, &#39;123&#39;, &#39;124&#39;, &#39;125&#39;, &#39;128&#39;, &#39;129&#39;, &#39;138&#39;, &#39;143&#39;, &#39;156&#39;, &#39;157&#39;,
-       &#39;159&#39;, &#39;160&#39;, &#39;165&#39;, &#39;184&#39;, &#39;191&#39;, &#39;195&#39;, &#39;201&#39;, &#39;220&#39;, &#39;231&#39;, &#39;232&#39;,
-       &#39;233&#39;, &#39;236&#39;, &#39;247&#39;, &#39;248&#39;, &#39;250&#39;, &#39;251&#39;, &#39;252&#39;, &#39;261&#39;, &#39;263&#39;, &#39;264&#39;,
-       &#39;267&#39;, &#39;272&#39;, &#39;279&#39;, &#39;281&#39;, &#39;282&#39;, &#39;292&#39;, &#39;303&#39;, &#39;307&#39;, &#39;308&#39;, &#39;312&#39;,
-       &#39;315&#39;, &#39;317&#39;, &#39;322&#39;, &#39;332&#39;, &#39;334&#39;, &#39;336&#39;, &#39;338&#39;, &#39;351&#39;, &#39;353&#39;, &#39;360&#39;,
-       &#39;362&#39;, &#39;382&#39;, &#39;384&#39;, &#39;385&#39;, &#39;391&#39;, &#39;403&#39;, &#39;404&#39;, &#39;413&#39;, &#39;421&#39;, &#39;450&#39;,
-       &#39;458&#39;],
-      dtype=&#39;object&#39;, name=&#39;Transformer&#39;)
+      dtype=&#39;object&#39;, name=&#39;name&#39;)
 INFO:linopy.model: Solve problem using Highs solver
 INFO:linopy.io:Writing objective.
-Writing constraints.: 100%|██████████| 15/15 [00:00&lt;00:00, 15.60it/s]
-Writing continuous variables.: 100%|██████████| 6/6 [00:00&lt;00:00, 33.20it/s]
-INFO:linopy.io: Writing time: 1.19s
-INFO:linopy.constants: Optimization successful: 
+Writing constraints.: 100%|██████████| 15/15 [00:00&lt;00:00, 80.86it/s] 
+Writing continuous variables.: 100%|██████████| 6/6 [00:00&lt;00:00, 567.71it/s]
+INFO:linopy.io: Writing time: 0.25s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.12.0 (git hash: n/a): Copyright (c) 2025 HiGHS under MIT licence terms
+LP linopy-problem-jj5jnhwe has 142968 rows; 59640 cols; 263626 nonzeros
+Coefficient ranges:
+  Matrix  [1e-02, 2e+02]
+  Cost    [3e+00, 1e+02]
+  Bound   [0e+00, 0e+00]
+  RHS     [2e-11, 6e+03]
+WARNING: Problem has some excessively small row bounds
+Presolving model
+18737 rows, 44750 cols, 115742 nonzeros  0s
+13268 rows, 39087 cols, 107549 nonzeros  0s
+12701 rows, 31690 cols, 99620 nonzeros  0s
+Dependent equations search running on 12693 equations with time limit of 1000.00s
+Dependent equations search removed 0 rows and 0 nonzeros in 0.00s (limit = 1000.00s)
+12693 rows, 31669 cols, 99607 nonzeros  0s
+Presolve reductions: rows 12693(-130275); columns 31669(-27971); nonzeros 99607(-164019) 
+Solving the presolved LP
+Using EKK dual simplex solver - serial
+  Iteration        Objective     Infeasibilities num(sum)
+          0     0.0000000000e+00 Ph1: 0(0) 0s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:linopy.constants: Optimization successful: 
 Status: ok
 Termination condition: optimal
 Solution: 59640 primals, 142968 duals
 Objective: 9.20e+06
 Solver model: available
-Solver message: optimal
+Solver message: Optimal
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      17068     9.1992880405e+06 Pr: 0(0); Du: 0(6.91326e-13) 3s
+      17068     9.1992880405e+06 Pr: 0(0); Du: 0(6.91326e-13) 3s
 
-INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-fix-p-lower, Generator-fix-p-upper, Line-fix-s-lower, Line-fix-s-upper, Transformer-fix-s-lower, Transformer-fix-s-upper, StorageUnit-fix-p_dispatch-lower, StorageUnit-fix-p_dispatch-upper, StorageUnit-fix-p_store-lower, StorageUnit-fix-p_store-upper, StorageUnit-fix-state_of_charge-lower, StorageUnit-fix-state_of_charge-upper, Kirchhoff-Voltage-Law, StorageUnit-energy_balance were not assigned to the network.
+Performed postsolve
+Solving the original LP from the solution after postsolve
+
+Model name          : linopy-problem-jj5jnhwe
+Model status        : Optimal
+Simplex   iterations: 17068
+Objective value     :  9.1992880405e+06
+P-D objective error :  1.2958533589e-14
+HiGHS run time      :          2.76
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-fix-p-lower, Generator-fix-p-upper, Line-fix-s-lower, Line-fix-s-upper, Transformer-fix-s-lower, Transformer-fix-s-upper, StorageUnit-fix-p_dispatch-lower, StorageUnit-fix-p_dispatch-upper, StorageUnit-fix-p_store-lower, StorageUnit-fix-p_store-upper, StorageUnit-fix-state_of_charge-lower, StorageUnit-fix-state_of_charge-upper, Kirchhoff-Voltage-Law, StorageUnit-energy_balance were not assigned to the network.
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;ok&#39;, &#39;optimal&#39;)
@@ -2614,7 +2642,7 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
     <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
     <span class="n">bus_sizes</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
     <span class="n">line_colors</span><span class="o">=</span><span class="n">line_loading</span><span class="p">,</span>
-    <span class="n">line_norm</span><span class="o">=</span><span class="n">norm</span><span class="p">,</span>
+    <span class="n">line_cmap_norm</span><span class="o">=</span><span class="n">norm</span><span class="p">,</span>
     <span class="n">line_cmap</span><span class="o">=</span><span class="s2">&quot;plasma&quot;</span><span class="p">,</span>
     <span class="n">line_widths</span><span class="o">=</span><span class="n">n</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">s_nom</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span>
 <span class="p">)</span>
@@ -2629,14 +2657,10 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\34620\.conda\envs\integrated-energy-grids\Lib\site-packages\cartopy\mpl\feature_artist.py:144: UserWarning: facecolor will have no effect as it has been defined as &quot;never&quot;.
-  warnings.warn(&#39;facecolor will have no effect as it has been &#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x316401a90&gt;
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x15b651533e0&gt;
-</pre></div>
-</div>
-<img alt="_images/04355135a66dc9aa9cd622375fa315431a970cacdb0495a2254a807fe2c89e7e.png" src="_images/04355135a66dc9aa9cd622375fa315431a970cacdb0495a2254a807fe2c89e7e.png" />
+<img alt="_images/fe58087748503a51a63fe96c35631d56ee998ae26d262a5d37c403fc8bfe510d.png" src="_images/fe58087748503a51a63fe96c35631d56ee998ae26d262a5d37c403fc8bfe510d.png" />
 </div>
 </div>
 <p>Or plot the hourly dispatch grouped by carrier:</p>
@@ -2667,7 +2691,7 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1472d304f347d1dc6adc0c80de364d66c6bf8b9cf3ed3ec870c1183fb97c0e05.png" src="_images/1472d304f347d1dc6adc0c80de364d66c6bf8b9cf3ed3ec870c1183fb97c0e05.png" />
+<img alt="_images/0cae1f4afc5d6cc8fb74619f4f4a263e1bec76ab70cd2c466d85c2faa608ebc5.png" src="_images/0cae1f4afc5d6cc8fb74619f4f4a263e1bec76ab70cd2c466d85c2faa608ebc5.png" />
 </div>
 </div>
 <p>Or plot the aggregate dispatch of the pumped hydro storage units and the state of charge throughout the day:</p>
@@ -2691,7 +2715,7 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;MWh or MW&#39;)
 </pre></div>
 </div>
-<img alt="_images/b63631411bca488cc1405407f8d4156b96384d888fe5d0e5aed76258fbaa0b31.png" src="_images/b63631411bca488cc1405407f8d4156b96384d888fe5d0e5aed76258fbaa0b31.png" />
+<img alt="_images/db655d199d955bb14c907e61f3cb4a8048087770fc3e2b082aee072565274767.png" src="_images/db655d199d955bb14c907e61f3cb4a8048087770fc3e2b082aee072565274767.png" />
 </div>
 </div>
 <p>Or plot the locational marginal prices (LMPs):</p>
@@ -2706,7 +2730,7 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
     <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
     <span class="n">bus_colors</span><span class="o">=</span><span class="n">n</span><span class="o">.</span><span class="n">buses_t</span><span class="o">.</span><span class="n">marginal_price</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
     <span class="n">bus_cmap</span><span class="o">=</span><span class="s2">&quot;plasma&quot;</span><span class="p">,</span>
-    <span class="n">bus_norm</span><span class="o">=</span><span class="n">norm</span><span class="p">,</span>
+    <span class="n">bus_cmap_norm</span><span class="o">=</span><span class="n">norm</span><span class="p">,</span>
     <span class="n">bus_alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
 <span class="p">)</span>
 
@@ -2720,14 +2744,10 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\34620\.conda\envs\integrated-energy-grids\Lib\site-packages\cartopy\mpl\feature_artist.py:144: UserWarning: facecolor will have no effect as it has been defined as &quot;never&quot;.
-  warnings.warn(&#39;facecolor will have no effect as it has been &#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x343323750&gt;
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x15b525e1010&gt;
-</pre></div>
-</div>
-<img alt="_images/adbf233e99dd8c0826366895bc6e0e0e39aa9bbda83cb46eefab77806cccddd2.png" src="_images/adbf233e99dd8c0826366895bc6e0e0e39aa9bbda83cb46eefab77806cccddd2.png" />
+<img alt="_images/b0733337122e74e9db515bd24b8d59d4e6ea26e66905473fe7d4d90008b4a264.png" src="_images/b0733337122e74e9db515bd24b8d59d4e6ea26e66905473fe7d4d90008b4a264.png" />
 </div>
 </div>
 </section>
@@ -2788,8 +2808,7 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -2856,8 +2875,8 @@ By Marta Victoria, Aleksander Grochowicz
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

@@ -16,33 +16,30 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -53,7 +50,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -70,7 +67,6 @@
     <link rel="prev" title="Problem 5.4" href="Problem05.04.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -86,8 +82,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -95,6 +102,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -102,8 +110,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -119,8 +127,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -149,18 +156,22 @@
       
     
     
-    <img src="../_static/DTUlogo.jpg" class="logo__image only-light" alt="integrated-energy-grids - Home"/>
-    <img src="../_static/DTUlogo.jpg" class="logo__image only-dark pst-js-only" alt="integrated-energy-grids - Home"/>
+    <img src="../_static/DTUlogo_red.png" class="logo__image only-light" alt="integrated-energy-grids - Home"/>
+    <script>document.write(`<img src="../_static/DTUlogo_red.png" class="logo__image only-dark" alt="integrated-energy-grids - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -245,14 +256,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -427,16 +433,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 
 </div></div>
       
@@ -483,6 +497,13 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set parameter Username
+Set parameter LicenseID to value 2767832
+Academic license - for non-commercial use only - expires 2027-01-20
+</pre></div>
+</div>
+</div>
 </div>
 <p>The cross-sectional area <span class="math notranslate nohighlight">\(A\)</span> and the speed of sound in gas <span class="math notranslate nohighlight">\(c\)</span> can be calculated as</p>
 <div class="cell docutils container">
@@ -503,7 +524,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>450.3900615022494
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(450.3900615022494)
 </pre></div>
 </div>
 </div>
@@ -517,7 +538,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24.648608512719843
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(24.648608512719843)
 </pre></div>
 </div>
 </div>
@@ -531,7 +552,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5226.922401172076
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(5226.922401172076)
 </pre></div>
 </div>
 </div>
@@ -579,6 +600,7 @@
       <th>y</th>
       <th>carrier</th>
       <th>unit</th>
+      <th>location</th>
       <th>v_mag_pu_set</th>
       <th>v_mag_pu_min</th>
       <th>v_mag_pu_max</th>
@@ -587,7 +609,8 @@
       <th>sub_network</th>
     </tr>
     <tr>
-      <th>Bus</th>
+      <th>name</th>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -611,6 +634,7 @@
       <td>0.0</td>
       <td>AC</td>
       <td></td>
+      <td></td>
       <td>1.0</td>
       <td>0.0</td>
       <td>inf</td>
@@ -625,6 +649,7 @@
       <td>0.0</td>
       <td>1.0</td>
       <td>AC</td>
+      <td></td>
       <td></td>
       <td>1.0</td>
       <td>0.0</td>
@@ -641,6 +666,7 @@
       <td>1.0</td>
       <td>AC</td>
       <td></td>
+      <td></td>
       <td>1.0</td>
       <td>0.0</td>
       <td>inf</td>
@@ -656,6 +682,7 @@
       <td>2.0</td>
       <td>AC</td>
       <td></td>
+      <td></td>
       <td>1.0</td>
       <td>0.0</td>
       <td>inf</td>
@@ -670,6 +697,7 @@
       <td>1.0</td>
       <td>2.0</td>
       <td>AC</td>
+      <td></td>
       <td></td>
       <td>1.0</td>
       <td>0.0</td>
@@ -736,7 +764,7 @@
       <th>p_nom_opt</th>
     </tr>
     <tr>
-      <th>Link</th>
+      <th>name</th>
       <th></th>
       <th></th>
       <th></th>
@@ -883,7 +911,7 @@
     </tr>
   </tbody>
 </table>
-<p>5 rows × 34 columns</p>
+<p>5 rows × 35 columns</p>
 </div></div></div>
 </div>
 <div class="cell docutils container">
@@ -938,7 +966,7 @@
       <th>active</th>
     </tr>
     <tr>
-      <th>Load</th>
+      <th>name</th>
       <th></th>
       <th></th>
       <th></th>
@@ -1041,8 +1069,8 @@
       <th>p_nom_extendable</th>
       <th>p_nom_min</th>
       <th>p_nom_max</th>
+      <th>p_nom_set</th>
       <th>p_min_pu</th>
-      <th>p_max_pu</th>
       <th>...</th>
       <th>min_up_time</th>
       <th>min_down_time</th>
@@ -1056,7 +1084,7 @@
       <th>p_nom_opt</th>
     </tr>
     <tr>
-      <th>Generator</th>
+      <th>name</th>
       <th></th>
       <th></th>
       <th></th>
@@ -1091,8 +1119,8 @@
       <td>False</td>
       <td>0.0</td>
       <td>inf</td>
+      <td>NaN</td>
       <td>0.0</td>
-      <td>1.0</td>
       <td>...</td>
       <td>0</td>
       <td>0</td>
@@ -1107,7 +1135,7 @@
     </tr>
   </tbody>
 </table>
-<p>1 rows × 37 columns</p>
+<p>1 rows × 38 columns</p>
 </div></div></div>
 </div>
 <div class="cell docutils container">
@@ -1118,28 +1146,43 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.consistency:The following buses have carriers which are not defined:
-Index([&#39;bus DE&#39;, &#39;bus DK1&#39;, &#39;bus DK2&#39;, &#39;bus NO&#39;, &#39;bus SE&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
+Index([&#39;bus DE&#39;, &#39;bus DK1&#39;, &#39;bus DK2&#39;, &#39;bus NO&#39;, &#39;bus SE&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
 WARNING:pypsa.consistency:The following links have carriers which are not defined:
 Index([&#39;pipeline DE-DK1&#39;, &#39;pipeline DK1-DK2&#39;, &#39;pipeline DK1-NO&#39;,
        &#39;pipeline DK1-SE&#39;, &#39;pipeline DK2-SE&#39;],
-      dtype=&#39;object&#39;, name=&#39;Link&#39;)
-WARNING:pypsa.consistency:The following buses have carriers which are not defined:
-Index([&#39;bus DE&#39;, &#39;bus DK1&#39;, &#39;bus DK2&#39;, &#39;bus NO&#39;, &#39;bus SE&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
-WARNING:pypsa.consistency:The following links have carriers which are not defined:
-Index([&#39;pipeline DE-DK1&#39;, &#39;pipeline DK1-DK2&#39;, &#39;pipeline DK1-NO&#39;,
-       &#39;pipeline DK1-SE&#39;, &#39;pipeline DK2-SE&#39;],
-      dtype=&#39;object&#39;, name=&#39;Link&#39;)
+      dtype=&#39;object&#39;, name=&#39;name&#39;)
 INFO:linopy.model: Solve problem using Highs solver
-INFO:linopy.io: Writing time: 0.07s
+INFO:linopy.io: Writing time: 0.22s
 INFO:linopy.constants: Optimization successful: 
 Status: ok
 Termination condition: optimal
 Solution: 6 primals, 17 duals
 Objective: 1.00e+05
 Solver model: available
-Solver message: optimal
+Solver message: Optimal
 
 INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-fix-p-lower, Generator-fix-p-upper, Link-fix-p-lower, Link-fix-p-upper were not assigned to the network.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.12.0 (git hash: n/a): Copyright (c) 2025 HiGHS under MIT licence terms
+LP linopy-problem-zn7q1u47 has 17 rows; 6 cols; 23 nonzeros
+Coefficient ranges:
+  Matrix  [1e+00, 1e+00]
+  Cost    [2e+01, 2e+01]
+  Bound   [0e+00, 0e+00]
+  RHS     [1e+03, 1e+04]
+Presolving model
+0 rows, 0 cols, 0 nonzeros  0s
+0 rows, 0 cols, 0 nonzeros  0s
+Presolve reductions: rows 0(-17); columns 0(-6); nonzeros 0(-23) - Reduced to empty
+Performed postsolve
+Solving the original LP from the solution after postsolve
+
+Model name          : linopy-problem-zn7q1u47
+Model status        : Optimal
+Objective value     :  1.0000000000e+05
+P-D objective error :  0.0000000000e+00
+HiGHS run time      :          0.00
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;ok&#39;, &#39;optimal&#39;)
@@ -1171,7 +1214,7 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
-      <th>Generator</th>
+      <th>name</th>
       <th>gas</th>
     </tr>
     <tr>
@@ -1196,7 +1239,7 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Link
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>name
 pipeline DE-DK1    -1.000000
 pipeline DK1-DK2   -3.226922
 pipeline DK1-NO    -4.000000
@@ -1213,7 +1256,7 @@ Name: now, dtype: float64
     <span class="n">margin</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
     <span class="n">bus_colors</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span>
     <span class="n">bus_alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
-    <span class="n">color_geomap</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">geomap_color</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">link_widths</span><span class="o">=</span><span class="nb">abs</span><span class="p">(</span><span class="n">gas_flows</span><span class="p">),</span>
     <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Gas flows&quot;</span><span class="p">,</span>
 <span class="p">);</span>
@@ -1221,11 +1264,7 @@ Name: now, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\34620\.conda\envs\integrated-energy-grids\Lib\site-packages\cartopy\mpl\feature_artist.py:144: UserWarning: facecolor will have no effect as it has been defined as &quot;never&quot;.
-  warnings.warn(&#39;facecolor will have no effect as it has been &#39;
-</pre></div>
-</div>
-<img alt="../_images/ba65cd560800cf4cba4d4918f42549f4853808e8de1f9a08d4f86bd6f433bcb8.png" src="../_images/ba65cd560800cf4cba4d4918f42549f4853808e8de1f9a08d4f86bd6f433bcb8.png" />
+<img alt="../_images/9f1302c389ebf534526887aff0f1b07166dcc3b786e9e916fc67dee5c8b9e5e9.png" src="../_images/9f1302c389ebf534526887aff0f1b07166dcc3b786e9e916fc67dee5c8b9e5e9.png" />
 </div>
 </div>
 <p><strong>(c) Assume the following lengths for the links: DK1-DK2=200 km, DK1-DE=600 km, DK1-NO= 500 km, DK1-SE=600 km, DK2-SE=100 km. If we consider that the losses due to energy consumption of the compressors’ to maintain the pressure can be estimated at 2% of the energy flow per 1000 km. Adapt the link elements in PyPSA to include an efficiency that takes compressors’ energy demand into account. calculate the optimal gas flows through the network and plot them.</strong></p>
@@ -1297,7 +1336,7 @@ Name: now, dtype: float64
       <th>p_nom_opt</th>
     </tr>
     <tr>
-      <th>Link</th>
+      <th>name</th>
       <th></th>
       <th></th>
       <th></th>
@@ -1564,7 +1603,7 @@ Name: now, dtype: float64
     </tr>
   </tbody>
 </table>
-<p>10 rows × 34 columns</p>
+<p>10 rows × 35 columns</p>
 </div></div></div>
 </div>
 <div class="cell docutils container">
@@ -1575,32 +1614,58 @@ Name: now, dtype: float64
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.consistency:The following buses have carriers which are not defined:
-Index([&#39;bus DE&#39;, &#39;bus DK1&#39;, &#39;bus DK2&#39;, &#39;bus NO&#39;, &#39;bus SE&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
-WARNING:pypsa.consistency:The following links have carriers which are not defined:
+Index([&#39;bus DE&#39;, &#39;bus DK1&#39;, &#39;bus DK2&#39;, &#39;bus NO&#39;, &#39;bus SE&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.consistency:The following links have carriers which are not defined:
 Index([&#39;pipeline DE-DK1&#39;, &#39;pipeline DK1-DK2&#39;, &#39;pipeline DK1-NO&#39;,
        &#39;pipeline DK1-SE&#39;, &#39;pipeline DK2-SE&#39;, &#39;pipeline DK1-DE&#39;,
        &#39;pipeline DK2-DK1&#39;, &#39;pipeline NO-DK1&#39;, &#39;pipeline SE-DK1&#39;,
        &#39;pipeline SE-DK2&#39;],
-      dtype=&#39;object&#39;, name=&#39;Link&#39;)
-WARNING:pypsa.consistency:The following buses have carriers which are not defined:
-Index([&#39;bus DE&#39;, &#39;bus DK1&#39;, &#39;bus DK2&#39;, &#39;bus NO&#39;, &#39;bus SE&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
-WARNING:pypsa.consistency:The following links have carriers which are not defined:
-Index([&#39;pipeline DE-DK1&#39;, &#39;pipeline DK1-DK2&#39;, &#39;pipeline DK1-NO&#39;,
-       &#39;pipeline DK1-SE&#39;, &#39;pipeline DK2-SE&#39;, &#39;pipeline DK1-DE&#39;,
-       &#39;pipeline DK2-DK1&#39;, &#39;pipeline NO-DK1&#39;, &#39;pipeline SE-DK1&#39;,
-       &#39;pipeline SE-DK2&#39;],
-      dtype=&#39;object&#39;, name=&#39;Link&#39;)
+      dtype=&#39;object&#39;, name=&#39;name&#39;)
+WARNING:pypsa.consistency:The following sub_networks have carriers which are not defined:
+Index([&#39;0&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
 INFO:linopy.model: Solve problem using Highs solver
-INFO:linopy.io: Writing time: 0.06s
+INFO:linopy.io: Writing time: 0.08s
 INFO:linopy.constants: Optimization successful: 
 Status: ok
 Termination condition: optimal
 Solution: 11 primals, 27 duals
 Objective: 1.01e+05
 Solver model: available
-Solver message: optimal
+Solver message: Optimal
 
 INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-fix-p-lower, Generator-fix-p-upper, Link-fix-p-lower, Link-fix-p-upper were not assigned to the network.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.12.0 (git hash: n/a): Copyright (c) 2025 HiGHS under MIT licence terms
+LP linopy-problem-vl77htxf has 27 rows; 11 cols; 43 nonzeros
+Coefficient ranges:
+  Matrix  [1e+00, 1e+00]
+  Cost    [2e+01, 2e+01]
+  Bound   [0e+00, 0e+00]
+  RHS     [1e+03, 1e+04]
+Presolving model
+4 rows, 10 cols, 18 nonzeros  0s
+Dependent equations search running on 4 equations with time limit of 1000.00s
+Dependent equations search removed 0 rows and 0 nonzeros in 0.00s (limit = 1000.00s)
+4 rows, 10 cols, 18 nonzeros  0s
+Presolve reductions: rows 4(-23); columns 10(-1); nonzeros 18(-25) 
+Solving the presolved LP
+Using EKK dual simplex solver - serial
+  Iteration        Objective     Infeasibilities num(sum)
+          0     5.0487388926e-04 Pr: 4(5012.15) 0s
+          6     1.0125636230e+05 Pr: 0(0) 0s
+
+Performed postsolve
+Solving the original LP from the solution after postsolve
+
+Model name          : linopy-problem-vl77htxf
+Model status        : Optimal
+Simplex   iterations: 6
+Objective value     :  1.0125636230e+05
+P-D objective error :  0.0000000000e+00
+HiGHS run time      :          0.00
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;ok&#39;, &#39;optimal&#39;)
@@ -1632,7 +1697,7 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
-      <th>Generator</th>
+      <th>name</th>
       <th>gas</th>
     </tr>
     <tr>
@@ -1657,7 +1722,7 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Link
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>name
 pipeline DE-DK1    -0.000000
 pipeline DK1-DK2    2.010044
 pipeline DK1-NO    -0.000000
@@ -1679,7 +1744,7 @@ Name: now, dtype: float64
     <span class="n">margin</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
     <span class="n">bus_colors</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span>
     <span class="n">bus_alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
-    <span class="n">color_geomap</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">geomap_color</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">link_widths</span><span class="o">=</span><span class="n">gas_flows</span><span class="p">,</span>
     <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Gas flows&quot;</span><span class="p">,</span>
 <span class="p">);</span>
@@ -1687,11 +1752,7 @@ Name: now, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\34620\.conda\envs\integrated-energy-grids\Lib\site-packages\cartopy\mpl\feature_artist.py:144: UserWarning: facecolor will have no effect as it has been defined as &quot;never&quot;.
-  warnings.warn(&#39;facecolor will have no effect as it has been &#39;
-</pre></div>
-</div>
-<img alt="../_images/64599cf39433b9a1425d99b8012f928b8618f04b80327f9635a6e1f502800876.png" src="../_images/64599cf39433b9a1425d99b8012f928b8618f04b80327f9635a6e1f502800876.png" />
+<img alt="../_images/06613b9295223b41c2f946ee4d5ab9af790bf0967f8781e80274f13923d0eef4.png" src="../_images/06613b9295223b41c2f946ee4d5ab9af790bf0967f8781e80274f13923d0eef4.png" />
 </div>
 </div>
 <p><strong>(d) Assuming the following demands in GWh for three consecutive time steps DE=[0,0,3], DK1=[1,2,1], DK2=[1,1,1], NO=[1,1,1], SE=[0,1,0]. Calculate the optimal flows in every time step and the total system costs.</strong></p>
@@ -1770,7 +1831,7 @@ Name: now, dtype: float64
       <th>p_nom_opt</th>
     </tr>
     <tr>
-      <th>Link</th>
+      <th>name</th>
       <th></th>
       <th></th>
       <th></th>
@@ -2037,7 +2098,7 @@ Name: now, dtype: float64
     </tr>
   </tbody>
 </table>
-<p>10 rows × 34 columns</p>
+<p>10 rows × 35 columns</p>
 </div></div></div>
 </div>
 <p>We add the load in every node.</p>
@@ -2060,13 +2121,13 @@ Name: now, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;p_set&#39;: Load      gas demand DE  gas demand DK1  gas demand DK2  gas demand NO  \
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;p_set&#39;: name      gas demand DE  gas demand DK1  gas demand DK2  gas demand NO  \
  snapshot                                                                 
  0                   0.0          1000.0          1000.0         1000.0   
  1                   0.0          2000.0          1000.0         1000.0   
  2                3000.0          1000.0          1000.0         1000.0   
  
- Load      gas demand SE  
+ name      gas demand SE  
  snapshot                 
  0                   0.0  
  1                1000.0  
@@ -2092,21 +2153,15 @@ Name: now, dtype: float64
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.consistency:The following buses have carriers which are not defined:
-Index([&#39;bus DE&#39;, &#39;bus DK1&#39;, &#39;bus DK2&#39;, &#39;bus NO&#39;, &#39;bus SE&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
-WARNING:pypsa.consistency:The following links have carriers which are not defined:
+Index([&#39;bus DE&#39;, &#39;bus DK1&#39;, &#39;bus DK2&#39;, &#39;bus NO&#39;, &#39;bus SE&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.consistency:The following links have carriers which are not defined:
 Index([&#39;pipeline DE-DK1&#39;, &#39;pipeline DK1-DK2&#39;, &#39;pipeline DK1-NO&#39;,
        &#39;pipeline DK1-SE&#39;, &#39;pipeline DK2-SE&#39;, &#39;pipeline DK1-DE&#39;,
        &#39;pipeline DK2-DK1&#39;, &#39;pipeline NO-DK1&#39;, &#39;pipeline SE-DK1&#39;,
        &#39;pipeline SE-DK2&#39;],
-      dtype=&#39;object&#39;, name=&#39;Link&#39;)
-WARNING:pypsa.consistency:The following buses have carriers which are not defined:
-Index([&#39;bus DE&#39;, &#39;bus DK1&#39;, &#39;bus DK2&#39;, &#39;bus NO&#39;, &#39;bus SE&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
-WARNING:pypsa.consistency:The following links have carriers which are not defined:
-Index([&#39;pipeline DE-DK1&#39;, &#39;pipeline DK1-DK2&#39;, &#39;pipeline DK1-NO&#39;,
-       &#39;pipeline DK1-SE&#39;, &#39;pipeline DK2-SE&#39;, &#39;pipeline DK1-DE&#39;,
-       &#39;pipeline DK2-DK1&#39;, &#39;pipeline NO-DK1&#39;, &#39;pipeline SE-DK1&#39;,
-       &#39;pipeline SE-DK2&#39;],
-      dtype=&#39;object&#39;, name=&#39;Link&#39;)
+      dtype=&#39;object&#39;, name=&#39;name&#39;)
 INFO:linopy.model: Solve problem using Highs solver
 INFO:linopy.io: Writing time: 0.04s
 INFO:linopy.constants: Optimization successful: 
@@ -2115,9 +2170,39 @@ Termination condition: optimal
 Solution: 33 primals, 81 duals
 Objective: 2.83e+05
 Solver model: available
-Solver message: optimal
+Solver message: Optimal
 
 INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-fix-p-lower, Generator-fix-p-upper, Link-fix-p-lower, Link-fix-p-upper were not assigned to the network.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.12.0 (git hash: n/a): Copyright (c) 2025 HiGHS under MIT licence terms
+LP linopy-problem-fyq_jdbg has 81 rows; 33 cols; 129 nonzeros
+Coefficient ranges:
+  Matrix  [1e+00, 1e+00]
+  Cost    [2e+01, 2e+01]
+  Bound   [0e+00, 0e+00]
+  RHS     [1e+03, 1e+05]
+Presolving model
+12 rows, 30 cols, 54 nonzeros  0s
+Dependent equations search running on 12 equations with time limit of 1000.00s
+Dependent equations search removed 0 rows and 0 nonzeros in 0.00s (limit = 1000.00s)
+12 rows, 30 cols, 54 nonzeros  0s
+Presolve reductions: rows 12(-69); columns 30(-3); nonzeros 54(-75) 
+Solving the presolved LP
+Using EKK dual simplex solver - serial
+  Iteration        Objective     Infeasibilities num(sum)
+          0     1.1758012135e-03 Pr: 10(14036.4) 0s
+         18     2.8332350627e+05 Pr: 0(0) 0s
+
+Performed postsolve
+Solving the original LP from the solution after postsolve
+
+Model name          : linopy-problem-fyq_jdbg
+Model status        : Optimal
+Simplex   iterations: 18
+Objective value     :  2.8332350627e+05
+P-D objective error :  1.0272278315e-16
+HiGHS run time      :          0.00
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;ok&#39;, &#39;optimal&#39;)
@@ -2150,7 +2235,7 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
-      <th>Link</th>
+      <th>name</th>
       <th>pipeline DE-DK1</th>
       <th>pipeline DK1-DK2</th>
       <th>pipeline DK1-NO</th>
@@ -2247,30 +2332,41 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.consistency:The following buses have carriers which are not defined:
-Index([&#39;bus DE&#39;, &#39;bus DK1&#39;, &#39;bus DK2&#39;, &#39;bus NO&#39;, &#39;bus SE&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
-WARNING:pypsa.consistency:The following links have carriers which are not defined:
+Index([&#39;bus DE&#39;, &#39;bus DK1&#39;, &#39;bus DK2&#39;, &#39;bus NO&#39;, &#39;bus SE&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.consistency:The following links have carriers which are not defined:
 Index([&#39;pipeline DE-DK1&#39;, &#39;pipeline DK1-DK2&#39;, &#39;pipeline DK1-NO&#39;,
        &#39;pipeline DK1-SE&#39;, &#39;pipeline DK2-SE&#39;, &#39;pipeline DK1-DE&#39;,
        &#39;pipeline DK2-DK1&#39;, &#39;pipeline NO-DK1&#39;, &#39;pipeline SE-DK1&#39;,
        &#39;pipeline SE-DK2&#39;],
-      dtype=&#39;object&#39;, name=&#39;Link&#39;)
-WARNING:pypsa.consistency:The following buses have carriers which are not defined:
-Index([&#39;bus DE&#39;, &#39;bus DK1&#39;, &#39;bus DK2&#39;, &#39;bus NO&#39;, &#39;bus SE&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
-WARNING:pypsa.consistency:The following links have carriers which are not defined:
-Index([&#39;pipeline DE-DK1&#39;, &#39;pipeline DK1-DK2&#39;, &#39;pipeline DK1-NO&#39;,
-       &#39;pipeline DK1-SE&#39;, &#39;pipeline DK2-SE&#39;, &#39;pipeline DK1-DE&#39;,
-       &#39;pipeline DK2-DK1&#39;, &#39;pipeline NO-DK1&#39;, &#39;pipeline SE-DK1&#39;,
-       &#39;pipeline SE-DK2&#39;],
-      dtype=&#39;object&#39;, name=&#39;Link&#39;)
+      dtype=&#39;object&#39;, name=&#39;name&#39;)
+WARNING:pypsa.consistency:The following sub_networks have carriers which are not defined:
+Index([&#39;0&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
 INFO:linopy.model: Solve problem using Highs solver
-INFO:linopy.io: Writing time: 0.06s
-WARNING:linopy.constants:Optimization failed: 
+INFO:linopy.io: Writing time: 0.03s
+WARNING:linopy.constants:Optimization potentially failed: 
 Status: warning
 Termination condition: infeasible
 Solution: 0 primals, 0 duals
 Objective: nan
 Solver model: available
-Solver message: infeasible
+Solver message: Infeasible
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.12.0 (git hash: n/a): Copyright (c) 2025 HiGHS under MIT licence terms
+LP linopy-problem-9n2b0t9f has 81 rows; 33 cols; 129 nonzeros
+Coefficient ranges:
+  Matrix  [1e+00, 1e+00]
+  Cost    [2e+01, 2e+01]
+  Bound   [0e+00, 0e+00]
+  RHS     [1e+03, 1e+05]
+Presolving model
+Problem status detected on presolve: Infeasible
+Model name          : linopy-problem-9n2b0t9f
+Model status        : Infeasible
+Objective value     :  0.0000000000e+00
+HiGHS run time      :          0.00
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;warning&#39;, &#39;infeasible&#39;)
@@ -2292,7 +2388,7 @@ Solver message: infeasible
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9652.383367497767
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(9652.383367497767)
 </pre></div>
 </div>
 </div>
@@ -2335,8 +2431,8 @@ Solver message: infeasible
       <th>e_nom_extendable</th>
       <th>e_nom_min</th>
       <th>e_nom_max</th>
+      <th>e_nom_set</th>
       <th>e_min_pu</th>
-      <th>e_max_pu</th>
       <th>...</th>
       <th>sign</th>
       <th>marginal_cost</th>
@@ -2350,7 +2446,7 @@ Solver message: infeasible
       <th>e_nom_opt</th>
     </tr>
     <tr>
-      <th>Store</th>
+      <th>name</th>
       <th></th>
       <th></th>
       <th></th>
@@ -2385,8 +2481,8 @@ Solver message: infeasible
       <td>False</td>
       <td>0.0</td>
       <td>inf</td>
+      <td>NaN</td>
       <td>0.0</td>
-      <td>1.0</td>
       <td>...</td>
       <td>1.0</td>
       <td>0.0</td>
@@ -2409,8 +2505,8 @@ Solver message: infeasible
       <td>False</td>
       <td>0.0</td>
       <td>inf</td>
+      <td>NaN</td>
       <td>0.0</td>
-      <td>1.0</td>
       <td>...</td>
       <td>1.0</td>
       <td>0.0</td>
@@ -2433,8 +2529,8 @@ Solver message: infeasible
       <td>False</td>
       <td>0.0</td>
       <td>inf</td>
+      <td>NaN</td>
       <td>0.0</td>
-      <td>1.0</td>
       <td>...</td>
       <td>1.0</td>
       <td>0.0</td>
@@ -2457,8 +2553,8 @@ Solver message: infeasible
       <td>False</td>
       <td>0.0</td>
       <td>inf</td>
+      <td>NaN</td>
       <td>0.0</td>
-      <td>1.0</td>
       <td>...</td>
       <td>1.0</td>
       <td>0.0</td>
@@ -2481,8 +2577,8 @@ Solver message: infeasible
       <td>False</td>
       <td>0.0</td>
       <td>inf</td>
+      <td>NaN</td>
       <td>0.0</td>
-      <td>1.0</td>
       <td>...</td>
       <td>1.0</td>
       <td>0.0</td>
@@ -2497,7 +2593,7 @@ Solver message: infeasible
     </tr>
   </tbody>
 </table>
-<p>5 rows × 26 columns</p>
+<p>5 rows × 28 columns</p>
 </div></div></div>
 </div>
 <div class="cell docutils container">
@@ -2508,40 +2604,61 @@ Solver message: infeasible
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.consistency:The following buses have carriers which are not defined:
-Index([&#39;bus DE&#39;, &#39;bus DK1&#39;, &#39;bus DK2&#39;, &#39;bus NO&#39;, &#39;bus SE&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
+Index([&#39;bus DE&#39;, &#39;bus DK1&#39;, &#39;bus DK2&#39;, &#39;bus NO&#39;, &#39;bus SE&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
 WARNING:pypsa.consistency:The following links have carriers which are not defined:
 Index([&#39;pipeline DE-DK1&#39;, &#39;pipeline DK1-DK2&#39;, &#39;pipeline DK1-NO&#39;,
        &#39;pipeline DK1-SE&#39;, &#39;pipeline DK2-SE&#39;, &#39;pipeline DK1-DE&#39;,
        &#39;pipeline DK2-DK1&#39;, &#39;pipeline NO-DK1&#39;, &#39;pipeline SE-DK1&#39;,
        &#39;pipeline SE-DK2&#39;],
-      dtype=&#39;object&#39;, name=&#39;Link&#39;)
-WARNING:pypsa.consistency:The following stores have carriers which are not defined:
+      dtype=&#39;object&#39;, name=&#39;name&#39;)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.consistency:The following stores have carriers which are not defined:
 Index([&#39;linepack DE-DK1&#39;, &#39;linepack DK1-DK2&#39;, &#39;linepack DK1-NO&#39;,
        &#39;linepack DK1-SE&#39;, &#39;linepack DK2-SE&#39;],
-      dtype=&#39;object&#39;, name=&#39;Store&#39;)
-WARNING:pypsa.consistency:The following buses have carriers which are not defined:
-Index([&#39;bus DE&#39;, &#39;bus DK1&#39;, &#39;bus DK2&#39;, &#39;bus NO&#39;, &#39;bus SE&#39;], dtype=&#39;object&#39;, name=&#39;Bus&#39;)
-WARNING:pypsa.consistency:The following links have carriers which are not defined:
-Index([&#39;pipeline DE-DK1&#39;, &#39;pipeline DK1-DK2&#39;, &#39;pipeline DK1-NO&#39;,
-       &#39;pipeline DK1-SE&#39;, &#39;pipeline DK2-SE&#39;, &#39;pipeline DK1-DE&#39;,
-       &#39;pipeline DK2-DK1&#39;, &#39;pipeline NO-DK1&#39;, &#39;pipeline SE-DK1&#39;,
-       &#39;pipeline SE-DK2&#39;],
-      dtype=&#39;object&#39;, name=&#39;Link&#39;)
-WARNING:pypsa.consistency:The following stores have carriers which are not defined:
-Index([&#39;linepack DE-DK1&#39;, &#39;linepack DK1-DK2&#39;, &#39;linepack DK1-NO&#39;,
-       &#39;linepack DK1-SE&#39;, &#39;linepack DK2-SE&#39;],
-      dtype=&#39;object&#39;, name=&#39;Store&#39;)
+      dtype=&#39;object&#39;, name=&#39;name&#39;)
 INFO:linopy.model: Solve problem using Highs solver
-INFO:linopy.io: Writing time: 0.07s
+INFO:linopy.io: Writing time: 0.06s
 INFO:linopy.constants: Optimization successful: 
 Status: ok
 Termination condition: optimal
 Solution: 63 primals, 126 duals
 Objective: 3.45e+05
 Solver model: available
-Solver message: optimal
+Solver message: Optimal
 
 INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-fix-p-lower, Generator-fix-p-upper, Link-fix-p-lower, Link-fix-p-upper, Store-fix-e-lower, Store-fix-e-upper, Store-energy_balance were not assigned to the network.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.12.0 (git hash: n/a): Copyright (c) 2025 HiGHS under MIT licence terms
+LP linopy-problem-y8uqkzt_ has 126 rows; 63 cols; 214 nonzeros
+Coefficient ranges:
+  Matrix  [1e+00, 1e+00]
+  Cost    [2e+01, 2e+01]
+  Bound   [0e+00, 0e+00]
+  RHS     [1e+03, 1e+05]
+Presolving model
+25 rows, 58 cols, 108 nonzeros  0s
+15 rows, 48 cols, 88 nonzeros  0s
+Dependent equations search running on 15 equations with time limit of 1000.00s
+Dependent equations search removed 0 rows and 0 nonzeros in 0.00s (limit = 1000.00s)
+15 rows, 42 cols, 78 nonzeros  0s
+Presolve reductions: rows 15(-111); columns 42(-21); nonzeros 78(-136) 
+Solving the presolved LP
+Using EKK dual simplex solver - serial
+  Iteration        Objective     Infeasibilities num(sum)
+          0     0.0000000000e+00 Pr: 11(17000) 0s
+         24     3.4466567287e+05 Pr: 0(0) 0s
+
+Performed postsolve
+Solving the original LP from the solution after postsolve
+
+Model name          : linopy-problem-y8uqkzt_
+Model status        : Optimal
+Simplex   iterations: 24
+Objective value     :  3.4466567287e+05
+P-D objective error :  8.4440634873e-17
+HiGHS run time      :          0.00
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;ok&#39;, &#39;optimal&#39;)
@@ -2556,7 +2673,7 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>344665.67287265125
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>344665.6728726512
 </pre></div>
 </div>
 </div>
@@ -2595,41 +2712,47 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
  &#39;ramp_limit_down&#39;: Empty DataFrame
  Columns: []
  Index: [0, 1, 2],
- &#39;p0&#39;: Link      pipeline DE-DK1  pipeline DK1-DK2  pipeline DK1-NO  pipeline DK1-SE  \
+ &#39;p0&#39;: name      pipeline DE-DK1  pipeline DK1-DK2  pipeline DK1-NO  pipeline DK1-SE  \
  snapshot                                                                        
  0                    -0.0       1004.016064             -0.0             -0.0   
  1                    -0.0       2010.044185             -0.0             -0.0   
  2                    -0.0       1004.016064             -0.0             -0.0   
  
- Link      pipeline DK2-SE  pipeline DK1-DE  pipeline DK2-DK1  pipeline NO-DK1  \
+ name      pipeline DK2-SE  pipeline DK1-DE  pipeline DK2-DK1  pipeline NO-DK1  \
  snapshot                                                                        
  0               -0.000000      3170.637113              -0.0      5226.922401   
  1             1002.004008      1164.608992              -0.0      5226.922401   
  2               -0.000000      1737.628389              -0.0      3779.438841   
  
- Link      pipeline SE-DK1  pipeline SE-DK2  
+ name      pipeline SE-DK1  pipeline SE-DK2  
  snapshot                                    
  0                    -0.0             -0.0  
  1                    -0.0             -0.0  
  2                    -0.0             -0.0  ,
- &#39;p1&#39;: Link      pipeline DE-DK1  pipeline DK1-DK2  pipeline DK1-NO  pipeline DK1-SE  \
+ &#39;p1&#39;: name      pipeline DE-DK1  pipeline DK1-DK2  pipeline DK1-NO  pipeline DK1-SE  \
  snapshot                                                                        
  0                     0.0      -1000.000000              0.0              0.0   
  1                     0.0      -2002.004008              0.0              0.0   
  2                     0.0      -1000.000000              0.0              0.0   
  
- Link      pipeline DK2-SE  pipeline DK1-DE  pipeline DK2-DK1  pipeline NO-DK1  \
+ name      pipeline DK2-SE  pipeline DK1-DE  pipeline DK2-DK1  pipeline NO-DK1  \
  snapshot                                                                        
  0                     0.0     -3132.589468               0.0     -5174.653177   
  1                 -1000.0     -1150.633684               0.0     -5174.653177   
  2                     0.0     -1716.776848               0.0     -3741.644453   
  
- Link      pipeline SE-DK1  pipeline SE-DK2  
+ name      pipeline SE-DK1  pipeline SE-DK2  
  snapshot                                    
  0                     0.0              0.0  
  1                     0.0              0.0  
  2                     0.0              0.0  ,
  &#39;status&#39;: Empty DataFrame
+ Columns: []
+ Index: [0, 1, 2],
+ &#39;start_up&#39;: Empty DataFrame
+ Columns: []
+ Index: [0, 1, 2],
+ &#39;shut_down&#39;: Empty DataFrame
  Columns: []
  Index: [0, 1, 2],
  &#39;mu_lower&#39;: Empty DataFrame
@@ -2752,8 +2875,8 @@ By Marta Victoria, Aleksander Grochowicz
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

@@ -16,33 +16,30 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -53,7 +50,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -70,7 +67,6 @@
     <link rel="prev" title="Problem 4.2" href="Problem04.02.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -86,8 +82,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -95,6 +102,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -102,8 +110,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -119,8 +127,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -149,18 +156,22 @@
       
     
     
-    <img src="../_static/DTUlogo.jpg" class="logo__image only-light" alt="integrated-energy-grids - Home"/>
-    <img src="../_static/DTUlogo.jpg" class="logo__image only-dark pst-js-only" alt="integrated-energy-grids - Home"/>
+    <img src="../_static/DTUlogo_red.png" class="logo__image only-light" alt="integrated-energy-grids - Home"/>
+    <script>document.write(`<img src="../_static/DTUlogo_red.png" class="logo__image only-dark" alt="integrated-energy-grids - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -245,14 +256,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -427,16 +433,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 
 </div></div>
       
@@ -499,7 +513,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ae2e3406fd50faefb8000f848471db8d016eeeb6cb9b0776508cac076787f683.png" src="../_images/ae2e3406fd50faefb8000f848471db8d016eeeb6cb9b0776508cac076787f683.png" />
+<img alt="../_images/85d995893b8f7878b68b4dfd8560e922ade9e7e1cd22c493326640f037bbce8e.png" src="../_images/85d995893b8f7878b68b4dfd8560e922ade9e7e1cd22c493326640f037bbce8e.png" />
 </div>
 </div>
 <p><strong>c) Calculate the Degree, Adjacency, Incidence, and Laplacian matrix</strong></p>
@@ -519,10 +533,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x20579fa29f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x17704bb60&gt;
 </pre></div>
 </div>
-<img alt="../_images/e1ca61fbf7623897bfb623b8f744ed4cafc7f7dcc8d3e3c8ad19f81b957f89d8.png" src="../_images/e1ca61fbf7623897bfb623b8f744ed4cafc7f7dcc8d3e3c8ad19f81b957f89d8.png" />
+<img alt="../_images/f5c83f17d02c4744996855c4bfb8b0180ec4f3187c512e7c9deebceff78e5307.png" src="../_images/f5c83f17d02c4744996855c4bfb8b0180ec4f3187c512e7c9deebceff78e5307.png" />
 </div>
 </div>
 <p>incidence matrix (Careful, <code class="docutils literal notranslate"><span class="pre">networkx</span></code> will yield a incidence matrix without orientation by default!)</p>
@@ -550,10 +564,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x2057a30d4c0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x177953750&gt;
 </pre></div>
 </div>
-<img alt="../_images/5aef819b249d4c8d80c6998636210d5bf11f13135b3735ffb3da9533f2610dbb.png" src="../_images/5aef819b249d4c8d80c6998636210d5bf11f13135b3735ffb3da9533f2610dbb.png" />
+<img alt="../_images/2bbbdd7eac0d40363d2ece1d5182f4874cfd015dbd5b04a6f11458967d800440.png" src="../_images/2bbbdd7eac0d40363d2ece1d5182f4874cfd015dbd5b04a6f11458967d800440.png" />
 </div>
 </div>
 <p>Laplacian matrix (Careful, <code class="docutils literal notranslate"><span class="pre">networkx</span></code> will yield a weighted adjacency matrix by default!)</p>
@@ -569,7 +583,7 @@
        [-1,  4, -1, -1, -1],
        [ 0, -1,  2,  0, -1],
        [ 0, -1,  0,  1,  0],
-       [ 0, -1, -1,  0,  2]], dtype=int32)
+       [ 0, -1, -1,  0,  2]])
 </pre></div>
 </div>
 </div>
@@ -581,10 +595,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x2057b492ea0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x1779ec690&gt;
 </pre></div>
 </div>
-<img alt="../_images/4d7942b65f3b283c8a2893810e8669e11d17828094c5ea19dae91d7b70297a85.png" src="../_images/4d7942b65f3b283c8a2893810e8669e11d17828094c5ea19dae91d7b70297a85.png" />
+<img alt="../_images/5c0df6322d77537a754aa1171650da9a1d373bdd6193010a5ce9a67ed00628f1.png" src="../_images/5c0df6322d77537a754aa1171650da9a1d373bdd6193010a5ce9a67ed00628f1.png" />
 </div>
 </div>
 <p><strong>a) Assuming that the reactance in the links is <span class="math notranslate nohighlight">\(x_l\)</span>=1, calculate the Power Transfer Distribution Factor (PTDF) matrix</strong></p>
@@ -628,10 +642,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x2057a2f58e0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x177a45590&gt;
 </pre></div>
 </div>
-<img alt="../_images/2aaa4b2041a5935bd8e01af134f9988f81bd843e59f84004932b5cc67157cc13.png" src="../_images/2aaa4b2041a5935bd8e01af134f9988f81bd843e59f84004932b5cc67157cc13.png" />
+<img alt="../_images/0006afa50525df0016deeca25036476e6adf8341d5fcf49bd478fee5e37d311e.png" src="../_images/0006afa50525df0016deeca25036476e6adf8341d5fcf49bd478fee5e37d311e.png" />
 </div>
 </div>
 <p><strong>b) Assuming the power injection pattern described in Problem 4.1 determine the power flows in the lines of the network and plot them.</strong></p>
@@ -665,7 +679,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/11c3f8dd9e6895ea95032d4b856e4ad6b3acfe4bd5db212f1946b9fc25dfcb61.png" src="../_images/11c3f8dd9e6895ea95032d4b856e4ad6b3acfe4bd5db212f1946b9fc25dfcb61.png" />
+<img alt="../_images/f5de464e17cafa9321be05a004465a435c0e224a4eb58c25fd281bd44c323463.png" src="../_images/f5de464e17cafa9321be05a004465a435c0e224a4eb58c25fd281bd44c323463.png" />
 </div>
 </div>
 <p><strong>c) Assume now that the links unitary susceptance is <span class="math notranslate nohighlight">\(x_{l}\)</span>=[1, 0.5, 0.5, 0.5, 1], calculate the weighted Laplacian (or susceptance matrix),  the PTDF matrix, the power flows and plot them.</strong></p>
@@ -687,10 +701,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x2057b5ef830&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x177af60d0&gt;
 </pre></div>
 </div>
-<img alt="../_images/3ecfb1abb5d515adc1bb9077841990e2898839aa8b600df1c77b790ef4b93275.png" src="../_images/3ecfb1abb5d515adc1bb9077841990e2898839aa8b600df1c77b790ef4b93275.png" />
+<img alt="../_images/07f5200cde342f96a1a64f8ccbd241ed860e4c954f4c9566ee75a473acb1a763.png" src="../_images/07f5200cde342f96a1a64f8ccbd241ed860e4c954f4c9566ee75a473acb1a763.png" />
 </div>
 </div>
 <p>Now, we can calculate the weighted Laplacian as <span class="math notranslate nohighlight">\(K_{il}\frac{1}{x_l}K_{lj}\)</span></p>
@@ -733,10 +747,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x2057b558410&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x177b5afd0&gt;
 </pre></div>
 </div>
-<img alt="../_images/056d7d1d5585897cd792a5342e1e9e68ee23b4839cdc4ca4437201f277e152bf.png" src="../_images/056d7d1d5585897cd792a5342e1e9e68ee23b4839cdc4ca4437201f277e152bf.png" />
+<img alt="../_images/fb1bd61299ea5930b5a9ccf6aa0114bc7922d595be5d9c9f3e2814f717a881cd.png" src="../_images/fb1bd61299ea5930b5a9ccf6aa0114bc7922d595be5d9c9f3e2814f717a881cd.png" />
 </div>
 </div>
 <p>And calculate the flows thrgoughout the lines</p>
@@ -853,8 +867,8 @@ By Marta Victoria, Aleksander Grochowicz
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

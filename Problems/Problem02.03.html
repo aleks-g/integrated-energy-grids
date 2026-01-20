@@ -16,33 +16,30 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -53,7 +50,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -68,7 +65,6 @@
     <link rel="prev" title="Problem 2.2" href="Problem02.02.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -84,8 +80,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -93,6 +100,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -100,8 +108,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -117,8 +125,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -147,18 +154,22 @@
       
     
     
-    <img src="../_static/DTUlogo.jpg" class="logo__image only-light" alt="integrated-energy-grids - Home"/>
-    <img src="../_static/DTUlogo.jpg" class="logo__image only-dark pst-js-only" alt="integrated-energy-grids - Home"/>
+    <img src="../_static/DTUlogo_red.png" class="logo__image only-light" alt="integrated-energy-grids - Home"/>
+    <script>document.write(`<img src="../_static/DTUlogo_red.png" class="logo__image only-dark" alt="integrated-energy-grids - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -243,14 +254,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -425,16 +431,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 
 </div></div>
       
@@ -477,6 +491,13 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set parameter Username
+Set parameter LicenseID to value 2767832
+Academic license - for non-commercial use only - expires 2027-01-20
+</pre></div>
+</div>
+</div>
 </div>
 <p>a)</p>
 <p>Load the data for Problem 3a and also 2c to recreate the system from Problem 2c.</p>
@@ -505,10 +526,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x26509923b30&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x17a3174d0&gt;
 </pre></div>
 </div>
-<img alt="../_images/85b7da30866748b3fdaa94b2c94b0dcc259d7bca1ca4f3efc36fce005415b322.png" src="../_images/85b7da30866748b3fdaa94b2c94b0dcc259d7bca1ca4f3efc36fce005415b322.png" />
+<img alt="../_images/b1fd25b4c50c1a4339ce9a98ec388cfcdfafa07b9efe630a0a80e19ee7fc1fe6.png" src="../_images/b1fd25b4c50c1a4339ce9a98ec388cfcdfafa07b9efe630a0a80e19ee7fc1fe6.png" />
 </div>
 </div>
 <p>b)</p>
@@ -560,32 +581,33 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set parameter Username
-Set parameter LicenseID to value 2604332
-Academic license - for non-commercial use only - expires 2025-12-30
-Read LP format model from file C:\Users\34620\AppData\Local\Temp\linopy-problem-na91m1nm.lp
+Set parameter LicenseID to value 2767832
+Academic license - for non-commercial use only - expires 2027-01-20
+Read LP format model from file /private/var/folders/zg/by4_k0616s98pw41wld9475c0000gp/T/linopy-problem-811ksqy0.lp
 Reading time = 0.00 seconds
 obj: 168 rows, 96 columns, 240 nonzeros
-Gurobi Optimizer version 12.0.0 build v12.0.0rc1 (win64 - Windows 11.0 (26100.2))
+Gurobi Optimizer version 13.0.0 build v13.0.0rc1 (mac64[arm] - Darwin 25.2.0 25C56)
 
-CPU model: Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz, instruction set [SSE2|AVX|AVX2]
-Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+CPU model: Apple M3
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
 
-Optimize a model with 168 rows, 96 columns and 240 nonzeros
-Model fingerprint: 0xd03b19b6
+Optimize a model with 168 rows, 96 columns and 240 nonzeros (Min)
+Model fingerprint: 0xb8c70478
+Model has 48 linear objective coefficients
 Coefficient statistics:
   Matrix range     [1e+00, 1e+00]
   Objective range  [1e+00, 6e+01]
   Bounds range     [0e+00, 0e+00]
   RHS range        [4e-16, 2e+01]
 Presolve removed 167 rows and 93 columns
-Presolve time: 0.01s
+Presolve time: 0.00s
 Presolved: 1 rows, 3 columns, 3 nonzeros
 
 Iteration    Objective       Primal Inf.    Dual Inf.      Time
        0    7.5035000e+03   1.350000e+00   0.000000e+00      0s
        1    7.5062000e+03   0.000000e+00   0.000000e+00      0s
 
-Solved in 1 iterations and 0.02 seconds (0.00 work units)
+Solved in 1 iterations and 0.01 seconds (0.00 work units)
 Optimal objective  7.506200000e+03
 </pre></div>
 </div>
@@ -605,7 +627,7 @@ Optimal objective  7.506200000e+03
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;dim_0&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/82ed9ce658a1a46c1badc0f5c86719ff2c30f050172f2d333c54836772c83284.png" src="../_images/82ed9ce658a1a46c1badc0f5c86719ff2c30f050172f2d333c54836772c83284.png" />
+<img alt="../_images/171e91d47c1119f69b3d78a0b266b3a3856eb2b2af3c157ffe6c62c6597879d8.png" src="../_images/171e91d47c1119f69b3d78a0b266b3a3856eb2b2af3c157ffe6c62c6597879d8.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -676,25 +698,26 @@ Name: energy_balance, dtype: float64
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set parameter Username
-Set parameter LicenseID to value 2604332
-Academic license - for non-commercial use only - expires 2025-12-30
-Read LP format model from file C:\Users\34620\AppData\Local\Temp\linopy-problem-jygtp5h8.lp
+Set parameter LicenseID to value 2767832
+Academic license - for non-commercial use only - expires 2027-01-20
+Read LP format model from file /private/var/folders/zg/by4_k0616s98pw41wld9475c0000gp/T/linopy-problem-8q9xlek1.lp
 Reading time = 0.00 seconds
 obj: 144 rows, 72 columns, 192 nonzeros
-Gurobi Optimizer version 12.0.0 build v12.0.0rc1 (win64 - Windows 11.0 (26100.2))
+Gurobi Optimizer version 13.0.0 build v13.0.0rc1 (mac64[arm] - Darwin 25.2.0 25C56)
 
-CPU model: Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz, instruction set [SSE2|AVX|AVX2]
-Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+CPU model: Apple M3
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
 
-Optimize a model with 144 rows, 72 columns and 192 nonzeros
-Model fingerprint: 0x753455ff
+Optimize a model with 144 rows, 72 columns and 192 nonzeros (Min)
+Model fingerprint: 0xc8549017
+Model has 24 linear objective coefficients
 Coefficient statistics:
   Matrix range     [1e+00, 1e+00]
   Objective range  [6e+01, 6e+01]
   Bounds range     [0e+00, 0e+00]
   RHS range        [6e-01, 2e+01]
 Presolve removed 144 rows and 72 columns
-Presolve time: 0.01s
+Presolve time: 0.00s
 Presolve: All rows and columns removed
 Iteration    Objective       Primal Inf.    Dual Inf.      Time
        0    7.6950000e+03   0.000000e+00   0.000000e+00      0s
@@ -718,39 +741,86 @@ Optimal objective  7.695000000e+03
 </symbol>
 </defs>
 </svg>
-<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
- *
- */
+<style>/* CSS stylesheet for displaying xarray objects in notebooks */
 
 :root {
-  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
-  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
-  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
-  --xr-border-color: var(--jp-border-color2, #e0e0e0);
-  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
-  --xr-background-color: var(--jp-layout-color0, white);
-  --xr-background-color-row-even: var(--jp-layout-color1, white);
-  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+  --xr-font-color0: var(
+    --jp-content-font-color0,
+    var(--pst-color-text-base rgba(0, 0, 0, 1))
+  );
+  --xr-font-color2: var(
+    --jp-content-font-color2,
+    var(--pst-color-text-base, rgba(0, 0, 0, 0.54))
+  );
+  --xr-font-color3: var(
+    --jp-content-font-color3,
+    var(--pst-color-text-base, rgba(0, 0, 0, 0.38))
+  );
+  --xr-border-color: var(
+    --jp-border-color2,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 10))
+  );
+  --xr-disabled-color: var(
+    --jp-layout-color3,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 40))
+  );
+  --xr-background-color: var(
+    --jp-layout-color0,
+    var(--pst-color-on-background, white)
+  );
+  --xr-background-color-row-even: var(
+    --jp-layout-color1,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 5))
+  );
+  --xr-background-color-row-odd: var(
+    --jp-layout-color2,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 15))
+  );
 }
 
 html[theme="dark"],
 html[data-theme="dark"],
 body[data-theme="dark"],
 body.vscode-dark {
-  --xr-font-color0: rgba(255, 255, 255, 1);
-  --xr-font-color2: rgba(255, 255, 255, 0.54);
-  --xr-font-color3: rgba(255, 255, 255, 0.38);
-  --xr-border-color: #1f1f1f;
-  --xr-disabled-color: #515151;
-  --xr-background-color: #111111;
-  --xr-background-color-row-even: #111111;
-  --xr-background-color-row-odd: #313131;
+  --xr-font-color0: var(
+    --jp-content-font-color0,
+    var(--pst-color-text-base, rgba(255, 255, 255, 1))
+  );
+  --xr-font-color2: var(
+    --jp-content-font-color2,
+    var(--pst-color-text-base, rgba(255, 255, 255, 0.54))
+  );
+  --xr-font-color3: var(
+    --jp-content-font-color3,
+    var(--pst-color-text-base, rgba(255, 255, 255, 0.38))
+  );
+  --xr-border-color: var(
+    --jp-border-color2,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 10))
+  );
+  --xr-disabled-color: var(
+    --jp-layout-color3,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 40))
+  );
+  --xr-background-color: var(
+    --jp-layout-color0,
+    var(--pst-color-on-background, #111111)
+  );
+  --xr-background-color-row-even: var(
+    --jp-layout-color1,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 5))
+  );
+  --xr-background-color-row-odd: var(
+    --jp-layout-color2,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 15))
+  );
 }
 
 .xr-wrap {
   display: block !important;
   min-width: 300px;
   max-width: 700px;
+  line-height: 1.6;
 }
 
 .xr-text-repr-fallback {
@@ -773,11 +843,18 @@ body.vscode-dark {
 }
 
 .xr-obj-type,
-.xr-array-name {
+.xr-obj-name,
+.xr-group-name {
   margin-left: 2px;
   margin-right: 10px;
 }
 
+.xr-group-name::before {
+  content: "📁";
+  padding-right: 0.3em;
+}
+
+.xr-group-name,
 .xr-obj-type {
   color: var(--xr-font-color2);
 }
@@ -786,6 +863,8 @@ body.vscode-dark {
   padding-left: 0 !important;
   display: grid;
   grid-template-columns: 150px auto auto 1fr 0 20px 0 20px;
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 
 .xr-section-item {
@@ -796,10 +875,12 @@ body.vscode-dark {
   display: inline-block;
   opacity: 0;
   height: 0;
+  margin: 0;
 }
 
 .xr-section-item input + label {
   color: var(--xr-disabled-color);
+  border: 2px solid transparent !important;
 }
 
 .xr-section-item input:enabled + label {
@@ -808,7 +889,7 @@ body.vscode-dark {
 }
 
 .xr-section-item input:focus + label {
-  border: 2px solid var(--xr-font-color0);
+  border: 2px solid var(--xr-font-color0) !important;
 }
 
 .xr-section-item input:enabled + label:hover {
@@ -853,7 +934,6 @@ body.vscode-dark {
 .xr-section-summary,
 .xr-section-inline-details {
   padding-top: 4px;
-  padding-bottom: 4px;
 }
 
 .xr-section-inline-details {
@@ -863,11 +943,38 @@ body.vscode-dark {
 .xr-section-details {
   display: none;
   grid-column: 1 / -1;
+  margin-top: 4px;
   margin-bottom: 5px;
 }
 
 .xr-section-summary-in:checked ~ .xr-section-details {
   display: contents;
+}
+
+.xr-group-box {
+  display: inline-grid;
+  grid-template-columns: 0px 20px auto;
+  width: 100%;
+}
+
+.xr-group-box-vline {
+  grid-column-start: 1;
+  border-right: 0.2em solid;
+  border-color: var(--xr-border-color);
+  width: 0px;
+}
+
+.xr-group-box-hline {
+  grid-column-start: 2;
+  grid-row-start: 1;
+  height: 1em;
+  width: 20px;
+  border-bottom: 0.2em solid;
+  border-color: var(--xr-border-color);
+}
+
+.xr-group-box-contents {
+  grid-column-start: 3;
 }
 
 .xr-array-wrap {
@@ -940,7 +1047,9 @@ body.vscode-dark {
 .xr-var-item label,
 .xr-var-item > .xr-var-name span {
   background-color: var(--xr-background-color-row-even);
+  border-color: var(--xr-background-color-row-odd);
   margin-bottom: 0;
+  padding-top: 2px;
 }
 
 .xr-var-item > .xr-var-name:hover span {
@@ -951,6 +1060,7 @@ body.vscode-dark {
 .xr-var-list > li:nth-child(odd) > label,
 .xr-var-list > li:nth-child(odd) > .xr-var-name span {
   background-color: var(--xr-background-color-row-odd);
+  border-color: var(--xr-background-color-row-even);
 }
 
 .xr-var-name {
@@ -1000,8 +1110,15 @@ body.vscode-dark {
 .xr-var-data,
 .xr-index-data {
   display: none;
-  background-color: var(--xr-background-color) !important;
-  padding-bottom: 5px !important;
+  border-top: 2px dotted var(--xr-background-color);
+  padding-bottom: 20px !important;
+  padding-top: 10px !important;
+}
+
+.xr-var-attrs-in + label,
+.xr-var-data-in + label,
+.xr-index-data-in + label {
+  padding: 0 1px;
 }
 
 .xr-var-attrs-in:checked ~ .xr-var-attrs,
@@ -1012,6 +1129,12 @@ body.vscode-dark {
 
 .xr-var-data > table {
   float: right;
+}
+
+.xr-var-data > pre,
+.xr-index-data > pre,
+.xr-var-data > table > tbody > tr {
+  background-color: transparent !important;
 }
 
 .xr-var-name span,
@@ -1073,6 +1196,14 @@ dl.xr-attrs {
   stroke: currentColor;
   fill: currentColor;
 }
+
+.xr-var-attrs-in:checked + label > .xr-icon-file-text2,
+.xr-var-data-in:checked + label > .xr-icon-database,
+.xr-index-data-in:checked + label > .xr-icon-database {
+  color: var(--xr-font-color0);
+  filter: drop-shadow(1px 1px 5px var(--xr-font-color2));
+  stroke-width: 0.8px;
+}
 </style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt; Size: 768B
 Dimensions:  (dim_0: 24)
 Coordinates:
@@ -1080,7 +1211,7 @@ Coordinates:
 Data variables:
     wind     (dim_0) float64 192B 5.85 6.45 6.15 5.85 5.4 ... 5.7 6.15 6.3 6.9
     solar    (dim_0) float64 192B 0.0 0.0 0.0 0.0 0.0 ... 0.6 0.0 0.0 0.0 0.0
-    gas      (dim_0) float64 192B 4.95 3.95 4.25 4.35 4.6 ... 7.9 6.45 5.5 4.5</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-d0f99b54-4124-449e-b03b-e156cf208ef4' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-d0f99b54-4124-449e-b03b-e156cf208ef4' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>dim_0</span>: 24</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-941d225a-09d2-4213-a500-2a25d40cc342' class='xr-section-summary-in' type='checkbox'  checked><label for='section-941d225a-09d2-4213-a500-2a25d40cc342' class='xr-section-summary' >Coordinates: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>dim_0</span></div><div class='xr-var-dims'>(dim_0)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2020-07-01 ... 2020-07-01T23:00:00</div><input id='attrs-486afedd-7596-43ce-9c98-278eae992551' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-486afedd-7596-43ce-9c98-278eae992551' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a2625f04-e70c-493a-a6e1-611efa4baf38' class='xr-var-data-in' type='checkbox'><label for='data-a2625f04-e70c-493a-a6e1-611efa4baf38' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([&#x27;2020-07-01T00:00:00.000000000&#x27;, &#x27;2020-07-01T01:00:00.000000000&#x27;,
+    gas      (dim_0) float64 192B 4.95 3.95 4.25 4.35 4.6 ... 7.9 6.45 5.5 4.5</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-ea92ea20-2c7a-4a0d-80fe-a5d6bd1d6810' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-ea92ea20-2c7a-4a0d-80fe-a5d6bd1d6810' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>dim_0</span>: 24</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-00be1bc5-a66f-454a-8334-47e5c2ee3e24' class='xr-section-summary-in' type='checkbox'  checked><label for='section-00be1bc5-a66f-454a-8334-47e5c2ee3e24' class='xr-section-summary' >Coordinates: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>dim_0</span></div><div class='xr-var-dims'>(dim_0)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2020-07-01 ... 2020-07-01T23:00:00</div><input id='attrs-61c5b08c-6323-424d-8b1d-aa0d941e058f' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-61c5b08c-6323-424d-8b1d-aa0d941e058f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a24eb4ec-d8a1-496e-837f-5f518a011234' class='xr-var-data-in' type='checkbox'><label for='data-a24eb4ec-d8a1-496e-837f-5f518a011234' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([&#x27;2020-07-01T00:00:00.000000000&#x27;, &#x27;2020-07-01T01:00:00.000000000&#x27;,
        &#x27;2020-07-01T02:00:00.000000000&#x27;, &#x27;2020-07-01T03:00:00.000000000&#x27;,
        &#x27;2020-07-01T04:00:00.000000000&#x27;, &#x27;2020-07-01T05:00:00.000000000&#x27;,
        &#x27;2020-07-01T06:00:00.000000000&#x27;, &#x27;2020-07-01T07:00:00.000000000&#x27;,
@@ -1092,25 +1223,13 @@ Data variables:
        &#x27;2020-07-01T18:00:00.000000000&#x27;, &#x27;2020-07-01T19:00:00.000000000&#x27;,
        &#x27;2020-07-01T20:00:00.000000000&#x27;, &#x27;2020-07-01T21:00:00.000000000&#x27;,
        &#x27;2020-07-01T22:00:00.000000000&#x27;, &#x27;2020-07-01T23:00:00.000000000&#x27;],
-      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-51a32065-3263-40bd-9458-1148bcf9a9e3' class='xr-section-summary-in' type='checkbox'  checked><label for='section-51a32065-3263-40bd-9458-1148bcf9a9e3' class='xr-section-summary' >Data variables: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>wind</span></div><div class='xr-var-dims'>(dim_0)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>5.85 6.45 6.15 ... 6.15 6.3 6.9</div><input id='attrs-373bb468-fb97-4752-a1e0-9a423ac135a7' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-373bb468-fb97-4752-a1e0-9a423ac135a7' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-43e70b05-57a1-466e-8452-fb9836ffe6c4' class='xr-var-data-in' type='checkbox'><label for='data-43e70b05-57a1-466e-8452-fb9836ffe6c4' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([5.85, 6.45, 6.15, 5.85, 5.4 , 4.95, 4.35, 3.45, 3.75, 2.7 , 4.8 ,
-       5.1 , 2.2 , 1.  , 5.1 , 3.9 , 4.35, 4.65, 5.25, 4.95, 5.7 , 6.15,
-       6.3 , 6.9 ])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>solar</span></div><div class='xr-var-dims'>(dim_0)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input id='attrs-27bf5c99-3082-4dec-9fac-10c923ec6458' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-27bf5c99-3082-4dec-9fac-10c923ec6458' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f82707b7-54b1-4a28-ae13-b03cb2bde25c' class='xr-var-data-in' type='checkbox'><label for='data-f82707b7-54b1-4a28-ae13-b03cb2bde25c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 0. ,  0. ,  0. ,  0. ,  0. ,  0. ,  0.6,  1.4,  2.4,  3.8,  2.6,
-        7. , 10.8, 12.2,  9.1,  9.4,  7. ,  5.8,  3. ,  0.6,  0. ,  0. ,
-        0. ,  0. ])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>gas</span></div><div class='xr-var-dims'>(dim_0)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.95 3.95 4.25 ... 6.45 5.5 4.5</div><input id='attrs-d400a8e2-2723-46f2-8a04-5324111bfc2d' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-d400a8e2-2723-46f2-8a04-5324111bfc2d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-4edf7d19-05fd-49a8-8c71-cf56039acf87' class='xr-var-data-in' type='checkbox'><label for='data-4edf7d19-05fd-49a8-8c71-cf56039acf87' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([4.95, 3.95, 4.25, 4.35, 4.6 , 6.45, 7.05, 9.15, 9.45, 7.9 , 6.6 ,
+      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-457d2969-a0c5-46da-8e6d-1be422bd6f52' class='xr-section-summary-in' type='checkbox'  checked><label for='section-457d2969-a0c5-46da-8e6d-1be422bd6f52' class='xr-section-summary' >Data variables: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>wind</span></div><div class='xr-var-dims'>(dim_0)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>5.85 6.45 6.15 ... 6.15 6.3 6.9</div><input id='attrs-cf2ddb10-a089-4d57-8fbb-90ae0b0c8f9d' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-cf2ddb10-a089-4d57-8fbb-90ae0b0c8f9d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-744330c6-909f-4454-9f84-ff216a6921b0' class='xr-var-data-in' type='checkbox'><label for='data-744330c6-909f-4454-9f84-ff216a6921b0' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([5.85, 6.45, 6.15, 5.85, 5.4 , 4.95, 4.35, 3.45, 3.75, 2.7 , 4.8 ,
+       5.1 , 3.3 , 1.  , 5.1 , 3.9 , 4.35, 4.65, 5.25, 4.95, 5.7 , 6.15,
+       6.3 , 6.9 ])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>solar</span></div><div class='xr-var-dims'>(dim_0)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input id='attrs-d1f27348-a3e9-4d34-a6f6-3d7c48837619' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-d1f27348-a3e9-4d34-a6f6-3d7c48837619' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c6d81ac7-0fa1-4e4c-9f34-4ec660fe52a5' class='xr-var-data-in' type='checkbox'><label for='data-c6d81ac7-0fa1-4e4c-9f34-4ec660fe52a5' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 0. ,  0. ,  0. ,  0. ,  0. ,  0. ,  0.6,  1.4,  2.4,  3.8,  2.6,
+        7. ,  9.7, 12.2,  9.1,  9.4,  7. ,  5.8,  3. ,  0.6,  0. ,  0. ,
+        0. ,  0. ])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>gas</span></div><div class='xr-var-dims'>(dim_0)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.95 3.95 4.25 ... 6.45 5.5 4.5</div><input id='attrs-f4a35fa4-a73f-4762-bfd6-f9c6e5b9ccc3' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-f4a35fa4-a73f-4762-bfd6-f9c6e5b9ccc3' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-41771842-fdbf-4038-86f7-909a962396e3' class='xr-var-data-in' type='checkbox'><label for='data-41771842-fdbf-4038-86f7-909a962396e3' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([4.95, 3.95, 4.25, 4.35, 4.6 , 6.45, 7.05, 9.15, 9.45, 7.9 , 6.6 ,
        1.5 , 0.  , 0.  , 0.  , 2.7 , 6.05, 7.75, 8.15, 9.05, 7.9 , 6.45,
-       5.5 , 4.5 ])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-3ab35e14-7a6b-4c4c-8e25-b894cf5e4ea3' class='xr-section-summary-in' type='checkbox'  ><label for='section-3ab35e14-7a6b-4c4c-8e25-b894cf5e4ea3' class='xr-section-summary' >Indexes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>dim_0</div></div><div class='xr-index-preview'>PandasIndex</div><input type='checkbox' disabled/><label></label><input id='index-9fac384a-8e5e-48cf-bc8a-fc1043c1d32d' class='xr-index-data-in' type='checkbox'/><label for='index-9fac384a-8e5e-48cf-bc8a-fc1043c1d32d' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(DatetimeIndex([&#x27;2020-07-01 00:00:00&#x27;, &#x27;2020-07-01 01:00:00&#x27;,
-               &#x27;2020-07-01 02:00:00&#x27;, &#x27;2020-07-01 03:00:00&#x27;,
-               &#x27;2020-07-01 04:00:00&#x27;, &#x27;2020-07-01 05:00:00&#x27;,
-               &#x27;2020-07-01 06:00:00&#x27;, &#x27;2020-07-01 07:00:00&#x27;,
-               &#x27;2020-07-01 08:00:00&#x27;, &#x27;2020-07-01 09:00:00&#x27;,
-               &#x27;2020-07-01 10:00:00&#x27;, &#x27;2020-07-01 11:00:00&#x27;,
-               &#x27;2020-07-01 12:00:00&#x27;, &#x27;2020-07-01 13:00:00&#x27;,
-               &#x27;2020-07-01 14:00:00&#x27;, &#x27;2020-07-01 15:00:00&#x27;,
-               &#x27;2020-07-01 16:00:00&#x27;, &#x27;2020-07-01 17:00:00&#x27;,
-               &#x27;2020-07-01 18:00:00&#x27;, &#x27;2020-07-01 19:00:00&#x27;,
-               &#x27;2020-07-01 20:00:00&#x27;, &#x27;2020-07-01 21:00:00&#x27;,
-               &#x27;2020-07-01 22:00:00&#x27;, &#x27;2020-07-01 23:00:00&#x27;],
-              dtype=&#x27;datetime64[ns]&#x27;, name=&#x27;dim_0&#x27;, freq=None))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-c7db1985-08cb-4eeb-a767-b65032694f53' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-c7db1985-08cb-4eeb-a767-b65032694f53' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+       5.5 , 4.5 ])</pre></div></li></ul></div></li></ul></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1122,10 +1241,10 @@ Data variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x26509671670&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x3021c3d90&gt;]
 </pre></div>
 </div>
-<img alt="../_images/d7f392d31f27308609ee2cdd7dc9ca60a26c0c0537c611c5fee40eafc12cd039.png" src="../_images/d7f392d31f27308609ee2cdd7dc9ca60a26c0c0537c611c5fee40eafc12cd039.png" />
+<img alt="../_images/44be39a596b5d7c8386be71c4224a49819674bc137d1307653734ed6e14f3016.png" src="../_images/44be39a596b5d7c8386be71c4224a49819674bc137d1307653734ed6e14f3016.png" />
 </div>
 </div>
 </section>
@@ -1228,8 +1347,8 @@ By Marta Victoria, Aleksander Grochowicz
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

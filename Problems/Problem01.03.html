@@ -16,33 +16,30 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -53,7 +50,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -70,7 +67,6 @@
     <link rel="prev" title="Problem 1.1" href="Problem01.01.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -86,8 +82,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -95,6 +102,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -102,8 +110,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -119,8 +127,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -149,18 +156,22 @@
       
     
     
-    <img src="../_static/DTUlogo.jpg" class="logo__image only-light" alt="integrated-energy-grids - Home"/>
-    <img src="../_static/DTUlogo.jpg" class="logo__image only-dark pst-js-only" alt="integrated-energy-grids - Home"/>
+    <img src="../_static/DTUlogo_red.png" class="logo__image only-light" alt="integrated-energy-grids - Home"/>
+    <script>document.write(`<img src="../_static/DTUlogo_red.png" class="logo__image only-dark" alt="integrated-energy-grids - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -245,14 +256,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -427,16 +433,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 
 </div></div>
       
@@ -517,7 +531,7 @@ the load, that is,</strong>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;Hours&#39;)
 </pre></div>
 </div>
-<img alt="../_images/fd612587cf6be73d89faa91568608a53013e6ffe6097d370a04ae2ebf7f77d36.png" src="../_images/fd612587cf6be73d89faa91568608a53013e6ffe6097d370a04ae2ebf7f77d36.png" />
+<img alt="../_images/0253e7cc5a1af97cd98bdcd79fa926f2c24c0bdf615201d94b8ce9c6f8945e5d.png" src="../_images/0253e7cc5a1af97cd98bdcd79fa926f2c24c0bdf615201d94b8ce9c6f8945e5d.png" />
 </div>
 </div>
 <p>The average mismatch throughout the year is zero, i.e., on average renewable generation equals demand.</p>
@@ -528,7 +542,7 @@ the load, that is,</strong>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-2.7118826369914866e-05
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-2.7118826369913244e-05)
 </pre></div>
 </div>
 </div>
@@ -541,7 +555,7 @@ the load, that is,</strong>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-1693.0434313753733
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-1693.0434313753733)
 </pre></div>
 </div>
 </div>
@@ -555,7 +569,7 @@ the load, that is,</strong>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9054359905560991
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.9054359905560991)
 </pre></div>
 </div>
 </div>
@@ -569,7 +583,7 @@ the load, that is,</strong>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1692.8058975751992
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(1692.8058975751992)
 </pre></div>
 </div>
 </div>
@@ -612,7 +626,7 @@ the load, that is,</strong>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Backup Energy, $E_B$ (GWh)&#39;)
 </pre></div>
 </div>
-<img alt="../_images/27d86e36a3272e162aec883ec0786ac22d6bb8e7af074956b018c9d23e2e9014.png" src="../_images/27d86e36a3272e162aec883ec0786ac22d6bb8e7af074956b018c9d23e2e9014.png" />
+<img alt="../_images/bb44d44579263c1082365b57d823e4444cab82d681e0c0df8bb1dd452e204f17.png" src="../_images/bb44d44579263c1082365b57d823e4444cab82d681e0c0df8bb1dd452e204f17.png" />
 </div>
 </div>
 <p>The backup capacity is minimized when <span class="math notranslate nohighlight">\(\alpha\)</span>=0.9</p>
@@ -628,7 +642,7 @@ the load, that is,</strong>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Backup Capacity, $C_B$ (GW)&#39;)
 </pre></div>
 </div>
-<img alt="../_images/fad7d08bb528ba5a333fd4336b76474fa097d151b1f3e88d62f32343f04224d8.png" src="../_images/fad7d08bb528ba5a333fd4336b76474fa097d151b1f3e88d62f32343f04224d8.png" />
+<img alt="../_images/df90703477dc3d4c98fcf793383fdaad9eb8de86f4d3975eafe507e19ddb87e2.png" src="../_images/df90703477dc3d4c98fcf793383fdaad9eb8de86f4d3975eafe507e19ddb87e2.png" />
 </div>
 </div>
 <p>The curtailed energy is minimized when <span class="math notranslate nohighlight">\(\alpha\)</span>=0.5</p>
@@ -644,7 +658,7 @@ the load, that is,</strong>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Curtailed Energy, $E_C$ (GWh)&#39;)
 </pre></div>
 </div>
-<img alt="../_images/f59f77539183f865bbd776684237fcc25f4b72308b9d526bd1217733ccbd87cc.png" src="../_images/f59f77539183f865bbd776684237fcc25f4b72308b9d526bd1217733ccbd87cc.png" />
+<img alt="../_images/48ef4a66be6e055ba5ec1e8fd4292e4ba2dd31e0d75ef612970e9e89bc545b68.png" src="../_images/48ef4a66be6e055ba5ec1e8fd4292e4ba2dd31e0d75ef612970e9e89bc545b68.png" />
 </div>
 </div>
 <p><strong>(c) Calculate and plot the backup energy <span class="math notranslate nohighlight">\(E_B\)</span>, backup capacity <span class="math notranslate nohighlight">\(C_B\)</span>, and curtailed energy <span class="math notranslate nohighlight">\(E_C\)</span> for <span class="math notranslate nohighlight">\(\alpha\)</span> values ranging from 0 to 1 and <span class="math notranslate nohighlight">\(\gamma\)</span> values ranging from 0 to 1 and discuss the results.</strong></p>
@@ -690,7 +704,7 @@ the load, that is,</strong>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/44d40761cddba983e8caacf6cc03a76f08309bb372c3aaeb85a6a836057a09d0.png" src="../_images/44d40761cddba983e8caacf6cc03a76f08309bb372c3aaeb85a6a836057a09d0.png" />
+<img alt="../_images/ead1b2fcfcfa2267465704072514b258d90ed7152e37e6116a0eae24403d96bb.png" src="../_images/ead1b2fcfcfa2267465704072514b258d90ed7152e37e6116a0eae24403d96bb.png" />
 </div>
 </div>
 <p>The required backup capacity is minimized for <span class="math notranslate nohighlight">\(\gamma\)</span>=1 and <span class="math notranslate nohighlight">\(\alpha\)</span>=0.9. For <span class="math notranslate nohighlight">\(\gamma\)</span>=0 (no renewable generation), the required backup capacity is 1. For <span class="math notranslate nohighlight">\(\gamma\)</span>=1 (renewable generation covering, on average, demand), the required backup capacity is still 0.825 GW.</p>
@@ -705,7 +719,7 @@ the load, that is,</strong>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ea4d648feb172f626f67dbb9005eda169e150621167ee37e994604e18df04333.png" src="../_images/ea4d648feb172f626f67dbb9005eda169e150621167ee37e994604e18df04333.png" />
+<img alt="../_images/8477b8733b54198091a944d9dd783f9986f2bd7f97542b7c8a4c5731e1464643.png" src="../_images/8477b8733b54198091a944d9dd783f9986f2bd7f97542b7c8a4c5731e1464643.png" />
 </div>
 </div>
 <p>The curtailed energy is minimized for <span class="math notranslate nohighlight">\(\gamma\)</span>=0 since the renewable energy is not enough to cover the demand. For <span class="math notranslate nohighlight">\(\gamma\)</span>=1, the curtailed energy is minimized for <span class="math notranslate nohighlight">\(\alpha\)</span>=0.5.</p>
@@ -720,7 +734,7 @@ the load, that is,</strong>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/dfd546e057897c643db7f32248bf3d9ad8b3a52216642aed8a3c5359c4fdce42.png" src="../_images/dfd546e057897c643db7f32248bf3d9ad8b3a52216642aed8a3c5359c4fdce42.png" />
+<img alt="../_images/10b8fb8b039c5c9b5193a7eeabd3f77c46459e3c1cdb75db245c4a66b4d8d92f.png" src="../_images/10b8fb8b039c5c9b5193a7eeabd3f77c46459e3c1cdb75db245c4a66b4d8d92f.png" />
 </div>
 </div>
 </section>
@@ -823,8 +837,8 @@ By Marta Victoria, Aleksander Grochowicz
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>
