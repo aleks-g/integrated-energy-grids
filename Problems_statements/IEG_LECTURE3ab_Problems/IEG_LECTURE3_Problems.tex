@@ -1,0 +1,96 @@
+\documentclass[10pt]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{url}
+\usepackage{hyperref}
+\title{IEG_Problems_Lecture3}
+\author{martavictoriaperez}
+\date{February 2026}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+ \setlength\parindent{0pt}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+ 
+\title{\textbf{Lecture 3: Joint capacity and dispatch optimisation and limiting $CO_2$ emissions}}
+\author{
+%Your name\\
+DTU Course 46770: Integrated Energy Grids }
+\maketitle
+
+\begin{problem}{3.1}
+
+Optimise the capacity and dispatch of solar PV, onshore wind, and open-cycle gas turbine (OCGT) generators to supply the inelastic electricity demand throughout one year. 
+
+To do this, take the time series for the wind and solar capacity factors for Portugal in 2015 obtained from \url{https://zenodo.org/record/3253876#.XSiVOEdS8l0}
+and \url{https://zenodo.org/record/2613651#.X0kbhDVS-uV} (select the file ‘pvoptimal.csv’) and the electricity demand from \url{https://github.com/aleks-g/integrated-energy-grids/tree/main/integrated-energy-grids/Problems/data}.
+
+\
+
+Consider the annualised capital costs and marginal generation costs for the different technologies in the following table. The efficiency for the OCGT plant is 0.41.
+
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{ccc}
+    \hline
+        Technology & Annualised capital costs (EUR/MW/a) & Marginal generation costs (EUR/MWh) \\
+    \hline
+    Onshore wind &  101,644 & 0 \\
+         Solar PV &  51,346 & 0 \\
+         OCGT & 47,718 &  64.7  \\
+    \hline
+    \end{tabular}
+    \caption{Costs assumptions.}
+    \label{tab:my_label}
+\end{table}
+\begin{itemize}
+\item[a)] Calculate the total system cost, the optimal installed capacities, the annual generation per technology, and plot the hourly generation and demand during January.
+\item[b)] Calculate the revenues collected by every technology throughout the year and show that their sum is equal to their costs. 
+\end{itemize}
+
+Now we are adding the possibility of installing battery storage. The annualised capital cost of the battery comprises 12,894 EUR/MWh/a for the energy capacity and 24,678 EUR/MW/a for the inverter. The inverter efficiency is 0.96 and the battery is assumed to have a fixed energy-to-power ratio of 2 hours. Assume also an existing combined-cycle gas turbine (CCGT) unit with an electricity generation capacity of 6 GW and efficiency of 0.58. The annualised capital cost and marginal generation costs for the CCGT are respectively 104,788 EUR/MW/a and 46.8 EUR/MWh.
+
+\begin{itemize}
+\item[c)] Calculate the total system cost, the optimal installed capacities, the annual generation per technology, and plot the hourly generation and demand during January.
+
+\item[d)] How does the CCGT power plant recover its cost?
+
+\item[e)] How does the battery recover its cost?
+
+\end{itemize}
+
+Use the model built in PyPSA described in Problem 8.2 and assume that methane gas emits 0.198 tCO2 per MWh of thermal energy contained in the gas. The OCGT unit has an efficiency of 0.41. Limit the maximum CO$_2$ emissions to 5 MtCO2/year. 
+
+\begin{itemize}
+	\item[f)] Calculate the optimal installed capacities and plot the hourly generation and demand during January.
+	\item[g)] What is the CO$_2$ tax required to meet this CO$_2$ emission limit?
+\end{itemize}
+
+\end{problem}
+
+\begin{problem}{3.2}
+	Optimise the model described in Problem 3.1 without the CCGT generator.
+	
+	\begin{itemize}
+		\item[a)] Calculate the revenues collected by the OCGT plant throughout the year and show that their sum is equal to its costs.
+		\item[b)] Solve the problem for different CO$_2$ values ranging from 5 MtCO2/year to zero. Plot the total system cost and the required CO$_2$ prices as a function of the emissions allowance.
+	\end{itemize}
+\end{problem}
+
+
+%\begin{proof}[Solution]
+%Write a solution here
+%\end{proof}
+
+\end{document}
+
+
+ 
+
