@@ -1,0 +1,59 @@
+\documentclass[10pt]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\title{IEG_Assignment_1}
+\author{martavictoriaperez }
+\date{February 2026}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+ 
+\title{\textbf{Course Project Part 1 (Assignment 1)}}
+\author{DTU Course 46770: Integrated Energy Grids }
+\maketitle
+
+In this first part of the course project, you are asked to carry out the tasks described below. \\
+
+Write a short report (maximum length 6 pages) in groups of 4 students, including your main findings, and upload it to DTULearn. \\
+
+\textbf{Deadline for submission: March 25, 2026, 23:55} \\
+
+%\textcolor{red}{Add to the first lecture, a participation table accompanying the report, detailing the participation of each group member (as provided in the slides from Week0)} \\
+
+Please, review the \href{https://martavp.github.io/integrated-energy-grids/intro-pypsa.html}{PyPSA tutorial} before starting this project. \\
+
+\begin{itemize}
+
+\item[a)] Choose one country/region/city/system and calculate the optimal capacities for renewable and non-renewable generators. You can add as many technologies as you want. Remember to provide a reference for the costs and other technological assumptions. Plot the dispatch time series for a week in summer and winter. Plot the annual electricity mix. Use the duration curves or the capacity factor to investigate the contribution of different technologies.
+
+\item[b)] Investigate how sensitive the optimal capacity mix is to the global CO$_2$ constraint. E.g., plot the generation mix as a function of the CO$_2$ constraint that you impose. Search for the CO$_2$ emissions in your country (today or in 1990) and refer to the emissions allowance for that historical data.
+
+\item[c)] Investigate how sensitive your results are to the interannual variability of solar and wind generation. Plot the average capacity and variability obtained for every generator using different weather years.
+
+\item[d)] Add some storage technology/ies and investigate how they behave and what their impact is on the optimal system configuration. Discuss what strategies your system is using to balance the renewable generation at different time scales (intraday, seasonal, etc.)
+
+\item[e)] Connect your country to at least three neighbouring countries using HVAC lines, making sure that the network includes at least one closed cycle. Look for information on the existing capacities of those interconnectors and set the capacities fixed. Assume a voltage level of 400 kV and a unitary reactance $x$=0.1. You can assume that the generation capacities in the neighbouring countries are fixed or co-optimize the whole system. Optimize the whole system, assuming linearized AC power flow (DC approximation) and discuss the results.
+
+\item[f)] \textit{(Note: this section must be solved with pen and paper. The objective is to replicate the power flows that you obtained for the first time step in your simulation. )}
+
+Calculate the incidence matrix and the power transfer distribution factor (PTDF) matrix of the network that you defined in the previous section. Read from your PyPSA model the imbalances in the first time step in every node (i.e. generation - demand). Assuming linearized AC power flows, and the previously determined PTDF matrix, calculate the optimal power flowing through every line and check that it coincides with the modelled results.
+ 
+
+\end{itemize}
+
+
+\end{document}
+
+
+ 
+
