@@ -2,7 +2,7 @@
 \usepackage{graphicx} % Required for inserting images
 \usepackage{url}
 \usepackage{hyperref}
-\title{IEG_Problems_Lecture3}
+\title{IEG_Problems_Lecture2}
 \author{Aleksander Grochowicz}
 \date{January 2025}
 
@@ -17,7 +17,7 @@
 
 \begin{document}
  
-\title{\textbf{Lecture 2: Optimization}}
+\title{\textbf{Lecture 2: Optimisation}}
 \author{
 %Your name\\
 DTU Course 46770: Integrated Energy Grids }
@@ -38,15 +38,17 @@ Given the following optimization problem,
 
 
 \begin{itemize}
-\item[a)] Solve the optimization problem graphically (pen and paper or on your laptop). Note that it is a maximization problem, whereas we will mostly work with minimizations. Reformulate as a minimization problem.
+\item[a)] Solve the optimisation problem graphically (pen and paper or on your laptop). Note that it is a maximisation problem, whereas we will mostly work with minimizations. Reformulate as a minimisation problem.
 \item[b)] Return to the original formulation. Indicate which constraints are binding and calculate the values of the Lagrange multipliers.
-\item[c)] In the above set-up, we have a unique solution to our maximization problem (existence and uniqueness). Adapt the exercise such that this is no longer the case.
+\item[c)] In the above set-up, we have a unique solution to our maximisation problem (existence and uniqueness). Adapt the exercise such that this is no longer the case.
 \end{itemize}
 \end{problem}
 
 \
 
 \begin{problem}{2.2}
+	For this problem you will need to use the Python package \href{https://linopy.readthedocs.io/en/latest/}{linopy}. Start with the introduction to linopy: \url{https://aleks-g.github.io/integrated-energy-grids/intro-linopy.html}.
+
 	
 	Consider the following economic dispatch problem: 
 	\begin{itemize}
@@ -60,8 +62,8 @@ Given the following optimization problem,
 	
 	\begin{itemize}
 		\item[a)] Use linopy to define and solve the LP and find the optimal solution as well as reading out the Lagrange multipliers as defined in the lecture. 
-		\item[b)] Open \href{problem2b.csv}{\texttt{problem2b.csv}}, and use the values as inputs for capacity factors as well as demand in the dispatch problem. Solve the LP with linopy.
-		\item[c)] Open \href{problem2c.csv}{\texttt{problem2c.csv}}, and use the values as inputs for capacity factors as well as demand in the dispatch problem. Solve the LP with linopy.
+		\item[b)] Open \href{https://github.com/aleks-g/integrated-energy-grids/tree/main/integrated-energy-grids/Problems/data/problem2_2b.csv}{\texttt{problem2\_2b.csv}}, and use the values as inputs for capacity factors as well as demand in the dispatch problem. Solve the LP with linopy.
+		\item[c)] Open \href{https://github.com/aleks-g/integrated-energy-grids/tree/main/integrated-energy-grids/Problems/data/problem2_2c.csv}{\texttt{problem2\_2c.csv}}, and use the values as inputs for capacity factors as well as demand in the dispatch problem. Solve the LP with linopy.
 		\item[d)] Compare the share of renewable generation, the dual variables, and the objective from a)-c) [average, median, min, max] and interpret the differences. Compute the curtailment from renewables.
 		\item[e)] Plot the supply and demand duration curves for the different resources in c). Also consider \texttt{demand - renewable generation} (``net load''). Could transmission or storage be useful for this system? Why or why not?
 	\end{itemize}
@@ -74,9 +76,9 @@ Given the following optimization problem,
 	
 	We assume the system from Problem 2.2.
 	\begin{itemize}
-		\item[a)] Another system that is connected to ours --- assuming copper-plate --- decides dispatch just before we do and can export utility solar. The results from that dispatch optimization are saved in \href{problem3a.csv}{\texttt{problem3a.csv}}. Create a time series of available imports and their price.
+		\item[a)] Another system that is connected to ours --- assuming copper-plate --- decides dispatch just before we do and can export utility solar. The results from that dispatch optimization are saved in \href{https://github.com/aleks-g/integrated-energy-grids/tree/main/integrated-energy-grids/Problems/data/problem2_3a.csv}{\texttt{problem2\_3a.csv}}. Create a time series of available imports and their price.
 		\item[b)] Solve the updated problem with the available imports. Think of the imports as a generator with variable, marginal prices corresponding to the dual variables.
-		% \item[c)] Now formulate the two problems as a joint optimization (so, one common demand, and combining all generators), what difference do you see to the previous solutions? Try to interpret what happened.
+		% \item[c)] Now formulate the two problems as a joint optimisation (so, one common demand, and combining all generators), what difference do you see to the previous solutions? Try to interpret what happened.
 	\end{itemize}
 
 \end{problem}
