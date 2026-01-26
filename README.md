@@ -26,7 +26,7 @@ If you want to build/modify the html version of this repository:
 
 ## Contributing
 
-We welcome and recognize all contributions. If you'd like to contribute to the project by providing feedback, identifying a bug or working on a new feature, check out the [contributing guide](CONTRIBUTING.md) to get started.
+We welcome and recognise all contributions. If you'd like to contribute to the project by providing feedback, identifying a bug or working on a new feature, check out the [contributing guide](CONTRIBUTING.md) to get started.
 
 You can see a list of current contributors in the [contributors tab]([https://github.com/martavp/integrated-energy-grids/graphs/contributors](https://github.com/aleks-g/integrated-energy-grids/graphs/contributors)).
 
