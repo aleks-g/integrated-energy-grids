@@ -25,8 +25,9 @@ Python distribution. This is an installation of Python with a set of curated
 packages which are guaranteed to work together.
 
 For instance, you can install on your computer the popular
-[Anaconda Python Distribution](https://www.anaconda.com/download/).
-Follow the link to obtain a one-click installer for your operating system.
+[Anaconda Python Distribution](https://www.anaconda.com/download/). Follow the link to obtain a one-click installer for your operating system.
+Be aware that you can also install a lightweight version of it; see the section
+**“Lightweight alternatives: micromamba and miniconda”** below.
 
 The instructions below  assume you have access to a command line. For **Linux and MacOS users**, you can access the command line by opening the _terminal_ program. For **Windows users**, you should first install Anaconda (described above) or miniconda/micromamba (described below), which gives you access to the "Anaconda Prompt" desktop application. (Instructions for this are given on the [Anaconda Website](https://docs.anaconda.com/anaconda/user-guide/getting-started/#write-a-python-program-using-anaconda-prompt-or-terminal).) Alternatively, you can use the Anaconda Navigator (described below). 
 
@@ -44,7 +45,7 @@ lightweight alternative installation methods (like `micromamba` and `miniconda`)
 
 1. [Micromamba Installation](https://mamba.readthedocs.io/en/latest/installation/micromamba-installation.html)
 
-2. [Miniconda Installation](https://docs.conda.io/en/latest/miniconda.html)
+2. [Miniconda Installation](https://www.anaconda.com/docs/getting-started/miniconda/install#quickstart-install-instructions)
 
 ### Installing Python without a package manager
 
@@ -136,9 +137,9 @@ instead of `conda`. Everything will be faster.
 
 The latest environment specification for this course can be downloaded under the following link as a [`YAML`-file](https://en.wikipedia.org/wiki/YAML):
 
-https://github.com/martavp/integrated-energy-grids/blob/main/environment.yaml
+https://github.com/aleks-g/integrated-energy-grids/blob/main/environment.yaml
 
-There is a download button at the top-right corner.
+There is a download button at the top-right corner. Please download the file and add it to a newly created folder for this course.
 
 After navigating to the folder where the `environment.yaml` file is stored,
 you can create this environment using `conda` or `mamba`
