@@ -1,6 +1,7 @@
 name: integrated-energy-grids
 channels:
 - conda-forge
+- gurobi
 dependencies:
 - python>=3.11
 - pip
