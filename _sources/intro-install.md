@@ -152,7 +152,7 @@ or
 
 Activate this environment
 
-    mamba activate integrated-energy-grids
+    conda activate integrated-energy-grids
 
 This environment should be sufficient for all of the problems in this repository.
 
