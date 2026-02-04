@@ -165,7 +165,7 @@ The environment has to be activated whenever you open a new terminal,
 
 If you want to use `pip` for managing your environment, download the `requirements.txt` file
 
-https://github.com/martavp/integrated-energy-grids/blob/main/requirements.txt
+https://github.com/aleks-g/integrated-energy-grids/blob/main/requirements.txt
 
 There is a download button at the top-right corner.
 
