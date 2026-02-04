@@ -445,8 +445,9 @@ When we are writing a piece of code, we can benefit from functions that are incl
 Python distribution. This is an installation of Python with a set of curated
 packages which are guaranteed to work together.</p>
 <p>For instance, you can install on your computer the popular
-<a class="reference external" href="https://www.anaconda.com/download/">Anaconda Python Distribution</a>.
-Follow the link to obtain a one-click installer for your operating system.</p>
+<a class="reference external" href="https://www.anaconda.com/download/">Anaconda Python Distribution</a>. Follow the link to obtain a one-click installer for your operating system.
+Be aware that you can also install a lightweight version of it; see the section
+<strong>“Lightweight alternatives: micromamba and miniconda”</strong> below.</p>
 <p>The instructions below  assume you have access to a command line. For <strong>Linux and MacOS users</strong>, you can access the command line by opening the <em>terminal</em> program. For <strong>Windows users</strong>, you should first install Anaconda (described above) or miniconda/micromamba (described below), which gives you access to the “Anaconda Prompt” desktop application. (Instructions for this are given on the <a class="reference external" href="https://docs.anaconda.com/anaconda/user-guide/getting-started/#write-a-python-program-using-anaconda-prompt-or-terminal">Anaconda Website</a>.) Alternatively, you can use the Anaconda Navigator (described below).</p>
 </section>
 <section id="anaconda-navigator">
@@ -460,7 +461,7 @@ Follow the link to obtain a one-click installer for your operating system.</p>
 lightweight alternative installation methods (like <code class="docutils literal notranslate"><span class="pre">micromamba</span></code> and <code class="docutils literal notranslate"><span class="pre">miniconda</span></code>).</p>
 <ol class="arabic simple">
 <li><p><a class="reference external" href="https://mamba.readthedocs.io/en/latest/installation/micromamba-installation.html">Micromamba Installation</a></p></li>
-<li><p><a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda Installation</a></p></li>
+<li><p><a class="reference external" href="https://www.anaconda.com/docs/getting-started/miniconda/install#quickstart-install-instructions">Miniconda Installation</a></p></li>
 </ol>
 </section>
 <section id="installing-python-without-a-package-manager">
@@ -549,8 +550,8 @@ instead of <code class="docutils literal notranslate"><span class="pre">conda</s
 <section id="with-conda-or-mamba">
 <h1>With <code class="docutils literal notranslate"><span class="pre">conda</span></code> or <code class="docutils literal notranslate"><span class="pre">mamba</span></code><a class="headerlink" href="#with-conda-or-mamba" title="Link to this heading">#</a></h1>
 <p>The latest environment specification for this course can be downloaded under the following link as a <a class="reference external" href="https://en.wikipedia.org/wiki/YAML"><code class="docutils literal notranslate"><span class="pre">YAML</span></code>-file</a>:</p>
-<p><a class="github reference external" href="https://github.com/martavp/integrated-energy-grids/blob/main/environment.yaml">martavp/integrated-energy-grids</a></p>
-<p>There is a download button at the top-right corner.</p>
+<p><a class="github reference external" href="https://github.com/aleks-g/integrated-energy-grids/blob/main/environment.yaml">aleks-g/integrated-energy-grids</a></p>
+<p>There is a download button at the top-right corner. Please download the file and add it to a newly created folder for this course.</p>
 <p>After navigating to the folder where the <code class="docutils literal notranslate"><span class="pre">environment.yaml</span></code> file is stored,
 you can create this environment using <code class="docutils literal notranslate"><span class="pre">conda</span></code> or <code class="docutils literal notranslate"><span class="pre">mamba</span></code></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>conda env create -f environment.yaml
@@ -573,7 +574,7 @@ you can create this environment using <code class="docutils literal notranslate"
 <section id="with-pip">
 <h2>With <code class="docutils literal notranslate"><span class="pre">pip</span></code><a class="headerlink" href="#with-pip" title="Link to this heading">#</a></h2>
 <p>If you want to use <code class="docutils literal notranslate"><span class="pre">pip</span></code> for managing your environment, download the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file</p>
-<p><a class="github reference external" href="https://github.com/martavp/integrated-energy-grids/blob/main/requirements.txt">martavp/integrated-energy-grids</a></p>
+<p><a class="github reference external" href="https://github.com/aleks-g/integrated-energy-grids/blob/main/requirements.txt">aleks-g/integrated-energy-grids</a></p>
 <p>There is a download button at the top-right corner.</p>
 <p>After navigating to the folder where the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file is stored,
 you can install the required packages with</p>
