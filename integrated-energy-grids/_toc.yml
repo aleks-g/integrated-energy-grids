@@ -10,10 +10,10 @@ chapters:
 - file: intro-numpy
 - file: intro-matplotlib
 - file: intro-pandas
-# - file: Problems/Problem01.01
-# - file: Problems/Problem01.03
-# - file: Problems/Problem01.04
-# - file: Problems/Problem01.05
+- file: Problems/Problem01.01
+- file: Problems/Problem01.03
+- file: Problems/Problem01.04
+- file: Problems/Problem01.05
 # - file: Problems/Problem02.01
 - file: intro-linopy
 # - file: Problems/Problem02.02
