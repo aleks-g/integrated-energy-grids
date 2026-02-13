@@ -2,9 +2,9 @@
 \usepackage{graphicx} % Required for inserting images
 \usepackage{url}
 \usepackage{hyperref}
-\title{IEG_Problems_Lecture1}
-\author{martavictoriaperez }
-\date{January 2025}
+\title{IEG_Problems_Lecture3}
+\author{martavictoriaperez}
+\date{February 2026}
 
 \usepackage[margin=1in]{geometry} 
 \usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
@@ -12,91 +12,78 @@
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
  
+ \setlength\parindent{0pt}
 \newenvironment{problem}[2][Problem]{\begin{trivlist}
 \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
 
 \begin{document}
  
-\title{\textbf{Lecture 3: Networks}}
+\title{\textbf{Lecture 3: Joint capacity and dispatch optimisation}}
 \author{
 %Your name\\
 DTU Course 46770: Integrated Energy Grids }
 \maketitle
+
 \begin{problem}{3.1}
 
-The time series included in DTU Learn represent the hourly capacity factor for wind power in Spain $g_t^{W,Spain}$ and Denmark $g_t^{W,Denmark}$. Assuming a constant electricity demand of 1 GW in every country:
+Optimise the capacity and dispatch of solar PV, onshore wind, and open-cycle gas turbine (OCGT) generators to supply the inelastic electricity demand throughout one year. 
 
-\begin{itemize}
-\item[a)] Calculate the required wind power capacity in every country to cover, on average, the electricity demand. 
-\item[b)] 	Calculate the required backup energy and backup power capacity to ensure that demand is covered every hour, assuming the capacity found in (a).
-\item[c)] If we assume that Spain and Denmark can be connected through an ideal interconnection (without any losses) and the installed capacities are those calculated in section (a). Calculate the required backup energy and backup power capacity to ensure the hourly supply of electricity demand in both countries.
-\end{itemize}
-\end{problem}
+To do this, take the time series for the wind and solar capacity factors for Portugal in 2015 obtained from \url{https://zenodo.org/record/3253876#.XSiVOEdS8l0}
+and \url{https://zenodo.org/record/2613651#.X0kbhDVS-uV} (select the file ‘pvoptimal.csv’) and the electricity demand from \url{https://github.com/aleks-g/integrated-energy-grids/tree/main/integrated-energy-grids/Problems/data}.
 
 \
+
+Consider the annualised capital costs and marginal generation costs for the different technologies in the following table. The efficiency for the OCGT plant is 0.41.
+
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{ccc}
+    \hline
+        Technology & Annualised capital costs (EUR/MW/a) & Marginal generation costs (EUR/MWh) \\
+    \hline
+    Onshore wind &  101,644 & 0 \\
+         Solar PV &  51,346 & 0 \\
+         OCGT & 47,718 &  64.7  \\
+    \hline
+    \end{tabular}
+    \caption{Costs assumptions.}
+    \label{tab:my_label}
+\end{table}
+\begin{itemize}
+\item[a)] Calculate the total system cost, the optimal installed capacities, the annual generation per technology, and plot the hourly generation and demand during January.
+\item[b)] Calculate the revenues collected by every technology throughout the year and show that their sum is equal to their costs. 
+\end{itemize}
+
+Now we are adding the possibility of installing battery storage. The annualised capital cost of the battery comprises 12,894 EUR/MWh/a for the energy capacity and 24,678 EUR/MW/a for the inverter. The inverter efficiency is 0.96 and the battery is assumed to have a fixed energy-to-power ratio of 2 hours. Assume also an existing combined-cycle gas turbine (CCGT) unit with an electricity generation capacity of 6 GW and efficiency of 0.58. The annualised capital cost and marginal generation costs for the CCGT are respectively 104,788 EUR/MW/a and 46.8 EUR/MWh.
+
+\begin{itemize}
+\item[c)] Calculate the total system cost, the optimal installed capacities, the annual generation per technology, and plot the hourly generation and demand during January.
+
+\item[d)] How does the CCGT power plant recover its cost?
+
+ \item[e)] How does the battery recover its cost?
+
+\end{itemize}
+
+% Now assume that methane gas emits 0.198 tCO2 per MWh of thermal energy contained in the gas. The OCGT unit has an efficiency of 0.41. Limit the maximum CO$_2$ emissions to 5 MtCO2/year. 
+
+%\begin{itemize}
+%	\item[f)] Calculate the optimal installed capacities and plot the hourly generation and demand during January.
+%	\item[g)] What is the CO$_2$ tax required to meet this CO$_2$ emission limit?
+% \end{itemize}
+
+\end{problem}
 
 \begin{problem}{3.2}
-
-Consider the simplified network plotted in Fig. \ref{fig_network}, which represents Denmark and its neighbouring countries. Let us assume the following convention names for the regions Germany=0, DK1=1, DK2=2, Norway=3, and Sweden=4.
-\begin{figure}
-    \centering
-    \includegraphics[width=0.2\linewidth]{figures/nodes.jpg}
-    \caption{Simplified network.}
-    \label{fig_network}
-\end{figure}
-\begin{itemize}
-\item[a)] Create a list of the nodes and links. Sort the nodes and links in ascending order. Link (0,1) before (1,2), before (1,3) etc.
-\item[b)] Calculate the degree of each node $k_i$  and the average degree of the network 〈k〉. 
-\item[c)] Create the degree matrix $D_{ij}$. Create the adjacency matrix $A_{ij}$ and check that it is symmetric. 
-\item[d)] Create the incidence matrix $K_{ij}$, assuming the links are always directed from low-number node to high-number node.
-\item[e)] Create the Laplacian matrix $L_{ij}$  using the degree and adjacency matrices. Create the Laplacian matrix using the incidence matrix. Check that the two definitions agree. 
-\end{itemize}
-
+	Optimise the model described in Problem 3.1 without the CCGT generator (but with the battery). Calculate the revenues collected by the OCGT plant throughout the year and show that their sum is equal to its costs.
+	
+%	\begin{itemize}
+%		\item[a)] Calculate the revenues collected by the OCGT plant throughout the year and show that their sum is equal to its costs.
+		% \item[b)] Solve the problem for different CO$_2$ values ranging from 5 MtCO2/year to zero. Plot the total system cost and the required CO$_2$ prices as a function of the emissions allowance.
+%	\end{itemize}
 \end{problem}
 
-\
-
-\begin{problem}{3.3}
-Using the Python package \href{https://networkx.org/}{networkX}, codify the network described in Problem 3.2. 
-
-\begin{itemize}
-\item[a)] Make a plot of the network.
-\item[b)] Calculate the degree in every node and the average degree.
-\item[c)] Calculate the Degree, Adjacency, Incidence and Laplacian matrix. Make a heat map of each of those matrices to evaluate them visually.
-
-\end{itemize}
-
-\textit{Hint: It is recommended to follow the} \href{https://martavp.github.io/integrated-energy-grids/intro-networkx.html#}{networkX tutorial} \textit{before trying this problem.}
-\end{problem}
-
-\
-
-\begin{problem}{3.4}
-
-In this problem, we will evaluate the transmission grid in Europe using data from ENTSOE and the Python package \href{https://networkx.org/}{networkX}.
-
-\
-
-Using the simplified dataset of the European high-voltage transmission network whose data is contained in the files 'data/nodes.csv' and 'data/edges.csv':
-
-\begin{itemize}
-\item[a)] Create a network object using 
- 
-\begin{verbatim}
-nx.from_pandas_edgelist()
-\end{verbatim}
-
-and calculate the average degree.
-
-\item[b)]  Add the information on the position of each node provided in 'data/nodes.csv' and make a plot of the network.
-
-\item[c)]  Determine how many independent networks exist (these are the synchronous zones of the European transmission network).
-
-\item[d)]  For the synchronous zone corresponding to Scandinavia, calculate the number of nodes and edges. Calculate the Degree, Adjacency, Incidence, and Laplacian matrices. Make a heat map of each of those matrices to evaluate them visually.
-
-\end{itemize}
-
-\end{problem}
 
 %\begin{proof}[Solution]
 %Write a solution here
