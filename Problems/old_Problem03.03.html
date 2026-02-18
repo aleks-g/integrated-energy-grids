@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Problem 7.2 &#8212; integrated-energy-grids</title>
+    <title>Problem 3.3 &#8212; integrated-energy-grids</title>
   
   
   
@@ -58,9 +58,7 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Problems/Problem07.02';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Problems/old_Problem03.03';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -263,7 +261,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/aleks-g/integrated-energy-grids/blob/main/integrated-energy-grids/Problems/Problem07.02.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/aleks-g/integrated-energy-grids/blob/main/integrated-energy-grids/Problems/old_Problem03.03.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -311,7 +309,7 @@
       
       
       
-      <li><a href="https://github.com/aleks-g/integrated-energy-grids/issues/new?title=Issue%20on%20page%20%2FProblems/Problem07.02.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/aleks-g/integrated-energy-grids/issues/new?title=Issue%20on%20page%20%2FProblems/old_Problem03.03.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -341,7 +339,7 @@
       
       
       
-      <li><a href="../_sources/Problems/Problem07.02.ipynb" target="_blank"
+      <li><a href="../_sources/Problems/old_Problem03.03.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -423,7 +421,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Problem 7.2</h1>
+    <h1>Problem 3.3</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -437,71 +435,178 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="problem-7-2">
-<h1>Problem 7.2<a class="headerlink" href="#problem-7-2" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="problem-3-3">
+<h1>Problem 3.3<a class="headerlink" href="#problem-3-3" title="Link to this heading">#</a></h1>
 <p><strong>Integrated Energy Grids</strong></p>
-<p><strong>Problem 7.2</strong></p>
-<p><em>Note: This problem is similar to 7.1 but now it assumes that the mass flow in the district heating network is variable.</em></p>
-<p><strong>A district heating system is used to transport heat generated using a heat pump to two distant buildings. The pipeline diameter is 0.5 m, the supply temperature is <span class="math notranslate nohighlight">\(T^S\)</span>=80<span class="math notranslate nohighlight">\(^{\circ}\)</span>C and the return temperature is <span class="math notranslate nohighlight">\(T^R\)</span>=40<span class="math notranslate nohighlight">\(^{\circ}\)</span>C. Assume the mass flow to be constant and that the heat losses in the pipelines due to dissipation to the ambient can be neglected.</strong></p>
-<p><strong>The heat transfer coefficient of building A is <span class="math notranslate nohighlight">\(U_A\)</span> = 2 MW/k, the heat transfer coefficient of building B is <span class="math notranslate nohighlight">\(U_B\)</span> = 3 MW/k, the ambient temperature is 5<span class="math notranslate nohighlight">\(^{\circ}\)</span>C and the interior comfort temperature of the buildings must be 20<span class="math notranslate nohighlight">\(^{\circ}\)</span>C.</strong></p>
-<p><strong>Calculate the mass flow needed at the heat exchanger that serves every building, assuming that the input and output temperature correspond to <span class="math notranslate nohighlight">\(T^S\)</span> and <span class="math notranslate nohighlight">\(T^R\)</span></strong>.</p>
+<p><strong>Problem 3.3</strong></p>
+<p><strong>Using the Python package <a class="reference internal" href="#networkX"><span class="xref myst">networkX</span></a>, codify the network described in Problem 3.2</strong></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you have not yet set up Python on your computer, you can execute this tutorial in your browser via <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>. Click on the rocket in the top right corner and launch “Colab”. If that doesn’t work download the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file and import it in <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>.</p>
+<p>Then install the following packages by executing the following command in a Jupyter cell at the top of the notebook.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>!pip<span class="w"> </span>install<span class="w"> </span>numpy<span class="w"> </span>networkx<span class="w"> </span>pandas<span class="w"> </span>matplotlib
+</pre></div>
 </div>
+</div>
+<p>We start by creating the network and adding the nodes and links.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">N</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="n">N</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)])</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>We can calculate the rate of heat extracted in every building as</p>
-<p><span class="math notranslate nohighlight">\(q_{A,B}=U_{A,B}(T_{indoor}-T_{ambient})\)</span></p>
+<p><strong>a) Make a plot of the network</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T_ind</span> <span class="o">=</span> <span class="mi">20</span> <span class="c1">#C</span>
-<span class="n">T_amb</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1">#C</span>
-<span class="n">U_A</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># MW/K</span>
-<span class="n">U_B</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1"># MW/K</span>
-
-<span class="n">q_A</span> <span class="o">=</span> <span class="n">U_A</span><span class="o">*</span><span class="p">(</span><span class="n">T_ind</span><span class="o">-</span><span class="n">T_amb</span><span class="p">)</span>
-<span class="n">q_B</span> <span class="o">=</span> <span class="n">U_B</span><span class="o">*</span><span class="p">(</span><span class="n">T_ind</span><span class="o">-</span><span class="n">T_amb</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">q_A</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; MW are extracted in building A.&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">q_B</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; MW are extracted in building B.&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30 MW are extracted in building A.
-45 MW are extracted in building B.
-</pre></div>
+<img alt="../_images/a5bd7382eecb194230ffc502288e7997841b2222d272337d08b5fa1c9629783c.png" src="../_images/a5bd7382eecb194230ffc502288e7997841b2222d272337d08b5fa1c9629783c.png" />
 </div>
 </div>
-</div>
-<p>If we apply the energy nodal balance to the two buildings</p>
-<p><span class="math notranslate nohighlight">\(q_{buildingA}=c_pm_A(T^S-T^R)\)</span></p>
-<p><span class="math notranslate nohighlight">\(q_{buildingB}=c_pm_B(T^S-T^R)\)</span></p>
-<p>The mass flow can be estimated as</p>
+<p>We can add the position of every node to make the figure more similar to the original plot.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_p</span> <span class="o">=</span> <span class="mi">4186</span> <span class="c1">#J/kgK</span>
-<span class="n">T_S</span> <span class="o">=</span> <span class="mi">80</span> <span class="c1">#C</span>
-<span class="n">T_R</span> <span class="o">=</span> <span class="mi">40</span> <span class="c1">#C</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pos</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="s1">&#39;pos&#39;</span><span class="p">)</span>
+<span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">pos</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">pos</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">pos</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
 
-<span class="n">m_A</span><span class="o">=</span><span class="n">q_A</span><span class="o">*</span><span class="mi">1000000</span><span class="o">/</span><span class="p">(</span><span class="n">c_p</span><span class="o">*</span><span class="p">(</span><span class="n">T_S</span><span class="o">-</span><span class="n">T_R</span><span class="p">))</span>  <span class="c1"># MW -&gt; W</span>
-<span class="n">m_B</span><span class="o">=</span><span class="n">q_B</span><span class="o">*</span><span class="mi">1000000</span><span class="o">/</span><span class="p">(</span><span class="n">c_p</span><span class="o">*</span><span class="p">(</span><span class="n">T_S</span><span class="o">-</span><span class="n">T_R</span><span class="p">))</span>  <span class="c1"># MW -&gt; W</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Required mass flow in heat exchanger in building A: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">m_A</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;kg/s&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Required mass flow in heat exchanger in building B: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">m_B</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;kg/s&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Required mass flow in heat exchanger in building A: 179.2kg/s
-Required mass flow in heat exchanger in building B: 268.8kg/s
+<img alt="../_images/85d995893b8f7878b68b4dfd8560e922ade9e7e1cd22c493326640f037bbce8e.png" src="../_images/85d995893b8f7878b68b4dfd8560e922ade9e7e1cd22c493326640f037bbce8e.png" />
+</div>
+</div>
+<p><strong>b) Calculate the degree in every node and the average degree</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">degrees</span><span class="o">=</span><span class="p">[</span><span class="n">deg</span> <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">deg</span> <span class="ow">in</span> <span class="n">N</span><span class="o">.</span><span class="n">degree</span><span class="p">()]</span>
+<span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">degrees</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(2.0)
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>c) Calculate the Degree, Adjacency, Incidence and Laplacian matrix. Make a heat-map of each of those matrices to evaluate them visually.</strong></p>
+<p>Degree matrix</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">degrees</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x16cbbfcb0&gt;
+</pre></div>
+</div>
+<img alt="../_images/23a5aeca1e0a40597b2bab25ebceb2e117b7f068e2031bc1dae16ef4d4f90970.png" src="../_images/23a5aeca1e0a40597b2bab25ebceb2e117b7f068e2031bc1dae16ef4d4f90970.png" />
+</div>
+</div>
+<p>Adjacency matrix (Careful, <code class="docutils literal notranslate"><span class="pre">networkx</span></code> will yield a weighted adjacency matrix by default!)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can plot the matrix to get a visual overview of how interconnected is the network</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Reds&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x16d10b390&gt;
+</pre></div>
+</div>
+<img alt="../_images/f5c83f17d02c4744996855c4bfb8b0180ec4f3187c512e7c9deebceff78e5307.png" src="../_images/f5c83f17d02c4744996855c4bfb8b0180ec4f3187c512e7c9deebceff78e5307.png" />
+</div>
+</div>
+<p>Incidence matrix (Careful, <code class="docutils literal notranslate"><span class="pre">networkx</span></code> will yield a incidence matrix without orientation by default!)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">K</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">incidence_matrix</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">oriented</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+<span class="n">K</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-1.,  0.,  0.,  0.,  0.],
+       [ 1., -1., -1., -1.,  0.],
+       [ 0.,  1.,  0.,  0., -1.],
+       [ 0.,  0.,  1.,  0.,  0.],
+       [ 0.,  0.,  0.,  1.,  1.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;PRGn&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x16d2e82d0&gt;
+</pre></div>
+</div>
+<img alt="../_images/2bbbdd7eac0d40363d2ece1d5182f4874cfd015dbd5b04a6f11458967d800440.png" src="../_images/2bbbdd7eac0d40363d2ece1d5182f4874cfd015dbd5b04a6f11458967d800440.png" />
+</div>
+</div>
+<p>Laplacian matrix (Careful, <code class="docutils literal notranslate"><span class="pre">networkx</span></code> will yield a weighted Laplacian matrix by default!)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">laplacian_matrix</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+<span class="n">L</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1, -1,  0,  0,  0],
+       [-1,  4, -1, -1, -1],
+       [ 0, -1,  2,  0, -1],
+       [ 0, -1,  0,  1,  0],
+       [ 0, -1, -1,  0,  2]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdBu&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x16d3491d0&gt;
+</pre></div>
+</div>
+<img alt="../_images/5c0df6322d77537a754aa1171650da9a1d373bdd6193010a5ce9a67ed00628f1.png" src="../_images/5c0df6322d77537a754aa1171650da9a1d373bdd6193010a5ce9a67ed00628f1.png" />
 </div>
 </div>
 </section>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Problem 7.2 &#8212; integrated-energy-grids</title>
+    <title>Problem 3.2 &#8212; integrated-energy-grids</title>
   
   
   
@@ -60,7 +60,7 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Problems/Problem07.02';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Problems/old_Problem03.02';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -263,7 +263,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/aleks-g/integrated-energy-grids/blob/main/integrated-energy-grids/Problems/Problem07.02.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/aleks-g/integrated-energy-grids/blob/main/integrated-energy-grids/Problems/old_Problem03.02.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -311,7 +311,7 @@
       
       
       
-      <li><a href="https://github.com/aleks-g/integrated-energy-grids/issues/new?title=Issue%20on%20page%20%2FProblems/Problem07.02.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/aleks-g/integrated-energy-grids/issues/new?title=Issue%20on%20page%20%2FProblems/old_Problem03.02.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -341,7 +341,7 @@
       
       
       
-      <li><a href="../_sources/Problems/Problem07.02.ipynb" target="_blank"
+      <li><a href="../_sources/Problems/old_Problem03.02.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -423,7 +423,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Problem 7.2</h1>
+    <h1>Problem 3.2</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -437,69 +437,166 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="problem-7-2">
-<h1>Problem 7.2<a class="headerlink" href="#problem-7-2" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="problem-3-2">
+<h1>Problem 3.2<a class="headerlink" href="#problem-3-2" title="Link to this heading">#</a></h1>
 <p><strong>Integrated Energy Grids</strong></p>
-<p><strong>Problem 7.2</strong></p>
-<p><em>Note: This problem is similar to 7.1 but now it assumes that the mass flow in the district heating network is variable.</em></p>
-<p><strong>A district heating system is used to transport heat generated using a heat pump to two distant buildings. The pipeline diameter is 0.5 m, the supply temperature is <span class="math notranslate nohighlight">\(T^S\)</span>=80<span class="math notranslate nohighlight">\(^{\circ}\)</span>C and the return temperature is <span class="math notranslate nohighlight">\(T^R\)</span>=40<span class="math notranslate nohighlight">\(^{\circ}\)</span>C. Assume the mass flow to be constant and that the heat losses in the pipelines due to dissipation to the ambient can be neglected.</strong></p>
-<p><strong>The heat transfer coefficient of building A is <span class="math notranslate nohighlight">\(U_A\)</span> = 2 MW/k, the heat transfer coefficient of building B is <span class="math notranslate nohighlight">\(U_B\)</span> = 3 MW/k, the ambient temperature is 5<span class="math notranslate nohighlight">\(^{\circ}\)</span>C and the interior comfort temperature of the buildings must be 20<span class="math notranslate nohighlight">\(^{\circ}\)</span>C.</strong></p>
-<p><strong>Calculate the mass flow needed at the heat exchanger that serves every building, assuming that the input and output temperature correspond to <span class="math notranslate nohighlight">\(T^S\)</span> and <span class="math notranslate nohighlight">\(T^R\)</span></strong>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If you have not yet set up Python on your computer, you can execute this tutorial in your browser via <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>. Click on the rocket in the top right corner and launch “Colab”. If that doesn’t work download the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file and import it in <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>.</p>
-</div>
+<p><strong>Problem 3.2</strong></p>
+<p><strong>Consider the simplified network plotted in the figure, which represents Denmark and its neighbouring countries. Let us assume the following convention names for the regions Germany=0, DK1=1, DK2=2, Norway=3, and Sweden=4.</strong></p>
+<img src="figures/nodes.png" width=200 height=300 />
+<p><strong>a) Create a list of the nodes and links. Sort the nodes and links in ascending order. Link (0,1) before (1,2), before (1,3) etc.</strong></p>
+<p>We will use the package <a class="reference external" href="https://numpy.org/">numpy</a> to operate with matrices.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy.linalg</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>We can calculate the rate of heat extracted in every building as</p>
-<p><span class="math notranslate nohighlight">\(q_{A,B}=U_{A,B}(T_{indoor}-T_{ambient})\)</span></p>
+<p>List of nodes and links</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T_ind</span> <span class="o">=</span> <span class="mi">20</span> <span class="c1">#C</span>
-<span class="n">T_amb</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1">#C</span>
-<span class="n">U_A</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># MW/K</span>
-<span class="n">U_B</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1"># MW/K</span>
-
-<span class="n">q_A</span> <span class="o">=</span> <span class="n">U_A</span><span class="o">*</span><span class="p">(</span><span class="n">T_ind</span><span class="o">-</span><span class="n">T_amb</span><span class="p">)</span>
-<span class="n">q_B</span> <span class="o">=</span> <span class="n">U_B</span><span class="o">*</span><span class="p">(</span><span class="n">T_ind</span><span class="o">-</span><span class="n">T_amb</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">q_A</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; MW are extracted in building A.&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">q_B</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; MW are extracted in building B.&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">links</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>b) Calculate the degree of each node <span class="math notranslate nohighlight">\(k_i\)</span>  and the average degree of the network 〈k〉.</strong></p>
+<p>Degree of each node and average degree of the network</p>
+<p><span class="math notranslate nohighlight">\(k_1\)</span>= 1, <span class="math notranslate nohighlight">\(k_1\)</span>=4, <span class="math notranslate nohighlight">\(k_2\)</span>=2, <span class="math notranslate nohighlight">\(k_3\)</span>=1, <span class="math notranslate nohighlight">\(k_4\)</span>=2</p>
+<p>Average degree of the network</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">4</span><span class="o">+</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">5</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30 MW are extracted in building A.
-45 MW are extracted in building B.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.0
 </pre></div>
 </div>
 </div>
 </div>
-<p>If we apply the energy nodal balance to the two buildings</p>
-<p><span class="math notranslate nohighlight">\(q_{buildingA}=c_pm_A(T^S-T^R)\)</span></p>
-<p><span class="math notranslate nohighlight">\(q_{buildingB}=c_pm_B(T^S-T^R)\)</span></p>
-<p>The mass flow can be estimated as</p>
+<p><strong>c) Create the degree matrix <span class="math notranslate nohighlight">\(D_{ij}\)</span>. Create the adjacency matrix <span class="math notranslate nohighlight">\(A_{ij}\)</span> and check that it is symmetric.</strong></p>
+<p><strong>Degree matrix</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_p</span> <span class="o">=</span> <span class="mi">4186</span> <span class="c1">#J/kgK</span>
-<span class="n">T_S</span> <span class="o">=</span> <span class="mi">80</span> <span class="c1">#C</span>
-<span class="n">T_R</span> <span class="o">=</span> <span class="mi">40</span> <span class="c1">#C</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)))</span>
 
-<span class="n">m_A</span><span class="o">=</span><span class="n">q_A</span><span class="o">*</span><span class="mi">1000000</span><span class="o">/</span><span class="p">(</span><span class="n">c_p</span><span class="o">*</span><span class="p">(</span><span class="n">T_S</span><span class="o">-</span><span class="n">T_R</span><span class="p">))</span>  <span class="c1"># MW -&gt; W</span>
-<span class="n">m_B</span><span class="o">=</span><span class="n">q_B</span><span class="o">*</span><span class="mi">1000000</span><span class="o">/</span><span class="p">(</span><span class="n">c_p</span><span class="o">*</span><span class="p">(</span><span class="n">T_S</span><span class="o">-</span><span class="n">T_R</span><span class="p">))</span>  <span class="c1"># MW -&gt; W</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Required mass flow in heat exchanger in building A: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">m_A</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;kg/s&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Required mass flow in heat exchanger in building B: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">m_B</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;kg/s&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+    <span class="n">D</span><span class="p">[</span><span class="n">node</span><span class="p">,</span> <span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="mi">1</span> <span class="k">if</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">link</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">links</span><span class="p">])</span>
+<span class="n">D</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Required mass flow in heat exchanger in building A: 179.2kg/s
-Required mass flow in heat exchanger in building B: 268.8kg/s
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1., 0., 0., 0., 0.],
+       [0., 4., 0., 0., 0.],
+       [0., 0., 2., 0., 0.],
+       [0., 0., 0., 1., 0.],
+       [0., 0., 0., 0., 2.]])
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Adjacency matrix</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)))</span>
+
+<span class="k">for</span> <span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span> <span class="ow">in</span> <span class="n">links</span><span class="p">:</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">node_b</span><span class="p">,</span> <span class="n">node_a</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">A</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0., 1., 0., 0., 0.],
+       [1., 0., 1., 1., 1.],
+       [0., 1., 0., 0., 1.],
+       [0., 1., 0., 0., 0.],
+       [0., 1., 1., 0., 0.]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can check that matrix A is symmetric by checking that its transpose is equal to the original matrix</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">-</span><span class="n">A</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0., 0., 0., 0., 0.],
+       [0., 0., 0., 0., 0.],
+       [0., 0., 0., 0., 0.],
+       [0., 0., 0., 0., 0.],
+       [0., 0., 0., 0., 0.]])
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>d) Create the incidence matrix <span class="math notranslate nohighlight">\(K_{ij}\)</span>, assuming that the links are always directed from low-number node to high-number node.</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">links</span><span class="p">)))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">links</span><span class="p">):</span>
+    <span class="n">K</span><span class="p">[</span><span class="n">node_a</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">K</span><span class="p">[</span><span class="n">node_b</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    
+<span class="n">K</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.,  0.,  0.,  0.,  0.],
+       [-1.,  1.,  1.,  1.,  0.],
+       [ 0., -1.,  0.,  0.,  1.],
+       [ 0.,  0., -1.,  0.,  0.],
+       [ 0.,  0.,  0., -1., -1.]])
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>e) Create the Laplacian matrix <span class="math notranslate nohighlight">\(L_{ij}\)</span> using the degree and adjacency matrices. Create the Laplacian matrix using the incidence matrix. Check that the two definitions agree.</strong></p>
+<p>a) using the adjacency matrix</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="n">D</span> <span class="o">-</span> <span class="n">A</span>
+<span class="n">L</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1., -1.,  0.,  0.,  0.],
+       [-1.,  4., -1., -1., -1.],
+       [ 0., -1.,  2.,  0., -1.],
+       [ 0., -1.,  0.,  1.,  0.],
+       [ 0., -1., -1.,  0.,  2.]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>b) using the incidence matrix</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">=</span><span class="n">K</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">K</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">L</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1., -1.,  0.,  0.,  0.],
+       [-1.,  4., -1., -1., -1.],
+       [ 0., -1.,  2.,  0., -1.],
+       [ 0., -1.,  0.,  1.,  0.],
+       [ 0., -1., -1.,  0.,  2.]])
 </pre></div>
 </div>
 </div>

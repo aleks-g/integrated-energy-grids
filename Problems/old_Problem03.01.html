@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Problem 3.3 &#8212; integrated-energy-grids</title>
+    <title>Problem 3.1 &#8212; integrated-energy-grids</title>
   
   
   
@@ -58,7 +58,9 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Problems/Problem03.03';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Problems/old_Problem03.01';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -200,7 +202,10 @@
 <li class="toctree-l1"><a class="reference internal" href="Problem01.03.html">Problem 1.3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Problem01.04.html">Problem 1.4</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Problem01.05.html">Problem 1.5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem02.01.html">Problem 2.1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-linopy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">linopy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem02.02.html">Problem 2.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem02.03.html">Problem 2.3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-networkx.html">Introduction to <code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-pypsa.html">Introduction to <code class="docutils literal notranslate"><span class="pre">pypsa</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-gurobipy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">gurobipy</span></code></a></li>
@@ -258,7 +263,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/aleks-g/integrated-energy-grids/blob/main/integrated-energy-grids/Problems/Problem03.03.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/aleks-g/integrated-energy-grids/blob/main/integrated-energy-grids/Problems/old_Problem03.01.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -306,7 +311,7 @@
       
       
       
-      <li><a href="https://github.com/aleks-g/integrated-energy-grids/issues/new?title=Issue%20on%20page%20%2FProblems/Problem03.03.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/aleks-g/integrated-energy-grids/issues/new?title=Issue%20on%20page%20%2FProblems/old_Problem03.01.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -336,7 +341,7 @@
       
       
       
-      <li><a href="../_sources/Problems/Problem03.03.ipynb" target="_blank"
+      <li><a href="../_sources/Problems/old_Problem03.01.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -418,7 +423,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Problem 3.3</h1>
+    <h1>Problem 3.1</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -432,180 +437,167 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="problem-3-3">
-<h1>Problem 3.3<a class="headerlink" href="#problem-3-3" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="problem-3-1">
+<h1>Problem 3.1<a class="headerlink" href="#problem-3-1" title="Link to this heading">#</a></h1>
 <p><strong>Integrated Energy Grids</strong></p>
-<p><strong>Problem 3.3</strong></p>
-<p><strong>Using the Python package <a class="reference internal" href="#networkX"><span class="xref myst">networkX</span></a>, codify the network described in Problem 3.2</strong></p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If you have not yet set up Python on your computer, you can execute this tutorial in your browser via <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>. Click on the rocket in the top right corner and launch “Colab”. If that doesn’t work download the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file and import it in <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>.</p>
-<p>Then install the following packages by executing the following command in a Jupyter cell at the top of the notebook.</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>!pip<span class="w"> </span>install<span class="w"> </span>numpy<span class="w"> </span>networkx<span class="w"> </span>pandas<span class="w"> </span>matplotlib
-</pre></div>
-</div>
-</div>
-<p>We start by creating the network and adding the nodes and links.</p>
+<p><strong>Problem 3.1</strong></p>
+<p><strong>The time series provided in DTU Learn represents the hourly capacity factor for wind energy in Spain <span class="math notranslate nohighlight">\(g^{W,Spain}_t\)</span> and Denmark <span class="math notranslate nohighlight">\(g^{W,Denmark}_t\)</span>. Assuming a constant electricity demand of 1 GW in every country:</strong></p>
+<p><strong>(a) Calculate the required wind power capacity in every country to cover, on average, the electricity demand.</strong></p>
+<p><strong>(b) Calculate the required backup energy and backup power capacity to ensure that demand is covered every hour, assuming the capacity found in (a).</strong></p>
+<p><strong>(c) If we assume that Spain and Denmark can be connected through an ideal interconnection (without any losses) and the installed capacities are those calculated in section (a), calculate the required backup energy and backup power capacity to ensure the hourly supply of electricity demand in both countries.</strong></p>
+<p>We will use the packages <a class="reference external" href="https://numpy.org/">numpy</a> to operate with arrays and <a class="reference external" href="https://matplotlib.org/stable/index.html">matplotlib.pyplot</a> to plot the results</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
-<span class="n">N</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
-<span class="n">N</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w">  </span><span class="nn">plt</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p><strong>a) Make a plot of the network</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">CF</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/onshore_wind.csv&#39;</span><span class="p">,</span>
+                      <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">CF</span><span class="o">.</span><span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">CF</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The required capacity to cover on average electricity demand in Denmark can calculated as</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">CF_ave_D</span> <span class="o">=</span> <span class="n">CF</span><span class="p">[</span><span class="s1">&#39;DNK&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">G_DNK</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">CF_ave_D</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">G_DNK</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; GW of wind power needs to be installed in Denmark.&#39;</span> <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/a5bd7382eecb194230ffc502288e7997841b2222d272337d08b5fa1c9629783c.png" src="../_images/a5bd7382eecb194230ffc502288e7997841b2222d272337d08b5fa1c9629783c.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.6 GW of wind power needs to be installed in Denmark.
+</pre></div>
 </div>
 </div>
-<p>We can add the position of every node to make the figure more similar to the original plot.</p>
+</div>
+<p>and for Spain</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pos</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="s1">&#39;pos&#39;</span><span class="p">)</span>
-<span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-<span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-<span class="n">pos</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-<span class="n">pos</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
-<span class="n">pos</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">CF_ave_S</span> <span class="o">=</span> <span class="n">CF</span><span class="p">[</span><span class="s1">&#39;ESP&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">G_ESP</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">CF_ave_S</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">G_ESP</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; GW of wind power needs to be installed in Spain.&#39;</span> <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/85d995893b8f7878b68b4dfd8560e922ade9e7e1cd22c493326640f037bbce8e.png" src="../_images/85d995893b8f7878b68b4dfd8560e922ade9e7e1cd22c493326640f037bbce8e.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.3 GW of wind power needs to be installed in Spain.
+</pre></div>
 </div>
 </div>
-<p><strong>b) Calculate the degree in every node and the average degree</strong></p>
+</div>
+<p><strong>(b) Calculate the required backup energy and backup power capacity to ensure that demand is covered every hour.</strong></p>
+<p>We can define the mismatch as the difference between the renewable generation and electricity load.</p>
+<p><span class="math notranslate nohighlight">\(\Delta_t = g^W_t- d_t\)</span></p>
+<p>The total backup energy can be calculated as the sum of the negative mismatch.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">degrees</span><span class="o">=</span><span class="p">[</span><span class="n">deg</span> <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">deg</span> <span class="ow">in</span> <span class="n">N</span><span class="o">.</span><span class="n">degree</span><span class="p">()]</span>
-<span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">degrees</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">G_DNK</span><span class="o">*</span><span class="n">CF</span><span class="p">[</span><span class="s1">&#39;DNK&#39;</span><span class="p">]])</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">Delta</span><span class="p">[</span><span class="n">Delta</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(2.0)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-2954.3130287540507)
 </pre></div>
 </div>
 </div>
 </div>
-<p><strong>c) Calculate the Degree, Adjacency, Incidence and Laplacian matrix. Make a heat-map of each of those matrices to evaluate them visually.</strong></p>
-<p>Degree matrix</p>
+<p>Denmark requires 2,954 GWh of backup energy.</p>
+<p>The capacity for backup generation can be calculated as the maximum of the negative mismatch values.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">degrees</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Delta</span><span class="p">[</span><span class="n">Delta</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x16cbbfcb0&gt;
-</pre></div>
-</div>
-<img alt="../_images/23a5aeca1e0a40597b2bab25ebceb2e117b7f068e2031bc1dae16ef4d4f90970.png" src="../_images/23a5aeca1e0a40597b2bab25ebceb2e117b7f068e2031bc1dae16ef4d4f90970.png" />
-</div>
-</div>
-<p>Adjacency matrix (Careful, <code class="docutils literal notranslate"><span class="pre">networkx</span></code> will yield a weighted adjacency matrix by default!)</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.9923385545773723)
 </pre></div>
 </div>
 </div>
 </div>
-<p>We can plot the matrix to get a visual overview of how interconnected is the network</p>
+<p>Denmark requires 0.99 GW of backup capacity, i.e., the required capacity is equal to the demand because there would be situations in which the wind power contribution will be zero.</p>
+<p>For Spain</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Reds&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">G_ESP</span><span class="o">*</span><span class="n">CF</span><span class="p">[</span><span class="s1">&#39;ESP&#39;</span><span class="p">]])</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">Delta</span><span class="p">[</span><span class="n">Delta</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x16d10b390&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-2096.6831157720217)
 </pre></div>
 </div>
-<img alt="../_images/f5c83f17d02c4744996855c4bfb8b0180ec4f3187c512e7c9deebceff78e5307.png" src="../_images/f5c83f17d02c4744996855c4bfb8b0180ec4f3187c512e7c9deebceff78e5307.png" />
 </div>
 </div>
-<p>Incidence matrix (Careful, <code class="docutils literal notranslate"><span class="pre">networkx</span></code> will yield a incidence matrix without orientation by default!)</p>
+<p>Spain requires 2,096 GWh of backup energy.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">K</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">incidence_matrix</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">oriented</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
-<span class="n">K</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Delta</span><span class="p">[</span><span class="n">Delta</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-1.,  0.,  0.,  0.,  0.],
-       [ 1., -1., -1., -1.,  0.],
-       [ 0.,  1.,  0.,  0., -1.],
-       [ 0.,  0.,  1.,  0.,  0.],
-       [ 0.,  0.,  0.,  1.,  1.]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.9003975309781712)
 </pre></div>
 </div>
 </div>
 </div>
+<p>Spain requires 0.9 GW of backup capacity, because there are no situations with wind capacity factor equal to zero in Spain.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;PRGn&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">min</span><span class="p">(</span><span class="n">CF</span><span class="p">[</span><span class="s1">&#39;ESP&#39;</span><span class="p">])</span><span class="o">*</span><span class="n">G_ESP</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x16d2e82d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.0996024690218288)
 </pre></div>
 </div>
-<img alt="../_images/2bbbdd7eac0d40363d2ece1d5182f4874cfd015dbd5b04a6f11458967d800440.png" src="../_images/2bbbdd7eac0d40363d2ece1d5182f4874cfd015dbd5b04a6f11458967d800440.png" />
 </div>
 </div>
-<p>Laplacian matrix (Careful, <code class="docutils literal notranslate"><span class="pre">networkx</span></code> will yield a weighted Laplacian matrix by default!)</p>
+<p><strong>(c) If we assume that Spain and Denmark can be connected through an ideal interconnection (without any losses) and installed capacities are those calculated in section (a). Calculate the required wind power capacity, backup energy and backup power capacity to ensure the hourly supply of demand in both countries.</strong></p>
+<p>The mismatch can be defined now as
+<span class="math notranslate nohighlight">\(\Delta_t = g^{W,Denmark}_t + g^{W,Spain}_t - 2\)</span></p>
+<p>The total backup energy can be calculated as the sum of the negative mismatch.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">laplacian_matrix</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
-<span class="n">L</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">-</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">G_DNK</span><span class="o">*</span><span class="n">CF</span><span class="p">[</span><span class="s1">&#39;DNK&#39;</span><span class="p">],</span><span class="n">G_ESP</span><span class="o">*</span><span class="n">CF</span><span class="p">[</span><span class="s1">&#39;ESP&#39;</span><span class="p">])])</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">Delta</span><span class="p">[</span><span class="n">Delta</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1, -1,  0,  0,  0],
-       [-1,  4, -1, -1, -1],
-       [ 0, -1,  2,  0, -1],
-       [ 0, -1,  0,  1,  0],
-       [ 0, -1, -1,  0,  2]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-3456.6942006056597)
 </pre></div>
 </div>
 </div>
 </div>
+<p>The two countries will require 3,456 GWh of backup energy, which is significantly lower than the sum of the backup energy that they would required if operated independently.</p>
+<p>The capacity for backup generation can be calculated as the maximum of the negative mismatch values.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdBu&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Delta</span><span class="p">[</span><span class="n">Delta</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x16d3491d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(1.7241951029263909)
 </pre></div>
 </div>
-<img alt="../_images/5c0df6322d77537a754aa1171650da9a1d373bdd6193010a5ce9a67ed00628f1.png" src="../_images/5c0df6322d77537a754aa1171650da9a1d373bdd6193010a5ce9a67ed00628f1.png" />
 </div>
 </div>
+<p>The two countries require 1.72 GW of backup capacity, which is lower than the backup capacity that they would require if operated independently.</p>
 </section>
 
     <script type="text/x-thebe-config">

@@ -202,7 +202,10 @@
 <li class="toctree-l1"><a class="reference internal" href="Problem01.03.html">Problem 1.3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Problem01.04.html">Problem 1.4</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Problem01.05.html">Problem 1.5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem02.01.html">Problem 2.1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-linopy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">linopy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem02.02.html">Problem 2.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem02.03.html">Problem 2.3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-networkx.html">Introduction to <code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-pypsa.html">Introduction to <code class="docutils literal notranslate"><span class="pre">pypsa</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-gurobipy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">gurobipy</span></code></a></li>
@@ -409,7 +412,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -425,6 +430,19 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites-handling-technology-data-and-costs">Prerequisites: handling technology data and costs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retrieving-time-series-data">Retrieving time series data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#joint-capacity-and-dispatch-optimization">Joint capacity and dispatch optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-run">Model Run</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -437,167 +455,761 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="problem-3-2">
 <h1>Problem 3.2<a class="headerlink" href="#problem-3-2" title="Link to this heading">#</a></h1>
 <p><strong>Integrated Energy Grids</strong></p>
-<p><strong>Problem 3.2</strong></p>
-<p><strong>Consider the simplified network plotted in the figure, which represents Denmark and its neighbouring countries. Let us assume the following convention names for the regions Germany=0, DK1=1, DK2=2, Norway=3, and Sweden=4.</strong></p>
-<img src="figures/nodes.png" width=200 height=300 />
-<p><strong>a) Create a list of the nodes and links. Sort the nodes and links in ascending order. Link (0,1) before (1,2), before (1,3) etc.</strong></p>
-<p>We will use the package <a class="reference external" href="https://numpy.org/">numpy</a> to operate with matrices.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy.linalg</span>
+<p><strong>Optimise the model described in Problem 3.1 without the CCGT generator.</strong></p>
+<p><strong>a) Calculate the revenues collected by the OCGT plant throughout the year and show that their sum is equal to its costs.</strong></p>
+<p><strong>b) Solve the problem for different CO<span class="math notranslate nohighlight">\(_2\)</span> values ranging from 5 MtCO2/year to zero. Plot the total system cost and the required CO<span class="math notranslate nohighlight">\(_2\)</span> prices as a function of the emissions allowance.</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you have not yet set up Python on your computer, you can execute this tutorial in your browser via <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>. Click on the rocket in the top right corner and launch “Colab”. If that doesn’t work download the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file and import it in <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>.</p>
+<p>Then install <code class="docutils literal notranslate"><span class="pre">pandas</span></code> and <code class="docutils literal notranslate"><span class="pre">numpy</span></code> by executing the following command in a Jupyter cell at the top of the notebook.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>!pip<span class="w"> </span>install<span class="w"> </span>pandas<span class="w"> </span>pypsa
 </pre></div>
 </div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See also <a class="reference external" href="https://model.energy">https://model.energy</a>.</p>
 </div>
-<p>List of nodes and links</p>
+<p>In this exercise, we want to build a replica of <a class="reference external" href="https://model.energy">model.energy</a>. This tool calculates the cost of meeting a constant electricity demand from a combination of wind power, solar power and storage for different regions of the world. We deviate from <a class="reference external" href="https://model.energy">model.energy</a> by including electricity demand profiles rather than a constant electricity demand.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
-<span class="n">links</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p><strong>b) Calculate the degree of each node <span class="math notranslate nohighlight">\(k_i\)</span>  and the average degree of the network 〈k〉.</strong></p>
-<p>Degree of each node and average degree of the network</p>
-<p><span class="math notranslate nohighlight">\(k_1\)</span>= 1, <span class="math notranslate nohighlight">\(k_1\)</span>=4, <span class="math notranslate nohighlight">\(k_2\)</span>=2, <span class="math notranslate nohighlight">\(k_3\)</span>=1, <span class="math notranslate nohighlight">\(k_4\)</span>=2</p>
-<p>Average degree of the network</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">4</span><span class="o">+</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">5</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pypsa</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set parameter Username
+Set parameter LicenseID to value 2767832
+Academic license - for non-commercial use only - expires 2027-01-20
 </pre></div>
 </div>
 </div>
 </div>
-<p><strong>c) Create the degree matrix <span class="math notranslate nohighlight">\(D_{ij}\)</span>. Create the adjacency matrix <span class="math notranslate nohighlight">\(A_{ij}\)</span> and check that it is symmetric.</strong></p>
-<p><strong>Degree matrix</strong></p>
+<section id="prerequisites-handling-technology-data-and-costs">
+<h2>Prerequisites: handling technology data and costs<a class="headerlink" href="#prerequisites-handling-technology-data-and-costs" title="Link to this heading">#</a></h2>
+<p>We maintain a database (<a class="github reference external" href="https://github.com/PyPSA/technology-data">PyPSA/technology-data</a>) which collects assumptions and projections for energy system technologies (such as costs, efficiencies, lifetimes, etc.) for given years, which we can load into a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>. This requires some pre-processing to load (e.g. converting units, setting defaults, re-arranging dimensions):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">year</span> <span class="o">=</span> <span class="mi">2030</span>
+<span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://raw.githubusercontent.com/PyPSA/technology-data/master/outputs/costs_</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">.csv&quot;</span>
+<span class="n">costs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">costs</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">costs</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;/kW&quot;</span><span class="p">),</span> <span class="s2">&quot;value&quot;</span><span class="p">]</span> <span class="o">*=</span> <span class="mf">1e3</span>
+<span class="n">costs</span><span class="o">.</span><span class="n">unit</span> <span class="o">=</span> <span class="n">costs</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;/kW&quot;</span><span class="p">,</span> <span class="s2">&quot;/MW&quot;</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
-    <span class="n">D</span><span class="p">[</span><span class="n">node</span><span class="p">,</span> <span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="mi">1</span> <span class="k">if</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">link</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">links</span><span class="p">])</span>
-<span class="n">D</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1., 0., 0., 0., 0.],
-       [0., 4., 0., 0., 0.],
-       [0., 0., 2., 0., 0.],
-       [0., 0., 0., 1., 0.],
-       [0., 0., 0., 0., 2.]])
-</pre></div>
-</div>
-</div>
-</div>
-<p><strong>Adjacency matrix</strong></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)))</span>
+<span class="n">defaults</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;FOM&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;VOM&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;efficiency&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;fuel&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;investment&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;lifetime&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+    <span class="s2">&quot;CO2 intensity&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;discount rate&quot;</span><span class="p">:</span> <span class="mf">0.07</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">costs</span> <span class="o">=</span> <span class="n">costs</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">defaults</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span> <span class="ow">in</span> <span class="n">links</span><span class="p">:</span>
-    <span class="n">A</span><span class="p">[</span><span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">A</span><span class="p">[</span><span class="n">node_b</span><span class="p">,</span> <span class="n">node_a</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;OCGT&quot;</span><span class="p">,</span> <span class="s2">&quot;fuel&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;gas&quot;</span><span class="p">,</span> <span class="s2">&quot;fuel&quot;</span><span class="p">]</span>
+<span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;CCGT&quot;</span><span class="p">,</span> <span class="s2">&quot;fuel&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;gas&quot;</span><span class="p">,</span> <span class="s2">&quot;fuel&quot;</span><span class="p">]</span>
+<span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;OCGT&quot;</span><span class="p">,</span> <span class="s2">&quot;CO2 intensity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;gas&quot;</span><span class="p">,</span> <span class="s2">&quot;CO2 intensity&quot;</span><span class="p">]</span>
+<span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;CCGT&quot;</span><span class="p">,</span> <span class="s2">&quot;CO2 intensity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;gas&quot;</span><span class="p">,</span> <span class="s2">&quot;CO2 intensity&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s also write a small utility function that calculates the <strong>annuity</strong> to annualise investment costs. The formula is</p>
+<div class="math notranslate nohighlight">
+\[
+a(r, n) = \frac{r}{1-(1+r)^{-n}}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(r\)</span> is the discount rate and <span class="math notranslate nohighlight">\(n\)</span> is the lifetime.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">annuity</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">r</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">r</span><span class="p">)</span> <span class="o">**</span> <span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">annuity</span><span class="p">(</span><span class="mf">0.07</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.09439292574325567
+</pre></div>
+</div>
+</div>
+</div>
+<p>Based on this, we can calculate the marginal generation costs (€/MWh):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">costs</span><span class="p">[</span><span class="s2">&quot;marginal_cost&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">costs</span><span class="p">[</span><span class="s2">&quot;VOM&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">costs</span><span class="p">[</span><span class="s2">&quot;fuel&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">costs</span><span class="p">[</span><span class="s2">&quot;efficiency&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>and the annualised investment costs (<code class="docutils literal notranslate"><span class="pre">capital_cost</span></code> in PyPSA terms, €/MW/a):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">annuity</span> <span class="o">=</span> <span class="n">costs</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">annuity</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;discount rate&quot;</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;lifetime&quot;</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">costs</span><span class="p">[</span><span class="s2">&quot;capital_cost&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">annuity</span> <span class="o">+</span> <span class="n">costs</span><span class="p">[</span><span class="s2">&quot;FOM&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span> <span class="o">*</span> <span class="n">costs</span><span class="p">[</span><span class="s2">&quot;investment&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can for example read the capital and marginal cost of onshore wind and solar, or the emissions factors of the carrier gas used in and OCGT</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;onwind&quot;</span><span class="p">,</span> <span class="s2">&quot;capital_cost&quot;</span><span class="p">]</span> <span class="c1">#EUR/MW/a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(101644.12332388277)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;solar&quot;</span><span class="p">,</span> <span class="s2">&quot;capital_cost&quot;</span><span class="p">]</span> <span class="c1">#EUR/MW/a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(51346.82981964593)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;OCGT&quot;</span><span class="p">,</span> <span class="s2">&quot;CO2 intensity&quot;</span><span class="p">]</span> <span class="c1">#tCO2/MWh_th</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.198)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="retrieving-time-series-data">
+<h2>Retrieving time series data<a class="headerlink" href="#retrieving-time-series-data" title="Link to this heading">#</a></h2>
+<p>In this example, wind data from <a class="reference external" href="https://zenodo.org/record/3253876#.XSiVOEdS8l0">https://zenodo.org/record/3253876#.XSiVOEdS8l0</a> and solar PV data from <a class="reference external" href="https://zenodo.org/record/3253876#.XSiVOEdS8l0">https://zenodo.org/record/2613651#.X0kbhDVS-uV</a> is used. The data is downloaded in csv format and saved in the ‘data’ folder.
+The Pandas package is used as a convenient way of managing the datasets.</p>
+<p>For convenience, the column including date information is converted into Datetime and set as index</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_solar</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/pv_optimal.csv&#39;</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+<span class="n">data_solar</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">data_solar</span><span class="p">[</span><span class="s1">&#39;utc_time&#39;</span><span class="p">])</span>
 
-<span class="n">A</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0., 1., 0., 0., 0.],
-       [1., 0., 1., 1., 1.],
-       [0., 1., 0., 0., 1.],
-       [0., 1., 0., 0., 0.],
-       [0., 1., 1., 0., 0.]])
-</pre></div>
-</div>
-</div>
-</div>
-<p>We can check that matrix A is symmetric by checking that its transpose is equal to the original matrix</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">-</span><span class="n">A</span><span class="o">.</span><span class="n">T</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0., 0., 0., 0., 0.],
-       [0., 0., 0., 0., 0.],
-       [0., 0., 0., 0., 0.],
-       [0., 0., 0., 0., 0.],
-       [0., 0., 0., 0., 0.]])
-</pre></div>
-</div>
-</div>
-</div>
-<p><strong>d) Create the incidence matrix <span class="math notranslate nohighlight">\(K_{ij}\)</span>, assuming that the links are always directed from low-number node to high-number node.</strong></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">links</span><span class="p">)))</span>
+<span class="n">data_wind</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/onshore_wind_1979-2017.csv&#39;</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+<span class="n">data_wind</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">data_wind</span><span class="p">[</span><span class="s1">&#39;utc_time&#39;</span><span class="p">])</span>
 
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">links</span><span class="p">):</span>
-    <span class="n">K</span><span class="p">[</span><span class="n">node_a</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">K</span><span class="p">[</span><span class="n">node_b</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-    
-<span class="n">K</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.,  0.,  0.,  0.,  0.],
-       [-1.,  1.,  1.,  1.,  0.],
-       [ 0., -1.,  0.,  0.,  1.],
-       [ 0.,  0., -1.,  0.,  0.],
-       [ 0.,  0.,  0., -1., -1.]])
+<span class="n">data_el</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/electricity_demand.csv&#39;</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+<span class="n">data_el</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">data_el</span><span class="p">[</span><span class="s1">&#39;utc_time&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p><strong>e) Create the Laplacian matrix <span class="math notranslate nohighlight">\(L_{ij}\)</span> using the degree and adjacency matrices. Create the Laplacian matrix using the incidence matrix. Check that the two definitions agree.</strong></p>
-<p>a) using the adjacency matrix</p>
+<p>The data format can now be analyzed using the .head() function to show the first lines of the data set</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="n">D</span> <span class="o">-</span> <span class="n">A</span>
-<span class="n">L</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_solar</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1., -1.,  0.,  0.,  0.],
-       [-1.,  4., -1., -1., -1.],
-       [ 0., -1.,  2.,  0., -1.],
-       [ 0., -1.,  0.,  1.,  0.],
-       [ 0., -1., -1.,  0.,  2.]])
-</pre></div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>utc_time</th>
+      <th>AUT</th>
+      <th>BEL</th>
+      <th>BGR</th>
+      <th>BIH</th>
+      <th>CHE</th>
+      <th>CYP</th>
+      <th>CZE</th>
+      <th>DEU</th>
+      <th>DNK</th>
+      <th>...</th>
+      <th>MLT</th>
+      <th>NLD</th>
+      <th>NOR</th>
+      <th>POL</th>
+      <th>PRT</th>
+      <th>ROU</th>
+      <th>SRB</th>
+      <th>SVK</th>
+      <th>SVN</th>
+      <th>SWE</th>
+    </tr>
+    <tr>
+      <th>utc_time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1979-01-01 00:00:00+00:00</th>
+      <td>1979-01-01T00:00:00Z</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1979-01-01 01:00:00+00:00</th>
+      <td>1979-01-01T01:00:00Z</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1979-01-01 02:00:00+00:00</th>
+      <td>1979-01-01T02:00:00Z</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1979-01-01 03:00:00+00:00</th>
+      <td>1979-01-01T03:00:00Z</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1979-01-01 04:00:00+00:00</th>
+      <td>1979-01-01T04:00:00Z</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 33 columns</p>
+</div></div></div>
 </div>
-</div>
-</div>
-<p>b) using the incidence matrix</p>
+<p>We will use timeseries for Portugal in this excercise</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">=</span><span class="n">K</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">K</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-<span class="n">L</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">country</span> <span class="o">=</span> <span class="s1">&#39;PRT&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="joint-capacity-and-dispatch-optimization">
+<h3>Joint capacity and dispatch optimization<a class="headerlink" href="#joint-capacity-and-dispatch-optimization" title="Link to this heading">#</a></h3>
+<p>For building the model, we start again by initialising an empty network, adding the snapshots, and the electricity bus.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="n">pypsa</span><span class="o">.</span><span class="n">Network</span><span class="p">()</span>
+<span class="n">hours_in_2015</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2015-01-01 00:00Z&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;2015-12-31 23:00Z&#39;</span><span class="p">,</span>
+                              <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;h&#39;</span><span class="p">)</span>
+
+<span class="n">n</span><span class="o">.</span><span class="n">set_snapshots</span><span class="p">(</span><span class="n">hours_in_2015</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Bus&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;electricity&quot;</span><span class="p">)</span>
+
+<span class="n">n</span><span class="o">.</span><span class="n">snapshots</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1., -1.,  0.,  0.,  0.],
-       [-1.,  4., -1., -1., -1.],
-       [ 0., -1.,  2.,  0., -1.],
-       [ 0., -1.,  0.,  1.,  0.],
-       [ 0., -1., -1.,  0.,  2.]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DatetimeIndex([&#39;2015-01-01 00:00:00&#39;, &#39;2015-01-01 01:00:00&#39;,
+               &#39;2015-01-01 02:00:00&#39;, &#39;2015-01-01 03:00:00&#39;,
+               &#39;2015-01-01 04:00:00&#39;, &#39;2015-01-01 05:00:00&#39;,
+               &#39;2015-01-01 06:00:00&#39;, &#39;2015-01-01 07:00:00&#39;,
+               &#39;2015-01-01 08:00:00&#39;, &#39;2015-01-01 09:00:00&#39;,
+               ...
+               &#39;2015-12-31 14:00:00&#39;, &#39;2015-12-31 15:00:00&#39;,
+               &#39;2015-12-31 16:00:00&#39;, &#39;2015-12-31 17:00:00&#39;,
+               &#39;2015-12-31 18:00:00&#39;, &#39;2015-12-31 19:00:00&#39;,
+               &#39;2015-12-31 20:00:00&#39;, &#39;2015-12-31 21:00:00&#39;,
+               &#39;2015-12-31 22:00:00&#39;, &#39;2015-12-31 23:00:00&#39;],
+              dtype=&#39;datetime64[ns]&#39;, name=&#39;snapshot&#39;, length=8760, freq=None)
 </pre></div>
 </div>
 </div>
 </div>
+<p>We add all the technologies we are going to include as carriers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">carriers</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;onwind&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;solar&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;OCGT&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CCGT&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;battery storage&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;Carrier&quot;</span><span class="p">,</span>
+    <span class="n">carriers</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;dodgerblue&quot;</span><span class="p">,</span> <span class="s2">&quot;gold&quot;</span><span class="p">,</span> <span class="s2">&quot;indianred&quot;</span><span class="p">,</span><span class="s2">&quot;yellow-green&quot;</span><span class="p">,</span> <span class="s2">&quot;brown&quot;</span><span class="p">],</span>
+    <span class="n">co2_emissions</span><span class="o">=</span><span class="p">[</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="s2">&quot;CO2 intensity&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">carriers</span><span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we add the demand time series to the model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># add load to the bus</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Load&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;demand&quot;</span><span class="p">,</span>
+      <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;electricity&quot;</span><span class="p">,</span>
+      <span class="n">p_set</span><span class="o">=</span><span class="n">data_el</span><span class="p">[</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s have a check whether the data was read-in correctly.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">loads_t</span><span class="o">.</span><span class="n">p_set</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;MW&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;snapshot&#39;, ylabel=&#39;MW&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/8a5f93d31c4a552f639e2b6277aa2ffc8b5e70ae75db3dd33685ff76cecea2fd.png" src="../_images/8a5f93d31c4a552f639e2b6277aa2ffc8b5e70ae75db3dd33685ff76cecea2fd.png" />
+</div>
+</div>
+<p>We add now the generators and set up their capacities to be extendable so that they can be optimized together with the dispatch time series. For the wind and solar generator, we need to indicate the capacity factor or maximum power per unit ‘p_max_pu’</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;Generator&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;OCGT&quot;</span><span class="p">,</span>
+    <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;electricity&quot;</span><span class="p">,</span>
+    <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;OCGT&quot;</span><span class="p">,</span>
+    <span class="n">capital_cost</span><span class="o">=</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;OCGT&quot;</span><span class="p">,</span> <span class="s2">&quot;capital_cost&quot;</span><span class="p">],</span>
+    <span class="n">marginal_cost</span><span class="o">=</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;OCGT&quot;</span><span class="p">,</span> <span class="s2">&quot;marginal_cost&quot;</span><span class="p">],</span>
+    <span class="n">efficiency</span><span class="o">=</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;OCGT&quot;</span><span class="p">,</span> <span class="s2">&quot;efficiency&quot;</span><span class="p">],</span>
+    <span class="n">p_nom_extendable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">CF_wind</span> <span class="o">=</span> <span class="n">data_wind</span><span class="p">[</span><span class="n">country</span><span class="p">][[</span><span class="n">hour</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%SZ&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">hour</span> <span class="ow">in</span> <span class="n">n</span><span class="o">.</span><span class="n">snapshots</span><span class="p">]]</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+        <span class="s2">&quot;Generator&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;onwind&quot;</span><span class="p">,</span>
+        <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;electricity&quot;</span><span class="p">,</span>
+        <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;onwind&quot;</span><span class="p">,</span>
+        <span class="n">p_max_pu</span><span class="o">=</span><span class="n">CF_wind</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+        <span class="n">capital_cost</span><span class="o">=</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;onwind&quot;</span><span class="p">,</span> <span class="s2">&quot;capital_cost&quot;</span><span class="p">],</span>
+        <span class="n">marginal_cost</span><span class="o">=</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;onwind&quot;</span><span class="p">,</span> <span class="s2">&quot;marginal_cost&quot;</span><span class="p">],</span>
+        <span class="n">efficiency</span><span class="o">=</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;onwind&quot;</span><span class="p">,</span> <span class="s2">&quot;efficiency&quot;</span><span class="p">],</span>
+        <span class="n">p_nom_extendable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="n">CF_solar</span> <span class="o">=</span> <span class="n">data_solar</span><span class="p">[</span><span class="n">country</span><span class="p">][[</span><span class="n">hour</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%SZ&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">hour</span> <span class="ow">in</span> <span class="n">n</span><span class="o">.</span><span class="n">snapshots</span><span class="p">]]</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+        <span class="s2">&quot;Generator&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;solar&quot;</span><span class="p">,</span>
+        <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;electricity&quot;</span><span class="p">,</span>
+        <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;solar&quot;</span><span class="p">,</span>
+        <span class="n">p_max_pu</span><span class="o">=</span> <span class="n">CF_solar</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+        <span class="n">capital_cost</span><span class="o">=</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;solar&quot;</span><span class="p">,</span> <span class="s2">&quot;capital_cost&quot;</span><span class="p">],</span>
+        <span class="n">marginal_cost</span><span class="o">=</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;solar&quot;</span><span class="p">,</span> <span class="s2">&quot;marginal_cost&quot;</span><span class="p">],</span>
+        <span class="n">efficiency</span><span class="o">=</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;solar&quot;</span><span class="p">,</span> <span class="s2">&quot;efficiency&quot;</span><span class="p">],</span>
+        <span class="n">p_nom_extendable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>So let’s make sure the capacity factors are read-in correctly.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">generators_t</span><span class="o">.</span><span class="n">p_max_pu</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;2015-01&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;CF&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;snapshot&#39;, ylabel=&#39;CF&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/109e0d0858e0341f538bf966514dd49939ce25648aa5ee7bed2a6a9df98d9054.png" src="../_images/109e0d0858e0341f538bf966514dd49939ce25648aa5ee7bed2a6a9df98d9054.png" />
+</div>
+</div>
+<p>We add the battery storage, assuming a fixed energy-to-power ratio of 2 hours, i.e. if fully charged, the battery can discharge at full capacity for 2 hours.</p>
+<p>For the capital cost, we have to factor in both the capacity and energy cost of the storage.</p>
+<p>We include the charging and discharging efficiencies we enforce a cyclic state-of-charge condition, i.e. the state of charge at the beginning of the optimisation period must equal the final state of charge.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;StorageUnit&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;battery storage&quot;</span><span class="p">,</span>
+    <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;electricity&quot;</span><span class="p">,</span>
+    <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;battery storage&quot;</span><span class="p">,</span>
+    <span class="n">max_hours</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">capital_cost</span><span class="o">=</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;battery inverter&quot;</span><span class="p">,</span> <span class="s2">&quot;capital_cost&quot;</span><span class="p">]</span>
+    <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;battery storage&quot;</span><span class="p">,</span> <span class="s2">&quot;capital_cost&quot;</span><span class="p">],</span>
+    <span class="n">efficiency_store</span><span class="o">=</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;battery inverter&quot;</span><span class="p">,</span> <span class="s2">&quot;efficiency&quot;</span><span class="p">],</span>
+    <span class="n">efficiency_dispatch</span><span class="o">=</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;battery inverter&quot;</span><span class="p">,</span> <span class="s2">&quot;efficiency&quot;</span><span class="p">],</span>
+    <span class="n">p_nom_extendable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">cyclic_state_of_charge</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="model-run">
+<h3>Model Run<a class="headerlink" href="#model-run" title="Link to this heading">#</a></h3>
+<p>Before solving the problem we add a CO<span class="math notranslate nohighlight">\(_2\)</span> emission limit as global constraint:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;GlobalConstraint&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CO2Limit&quot;</span><span class="p">,</span>
+    <span class="n">carrier_attribute</span><span class="o">=</span><span class="s2">&quot;co2_emissions&quot;</span><span class="p">,</span>
+    <span class="n">sense</span><span class="o">=</span><span class="s2">&quot;&lt;=&quot;</span><span class="p">,</span>
+    <span class="n">constant</span><span class="o">=</span><span class="mi">5000000</span><span class="p">,</span> <span class="c1">#5MtCO2</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can already solved the model using the open-solver “highs” or the commercial solver “gurobi” with the academic license</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">solver_name</span><span class="o">=</span><span class="s2">&quot;highs&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.consistency:The following buses have carriers which are not defined:
+Index([&#39;electricity&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
+INFO:linopy.model: Solve problem using Highs solver
+INFO:linopy.io:Writing objective.
+Writing constraints.: 100%|██████████| 13/13 [00:00&lt;00:00, 39.10it/s]
+Writing continuous variables.: 100%|██████████| 6/6 [00:00&lt;00:00, 208.27it/s]
+INFO:linopy.io: Writing time: 0.4s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.12.0 (git hash: n/a): Copyright (c) 2025 HiGHS under MIT licence terms
+LP linopy-problem-xoq0exi7 has 122645 rows; 52564 cols; 240922 nonzeros
+Coefficient ranges:
+  Matrix  [1e-03, 2e+00]
+  Cost    [1e-02, 1e+05]
+  Bound   [0e+00, 0e+00]
+  RHS     [3e+03, 5e+06]
+WARNING: Problem has some excessively large row bounds
+WARNING:    Consider scaling the    bounds by 1e-1, or setting the user_bound_scale option to -3
+Presolving model
+65719 rows, 48202 cols, 179634 nonzeros  0s
+Dependent equations search running on 17520 equations with time limit of 1000.00s
+Dependent equations search removed 0 rows and 0 nonzeros in 0.00s (limit = 1000.00s)
+65719 rows, 48202 cols, 179634 nonzeros  0s
+Presolve reductions: rows 65719(-56926); columns 48202(-4362); nonzeros 179634(-61288) 
+Solving the presolved LP
+Using EKK dual simplex solver - serial
+  Iteration        Objective     Infeasibilities num(sum)
+          0     0.0000000000e+00 Pr: 8760(4.89297e+07) 0s
+      28897     2.2959038837e+09 Pr: 11445(2.00766e+08); Du: 0(2.11026e-07) 5s
+      47025     3.4196838906e+09 Pr: 39682(1.01297e+09); Du: 0(6.57671e-08) 10s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:linopy.constants: Optimization successful: 
+Status: ok
+Termination condition: optimal
+Solution: 52564 primals, 122645 duals
+Objective: 3.48e+09
+Solver model: available
+Solver message: Optimal
+
+INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-ext-p-lower, Generator-ext-p-upper, StorageUnit-ext-p_dispatch-lower, StorageUnit-ext-p_dispatch-upper, StorageUnit-ext-p_store-lower, StorageUnit-ext-p_store-upper, StorageUnit-ext-state_of_charge-lower, StorageUnit-ext-state_of_charge-upper, StorageUnit-energy_balance were not assigned to the network.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      51357     3.4750583556e+09 Pr: 0(0); Du: 0(2.43844e-10) 13s
+
+Performed postsolve
+Solving the original LP from the solution after postsolve
+
+Model name          : linopy-problem-xoq0exi7
+Model status        : Optimal
+Simplex   iterations: 51357
+Objective value     :  3.4750583556e+09
+P-D objective error :  5.6945064046e-15
+HiGHS run time      :         13.04
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;ok&#39;, &#39;optimal&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we can look at the results and evaluate the total system cost (in billion Euros per year)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">objective</span> <span class="o">/</span> <span class="mf">1e9</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.4750583556344865
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">global_constraints</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>type</th>
+      <th>investment_period</th>
+      <th>bus</th>
+      <th>carrier_attribute</th>
+      <th>sense</th>
+      <th>constant</th>
+      <th>mu</th>
+    </tr>
+    <tr>
+      <th>name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>CO2Limit</th>
+      <td>primary_energy</td>
+      <td>NaN</td>
+      <td></td>
+      <td>co2_emissions</td>
+      <td>&lt;=</td>
+      <td>5000000.0</td>
+      <td>-107.043318</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>a) Calculate the revenues collected by the OCGT plant throughout the year and show that their sum is equal to its costs.</strong></p>
+<p>To calculate the revenues collected by every technology, we multiply the energy generated in every hour by the electricity price in that hour and sum for the entire year.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">generators_t</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">buses_t</span><span class="o">.</span><span class="n">marginal_price</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="mf">1e6</span><span class="p">)</span> <span class="c1"># EUR -&gt; MEUR</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>name
+OCGT      1419.474028
+onwind    1346.159208
+solar      673.717868
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>To calculate the tax paid by the OCGT generator, we mutiply the sum of the energy generated by its emission factor, and the CO2 price.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="o">.</span><span class="n">global_constraints</span><span class="o">.</span><span class="n">mu</span><span class="p">)</span><span class="o">*</span><span class="n">n</span><span class="o">.</span><span class="n">generators_t</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">sum</span><span class="p">()[</span><span class="s1">&#39;OCGT&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;OCGT&quot;</span><span class="p">,</span> <span class="s2">&quot;CO2 intensity&quot;</span><span class="p">]</span><span class="o">/</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;OCGT&quot;</span><span class="p">,</span> <span class="s2">&quot;efficiency&quot;</span><span class="p">]</span><span class="o">*</span><span class="mf">0.000001</span> <span class="c1">#tCO2/MtCO2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>name
+CO2Limit    535.21659
+Name: mu, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>The market revenues, minus what is paid in CO2 tax,corresponds to the total cost for OCGT, which we can also read using the statistics module:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">capex</span><span class="p">()</span> <span class="o">+</span> <span class="n">n</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">opex</span><span class="p">())</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="mf">1e6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>component    carrier        
+Generator    OCGT                884.257438
+             onwind             1346.159208
+             solar               673.717868
+StorageUnit  battery storage            NaN
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -636,6 +1248,26 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites-handling-technology-data-and-costs">Prerequisites: handling technology data and costs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retrieving-time-series-data">Retrieving time series data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#joint-capacity-and-dispatch-optimization">Joint capacity and dispatch optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-run">Model Run</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
