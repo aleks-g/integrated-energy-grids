@@ -64,6 +64,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Introduction to gurobipy" href="../intro-gurobipy.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -126,8 +127,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -183,7 +182,7 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../intro-install.html">Python and Conda</a></li>
 
 
@@ -209,6 +208,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../intro-networkx.html">Introduction to <code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-pypsa.html">Introduction to <code class="docutils literal notranslate"><span class="pre">pypsa</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-gurobipy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">gurobipy</span></code></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Course project</a></li>
+
+
 </ul>
 
     </div>
@@ -453,8 +455,8 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="course-project">
 <h1>Course project<a class="headerlink" href="#course-project" title="Link to this heading">#</a></h1>
 <p>This notebook includes the steps to optimize the capacity and dispatch of generators in a stylized energy system. It has been prepared to serve as a tutorial for a simple PyPSA model representing the energy system in one country, city or region.</p>
-<p>For the (optional) project of the course <a class="reference external" href="https://kurser.dtu.dk/course/2024-2025/46770?menulanguage=en">Integrated Energy Grids</a> you need to deliver a report including the sections described at the end of this notebook.</p>
-<p>Please, review the <a class="reference external" href="https://martavp.github.io/integrated-energy-grids/intro-pypsa.html">PyPSA tutorial</a> before starting this project.</p>
+<p>For the (optional) project of the course <a class="reference external" href="https://kurser.dtu.dk/course/2025-2026/46770?menulanguage=en">Integrated Energy Grids</a> you need to deliver a report including the sections described at the end of this notebook.</p>
+<p>Please, review the <a class="reference external" href="https://aleks-g.github.io/integrated-energy-grids/intro-pypsa.html">PyPSA tutorial</a> before starting this project.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you have not yet set up Python on your computer, you can execute this tutorial in your browser via <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>. Click on the rocket in the top right corner and launch “Colab”. If that doesn’t work download the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file and import it in <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>.</p>
@@ -2260,10 +2262,13 @@ Name: p_nom_opt, dtype: float64
 <section class="tex2jax_ignore mathjax_ignore" id="project-instructions">
 <h1>PROJECT INSTRUCTIONS<a class="headerlink" href="#project-instructions" title="Link to this heading">#</a></h1>
 <p>Based on the previous example, you are asked to carry out the following tasks:</p>
+<p>—- Part 1 —-</p>
 <p>A. Choose a different country/region/city/system and calculate the optimal capacities for renewable and non-renewable generators. You can add as many technologies as you want. Remember to provide a reference for the cost assumptions. Plot the dispatch time series for a week in summer and winter. Plot the annual electricity mix. Use the duration curves or the capacity factor to investigate the contribution of different technologies.</p>
 <p>B. Investigate how sensitive your results are to the interannual variability of solar and wind generation. Plot the average capacity and variability obtained for every generator using different weather years.</p>
 <p>C. Add some storage technology/ies and investigate how they behave and what their impact is on the optimal system configuration. Discuss what strategies your system is using to balance the renewable generation at different time scales (intraday, seasonal, etc.)</p>
 <p>D. Connect your country to at least three neighbouring countries using HVAC lines, making sure that the network includes at least one closed cycle. Look for information on the existing capacities of those interconnectors and set the capacities fixed. Assume a voltage level of 400 kV and a unitary reactance <span class="math notranslate nohighlight">\(x\)</span>=0.1. You can assume that the generation capacities in the neighbouring countries are fixed or co-optimise the whole system. Optimise the whole system, assuming linearised AC power flow (DC approximation) and discuss the results.</p>
+<p>(E. WITH PEN AND PAPER)</p>
+<p>—- Part 2 —-</p>
 <p>F. Investigate how sensitive the optimal capacity mix is to the global CO<span class="math notranslate nohighlight">\(_2\)</span> constraint. E.g., plot the generation mix as a function of the CO<span class="math notranslate nohighlight">\(_2\)</span> constraint that you impose. Search for the CO<span class="math notranslate nohighlight">\(_2\)</span> emissions in your country (today or in 1990) and refer to the emissions allowance for that historical data.</p>
 <p>G. Assume that the countries are now also connected via gas pipelines transporting either H<span class="math notranslate nohighlight">\(_2\)</span> or CH<span class="math notranslate nohighlight">\(_4\)</span>. Use a linear approach to represent gas transport in pipelines. Optimise the network again and discuss your results, including in the discussion which of the two energy transport networks modelled is transporting more energy.</p>
 <p>G. Connect the electricity sector with, at least, another sector( e.g. heating or transport), and co-optimise all the sectors. Discuss your results.</p>
@@ -2380,7 +2385,7 @@ Index([&#39;country a - country b&#39;], dtype=&#39;object&#39;, name=&#39;name&
 </div>
 </div>
 <p><em>HINT 4: You can get inspiration for plotting the flows in the network in the following example</em></p>
-<p><a class="reference external" href="https://pypsa.readthedocs.io/en/latest/examples/flow-plot.html">https://pypsa.readthedocs.io/en/latest/examples/flow-plot.html</a></p>
+<p><a class="reference external" href="https://docs.pypsa.org/latest/user-guide/plotting/static-map/#balances-and-flow">https://docs.pypsa.org/latest/user-guide/plotting/static-map/#balances-and-flow</a></p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -2413,6 +2418,15 @@ Index([&#39;country a - country b&#39;], dtype=&#39;object&#39;, name=&#39;name&
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="../intro-gurobipy.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to <code class="docutils literal notranslate"><span class="pre">gurobipy</span></code></p>
+      </div>
+    </a>
 </div>
                 </footer>
               
