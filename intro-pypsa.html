@@ -578,13 +578,13 @@ document.write(`
 <h2>From structured data to optimisation<a class="headerlink" href="#from-structured-data-to-optimisation" title="Link to this heading">#</a></h2>
 <p>The design principle of PyPSA is that basically each component is associated with a set of variables and constraints that will be added to the optimisation model based on the input data stored for the components.</p>
 <p>For an <em>hourly</em> electricity market simulation, PyPSA will solve an optimisation problem that looks like this</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0994b5c8-6471-498b-ad4a-03782d603360">
-<span class="eqno">(1)<a class="headerlink" href="#equation-0994b5c8-6471-498b-ad4a-03782d603360" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-437c35db-6c6d-4e4d-923a-cfa3ee4318c7">
+<span class="eqno">(1)<a class="headerlink" href="#equation-437c35db-6c6d-4e4d-923a-cfa3ee4318c7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \min_{g_{i,s,t}; f_{\ell,t}; g_{i,r,t,\text{charge}}; g_{i,r,t,\text{discharge}}; e_{i,r,t}} \sum_s o_{s} g_{i,s,t}
 \end{equation}\]</div>
 <p>such that</p>
-<div class="amsmath math notranslate nohighlight" id="equation-383616e1-5102-4b16-a2c0-370bd361eaf4">
-<span class="eqno">(2)<a class="headerlink" href="#equation-383616e1-5102-4b16-a2c0-370bd361eaf4" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-4776aa82-de30-4107-baa3-4a77842cf8d0">
+<span class="eqno">(2)<a class="headerlink" href="#equation-4776aa82-de30-4107-baa3-4a77842cf8d0" title="Permalink to this equation">#</a></span>\[\begin{align}
 0 &amp; \leq g_{i,s,t} \leq \hat{g}_{i,s,t} G_{i,s}  &amp; \text{generation limits : generator} \\
 -P_\ell &amp;\leq p_{\ell,t} \leq P_\ell &amp; \text{transmission limits : line}  \\
 d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{i,r,t,\text{charge}} - \sum_\ell K_{i\ell} p_{\ell,t} &amp; \text{KCL : bus} \\
@@ -621,13 +621,13 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
 <section id="simple-electricity-market-economic-dispatch-example">
 <h2>Simple electricity market (economic dispatch) example<a class="headerlink" href="#simple-electricity-market-economic-dispatch-example" title="Link to this heading">#</a></h2>
 <p>Let’s assume we want to minimise the operational cost of an electricity system representing South Africa and Mozambique subject to generator limits and meeting the loads:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3fc02ee1-d438-45d6-ae0d-f9dc8653d938">
-<span class="eqno">(3)<a class="headerlink" href="#equation-3fc02ee1-d438-45d6-ae0d-f9dc8653d938" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a76ea9eb-942f-499f-aa75-a761d1127247">
+<span class="eqno">(3)<a class="headerlink" href="#equation-a76ea9eb-942f-499f-aa75-a761d1127247" title="Permalink to this equation">#</a></span>\[\begin{equation}
   \min_{g_s} \sum_s o_s g_s
 \end{equation}\]</div>
 <p>such that</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e9a6fe2e-0fb4-4b19-89b0-ff8d59ff1c98">
-<span class="eqno">(4)<a class="headerlink" href="#equation-e9a6fe2e-0fb4-4b19-89b0-ff8d59ff1c98" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-8eb9b8d5-1f6c-4265-8c1d-4f471b52e59b">
+<span class="eqno">(4)<a class="headerlink" href="#equation-8eb9b8d5-1f6c-4265-8c1d-4f471b52e59b" title="Permalink to this equation">#</a></span>\[\begin{align}
   \sum_s g_s &amp;= d \\
   g_s &amp;\leq G_s \\
   g_s &amp;\geq 0 
@@ -705,7 +705,7 @@ Academic license - for non-commercial use only - expires 2027-01-20
 </div>
 </div>
 <p>The second component we need are buses. <strong>Buses</strong> are the fundamental nodes of the network, to which all other components like loads, generators and transmission lines attach. They enforce energy conservation for all elements feeding in and out of it (i.e. Kirchhoff’s Current Law).</p>
-<img src="https://pypsa.readthedocs.io/en/latest/_images/buses.png" width="500px" />
+<img src="https://docs.pypsa.org/latest/assets/images/buses.png" width="500px" />
 <p>Components can be added to the network <code class="docutils literal notranslate"><span class="pre">n</span></code> using the <code class="docutils literal notranslate"><span class="pre">n.add()</span></code> function. It takes the component name as a first argument, the name of the component as a second argument and possibly further parameters as keyword arguments. Let’s use this function, to add buses for each country to our network:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
