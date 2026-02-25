@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Problem 5.1 &#8212; integrated-energy-grids</title>
+    <title>Problem 5.4 &#8212; integrated-energy-grids</title>
   
   
   
@@ -60,7 +60,7 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Problems/Problem06.01';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Problems/Problem06.04';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -263,7 +263,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/aleks-g/integrated-energy-grids/blob/main/integrated-energy-grids/Problems/Problem06.01.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/aleks-g/integrated-energy-grids/blob/main/integrated-energy-grids/Problems/Problem06.04.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -311,7 +311,7 @@
       
       
       
-      <li><a href="https://github.com/aleks-g/integrated-energy-grids/issues/new?title=Issue%20on%20page%20%2FProblems/Problem06.01.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/aleks-g/integrated-energy-grids/issues/new?title=Issue%20on%20page%20%2FProblems/Problem06.04.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -341,7 +341,7 @@
       
       
       
-      <li><a href="../_sources/Problems/Problem06.01.ipynb" target="_blank"
+      <li><a href="../_sources/Problems/Problem06.04.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -423,7 +423,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Problem 5.1</h1>
+    <h1>Problem 5.4</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -437,14 +437,14 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="problem-5-1">
-<h1>Problem 5.1<a class="headerlink" href="#problem-5-1" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="problem-5-4">
+<h1>Problem 5.4<a class="headerlink" href="#problem-5-4" title="Link to this heading">#</a></h1>
 <p><strong>Integrated Energy Grids</strong></p>
-<p><strong>Problem 5.1</strong></p>
-<p><strong>Assume we have three buses (Denmark, Netherlands and Germany) with nominal voltage <span class="math notranslate nohighlight">\(V_{nom}\)</span>= 2000 V connected by three transmission lines. In the  bus, Denmark there is a wind generator that is producing 100 MW. In the bus Germany, there is a load that is consuming 100 MW of active power and 100 MVAR of reactive power. The transmission lines DK-NL and NL-GE have a unitary resistance <span class="math notranslate nohighlight">\(r\)</span>=0.01 and reactance <span class="math notranslate nohighlight">\(x\)</span>=0.1. The transmission lines DK-GE has a unitary resistance <span class="math notranslate nohighlight">\(r\)</span>=0.02 and reactance <span class="math notranslate nohighlight">\(x\)</span>=0.1. Using Python for Power System Analysis (PyPSA):</strong></p>
-<p><strong>a) Calculate the power flows along the transmission lines using AC power flow representation.</strong></p>
-<p><strong>b) Calculate the power flows along the transmission lines using a linearized approximation (also known as DC optimal power flow) and discuss the results.</strong></p>
-<p><em>Hint: It is recommended to follow the <a class="reference external" href="https://martavp.github.io/integrated-energy-grids/intro-pypsa.html#">PyPSA tutorial</a> before trying this problem.</em></p>
+<p><strong>Problem 5.4</strong></p>
+<p><strong>Assume we have three buses (Denmark, Sweden, and Norway) with nominal voltage <span class="math notranslate nohighlight">\(V_{nom}\)</span>= 2000 V connected by three transmission lines. In each of the buses, there is a gas power generator whose variable cost is 50 EUR/MWh and installed capacity is 50 MW. In the Denmark bus, there is a wind generator whose variable cost is zero and whose installed capacity is 200 MW. The transmission lines have a unitary resistance <span class="math notranslate nohighlight">\(r\)</span>=0.01 and reactance <span class="math notranslate nohighlight">\(x\)</span>=0.1, and nominal capacity <span class="math notranslate nohighlight">\(S_{nom}=100\)</span> VA. The demand is 50 MW for Denmark and Sweden and 30 MW for Norway. Using Python for Power System Analysis (PyPSA):</strong></p>
+<p><strong>a) Calculate the optimal dispatch that minimizes the total system cost, the energy produced by each generator, and the power flows along the transmission lines using AC power flow representation.</strong></p>
+<p><strong>b) Calculate the optimal dispatch that minimizes the total system cost,  the energy produced by each generator, and the power flows along the transmission lines using a linearized approximation (also known as DC optimal power flow).</strong></p>
+<p><strong>c) Calculate the optimal dispatch that minimizes the total system cost,  the energy produced by each generator, and the power flows along the transmission lines using the Net Transfer Capacity (NTC) approach for the transmission lines and discuss the results.</strong></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you have not yet set up Python on your computer, you can execute this tutorial in your browser via <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>. Click on the rocket in the top right corner and launch “Colab”. If that doesn’t work download the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file and import it in <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>.</p>
@@ -468,8 +468,7 @@ Academic license - for non-commercial use only - expires 2027-01-20
 </div>
 </div>
 </div>
-<p>We start by creating the network object and adding the three buses corresponding to Denmark, Netherlands and Germany.
-The added buses can be printed using network.buses</p>
+<p>We start by creating the network object and adding the three buses corresponding to Denmark, Sweden, and Norway.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span> <span class="o">=</span> <span class="n">pypsa</span><span class="o">.</span><span class="n">Network</span><span class="p">()</span>
@@ -479,9 +478,8 @@ The added buses can be printed using network.buses</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Bus&quot;</span><span class="p">,</span> <span class="s2">&quot;bus Denmark&quot;</span><span class="p">,</span> <span class="n">v_nom</span><span class="o">=</span><span class="mf">2000.0</span><span class="p">)</span>
-<span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Bus&quot;</span><span class="p">,</span> <span class="s2">&quot;bus Netherlands&quot;</span><span class="p">,</span> <span class="n">v_nom</span><span class="o">=</span><span class="mf">2000.0</span><span class="p">)</span>
-<span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Bus&quot;</span><span class="p">,</span> <span class="s2">&quot;bus Germany&quot;</span><span class="p">,</span> <span class="n">v_nom</span><span class="o">=</span><span class="mf">2000.0</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Denmark&quot;</span><span class="p">,</span> <span class="s2">&quot;Sweden&quot;</span><span class="p">,</span> <span class="s2">&quot;Norway&quot;</span><span class="p">]:</span>
+    <span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Bus&quot;</span><span class="p">,</span> <span class="s2">&quot;bus </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node</span><span class="p">),</span> <span class="n">v_nom</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
 
 <span class="n">network</span><span class="o">.</span><span class="n">buses</span>
 </pre></div>
@@ -555,7 +553,7 @@ The added buses can be printed using network.buses</p>
       <td></td>
     </tr>
     <tr>
-      <th>bus Netherlands</th>
+      <th>bus Sweden</th>
       <td>2000.0</td>
       <td></td>
       <td>0.0</td>
@@ -571,7 +569,7 @@ The added buses can be printed using network.buses</p>
       <td></td>
     </tr>
     <tr>
-      <th>bus Germany</th>
+      <th>bus Norway</th>
       <td>2000.0</td>
       <td></td>
       <td>0.0</td>
@@ -593,9 +591,9 @@ The added buses can be printed using network.buses</p>
 <p>We add the three lines connecting the buses</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Line&quot;</span><span class="p">,</span><span class="s2">&quot; line DK-NL&quot;</span><span class="p">,</span> <span class="n">bus0</span> <span class="o">=</span> <span class="s2">&quot;bus Denmark&quot;</span><span class="p">,</span> <span class="n">bus1</span><span class="o">=</span> <span class="s2">&quot;bus Netherlands&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
-<span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Line&quot;</span><span class="p">,</span><span class="s2">&quot; line DK-DE&quot;</span><span class="p">,</span> <span class="n">bus0</span> <span class="o">=</span> <span class="s2">&quot;bus Denmark&quot;</span><span class="p">,</span> <span class="n">bus1</span><span class="o">=</span> <span class="s2">&quot;bus Germany&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
-<span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Line&quot;</span><span class="p">,</span><span class="s2">&quot; line NL-DE&quot;</span><span class="p">,</span> <span class="n">bus0</span> <span class="o">=</span> <span class="s2">&quot;bus Netherlands&quot;</span><span class="p">,</span> <span class="n">bus1</span><span class="o">=</span> <span class="s2">&quot;bus Germany&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Line&quot;</span><span class="p">,</span> <span class="s2">&quot;line DK-SW&quot;</span><span class="p">,</span> <span class="n">bus0</span> <span class="o">=</span> <span class="s2">&quot;bus Denmark&quot;</span><span class="p">,</span> <span class="n">bus1</span> <span class="o">=</span> <span class="s2">&quot;bus Sweden&quot;</span><span class="p">,</span> <span class="n">s_nom</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Line&quot;</span><span class="p">,</span> <span class="s2">&quot;line DK-NO&quot;</span><span class="p">,</span> <span class="n">bus0</span> <span class="o">=</span> <span class="s2">&quot;bus Denmark&quot;</span><span class="p">,</span> <span class="n">bus1</span> <span class="o">=</span> <span class="s2">&quot;bus Norway&quot;</span><span class="p">,</span> <span class="n">s_nom</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Line&quot;</span><span class="p">,</span> <span class="s2">&quot;line SW-NO&quot;</span><span class="p">,</span> <span class="n">bus0</span> <span class="o">=</span> <span class="s2">&quot;bus Sweden&quot;</span><span class="p">,</span>  <span class="n">bus1</span> <span class="o">=</span> <span class="s2">&quot;bus Norway&quot;</span><span class="p">,</span> <span class="n">s_nom</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
 
 <span class="n">network</span><span class="o">.</span><span class="n">lines</span>
 </pre></div>
@@ -669,15 +667,15 @@ The added buses can be printed using network.buses</p>
   </thead>
   <tbody>
     <tr>
-      <th>line DK-NL</th>
+      <th>line DK-SW</th>
       <td>bus Denmark</td>
-      <td>bus Netherlands</td>
+      <td>bus Sweden</td>
       <td></td>
       <td>0.1</td>
       <td>0.01</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
+      <td>100.0</td>
       <td>0.0</td>
       <td>False</td>
       <td>...</td>
@@ -693,15 +691,15 @@ The added buses can be printed using network.buses</p>
       <td>0.0</td>
     </tr>
     <tr>
-      <th>line DK-DE</th>
+      <th>line DK-NO</th>
       <td>bus Denmark</td>
-      <td>bus Germany</td>
+      <td>bus Norway</td>
       <td></td>
       <td>0.1</td>
-      <td>0.02</td>
+      <td>0.01</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
+      <td>100.0</td>
       <td>0.0</td>
       <td>False</td>
       <td>...</td>
@@ -717,15 +715,15 @@ The added buses can be printed using network.buses</p>
       <td>0.0</td>
     </tr>
     <tr>
-      <th>line NL-DE</th>
-      <td>bus Netherlands</td>
-      <td>bus Germany</td>
+      <th>line SW-NO</th>
+      <td>bus Sweden</td>
+      <td>bus Norway</td>
       <td></td>
       <td>0.1</td>
       <td>0.01</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
+      <td>100.0</td>
       <td>0.0</td>
       <td>False</td>
       <td>...</td>
@@ -745,13 +743,18 @@ The added buses can be printed using network.buses</p>
 <p>3 rows × 32 columns</p>
 </div></div></div>
 </div>
-<p>Add a generator at the Denmark bus.</p>
+<p>We add the generators</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Generator&quot;</span><span class="p">,</span> 
-            <span class="s2">&quot;generator Denmark&quot;</span><span class="p">,</span> 
-            <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;bus Denmark&quot;</span><span class="p">,</span>
-            <span class="n">p_set</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Denmark&quot;</span><span class="p">,</span> <span class="s2">&quot;Sweden&quot;</span><span class="p">,</span> <span class="s2">&quot;Norway&quot;</span><span class="p">]:</span>
+    <span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Generator&quot;</span><span class="p">,</span> <span class="s2">&quot;gas </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node</span><span class="p">),</span> <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;bus </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node</span><span class="p">),</span> 
+                <span class="n">p_nom</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> 
+                <span class="n">marginal_cost</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span> <span class="c1">#EUR/MWh_elec    </span>
+<span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Generator&quot;</span><span class="p">,</span> 
+            <span class="s2">&quot;wind Denmark&quot;</span><span class="p">,</span> 
+            <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;bus Denmark&quot;</span><span class="p">,</span> 
+            <span class="n">p_nom</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> 
+            <span class="n">marginal_cost</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">network</span><span class="o">.</span><span class="n">generators</span>
 </pre></div>
 </div>
@@ -824,11 +827,83 @@ The added buses can be printed using network.buses</p>
   </thead>
   <tbody>
     <tr>
-      <th>generator Denmark</th>
+      <th>gas Denmark</th>
       <td>bus Denmark</td>
       <td>PQ</td>
       <td></td>
+      <td>50.0</td>
       <td>0.0</td>
+      <td>False</td>
+      <td>0.0</td>
+      <td>inf</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>gas Sweden</th>
+      <td>bus Sweden</td>
+      <td>PQ</td>
+      <td></td>
+      <td>50.0</td>
+      <td>0.0</td>
+      <td>False</td>
+      <td>0.0</td>
+      <td>inf</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>gas Norway</th>
+      <td>bus Norway</td>
+      <td>PQ</td>
+      <td></td>
+      <td>50.0</td>
+      <td>0.0</td>
+      <td>False</td>
+      <td>0.0</td>
+      <td>inf</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>wind Denmark</th>
+      <td>bus Denmark</td>
+      <td>PQ</td>
+      <td></td>
+      <td>200.0</td>
       <td>0.0</td>
       <td>False</td>
       <td>0.0</td>
@@ -849,31 +924,19 @@ The added buses can be printed using network.buses</p>
     </tr>
   </tbody>
 </table>
-<p>1 rows × 38 columns</p>
+<p>4 rows × 38 columns</p>
 </div></div></div>
 </div>
+<p>We add the loads.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">generators</span><span class="o">.</span><span class="n">p_set</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>name
-generator Denmark    100.0
-Name: p_set, dtype: float64
-</pre></div>
-</div>
-</div>
-</div>
-<p>Add a load at the Germany bus</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Load&quot;</span><span class="p">,</span> 
-            <span class="s2">&quot;load Germany&quot;</span><span class="p">,</span> 
-            <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;bus Germany&quot;</span><span class="p">,</span> 
-            <span class="n">p_set</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-            <span class="n">q_set</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Denmark&quot;</span><span class="p">,</span> <span class="s2">&quot;Sweden&quot;</span><span class="p">]:</span>
+    <span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Load&quot;</span><span class="p">,</span> <span class="s2">&quot;load </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node</span><span class="p">),</span> 
+                <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;bus </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node</span><span class="p">),</span> 
+                <span class="n">p_set</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Load&quot;</span><span class="p">,</span> <span class="s2">&quot;load Norway&quot;</span><span class="p">,</span> 
+                <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;bus Norway&quot;</span><span class="p">,</span> 
+                <span class="n">p_set</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 <span class="n">network</span><span class="o">.</span><span class="n">loads</span>
 </pre></div>
 </div>
@@ -918,12 +981,32 @@ Name: p_set, dtype: float64
   </thead>
   <tbody>
     <tr>
-      <th>load Germany</th>
-      <td>bus Germany</td>
+      <th>load Denmark</th>
+      <td>bus Denmark</td>
       <td></td>
       <td></td>
-      <td>100.0</td>
-      <td>100.0</td>
+      <td>50.0</td>
+      <td>0.0</td>
+      <td>-1.0</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>load Sweden</th>
+      <td>bus Sweden</td>
+      <td></td>
+      <td></td>
+      <td>50.0</td>
+      <td>0.0</td>
+      <td>-1.0</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>load Norway</th>
+      <td>bus Norway</td>
+      <td></td>
+      <td></td>
+      <td>30.0</td>
+      <td>0.0</td>
       <td>-1.0</td>
       <td>True</td>
     </tr>
@@ -931,15 +1014,128 @@ Name: p_set, dtype: float64
 </table>
 </div></div></div>
 </div>
-<p>We can now solve the non-linear power flow using a Newton-Raphson method.</p>
+<p>We optimize searching for the minimum system cost.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">pf</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+<span class="c1">#network.optimize(solver=&#39;gurobi&#39;, assign_all_duals=True)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.power_flow:Performing non-linear load-flow on AC sub-network &lt;pypsa.networks.SubNetwork object at 0x3031c3770&gt; for snapshots Index([&#39;now&#39;], dtype=&#39;object&#39;, name=&#39;snapshot&#39;)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.consistency:The following buses have carriers which are not defined:
+Index([&#39;bus Denmark&#39;, &#39;bus Sweden&#39;, &#39;bus Norway&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
+WARNING:pypsa.consistency:The following lines have carriers which are not defined:
+Index([&#39;line DK-SW&#39;, &#39;line DK-NO&#39;, &#39;line SW-NO&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
+INFO:linopy.model: Solve problem using Highs solver
+INFO:linopy.io: Writing time: 0.09s
+INFO:linopy.constants: Optimization successful: 
+Status: ok
+Termination condition: optimal
+Solution: 7 primals, 18 duals
+Objective: 1.30e+03
+Solver model: available
+Solver message: Optimal
+
+INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-fix-p-lower, Generator-fix-p-upper, Line-fix-s-lower, Line-fix-s-upper, Kirchhoff-Voltage-Law were not assigned to the network.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.12.0 (git hash: n/a): Copyright (c) 2025 HiGHS under MIT licence terms
+LP linopy-problem-00lvaueh has 18 rows; 7 cols; 27 nonzeros
+Coefficient ranges:
+  Matrix  [3e-03, 1e+00]
+  Cost    [1e+01, 5e+01]
+  Bound   [0e+00, 0e+00]
+  RHS     [3e+01, 2e+02]
+Presolving model
+4 rows, 7 cols, 13 nonzeros  0s
+Dependent equations search running on 4 equations with time limit of 1000.00s
+Dependent equations search removed 0 rows and 0 nonzeros in 0.00s (limit = 1000.00s)
+4 rows, 7 cols, 13 nonzeros  0s
+Presolve reductions: rows 4(-14); columns 7(-0); nonzeros 13(-14) 
+Solving the presolved LP
+Using EKK dual simplex solver - serial
+  Iteration        Objective     Infeasibilities num(sum)
+          0    -6.1582334282e-06 Pr: 4(74.75) 0s
+          4     1.3000000000e+03 Pr: 0(0) 0s
+
+Performed postsolve
+Solving the original LP from the solution after postsolve
+
+Model name          : linopy-problem-00lvaueh
+Model status        : Optimal
+Simplex   iterations: 4
+Objective value     :  1.3000000000e+03
+P-D objective error :  0.0000000000e+00
+HiGHS run time      :          0.00
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;ok&#39;, &#39;optimal&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we can look at what is the optimal dispatch form every genenerator. As expected, the wind generator is producing power to supply the demand in every node.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">generators_t</span><span class="o">.</span><span class="n">p</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>name</th>
+      <th>gas Denmark</th>
+      <th>gas Sweden</th>
+      <th>gas Norway</th>
+      <th>wind Denmark</th>
+    </tr>
+    <tr>
+      <th>snapshot</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>now</th>
+      <td>-0.0</td>
+      <td>-0.0</td>
+      <td>-0.0</td>
+      <td>130.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We can see the optimal dispatch in the generators and then solve the non-linear power flow using a Newton-Raphson method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">generators_t</span><span class="o">.</span><span class="n">p_set</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">generators_t</span><span class="o">.</span><span class="n">p</span>
+<span class="n">network</span><span class="o">.</span><span class="n">pf</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.power_flow:Performing non-linear load-flow on AC sub-network &lt;pypsa.networks.SubNetwork object at 0x3017ab750&gt; for snapshots Index([&#39;now&#39;], dtype=&#39;object&#39;, name=&#39;snapshot&#39;)
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;n_iter&#39;: name      0
@@ -947,7 +1143,7 @@ Name: p_set, dtype: float64
  now       2,
  &#39;error&#39;: name                 0
  snapshot              
- now       8.204964e-09,
+ now       7.362638e-09,
  &#39;converged&#39;: name         0
  snapshot      
  now       True}
@@ -981,9 +1177,9 @@ Name: p_set, dtype: float64
   <thead>
     <tr style="text-align: right;">
       <th>name</th>
-      <th>line DK-NL</th>
-      <th>line DK-DE</th>
-      <th>line NL-DE</th>
+      <th>line DK-SW</th>
+      <th>line DK-NO</th>
+      <th>line SW-NO</th>
     </tr>
     <tr>
       <th>snapshot</th>
@@ -995,15 +1191,15 @@ Name: p_set, dtype: float64
   <tbody>
     <tr>
       <th>now</th>
-      <td>31.441059</td>
-      <td>68.558996</td>
-      <td>31.441054</td>
+      <td>43.333338</td>
+      <td>36.66667</td>
+      <td>-6.666667</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-<p>We can also check the voltage angles on the buses. We need to apply a conversion factor if we want to show them in degrees.</p>
+<p>We can also check the voltage angles on the buses</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">buses_t</span><span class="o">.</span><span class="n">v_ang</span> <span class="o">*</span> <span class="mi">180</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
@@ -1030,8 +1226,8 @@ Name: p_set, dtype: float64
     <tr style="text-align: right;">
       <th>name</th>
       <th>bus Denmark</th>
-      <th>bus Netherlands</th>
-      <th>bus Germany</th>
+      <th>bus Sweden</th>
+      <th>bus Norway</th>
     </tr>
     <tr>
       <th>snapshot</th>
@@ -1044,14 +1240,14 @@ Name: p_set, dtype: float64
     <tr>
       <th>now</th>
       <td>0.0</td>
-      <td>-0.00004</td>
-      <td>-0.00008</td>
+      <td>-0.000062</td>
+      <td>-0.000053</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-<p>and their per-unit magnitudes</p>
+<p>and their per-unit mangitudes</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">buses_t</span><span class="o">.</span><span class="n">v_mag_pu</span>
@@ -1078,8 +1274,8 @@ Name: p_set, dtype: float64
     <tr style="text-align: right;">
       <th>name</th>
       <th>bus Denmark</th>
-      <th>bus Netherlands</th>
-      <th>bus Germany</th>
+      <th>bus Sweden</th>
+      <th>bus Norway</th>
     </tr>
     <tr>
       <th>snapshot</th>
@@ -1092,15 +1288,15 @@ Name: p_set, dtype: float64
     <tr>
       <th>now</th>
       <td>1.0</td>
-      <td>0.999999</td>
-      <td>0.999998</td>
+      <td>1.0</td>
+      <td>1.0</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-<p><strong>b) Calculate the power flows along the transmission lines using a linearized approximation (DC optimal power flow).</strong></p>
-<p>We can use linear power flows and get a similar solution</p>
+<p><strong>b) Calculate the optimal dispatch that minimizes the total system cost,  the energy produced by each generator, and the power flows along the transmission lines using a linearized approximation (also known as DC optimal power flow)</strong></p>
+<p>In this case, since the voltage angles are very small, the linear power flow should be a good approximation. We can calculate the power flows in the line using the linear power flow (lpf) and check that we obtained a very similar result.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">lpf</span><span class="p">()</span>
@@ -1108,7 +1304,7 @@ Name: p_set, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.power_flow:Performing linear load-flow on AC sub-network &lt;pypsa.networks.SubNetwork object at 0x30319f610&gt; for snapshot(s) Index([&#39;now&#39;], dtype=&#39;object&#39;, name=&#39;snapshot&#39;)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.power_flow:Performing linear load-flow on AC sub-network &lt;pypsa.networks.SubNetwork object at 0x3017ab750&gt; for snapshot(s) Index([&#39;now&#39;], dtype=&#39;object&#39;, name=&#39;snapshot&#39;)
 </pre></div>
 </div>
 </div>
@@ -1138,9 +1334,9 @@ Name: p_set, dtype: float64
   <thead>
     <tr style="text-align: right;">
       <th>name</th>
-      <th>line DK-NL</th>
-      <th>line DK-DE</th>
-      <th>line NL-DE</th>
+      <th>line DK-SW</th>
+      <th>line DK-NO</th>
+      <th>line SW-NO</th>
     </tr>
     <tr>
       <th>snapshot</th>
@@ -1152,15 +1348,200 @@ Name: p_set, dtype: float64
   <tbody>
     <tr>
       <th>now</th>
-      <td>33.333333</td>
-      <td>66.666667</td>
-      <td>33.333333</td>
+      <td>43.333333</td>
+      <td>36.666667</td>
+      <td>-6.666667</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-<p>In this simple case, the solution that we obtain are very similar.</p>
+<p><strong>c) Calculate the optimal dispatch that minimizes the total system cost,  the energy produced by each generator, and the power flows along the transmission lines using Net Transfer Capacity (NTC) approach for the transmission lines and discuss the results.</strong></p>
+<p>We can create the problem again and this time use links to represent lines using only their Net Transfer Capacities.
+By selecting p_min_pu=-1 we make the link reversible.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span> <span class="o">=</span> <span class="n">pypsa</span><span class="o">.</span><span class="n">Network</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Denmark&quot;</span><span class="p">,</span> <span class="s2">&quot;Sweden&quot;</span><span class="p">,</span> <span class="s2">&quot;Norway&quot;</span><span class="p">]:</span>
+    <span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Bus&quot;</span><span class="p">,</span> <span class="s2">&quot;bus </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node</span><span class="p">),</span> <span class="n">v_nom</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
+
+<span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Link&quot;</span><span class="p">,</span><span class="s2">&quot;line DK-SW&quot;</span><span class="p">,</span> <span class="n">bus0</span> <span class="o">=</span> <span class="s2">&quot;bus Denmark&quot;</span><span class="p">,</span> <span class="n">bus1</span> <span class="o">=</span> <span class="s2">&quot;bus Sweden&quot;</span><span class="p">,</span> <span class="n">p_nom</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">p_min_pu</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Link&quot;</span><span class="p">,</span><span class="s2">&quot;line DK-NO&quot;</span><span class="p">,</span> <span class="n">bus0</span> <span class="o">=</span> <span class="s2">&quot;bus Denmark&quot;</span><span class="p">,</span> <span class="n">bus1</span> <span class="o">=</span> <span class="s2">&quot;bus Norway&quot;</span><span class="p">,</span> <span class="n">p_nom</span> <span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">p_min_pu</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Link&quot;</span><span class="p">,</span><span class="s2">&quot;line SW-NO&quot;</span><span class="p">,</span> <span class="n">bus0</span> <span class="o">=</span> <span class="s2">&quot;bus Sweden&quot;</span><span class="p">,</span> <span class="n">bus1</span> <span class="o">=</span> <span class="s2">&quot;bus Norway&quot;</span><span class="p">,</span> <span class="n">p_nom</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">p_min_pu</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Denmark&quot;</span><span class="p">,</span> <span class="s2">&quot;Sweden&quot;</span><span class="p">]:</span>
+    <span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Load&quot;</span><span class="p">,</span> <span class="s2">&quot;load </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node</span><span class="p">),</span> 
+                <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;bus </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node</span><span class="p">),</span> 
+                <span class="n">p_set</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Load&quot;</span><span class="p">,</span> <span class="s2">&quot;load Norway&quot;</span><span class="p">,</span> 
+                <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;bus Norway&quot;</span><span class="p">,</span> 
+                <span class="n">p_set</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">network</span><span class="o">.</span><span class="n">loads</span>
+
+<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Denmark&quot;</span><span class="p">,</span> <span class="s2">&quot;Sweden&quot;</span><span class="p">,</span> <span class="s2">&quot;Norway&quot;</span><span class="p">]:</span>
+    <span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Generator&quot;</span><span class="p">,</span> <span class="s2">&quot;gas </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node</span><span class="p">),</span> <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;bus </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node</span><span class="p">),</span> 
+                <span class="n">p_nom</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> 
+                <span class="n">marginal_cost</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span> <span class="c1">#EUR/MWh_elec    </span>
+<span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Generator&quot;</span><span class="p">,</span> <span class="s2">&quot;wind Denmark&quot;</span><span class="p">,</span> <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;bus Denmark&quot;</span><span class="p">,</span> 
+            <span class="n">p_nom</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> 
+            <span class="n">marginal_cost</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+
+<span class="n">network</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.consistency:The following buses have carriers which are not defined:
+Index([&#39;bus Denmark&#39;, &#39;bus Sweden&#39;, &#39;bus Norway&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
+WARNING:pypsa.consistency:The following links have carriers which are not defined:
+Index([&#39;line DK-SW&#39;, &#39;line DK-NO&#39;, &#39;line SW-NO&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
+INFO:linopy.model: Solve problem using Highs solver
+INFO:linopy.io: Writing time: 0.04s
+INFO:linopy.constants: Optimization successful: 
+Status: ok
+Termination condition: optimal
+Solution: 7 primals, 17 duals
+Objective: 1.30e+03
+Solver model: available
+Solver message: Optimal
+
+INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-fix-p-lower, Generator-fix-p-upper, Link-fix-p-lower, Link-fix-p-upper were not assigned to the network.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.12.0 (git hash: n/a): Copyright (c) 2025 HiGHS under MIT licence terms
+LP linopy-problem-tky2fylv has 17 rows; 7 cols; 24 nonzeros
+Coefficient ranges:
+  Matrix  [1e+00, 1e+00]
+  Cost    [1e+01, 5e+01]
+  Bound   [0e+00, 0e+00]
+  RHS     [3e+01, 2e+02]
+Presolving model
+3 rows, 7 cols, 10 nonzeros  0s
+Dependent equations search running on 3 equations with time limit of 1000.00s
+Dependent equations search removed 0 rows and 0 nonzeros in 0.00s (limit = 1000.00s)
+3 rows, 7 cols, 10 nonzeros  0s
+Presolve reductions: rows 3(-14); columns 7(-0); nonzeros 10(-14) 
+Solving the presolved LP
+Using EKK dual simplex solver - serial
+  Iteration        Objective     Infeasibilities num(sum)
+          0    -3.5008301912e-05 Pr: 3(470) 0s
+          5     1.3000000000e+03 Pr: 0(0) 0s
+
+Performed postsolve
+Solving the original LP from the solution after postsolve
+
+Model name          : linopy-problem-tky2fylv
+Model status        : Optimal
+Simplex   iterations: 5
+Objective value     :  1.3000000000e+03
+P-D objective error :  0.0000000000e+00
+HiGHS run time      :          0.00
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;ok&#39;, &#39;optimal&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">generators_t</span><span class="o">.</span><span class="n">p</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>name</th>
+      <th>gas Denmark</th>
+      <th>gas Sweden</th>
+      <th>gas Norway</th>
+      <th>wind Denmark</th>
+    </tr>
+    <tr>
+      <th>snapshot</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>now</th>
+      <td>-0.0</td>
+      <td>-0.0</td>
+      <td>-0.0</td>
+      <td>130.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">links_t</span><span class="o">.</span><span class="n">p0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>name</th>
+      <th>line DK-SW</th>
+      <th>line DK-NO</th>
+      <th>line SW-NO</th>
+    </tr>
+    <tr>
+      <th>snapshot</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>now</th>
+      <td>100.0</td>
+      <td>-20.0</td>
+      <td>50.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>In this case, the power flows are also compatible with the nodal balances, but they are significantly different from those obtained using AC power flow or linearized AC power flow to represent the power flowing through the different lines.</p>
 </section>
 
     <script type="text/x-thebe-config">

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Problem 7.2 &#8212; integrated-energy-grids</title>
+    <title>Problem 6.2 &#8212; integrated-energy-grids</title>
   
   
   
@@ -423,7 +423,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Problem 7.2</h1>
+    <h1>Problem 6.2</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -437,17 +437,19 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="problem-7-2">
-<h1>Problem 7.2<a class="headerlink" href="#problem-7-2" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="problem-6-2">
+<h1>Problem 6.2<a class="headerlink" href="#problem-6-2" title="Link to this heading">#</a></h1>
 <p><strong>Integrated Energy Grids</strong></p>
-<p><strong>Problem 7.2</strong></p>
-<p><em>Note: This problem is similar to 7.1 but now it assumes that the mass flow in the district heating network is variable.</em></p>
-<p><strong>A district heating system is used to transport heat generated using a heat pump to two distant buildings. The pipeline diameter is 0.5 m, the supply temperature is <span class="math notranslate nohighlight">\(T^S\)</span>=80<span class="math notranslate nohighlight">\(^{\circ}\)</span>C and the return temperature is <span class="math notranslate nohighlight">\(T^R\)</span>=40<span class="math notranslate nohighlight">\(^{\circ}\)</span>C. Assume the mass flow to be constant and that the heat losses in the pipelines due to dissipation to the ambient can be neglected.</strong></p>
-<p><strong>The heat transfer coefficient of building A is <span class="math notranslate nohighlight">\(U_A\)</span> = 2 MW/k, the heat transfer coefficient of building B is <span class="math notranslate nohighlight">\(U_B\)</span> = 3 MW/k, the ambient temperature is 5<span class="math notranslate nohighlight">\(^{\circ}\)</span>C and the interior comfort temperature of the buildings must be 20<span class="math notranslate nohighlight">\(^{\circ}\)</span>C.</strong></p>
-<p><strong>Calculate the mass flow needed at the heat exchanger that serves every building, assuming that the input and output temperature correspond to <span class="math notranslate nohighlight">\(T^S\)</span> and <span class="math notranslate nohighlight">\(T^R\)</span></strong>.</p>
+<p><strong>Problem 6.2</strong></p>
+<p><strong>Let us assume that the countries in Problem 6.1 are considering repurposing their methane gas network into a hydrogen network. In order to run the existing pipelines with hydrogen, the pressure needs to be reduced to <span class="math notranslate nohighlight">\(P\)</span>=40 bar, and the average flow velocity can be increased to <span class="math notranslate nohighlight">\(u\)</span> = 30 m/s. Calculate the capacity of every pipeline (in MW), and relative to their initial design when they transported methane gas.</strong></p>
+<p><strong>The energy content of <span class="math notranslate nohighlight">\(H_2\)</span> is 120 GJ/tonne. To calculate the speed of sound in hydrogen <span class="math notranslate nohighlight">\(c\)</span>, assume the universal gas constant <span class="math notranslate nohighlight">\(R\)</span>=8.314 J/molK, the molar mass of hydrogen <span class="math notranslate nohighlight">\(M\)</span>=2 g/mol, compression factor <span class="math notranslate nohighlight">\(Z\)</span>=1.03, and temperature T=25<span class="math notranslate nohighlight">\(^{\circ}\)</span>C.</strong></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you have not yet set up Python on your computer, you can execute this tutorial in your browser via <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>. Click on the rocket in the top right corner and launch “Colab”. If that doesn’t work download the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file and import it in <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>.</p>
+<p>Then install the following packages by executing the following command in a Jupyter cell at the top of the notebook.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>!pip<span class="w"> </span>install<span class="w"> </span>numpy
+</pre></div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -456,50 +458,131 @@ document.write(`
 </div>
 </div>
 </div>
-<p>We can calculate the rate of heat extracted in every building as</p>
-<p><span class="math notranslate nohighlight">\(q_{A,B}=U_{A,B}(T_{indoor}-T_{ambient})\)</span></p>
+<p>For methane, the cross-sectional area <span class="math notranslate nohighlight">\(A\)</span> and the speed of sound in gas <span class="math notranslate nohighlight">\(c\)</span> can be calculated as</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T_ind</span> <span class="o">=</span> <span class="mi">20</span> <span class="c1">#C</span>
-<span class="n">T_amb</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1">#C</span>
-<span class="n">U_A</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># MW/K</span>
-<span class="n">U_B</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1"># MW/K</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="mf">0.6</span> <span class="c1"># m</span>
+<span class="n">u</span> <span class="o">=</span> <span class="mi">15</span> <span class="c1"># m/s</span>
+<span class="n">P</span> <span class="o">=</span> <span class="mi">50</span><span class="o">*</span><span class="mi">100000</span> <span class="c1">#Pa</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="mf">1.31</span>
+<span class="n">R</span> <span class="o">=</span> <span class="mf">8.314</span> <span class="c1"># J/molK</span>
+<span class="n">M</span> <span class="o">=</span> <span class="mf">0.016</span> <span class="c1"># Kg/mol</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">273</span><span class="o">+</span><span class="mi">25</span> <span class="c1"># K</span>
+<span class="n">e</span> <span class="o">=</span> <span class="mi">50</span> <span class="c1"># GJ/t or MJ/kg</span>
 
-<span class="n">q_A</span> <span class="o">=</span> <span class="n">U_A</span><span class="o">*</span><span class="p">(</span><span class="n">T_ind</span><span class="o">-</span><span class="n">T_amb</span><span class="p">)</span>
-<span class="n">q_B</span> <span class="o">=</span> <span class="n">U_B</span><span class="o">*</span><span class="p">(</span><span class="n">T_ind</span><span class="o">-</span><span class="n">T_amb</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">q_A</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; MW are extracted in building A.&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">q_B</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; MW are extracted in building B.&quot;</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">D</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">c</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Z</span><span class="o">*</span><span class="n">R</span><span class="o">*</span><span class="n">T</span><span class="o">/</span><span class="n">M</span><span class="p">)</span>
+<span class="n">c</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30 MW are extracted in building A.
-45 MW are extracted in building B.
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(450.3900615022494)
 </pre></div>
 </div>
 </div>
 </div>
-<p>If we apply the energy nodal balance to the two buildings</p>
-<p><span class="math notranslate nohighlight">\(q_{buildingA}=c_pm_A(T^S-T^R)\)</span></p>
-<p><span class="math notranslate nohighlight">\(q_{buildingB}=c_pm_B(T^S-T^R)\)</span></p>
-<p>The mass flow can be estimated as</p>
+<p>The density can be calculated as</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_p</span> <span class="o">=</span> <span class="mi">4186</span> <span class="c1">#J/kgK</span>
-<span class="n">T_S</span> <span class="o">=</span> <span class="mi">80</span> <span class="c1">#C</span>
-<span class="n">T_R</span> <span class="o">=</span> <span class="mi">40</span> <span class="c1">#C</span>
-
-<span class="n">m_A</span><span class="o">=</span><span class="n">q_A</span><span class="o">*</span><span class="mi">1000000</span><span class="o">/</span><span class="p">(</span><span class="n">c_p</span><span class="o">*</span><span class="p">(</span><span class="n">T_S</span><span class="o">-</span><span class="n">T_R</span><span class="p">))</span>  <span class="c1"># MW -&gt; W</span>
-<span class="n">m_B</span><span class="o">=</span><span class="n">q_B</span><span class="o">*</span><span class="mi">1000000</span><span class="o">/</span><span class="p">(</span><span class="n">c_p</span><span class="o">*</span><span class="p">(</span><span class="n">T_S</span><span class="o">-</span><span class="n">T_R</span><span class="p">))</span>  <span class="c1"># MW -&gt; W</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Required mass flow in heat exchanger in building A: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">m_A</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;kg/s&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Required mass flow in heat exchanger in building B: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">m_B</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;kg/s&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span> <span class="o">=</span> <span class="n">P</span> <span class="o">/</span> <span class="n">c</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">rho</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Required mass flow in heat exchanger in building A: 179.2kg/s
-Required mass flow in heat exchanger in building B: 268.8kg/s
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(24.648608512719843)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The capacity of every pipeline can be calculated as <span class="math notranslate nohighlight">\(Q = \rho A u e\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">capacity_CH4</span> <span class="o">=</span> <span class="n">rho</span><span class="o">*</span><span class="n">A</span><span class="o">*</span><span class="n">u</span><span class="o">*</span><span class="n">e</span>
+<span class="n">capacity_CH4</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(5226.922401172076)
+</pre></div>
+</div>
+</div>
+</div>
+<p>So, we obtain that the capacity is aproximately 5.2 GW</p>
+<p>For hydrogen, the speed of sound in gas <span class="math notranslate nohighlight">\(c\)</span> can be calculated as</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="mf">0.6</span> <span class="c1"># m</span>
+<span class="n">u_H2</span> <span class="o">=</span> <span class="mi">30</span> <span class="c1"># m/s</span>
+<span class="n">P_H2</span> <span class="o">=</span> <span class="mi">40</span><span class="o">*</span><span class="mi">100000</span> <span class="c1">#Pa</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="mf">1.03</span>
+<span class="n">R</span> <span class="o">=</span> <span class="mf">8.314</span> <span class="c1"># J/molK</span>
+<span class="n">M</span> <span class="o">=</span> <span class="mf">0.002</span> <span class="c1"># Kg/mol</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">273</span><span class="o">+</span><span class="mi">25</span> <span class="c1"># K</span>
+<span class="n">e_H2</span> <span class="o">=</span> <span class="mi">120</span> <span class="c1"># GJ/t or MJ/kg</span>
+
+<span class="n">c_H2</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Z</span><span class="o">*</span><span class="n">R</span><span class="o">*</span><span class="n">T</span><span class="o">/</span><span class="n">M</span><span class="p">)</span>
+<span class="n">c_H2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(1129.5793818939862)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The density can be calculated as</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho_H2</span> <span class="o">=</span> <span class="n">P_H2</span> <span class="o">/</span> <span class="n">c_H2</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">rho_H2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(3.1349201118119416)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The new capacity of every pipeline can be calculated as <span class="math notranslate nohighlight">\(Q = \rho A u e\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">capacity_H2</span> <span class="o">=</span> <span class="n">rho_H2</span><span class="o">*</span><span class="n">A</span><span class="o">*</span><span class="n">u_H2</span><span class="o">*</span><span class="n">e_H2</span>
+<span class="n">capacity_H2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(3190.9600056864097)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">capacity_H2</span><span class="o">/</span><span class="n">capacity_CH4</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.610485436893204)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Even though the volumetric energy density for hydrogen is three times lower than that of methane, since the velocity in the pipelines is higher, the transport capacity for hydrogen is only reduced to 60% of that of methane.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">rho_H2</span><span class="o">*</span><span class="n">e_H2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">rho</span><span class="o">*</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.30524271844660195)
 </pre></div>
 </div>
 </div>

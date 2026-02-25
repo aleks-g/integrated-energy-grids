@@ -441,172 +441,163 @@ document.write(`
 <h1>Problem 4.1<a class="headerlink" href="#problem-4-1" title="Link to this heading">#</a></h1>
 <p><strong>Integrated Energy Grids</strong></p>
 <p><strong>Problem 4.1</strong></p>
-<p><strong>This is a continuation of Problem 3.2 from Lecture 3:
-Let us assume now that we are in an hour with an excess of wind generation in Denmark and a deficit in other countries so that the power injection <span class="math notranslate nohighlight">\(p_i\)</span> of the different countries is as follows: Germany= - 2 MW, DK1=5 MW, DK2=6 MW, Norway = - 8 MW, Sweden = -1 MW.</strong></p>
-<p><strong>Determine the voltage angles <span class="math notranslate nohighlight">\(\theta_i\)</span>  and the flows <span class="math notranslate nohighlight">\(p_l\)</span> in the lines of the network. Assume that <span class="math notranslate nohighlight">\(\theta_0\)</span>=0; i.e. the reference bus is at node 0 (Germany); and the reactance in all links are <span class="math notranslate nohighlight">\(x_l\)</span>=1.</strong></p>
-<p>We will use the package <a class="reference external" href="https://numpy.org/">numpy</a> to operate with matrices.</p>
+<p><strong>The time series provided in DTU Learn represents the hourly capacity factor for wind energy in Spain <span class="math notranslate nohighlight">\(g^{W,Spain}_t\)</span> and Denmark <span class="math notranslate nohighlight">\(g^{W,Denmark}_t\)</span>. Assuming a constant electricity demand of 1 GW in every country:</strong></p>
+<p><strong>(a) Calculate the required wind power capacity in every country to cover, on average, the electricity demand.</strong></p>
+<p><strong>(b) Calculate the required backup energy and backup power capacity to ensure that demand is covered every hour, assuming the capacity found in (a).</strong></p>
+<p><strong>(c) If we assume that Spain and Denmark can be connected through an ideal interconnection (without any losses) and the installed capacities are those calculated in section (a), calculate the required backup energy and backup power capacity to ensure the hourly supply of electricity demand in both countries.</strong></p>
+<p>We will use the packages <a class="reference external" href="https://numpy.org/">numpy</a> to operate with arrays and <a class="reference external" href="https://matplotlib.org/stable/index.html">matplotlib.pyplot</a> to plot the results</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy.linalg</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Calculate list of nodes, links, degree, adjacency and Laplacian matrix. (this was already implemented in Problem 3.2)</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nodes</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
-<span class="n">links</span><span class="o">=</span><span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w">  </span><span class="nn">plt</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)))</span>
-
-<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
-    <span class="n">D</span><span class="p">[</span><span class="n">node</span><span class="p">,</span> <span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="mi">1</span> <span class="k">if</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">link</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">links</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">CF</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/onshore_wind.csv&#39;</span><span class="p">,</span>
+                      <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">CF</span><span class="o">.</span><span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">CF</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>The required capacity to cover on average electricity demand in Denmark can calculated as</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)))</span>
-
-<span class="k">for</span> <span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span> <span class="ow">in</span> <span class="n">links</span><span class="p">:</span>
-    <span class="n">A</span><span class="p">[</span><span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">A</span><span class="p">[</span><span class="n">node_b</span><span class="p">,</span> <span class="n">node_a</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="n">D</span> <span class="o">-</span> <span class="n">A</span>
-<span class="n">L</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">CF_ave_D</span> <span class="o">=</span> <span class="n">CF</span><span class="p">[</span><span class="s1">&#39;DNK&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">G_DNK</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">CF_ave_D</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">G_DNK</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; GW of wind power needs to be installed in Denmark.&#39;</span> <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1., -1.,  0.,  0.,  0.],
-       [-1.,  4., -1., -1., -1.],
-       [ 0., -1.,  2.,  0., -1.],
-       [ 0., -1.,  0.,  1.,  0.],
-       [ 0., -1., -1.,  0.,  2.]])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.6 GW of wind power needs to be installed in Denmark.
 </pre></div>
 </div>
 </div>
 </div>
+<p>and for Spain</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">links</span><span class="p">)))</span>
-
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">links</span><span class="p">):</span>
-    <span class="n">K</span><span class="p">[</span><span class="n">node_a</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">K</span><span class="p">[</span><span class="n">node_b</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-    
-<span class="n">K</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">CF_ave_S</span> <span class="o">=</span> <span class="n">CF</span><span class="p">[</span><span class="s1">&#39;ESP&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">G_ESP</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">CF_ave_S</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">G_ESP</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; GW of wind power needs to be installed in Spain.&#39;</span> <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.,  0.,  0.,  0.,  0.],
-       [-1.,  1.,  1.,  1.,  0.],
-       [ 0., -1.,  0.,  0.,  1.],
-       [ 0.,  0., -1.,  0.,  0.],
-       [ 0.,  0.,  0., -1., -1.]])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.3 GW of wind power needs to be installed in Spain.
 </pre></div>
 </div>
 </div>
 </div>
-<p><strong>Power flow analysis</strong></p>
-<p>We know the power injection pattern for the nodes <span class="math notranslate nohighlight">\(p_i\)</span> and we want to determine the power flows <span class="math notranslate nohighlight">\(p_l\)</span> in the lines of the network</p>
-<p>The reactance in every link is <span class="math notranslate nohighlight">\(x_l\)</span>=1 so <span class="math notranslate nohighlight">\(L_{ij}=\sum_{l} K_{il} \frac{1}{x_l}K_{lj}=\sum_{l} K_{il} K_{lj}\)</span> or  <span class="math notranslate nohighlight">\(L_{ij}=D_{ij}-A_{i,j}\)</span></p>
-<p>First, we calculate the voltage angles, by solving the set of linear equations.
-<span class="math notranslate nohighlight">\(p_i=\sum L_{i,j} \theta_j\)</span></p>
+<p><strong>(b) Calculate the required backup energy and backup power capacity to ensure that demand is covered every hour.</strong></p>
+<p>We can define the mismatch as the difference between the renewable generation and electricity load.</p>
+<p><span class="math notranslate nohighlight">\(\Delta_t = g^W_t- d_t\)</span></p>
+<p>The total backup energy can be calculated as the sum of the negative mismatch.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_i</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>The node 0 (Germany) is the slack bus, so <span class="math notranslate nohighlight">\(\theta_0\)</span>=0.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">1</span><span class="p">:],</span> <span class="n">p_i</span><span class="p">[</span><span class="mi">1</span><span class="p">:])]</span>
-<span class="n">theta</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">G_DNK</span><span class="o">*</span><span class="n">CF</span><span class="p">[</span><span class="s1">&#39;DNK&#39;</span><span class="p">]])</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">Delta</span><span class="p">[</span><span class="n">Delta</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0.        ,  2.        ,  5.66666667, -6.        ,  3.33333333])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-2954.3130287540507)
 </pre></div>
 </div>
 </div>
 </div>
-<p>Second, we use the voltage angles to compute the flows.</p>
-<p><span class="math notranslate nohighlight">\(p_l=\frac{1}{x_l}\sum_{j}K_{lj}\theta_j\)</span></p>
+<p>Denmark requires 2,954 GWh of backup energy.</p>
+<p>The capacity for backup generation can be calculated as the maximum of the negative mismatch values.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_l</span><span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
-<span class="n">p_l</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Delta</span><span class="p">[</span><span class="n">Delta</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-2.        , -3.66666667,  8.        , -1.33333333,  2.33333333])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.9923385545773723)
 </pre></div>
 </div>
 </div>
 </div>
-<p><strong>Additional discussion on the inversion of the Laplacian matrix</strong></p>
-<p>The Laplacian matrix is not invertible.</p>
-<p>We can only invert a matrix if it is non-singular, i.e., the determinant should not be zero.</p>
-<p>You can also check that the rank of the matrix is 4 but the matrix has 5 columns, so the determinant is zero and we can not find the inverse</p>
+<p>Denmark requires 0.99 GW of backup capacity, i.e., the required capacity is equal to the demand because there would be situations in which the wind power contribution will be zero.</p>
+<p>For Spain</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">G_ESP</span><span class="o">*</span><span class="n">CF</span><span class="p">[</span><span class="s1">&#39;ESP&#39;</span><span class="p">]])</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">Delta</span><span class="p">[</span><span class="n">Delta</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(4)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-2096.6831157720217)
 </pre></div>
 </div>
 </div>
 </div>
-<p>Instead of selecting Germany as the slack bus, we could have used the <a class="reference external" href="https://en.wikipedia.org/wiki/Moore%E2%80%93Penrose_inverse">Moore Penrose pseudo-inverse</a> to invert the Laplacian.</p>
-<p>In this case, we don’t get bus zero as slack and the theta values in the solution are shifted with respect to the previous solution, but we get the same results for the power flows.</p>
+<p>Spain requires 2,096 GWh of backup energy.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">theta_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">p_i</span><span class="p">)</span>
-<span class="n">theta_</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Delta</span><span class="p">[</span><span class="n">Delta</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-1.        ,  1.        ,  4.66666667, -7.        ,  2.33333333])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.9003975309781712)
 </pre></div>
 </div>
 </div>
 </div>
+<p>Spain requires 0.9 GW of backup capacity, because there are no situations with wind capacity factor equal to zero in Spain.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P_l</span><span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">theta_</span><span class="p">)</span>
-<span class="n">P_l</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">min</span><span class="p">(</span><span class="n">CF</span><span class="p">[</span><span class="s1">&#39;ESP&#39;</span><span class="p">])</span><span class="o">*</span><span class="n">G_ESP</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-2.        , -3.66666667,  8.        , -1.33333333,  2.33333333])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.0996024690218288)
 </pre></div>
 </div>
 </div>
 </div>
+<p><strong>(c) If we assume that Spain and Denmark can be connected through an ideal interconnection (without any losses) and installed capacities are those calculated in section (a). Calculate the required wind power capacity, backup energy and backup power capacity to ensure the hourly supply of demand in both countries.</strong></p>
+<p>The mismatch can be defined now as
+<span class="math notranslate nohighlight">\(\Delta_t = g^{W,Denmark}_t + g^{W,Spain}_t - 2\)</span></p>
+<p>The total backup energy can be calculated as the sum of the negative mismatch.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">-</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">G_DNK</span><span class="o">*</span><span class="n">CF</span><span class="p">[</span><span class="s1">&#39;DNK&#39;</span><span class="p">],</span><span class="n">G_ESP</span><span class="o">*</span><span class="n">CF</span><span class="p">[</span><span class="s1">&#39;ESP&#39;</span><span class="p">])])</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">Delta</span><span class="p">[</span><span class="n">Delta</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-3456.6942006056597)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The two countries will require 3,456 GWh of backup energy, which is significantly lower than the sum of the backup energy that they would required if operated independently.</p>
+<p>The capacity for backup generation can be calculated as the maximum of the negative mismatch values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Delta</span><span class="p">[</span><span class="n">Delta</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(1.7241951029263909)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The two countries require 1.72 GW of backup capacity, which is lower than the backup capacity that they would require if operated independently.</p>
 </section>
 
     <script type="text/x-thebe-config">

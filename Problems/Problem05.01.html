@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Problem 5.1 &#8212; integrated-energy-grids</title>
+    <title>Problem 4.1 &#8212; integrated-energy-grids</title>
   
   
   
@@ -423,7 +423,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Problem 5.1</h1>
+    <h1>Problem 4.1</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -437,730 +437,176 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="problem-5-1">
-<h1>Problem 5.1<a class="headerlink" href="#problem-5-1" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="problem-4-1">
+<h1>Problem 4.1<a class="headerlink" href="#problem-4-1" title="Link to this heading">#</a></h1>
 <p><strong>Integrated Energy Grids</strong></p>
-<p><strong>Problem 5.1</strong></p>
-<p><strong>Assume we have three buses (Denmark, Netherlands and Germany) with nominal voltage <span class="math notranslate nohighlight">\(V_{nom}\)</span>= 2000 V connected by three transmission lines. In the  bus, Denmark there is a wind generator that is producing 100 MW. In the bus Germany, there is a load that is consuming 100 MW of active power and 100 MVAR of reactive power. The transmission lines DK-NL and NL-GE have a unitary resistance <span class="math notranslate nohighlight">\(r\)</span>=0.01 and reactance <span class="math notranslate nohighlight">\(x\)</span>=0.1. The transmission lines DK-GE has a unitary resistance <span class="math notranslate nohighlight">\(r\)</span>=0.02 and reactance <span class="math notranslate nohighlight">\(x\)</span>=0.1. Using Python for Power System Analysis (PyPSA):</strong></p>
-<p><strong>a) Calculate the power flows along the transmission lines using AC power flow representation.</strong></p>
-<p><strong>b) Calculate the power flows along the transmission lines using a linearized approximation (also known as DC optimal power flow) and discuss the results.</strong></p>
-<p><em>Hint: It is recommended to follow the <a class="reference external" href="https://martavp.github.io/integrated-energy-grids/intro-pypsa.html#">PyPSA tutorial</a> before trying this problem.</em></p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If you have not yet set up Python on your computer, you can execute this tutorial in your browser via <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>. Click on the rocket in the top right corner and launch “Colab”. If that doesn’t work download the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file and import it in <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>.</p>
-<p>Then install the following packages by executing the following command in a Jupyter cell at the top of the notebook.</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>!pip<span class="w"> </span>install<span class="w"> </span>numpy<span class="w"> </span>pypsa
-</pre></div>
-</div>
-</div>
+<p><strong>Problem 4.1</strong></p>
+<p><strong>This is a continuation of Problem 3.2 from Lecture 3:
+Let us assume now that we are in an hour with an excess of wind generation in Denmark and a deficit in other countries so that the power injection <span class="math notranslate nohighlight">\(p_i\)</span> of the different countries is as follows: Germany= - 2 MW, DK1=5 MW, DK2=6 MW, Norway = - 8 MW, Sweden = -1 MW.</strong></p>
+<p><strong>Determine the voltage angles <span class="math notranslate nohighlight">\(\theta_i\)</span>  and the flows <span class="math notranslate nohighlight">\(p_l\)</span> in the lines of the network. Assume that <span class="math notranslate nohighlight">\(\theta_0\)</span>=0; i.e. the reference bus is at node 0 (Germany); and the reactance in all links are <span class="math notranslate nohighlight">\(x_l\)</span>=1.</strong></p>
+<p>We will use the package <a class="reference external" href="https://numpy.org/">numpy</a> to operate with matrices.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pypsa</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set parameter Username
-Set parameter LicenseID to value 2767832
-Academic license - for non-commercial use only - expires 2027-01-20
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy.linalg</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>We start by creating the network object and adding the three buses corresponding to Denmark, Netherlands and Germany.
-The added buses can be printed using network.buses</p>
+<p>Calculate list of nodes, links, degree, adjacency and Laplacian matrix. (this was already implemented in Problem 3.2)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span> <span class="o">=</span> <span class="n">pypsa</span><span class="o">.</span><span class="n">Network</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nodes</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">links</span><span class="o">=</span><span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)]</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Bus&quot;</span><span class="p">,</span> <span class="s2">&quot;bus Denmark&quot;</span><span class="p">,</span> <span class="n">v_nom</span><span class="o">=</span><span class="mf">2000.0</span><span class="p">)</span>
-<span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Bus&quot;</span><span class="p">,</span> <span class="s2">&quot;bus Netherlands&quot;</span><span class="p">,</span> <span class="n">v_nom</span><span class="o">=</span><span class="mf">2000.0</span><span class="p">)</span>
-<span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Bus&quot;</span><span class="p">,</span> <span class="s2">&quot;bus Germany&quot;</span><span class="p">,</span> <span class="n">v_nom</span><span class="o">=</span><span class="mf">2000.0</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)))</span>
 
-<span class="n">network</span><span class="o">.</span><span class="n">buses</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>v_nom</th>
-      <th>type</th>
-      <th>x</th>
-      <th>y</th>
-      <th>carrier</th>
-      <th>unit</th>
-      <th>location</th>
-      <th>v_mag_pu_set</th>
-      <th>v_mag_pu_min</th>
-      <th>v_mag_pu_max</th>
-      <th>control</th>
-      <th>generator</th>
-      <th>sub_network</th>
-    </tr>
-    <tr>
-      <th>name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>bus Denmark</th>
-      <td>2000.0</td>
-      <td></td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>AC</td>
-      <td></td>
-      <td></td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>inf</td>
-      <td>PQ</td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>bus Netherlands</th>
-      <td>2000.0</td>
-      <td></td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>AC</td>
-      <td></td>
-      <td></td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>inf</td>
-      <td>PQ</td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>bus Germany</th>
-      <td>2000.0</td>
-      <td></td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>AC</td>
-      <td></td>
-      <td></td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>inf</td>
-      <td>PQ</td>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<p>We add the three lines connecting the buses</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Line&quot;</span><span class="p">,</span><span class="s2">&quot; line DK-NL&quot;</span><span class="p">,</span> <span class="n">bus0</span> <span class="o">=</span> <span class="s2">&quot;bus Denmark&quot;</span><span class="p">,</span> <span class="n">bus1</span><span class="o">=</span> <span class="s2">&quot;bus Netherlands&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
-<span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Line&quot;</span><span class="p">,</span><span class="s2">&quot; line DK-DE&quot;</span><span class="p">,</span> <span class="n">bus0</span> <span class="o">=</span> <span class="s2">&quot;bus Denmark&quot;</span><span class="p">,</span> <span class="n">bus1</span><span class="o">=</span> <span class="s2">&quot;bus Germany&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
-<span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Line&quot;</span><span class="p">,</span><span class="s2">&quot; line NL-DE&quot;</span><span class="p">,</span> <span class="n">bus0</span> <span class="o">=</span> <span class="s2">&quot;bus Netherlands&quot;</span><span class="p">,</span> <span class="n">bus1</span><span class="o">=</span> <span class="s2">&quot;bus Germany&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
-
-<span class="n">network</span><span class="o">.</span><span class="n">lines</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>bus0</th>
-      <th>bus1</th>
-      <th>type</th>
-      <th>x</th>
-      <th>r</th>
-      <th>g</th>
-      <th>b</th>
-      <th>s_nom</th>
-      <th>s_nom_mod</th>
-      <th>s_nom_extendable</th>
-      <th>...</th>
-      <th>v_ang_min</th>
-      <th>v_ang_max</th>
-      <th>sub_network</th>
-      <th>x_pu</th>
-      <th>r_pu</th>
-      <th>g_pu</th>
-      <th>b_pu</th>
-      <th>x_pu_eff</th>
-      <th>r_pu_eff</th>
-      <th>s_nom_opt</th>
-    </tr>
-    <tr>
-      <th>name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>line DK-NL</th>
-      <td>bus Denmark</td>
-      <td>bus Netherlands</td>
-      <td></td>
-      <td>0.1</td>
-      <td>0.01</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>False</td>
-      <td>...</td>
-      <td>-inf</td>
-      <td>inf</td>
-      <td></td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>line DK-DE</th>
-      <td>bus Denmark</td>
-      <td>bus Germany</td>
-      <td></td>
-      <td>0.1</td>
-      <td>0.02</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>False</td>
-      <td>...</td>
-      <td>-inf</td>
-      <td>inf</td>
-      <td></td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>line NL-DE</th>
-      <td>bus Netherlands</td>
-      <td>bus Germany</td>
-      <td></td>
-      <td>0.1</td>
-      <td>0.01</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>False</td>
-      <td>...</td>
-      <td>-inf</td>
-      <td>inf</td>
-      <td></td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-  </tbody>
-</table>
-<p>3 rows × 32 columns</p>
-</div></div></div>
-</div>
-<p>Add a generator at the Denmark bus.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Generator&quot;</span><span class="p">,</span> 
-            <span class="s2">&quot;generator Denmark&quot;</span><span class="p">,</span> 
-            <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;bus Denmark&quot;</span><span class="p">,</span>
-            <span class="n">p_set</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">network</span><span class="o">.</span><span class="n">generators</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>bus</th>
-      <th>control</th>
-      <th>type</th>
-      <th>p_nom</th>
-      <th>p_nom_mod</th>
-      <th>p_nom_extendable</th>
-      <th>p_nom_min</th>
-      <th>p_nom_max</th>
-      <th>p_nom_set</th>
-      <th>p_min_pu</th>
-      <th>...</th>
-      <th>min_up_time</th>
-      <th>min_down_time</th>
-      <th>up_time_before</th>
-      <th>down_time_before</th>
-      <th>ramp_limit_up</th>
-      <th>ramp_limit_down</th>
-      <th>ramp_limit_start_up</th>
-      <th>ramp_limit_shut_down</th>
-      <th>weight</th>
-      <th>p_nom_opt</th>
-    </tr>
-    <tr>
-      <th>name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>generator Denmark</th>
-      <td>bus Denmark</td>
-      <td>PQ</td>
-      <td></td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>False</td>
-      <td>0.0</td>
-      <td>inf</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-    </tr>
-  </tbody>
-</table>
-<p>1 rows × 38 columns</p>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">generators</span><span class="o">.</span><span class="n">p_set</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>name
-generator Denmark    100.0
-Name: p_set, dtype: float64
-</pre></div>
-</div>
-</div>
-</div>
-<p>Add a load at the Germany bus</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Load&quot;</span><span class="p">,</span> 
-            <span class="s2">&quot;load Germany&quot;</span><span class="p">,</span> 
-            <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;bus Germany&quot;</span><span class="p">,</span> 
-            <span class="n">p_set</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-            <span class="n">q_set</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">network</span><span class="o">.</span><span class="n">loads</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>bus</th>
-      <th>carrier</th>
-      <th>type</th>
-      <th>p_set</th>
-      <th>q_set</th>
-      <th>sign</th>
-      <th>active</th>
-    </tr>
-    <tr>
-      <th>name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>load Germany</th>
-      <td>bus Germany</td>
-      <td></td>
-      <td></td>
-      <td>100.0</td>
-      <td>100.0</td>
-      <td>-1.0</td>
-      <td>True</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<p>We can now solve the non-linear power flow using a Newton-Raphson method.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">pf</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.power_flow:Performing non-linear load-flow on AC sub-network &lt;pypsa.networks.SubNetwork object at 0x3031c3770&gt; for snapshots Index([&#39;now&#39;], dtype=&#39;object&#39;, name=&#39;snapshot&#39;)
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;n_iter&#39;: name      0
- snapshot   
- now       2,
- &#39;error&#39;: name                 0
- snapshot              
- now       8.204964e-09,
- &#39;converged&#39;: name         0
- snapshot      
- now       True}
-</pre></div>
-</div>
-</div>
-</div>
-<p>ok, the solution converge, we can check now the active power flow on the lines.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">lines_t</span><span class="o">.</span><span class="n">p0</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th>name</th>
-      <th>line DK-NL</th>
-      <th>line DK-DE</th>
-      <th>line NL-DE</th>
-    </tr>
-    <tr>
-      <th>snapshot</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>now</th>
-      <td>31.441059</td>
-      <td>68.558996</td>
-      <td>31.441054</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<p>We can also check the voltage angles on the buses. We need to apply a conversion factor if we want to show them in degrees.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">buses_t</span><span class="o">.</span><span class="n">v_ang</span> <span class="o">*</span> <span class="mi">180</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th>name</th>
-      <th>bus Denmark</th>
-      <th>bus Netherlands</th>
-      <th>bus Germany</th>
-    </tr>
-    <tr>
-      <th>snapshot</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>now</th>
-      <td>0.0</td>
-      <td>-0.00004</td>
-      <td>-0.00008</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<p>and their per-unit magnitudes</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">buses_t</span><span class="o">.</span><span class="n">v_mag_pu</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th>name</th>
-      <th>bus Denmark</th>
-      <th>bus Netherlands</th>
-      <th>bus Germany</th>
-    </tr>
-    <tr>
-      <th>snapshot</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>now</th>
-      <td>1.0</td>
-      <td>0.999999</td>
-      <td>0.999998</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<p><strong>b) Calculate the power flows along the transmission lines using a linearized approximation (DC optimal power flow).</strong></p>
-<p>We can use linear power flows and get a similar solution</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">lpf</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.network.power_flow:Performing linear load-flow on AC sub-network &lt;pypsa.networks.SubNetwork object at 0x30319f610&gt; for snapshot(s) Index([&#39;now&#39;], dtype=&#39;object&#39;, name=&#39;snapshot&#39;)
+<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+    <span class="n">D</span><span class="p">[</span><span class="n">node</span><span class="p">,</span> <span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="mi">1</span> <span class="k">if</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">link</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">links</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">lines_t</span><span class="o">.</span><span class="n">p0</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)))</span>
+
+<span class="k">for</span> <span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span> <span class="ow">in</span> <span class="n">links</span><span class="p">:</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">node_b</span><span class="p">,</span> <span class="n">node_a</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="n">D</span> <span class="o">-</span> <span class="n">A</span>
+<span class="n">L</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th>name</th>
-      <th>line DK-NL</th>
-      <th>line DK-DE</th>
-      <th>line NL-DE</th>
-    </tr>
-    <tr>
-      <th>snapshot</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>now</th>
-      <td>33.333333</td>
-      <td>66.666667</td>
-      <td>33.333333</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1., -1.,  0.,  0.,  0.],
+       [-1.,  4., -1., -1., -1.],
+       [ 0., -1.,  2.,  0., -1.],
+       [ 0., -1.,  0.,  1.,  0.],
+       [ 0., -1., -1.,  0.,  2.]])
+</pre></div>
 </div>
-<p>In this simple case, the solution that we obtain are very similar.</p>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">links</span><span class="p">)))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">links</span><span class="p">):</span>
+    <span class="n">K</span><span class="p">[</span><span class="n">node_a</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">K</span><span class="p">[</span><span class="n">node_b</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    
+<span class="n">K</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.,  0.,  0.,  0.,  0.],
+       [-1.,  1.,  1.,  1.,  0.],
+       [ 0., -1.,  0.,  0.,  1.],
+       [ 0.,  0., -1.,  0.,  0.],
+       [ 0.,  0.,  0., -1., -1.]])
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Power flow analysis</strong></p>
+<p>We know the power injection pattern for the nodes <span class="math notranslate nohighlight">\(p_i\)</span> and we want to determine the power flows <span class="math notranslate nohighlight">\(p_l\)</span> in the lines of the network</p>
+<p>The reactance in every link is <span class="math notranslate nohighlight">\(x_l\)</span>=1 so <span class="math notranslate nohighlight">\(L_{ij}=\sum_{l} K_{il} \frac{1}{x_l}K_{lj}=\sum_{l} K_{il} K_{lj}\)</span> or  <span class="math notranslate nohighlight">\(L_{ij}=D_{ij}-A_{i,j}\)</span></p>
+<p>First, we calculate the voltage angles, by solving the set of linear equations.
+<span class="math notranslate nohighlight">\(p_i=\sum L_{i,j} \theta_j\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_i</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The node 0 (Germany) is the slack bus, so <span class="math notranslate nohighlight">\(\theta_0\)</span>=0.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">1</span><span class="p">:],</span> <span class="n">p_i</span><span class="p">[</span><span class="mi">1</span><span class="p">:])]</span>
+<span class="n">theta</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0.        ,  2.        ,  5.66666667, -6.        ,  3.33333333])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Second, we use the voltage angles to compute the flows.</p>
+<p><span class="math notranslate nohighlight">\(p_l=\frac{1}{x_l}\sum_{j}K_{lj}\theta_j\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_l</span><span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+<span class="n">p_l</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-2.        , -3.66666667,  8.        , -1.33333333,  2.33333333])
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Additional discussion on the inversion of the Laplacian matrix</strong></p>
+<p>The Laplacian matrix is not invertible.</p>
+<p>We can only invert a matrix if it is non-singular, i.e., the determinant should not be zero.</p>
+<p>You can also check that the rank of the matrix is 4 but the matrix has 5 columns, so the determinant is zero and we can not find the inverse</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(4)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Instead of selecting Germany as the slack bus, we could have used the <a class="reference external" href="https://en.wikipedia.org/wiki/Moore%E2%80%93Penrose_inverse">Moore Penrose pseudo-inverse</a> to invert the Laplacian.</p>
+<p>In this case, we don’t get bus zero as slack and the theta values in the solution are shifted with respect to the previous solution, but we get the same results for the power flows.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">theta_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">p_i</span><span class="p">)</span>
+<span class="n">theta_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-1.        ,  1.        ,  4.66666667, -7.        ,  2.33333333])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P_l</span><span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">theta_</span><span class="p">)</span>
+<span class="n">P_l</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-2.        , -3.66666667,  8.        , -1.33333333,  2.33333333])
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Problem 7.3 &#8212; integrated-energy-grids</title>
+    <title>Problem 6.3 &#8212; integrated-energy-grids</title>
   
   
   
@@ -58,6 +58,8 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Problems/Problem07.03';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -421,7 +423,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Problem 7.3</h1>
+    <h1>Problem 6.3</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -435,1072 +437,248 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="problem-7-3">
-<h1>Problem 7.3<a class="headerlink" href="#problem-7-3" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="problem-6-3">
+<h1>Problem 6.3<a class="headerlink" href="#problem-6-3" title="Link to this heading">#</a></h1>
 <p><strong>Integrated Energy Grids</strong></p>
-<p><strong>Problem 7.3</strong></p>
-<p><strong>Assume that we have three locations (1,2,3) with an electric bus and a heating bus. The electricity loads are [0, 10, 20] MWh and the heating loads are [30, 20, 10] MWh. The electric buses are connected with transmission lines in a ring and there is a gas power generator at node 1 with an efficiency of 0.3 and a marginal cost of 50 EUR/MWh. At each location the electric and heating buses are connected with heat pumps with a coefficient of performance (COP) of 3; heat can also be supplied to every heat bus with a gas boiler with an efficiency of 0.9 and a marginal cost of 20 EUR/MWh.</strong></p>
-<p><strong>(a) Calculate the optimal heat generation by every component and the optical power flowing through the lines.</strong></p>
-<p><strong>(b) Repeat (a) assuming that the marginal cost of heat pumps is 10 EUR/MWh.</strong></p>
-<p><em>Note: This problem is based on the PyPSA example <a class="reference external" href="https://pypsa.readthedocs.io/en/stable/examples/lopf-with-heating.html">LOPF with coupling to heating sector</a>.</em></p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If you have not yet set up Python on your computer, you can execute this tutorial in your browser via <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>. Click on the rocket in the top right corner and launch “Colab”. If that doesn’t work download the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file and import it in <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>.</p>
-<p>Then install the following packages by executing the following command in a Jupyter cell at the top of the notebook.</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>!pip<span class="w"> </span>install<span class="w"> </span>numpy<span class="w"> </span>pypsa
+<p><strong>Problem 6.3</strong></p>
+<p><strong>Assume the gas transport system that is shown in Figure 2. Gas can be injected in Node 1 at a marginal price of 10 EUR/kg or at Node 5 at 15 EUR/kg. There is a demand of 2·<span class="math notranslate nohighlight">\(10^8\)</span> kg/s in Node 3. Finally, Node 2-3 represents a pumping station where gas pressure can be increased by <span class="math notranslate nohighlight">\(k_{23}\)</span>=1.2 at a cost that is proportional to the mass flow <span class="math notranslate nohighlight">\(m_{23}\)</span> by a constant <span class="math notranslate nohighlight">\(o_{23}\)</span> =5 EUR/kg.</strong></p>
+<p><strong>To calculate the speed of sound in gas <span class="math notranslate nohighlight">\(c\)</span>, assume the universal gas constant <span class="math notranslate nohighlight">\(R\)</span>=8.314 J/molK, the molar mass of methane <span class="math notranslate nohighlight">\(M\)</span>=16 g/mol, compression factor <span class="math notranslate nohighlight">\(Z\)</span>=1.31, and temperature T=25<span class="math notranslate nohighlight">\(^{\circ}\)</span>C. Assume the diameter of the pipelines is <span class="math notranslate nohighlight">\(D\)</span> = 1000 mm, the length <span class="math notranslate nohighlight">\(L_{12}\)</span>=<span class="math notranslate nohighlight">\(L_{34}\)</span>=<span class="math notranslate nohighlight">\(L_{45}\)</span>=100 km, and calculate the Darcy friction  coefficient <span class="math notranslate nohighlight">\(f_{D}\)</span> assuming fully-turbulent flow and roughness <span class="math notranslate nohighlight">\(\epsilon\)</span>=0.001m.</strong></p>
+<p><strong>(a) Write the equations of the optimization problem that minimizes the total system cost and use the Weymouth equation to represent pressure drop in the pipelines as a function of the mass flow <span class="math notranslate nohighlight">\(m_{ij}\)</span>.</strong></p>
+<p>We define the pressure at differet node as <span class="math notranslate nohighlight">\(\pi_i\)</span> and the mass flow at different pipes as <span class="math notranslate nohighlight">\(m_{ij}\)</span>
+We have 9 variables (<span class="math notranslate nohighlight">\(m_{12}\)</span>, <span class="math notranslate nohighlight">\(m_{23}\)</span>, <span class="math notranslate nohighlight">\(m_{34}\)</span>, <span class="math notranslate nohighlight">\(m_{45}\)</span>, <span class="math notranslate nohighlight">\(\pi_1\)</span>, <span class="math notranslate nohighlight">\(\pi_2\)</span>, <span class="math notranslate nohighlight">\(\pi_3\)</span>, <span class="math notranslate nohighlight">\(\pi_4\)</span>, <span class="math notranslate nohighlight">\(\pi_5\)</span>).</p>
+<p>We impose the energy balance constraint in nodes 1, 4 and 5, and the pipeline mass conservation and Weymouth equation in pipelines 12, 34 and 45.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{alignat*}{3}
+\min_{x,y} \quad &amp; o_1g_1 + o_5g_5 +o_{23}m_{23} &amp; \\
+\text{s.t.} \quad &amp; g_{1}=m_{12}  \\
+\quad &amp; -d_{4}=-m_{34}+m_{45}  \\
+\quad &amp; g_{5}=-m_{45}  \\
+\quad &amp; m_{12}=m_{23}  \\
+\quad &amp; m_{23}=m_{34}  \\
+\quad &amp; m_{34}=m_{45}  \\
+\quad &amp; \pi_{3}=k_{23}\pi_{2}  \\
+\quad &amp; \pi_{1}^2-\pi_{2}^2=a_{12}m_{12} |m_{12} | \\
+\quad &amp; \pi_{3}^2-\pi_{4}^2=a_{34}m_{34} |m_{34} | \\
+\quad &amp; \pi_{4}^2-\pi_{5}^2=a_{45}m_{45} |m_{34} | \\
+\end{alignat*}\]</div>
+<p>where the coefficients <span class="math notranslate nohighlight">\(a_{ij}=\frac{Lf^Dc^2}{DA^2}\)</span> depend on the physical properties of the pipelines and the methane gas.</p>
+<p><strong>(b) Use gurobipy to formulate and solve the problem</strong></p>
+<p>We start by calculating the cofficients <span class="math notranslate nohighlight">\(a_{ij}\)</span> from the Weymouth equation</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </pre></div>
+</div>
+</div>
+</div>
+<p>The cross-sectional area <span class="math notranslate nohighlight">\(A\)</span>, and the speed of sound in gas <span class="math notranslate nohighlight">\(c\)</span>, can be calculated as</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># m</span>
+
+<span class="n">Z</span> <span class="o">=</span> <span class="mf">1.31</span>
+<span class="n">R</span> <span class="o">=</span> <span class="mf">8.314</span> <span class="c1"># J/molk</span>
+<span class="n">M</span> <span class="o">=</span> <span class="mf">0.016</span> <span class="c1"># Kg/mol</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">273</span><span class="o">+</span><span class="mi">25</span> <span class="c1"># K</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">D</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">c</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Z</span><span class="o">*</span><span class="n">R</span><span class="o">*</span><span class="n">T</span><span class="o">/</span><span class="n">M</span><span class="p">)</span>
+<span class="n">c</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>450.3900615022494
+</pre></div>
+</div>
+</div>
+</div>
+<p>The Darcy friction coefficient can be calculated as <span class="math notranslate nohighlight">\(\frac{1}{\sqrt f_D}=-2log_{10}(\frac{\epsilon}{3.7D})\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.001</span> <span class="c1"># m</span>
+
+<span class="n">f_D</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">epsilon</span><span class="o">/</span><span class="p">(</span><span class="mf">3.7</span><span class="o">*</span><span class="n">D</span><span class="p">))))</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">f_D</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0196354659355267
+</pre></div>
+</div>
+</div>
+</div>
+<p>The coefficients from the Weymouth equation can be calculated as <span class="math notranslate nohighlight">\(a_{ij}=\frac{Lf_Dc^2}{DA^2}\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="mi">100</span><span class="o">*</span><span class="mi">1000</span> <span class="c1"># km -&gt; m</span>
+<span class="n">L_12</span><span class="o">=</span><span class="n">L</span>
+<span class="n">a_12</span><span class="o">=</span><span class="n">L_12</span><span class="o">*</span><span class="n">f_D</span><span class="o">*</span><span class="n">c</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="n">D</span><span class="o">*</span><span class="n">A</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">a_34</span><span class="o">=</span><span class="n">a_12</span>
+<span class="n">a_45</span><span class="o">=</span><span class="n">a_12</span>
+<span class="n">a_12</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>645712279.9219108
+</pre></div>
+</div>
+</div>
+</div>
+<p>We import gurobipy and write the problem</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">gurobipy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gurobipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">GRB</span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pypsa</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k_23</span> <span class="o">=</span> <span class="mf">1.2</span>
+<span class="n">d_4</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="mi">100000000</span> <span class="c1">#kg/s</span>
+<span class="n">o_1</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1">#EUR/kg</span>
+<span class="n">o_5</span> <span class="o">=</span> <span class="mi">15</span> <span class="c1">#EUR/kg</span>
+<span class="n">o_m23</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1">#EUR/kg</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="s2">&quot;My_quadratic_problem&quot;</span><span class="p">)</span>
+<span class="n">g_1</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;g_1&quot;</span><span class="p">)</span>
+<span class="n">g_5</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;g_5&quot;</span><span class="p">)</span>
+
+<span class="n">m_12</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m_12&quot;</span><span class="p">)</span>
+<span class="n">m_23</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m_23&quot;</span><span class="p">)</span>
+<span class="n">m_34</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m_34&quot;</span><span class="p">)</span>
+<span class="n">m_45</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=-</span><span class="mi">200000000</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m_45&quot;</span><span class="p">)</span>
+
+<span class="n">abs_m_12</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;abs_m_12&quot;</span><span class="p">)</span>
+<span class="n">abs_m_34</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;abs_m_34&quot;</span><span class="p">)</span>
+<span class="n">abs_m_45</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;abs_m_45&quot;</span><span class="p">)</span>
+
+<span class="n">p_1</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;p_1&quot;</span><span class="p">)</span>
+<span class="n">p_2</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;p_2&quot;</span><span class="p">)</span>
+<span class="n">p_3</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;p_3&quot;</span><span class="p">)</span>
+<span class="n">p_4</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;p_4&quot;</span><span class="p">)</span>
+<span class="n">p_5</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;p_5&quot;</span><span class="p">)</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">setObjective</span><span class="p">(</span><span class="n">o_1</span><span class="o">*</span><span class="n">g_1</span> <span class="o">+</span> <span class="n">o_5</span><span class="o">*</span><span class="n">g_5</span> <span class="o">+</span> <span class="n">o_m23</span><span class="o">*</span><span class="n">m_23</span><span class="p">,</span> <span class="n">GRB</span><span class="o">.</span><span class="n">MINIMIZE</span><span class="p">)</span>
+
+<span class="n">constraint_a</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addLConstr</span><span class="p">(</span><span class="n">g_1</span> <span class="o">==</span> <span class="n">m_12</span><span class="p">)</span>
+<span class="n">constraint_b</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addLConstr</span><span class="p">(</span><span class="o">-</span><span class="n">g_5</span> <span class="o">==</span> <span class="n">m_45</span><span class="p">)</span>
+<span class="n">constraint_c</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addLConstr</span><span class="p">(</span><span class="o">-</span><span class="n">d_4</span> <span class="o">==</span> <span class="o">-</span><span class="n">m_34</span><span class="o">+</span><span class="n">m_45</span><span class="p">)</span>
+<span class="n">constraint_d</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addLConstr</span><span class="p">(</span><span class="n">m_12</span> <span class="o">==</span> <span class="n">m_23</span><span class="p">)</span>
+<span class="n">constraint_e</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addLConstr</span><span class="p">(</span><span class="n">m_12</span> <span class="o">==</span> <span class="n">m_34</span><span class="p">)</span>
+<span class="n">constraint_f</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addLConstr</span><span class="p">(</span><span class="n">p_3</span> <span class="o">==</span> <span class="n">k_23</span><span class="o">*</span><span class="n">p_2</span><span class="p">)</span>
+
+<span class="c1"># We need to define additional constraints to use absolute values</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gurobipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">abs_</span>
+<span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">abs_m_12</span> <span class="o">==</span> <span class="n">abs_</span><span class="p">(</span><span class="n">m_12</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;abs_m_12&#39;</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">abs_m_34</span> <span class="o">==</span> <span class="n">abs_</span><span class="p">(</span><span class="n">m_34</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;abs_m_34&#39;</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">abs_m_45</span> <span class="o">==</span> <span class="n">abs_</span><span class="p">(</span><span class="n">m_45</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;abs_m_45&#39;</span><span class="p">)</span>
+<span class="n">constraint_g</span>  <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addQConstr</span><span class="p">(</span><span class="n">a_12</span><span class="o">*</span><span class="n">m_12</span><span class="o">*</span><span class="n">abs_m_12</span> <span class="o">==</span> <span class="n">p_1</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="n">p_2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">constraint_h</span>  <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addQConstr</span><span class="p">(</span><span class="n">a_34</span><span class="o">*</span><span class="n">m_34</span><span class="o">*</span><span class="n">abs_m_34</span> <span class="o">==</span> <span class="n">p_3</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="n">p_4</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">constraint_i</span>  <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addQConstr</span><span class="p">(</span><span class="n">a_45</span><span class="o">*</span><span class="n">m_45</span><span class="o">*</span><span class="n">abs_m_45</span> <span class="o">==</span> <span class="n">p_4</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="n">p_5</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set parameter Username
-Set parameter LicenseID to value 2767832
-Academic license - for non-commercial use only - expires 2027-01-20
+Set parameter LicenseID to value 2604332
+Academic license - for non-commercial use only - expires 2025-12-30
+Gurobi Optimizer version 12.0.0 build v12.0.0rc1 (win64 - Windows 11.0 (26100.2))
+
+CPU model: Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 6 rows, 14 columns and 12 nonzeros
+Model fingerprint: 0x2eae29bb
+Model has 3 quadratic constraints
+Model has 3 simple general constraints
+  3 ABS
+Variable types: 14 continuous, 0 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  QMatrix range    [1e+00, 6e+08]
+  Objective range  [5e+00, 2e+01]
+  Bounds range     [2e+08, 2e+08]
+  RHS range        [2e+08, 2e+08]
+Warning: Quadratic constraints contain large coefficients
+         Consider reformulating model or setting NumericFocus parameter
+         to avoid numerical issues.
+Presolve removed 5 rows and 8 columns
+Presolve time: 0.05s
+Presolved: 22 rows, 13 columns, 41 nonzeros
+Presolved model has 6 bilinear constraint(s)
+Warning: Model contains variables with very large bounds participating
+         in product terms.
+         Presolve was not able to compute smaller bounds for these variables.
+         Consider bounding these variables or reformulating the model.
+
+
+Solving non-convex MIQCP
+
+Variable types: 13 continuous, 0 integer (0 binary)
+
+Root relaxation: objective 3.000000e+09, 1 iterations, 0.01 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 3.0000e+09    0    1          - 3.0000e+09      -     -    0s
+     0     0 3.0000e+09    0    1          - 3.0000e+09      -     -    0s
+     0     2 3.0000e+09    0    1          - 3.0000e+09      -     -    0s
+ 226599  5403 3.0000e+09  433    2          - 3.0000e+09      -   0.3    5s
+ 497882  5766 infeasible  293               - 3.0000e+09      -   0.4   10s
+H598724   378                    3.000000e+09 3.0000e+09  0.00%   0.4   11s
+
+Explored 601882 nodes (215779 simplex iterations) in 11.72 seconds (0.69 work units)
+Thread count was 8 (of 8 available processors)
+
+Solution count 1: 3e+09 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 3.000000000000e+09, best bound 3.000000000000e+09, gap 0.0000%
 </pre></div>
 </div>
 </div>
 </div>
-<p>We start by building the network object that will contain the optimization problem</p>
+<p>We print the values of the variables in the solution</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span> <span class="o">=</span> <span class="n">pypsa</span><span class="o">.</span><span class="n">Network</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Add three buses of AC and heat carrier each</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Bus&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;electric bus </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">v_nom</span><span class="o">=</span><span class="mf">20.0</span><span class="p">)</span>
-    <span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Bus&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;heat bus </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;heat&quot;</span><span class="p">)</span>
-<span class="n">network</span><span class="o">.</span><span class="n">buses</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">g_1</span><span class="o">.</span><span class="n">VarName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">g_1</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">g_5</span><span class="o">.</span><span class="n">VarName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">g_5</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">m_12</span><span class="o">.</span><span class="n">VarName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">m_12</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">m_23</span><span class="o">.</span><span class="n">VarName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">m_23</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">m_34</span><span class="o">.</span><span class="n">VarName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">m_34</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">m_45</span><span class="o">.</span><span class="n">VarName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">m_45</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+                                   
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p_1</span><span class="o">.</span><span class="n">VarName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">p_1</span><span class="o">.</span><span class="n">x</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; Pa&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p_2</span><span class="o">.</span><span class="n">VarName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">p_2</span><span class="o">.</span><span class="n">x</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; Pa&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p_3</span><span class="o">.</span><span class="n">VarName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">p_3</span><span class="o">.</span><span class="n">x</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; Pa&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p_4</span><span class="o">.</span><span class="n">VarName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">p_4</span><span class="o">.</span><span class="n">x</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; Pa&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p_5</span><span class="o">.</span><span class="n">VarName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">p_5</span><span class="o">.</span><span class="n">x</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; Pa&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>v_nom</th>
-      <th>type</th>
-      <th>x</th>
-      <th>y</th>
-      <th>carrier</th>
-      <th>unit</th>
-      <th>location</th>
-      <th>v_mag_pu_set</th>
-      <th>v_mag_pu_min</th>
-      <th>v_mag_pu_max</th>
-      <th>control</th>
-      <th>generator</th>
-      <th>sub_network</th>
-    </tr>
-    <tr>
-      <th>name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>electric bus 0</th>
-      <td>20.0</td>
-      <td></td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>AC</td>
-      <td></td>
-      <td></td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>inf</td>
-      <td>PQ</td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>heat bus 0</th>
-      <td>1.0</td>
-      <td></td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>heat</td>
-      <td></td>
-      <td></td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>inf</td>
-      <td>PQ</td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>electric bus 1</th>
-      <td>20.0</td>
-      <td></td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>AC</td>
-      <td></td>
-      <td></td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>inf</td>
-      <td>PQ</td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>heat bus 1</th>
-      <td>1.0</td>
-      <td></td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>heat</td>
-      <td></td>
-      <td></td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>inf</td>
-      <td>PQ</td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>electric bus 2</th>
-      <td>20.0</td>
-      <td></td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>AC</td>
-      <td></td>
-      <td></td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>inf</td>
-      <td>PQ</td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>heat bus 2</th>
-      <td>1.0</td>
-      <td></td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>heat</td>
-      <td></td>
-      <td></td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>inf</td>
-      <td>PQ</td>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<p>Now, we add three transmission lines in a ring</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
-        <span class="s2">&quot;Line&quot;</span><span class="p">,</span>
-        <span class="sa">f</span><span class="s2">&quot;line </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="n">bus0</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;electric bus </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="n">bus1</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;electric bus </span><span class="si">{</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="n">x</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-        <span class="n">s_nom</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
-    <span class="p">)</span>
-<span class="n">network</span><span class="o">.</span><span class="n">lines</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>g_1 0.0023753316709413195
+g_5 199999999.99762452
+m_12 0.0023753316709413195
+m_23 0.0023753316709413195
+m_34 0.0023753316709413195
+m_45 -199999999.99762452
+p_1 79 Pa
+p_2 50 Pa
+p_3 60 Pa
+p_4 0 Pa
+p_5 5082173865214 Pa
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>bus0</th>
-      <th>bus1</th>
-      <th>type</th>
-      <th>x</th>
-      <th>r</th>
-      <th>g</th>
-      <th>b</th>
-      <th>s_nom</th>
-      <th>s_nom_mod</th>
-      <th>s_nom_extendable</th>
-      <th>...</th>
-      <th>v_ang_min</th>
-      <th>v_ang_max</th>
-      <th>sub_network</th>
-      <th>x_pu</th>
-      <th>r_pu</th>
-      <th>g_pu</th>
-      <th>b_pu</th>
-      <th>x_pu_eff</th>
-      <th>r_pu_eff</th>
-      <th>s_nom_opt</th>
-    </tr>
-    <tr>
-      <th>name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>line 0</th>
-      <td>electric bus 0</td>
-      <td>electric bus 1</td>
-      <td></td>
-      <td>0.1</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1000.0</td>
-      <td>0.0</td>
-      <td>False</td>
-      <td>...</td>
-      <td>-inf</td>
-      <td>inf</td>
-      <td></td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>line 1</th>
-      <td>electric bus 1</td>
-      <td>electric bus 2</td>
-      <td></td>
-      <td>0.1</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1000.0</td>
-      <td>0.0</td>
-      <td>False</td>
-      <td>...</td>
-      <td>-inf</td>
-      <td>inf</td>
-      <td></td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>line 2</th>
-      <td>electric bus 2</td>
-      <td>electric bus 0</td>
-      <td></td>
-      <td>0.1</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1000.0</td>
-      <td>0.0</td>
-      <td>False</td>
-      <td>...</td>
-      <td>-inf</td>
-      <td>inf</td>
-      <td></td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-  </tbody>
-</table>
-<p>3 rows × 32 columns</p>
-</div></div></div>
-</div>
-<p>We connect every electricity bus to its corresponding heat bus using a heat pump with Coefficient of Performance (COP) 3</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
-        <span class="s2">&quot;Link&quot;</span><span class="p">,</span>
-        <span class="sa">f</span><span class="s2">&quot;heat pump </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="n">bus0</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;electric bus </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="n">bus1</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;heat bus </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="n">p_nom</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-        <span class="n">efficiency</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span>
-    <span class="p">)</span>
-    
-<span class="n">network</span><span class="o">.</span><span class="n">links</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>bus0</th>
-      <th>bus1</th>
-      <th>type</th>
-      <th>carrier</th>
-      <th>efficiency</th>
-      <th>active</th>
-      <th>build_year</th>
-      <th>lifetime</th>
-      <th>p_nom</th>
-      <th>p_nom_mod</th>
-      <th>...</th>
-      <th>shut_down_cost</th>
-      <th>min_up_time</th>
-      <th>min_down_time</th>
-      <th>up_time_before</th>
-      <th>down_time_before</th>
-      <th>ramp_limit_up</th>
-      <th>ramp_limit_down</th>
-      <th>ramp_limit_start_up</th>
-      <th>ramp_limit_shut_down</th>
-      <th>p_nom_opt</th>
-    </tr>
-    <tr>
-      <th>name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>heat pump 0</th>
-      <td>electric bus 0</td>
-      <td>heat bus 0</td>
-      <td></td>
-      <td></td>
-      <td>3.0</td>
-      <td>True</td>
-      <td>0</td>
-      <td>inf</td>
-      <td>100.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>heat pump 1</th>
-      <td>electric bus 1</td>
-      <td>heat bus 1</td>
-      <td></td>
-      <td></td>
-      <td>3.0</td>
-      <td>True</td>
-      <td>0</td>
-      <td>inf</td>
-      <td>100.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>heat pump 2</th>
-      <td>electric bus 2</td>
-      <td>heat bus 2</td>
-      <td></td>
-      <td></td>
-      <td>3.0</td>
-      <td>True</td>
-      <td>0</td>
-      <td>inf</td>
-      <td>100.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-    </tr>
-  </tbody>
-</table>
-<p>3 rows × 35 columns</p>
-</div></div></div>
-</div>
-<p>We add a gas generator at electric bus 0 and a boiler at all heat buses</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
-    <span class="s2">&quot;Generator&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;gas generator&quot;</span><span class="p">,</span>
-    <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;electric bus 0&quot;</span><span class="p">,</span>
-    <span class="n">p_nom</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-    <span class="n">marginal_cost</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
-    <span class="n">efficiency</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
-        <span class="s2">&quot;Generator&quot;</span><span class="p">,</span>
-        <span class="sa">f</span><span class="s2">&quot;boiler </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="n">bus</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;heat bus </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="n">p_nom</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
-        <span class="n">efficiency</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span>
-        <span class="n">marginal_cost</span><span class="o">=</span><span class="mf">20.0</span><span class="p">,</span>
-        <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;gas&quot;</span><span class="p">,</span>
-    <span class="p">)</span>
-
-<span class="n">network</span><span class="o">.</span><span class="n">generators</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>bus</th>
-      <th>control</th>
-      <th>type</th>
-      <th>p_nom</th>
-      <th>p_nom_mod</th>
-      <th>p_nom_extendable</th>
-      <th>p_nom_min</th>
-      <th>p_nom_max</th>
-      <th>p_nom_set</th>
-      <th>p_min_pu</th>
-      <th>...</th>
-      <th>min_up_time</th>
-      <th>min_down_time</th>
-      <th>up_time_before</th>
-      <th>down_time_before</th>
-      <th>ramp_limit_up</th>
-      <th>ramp_limit_down</th>
-      <th>ramp_limit_start_up</th>
-      <th>ramp_limit_shut_down</th>
-      <th>weight</th>
-      <th>p_nom_opt</th>
-    </tr>
-    <tr>
-      <th>name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>gas generator</th>
-      <td>electric bus 0</td>
-      <td>PQ</td>
-      <td></td>
-      <td>100.0</td>
-      <td>0.0</td>
-      <td>False</td>
-      <td>0.0</td>
-      <td>inf</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>boiler 0</th>
-      <td>heat bus 0</td>
-      <td>PQ</td>
-      <td></td>
-      <td>1000.0</td>
-      <td>0.0</td>
-      <td>False</td>
-      <td>0.0</td>
-      <td>inf</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>boiler 1</th>
-      <td>heat bus 1</td>
-      <td>PQ</td>
-      <td></td>
-      <td>1000.0</td>
-      <td>0.0</td>
-      <td>False</td>
-      <td>0.0</td>
-      <td>inf</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>boiler 2</th>
-      <td>heat bus 2</td>
-      <td>PQ</td>
-      <td></td>
-      <td>1000.0</td>
-      <td>0.0</td>
-      <td>False</td>
-      <td>0.0</td>
-      <td>inf</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-    </tr>
-  </tbody>
-</table>
-<p>4 rows × 38 columns</p>
-</div></div></div>
-</div>
-<p>Add electric loads and heat loads.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
-        <span class="s2">&quot;Load&quot;</span><span class="p">,</span>
-        <span class="sa">f</span><span class="s2">&quot;electric load </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="n">bus</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;electric bus </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="n">p_set</span><span class="o">=</span><span class="n">i</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="p">)</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
-        <span class="s2">&quot;Load&quot;</span><span class="p">,</span>
-        <span class="sa">f</span><span class="s2">&quot;heat load </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="n">bus</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;heat bus </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="n">p_set</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="p">)</span>
-
-<span class="n">network</span><span class="o">.</span><span class="n">loads</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>bus</th>
-      <th>carrier</th>
-      <th>type</th>
-      <th>p_set</th>
-      <th>q_set</th>
-      <th>sign</th>
-      <th>active</th>
-    </tr>
-    <tr>
-      <th>name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>electric load 0</th>
-      <td>electric bus 0</td>
-      <td></td>
-      <td></td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>-1.0</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>electric load 1</th>
-      <td>electric bus 1</td>
-      <td></td>
-      <td></td>
-      <td>10.0</td>
-      <td>0.0</td>
-      <td>-1.0</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>electric load 2</th>
-      <td>electric bus 2</td>
-      <td></td>
-      <td></td>
-      <td>20.0</td>
-      <td>0.0</td>
-      <td>-1.0</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>heat load 0</th>
-      <td>heat bus 0</td>
-      <td></td>
-      <td></td>
-      <td>30.0</td>
-      <td>0.0</td>
-      <td>-1.0</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>heat load 1</th>
-      <td>heat bus 1</td>
-      <td></td>
-      <td></td>
-      <td>20.0</td>
-      <td>0.0</td>
-      <td>-1.0</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>heat load 2</th>
-      <td>heat bus 2</td>
-      <td></td>
-      <td></td>
-      <td>10.0</td>
-      <td>0.0</td>
-      <td>-1.0</td>
-      <td>True</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.consistency:The following buses have carriers which are not defined:
-Index([&#39;electric bus 0&#39;, &#39;heat bus 0&#39;, &#39;electric bus 1&#39;, &#39;heat bus 1&#39;,
-       &#39;electric bus 2&#39;, &#39;heat bus 2&#39;],
-      dtype=&#39;object&#39;, name=&#39;name&#39;)
-WARNING:pypsa.consistency:The following generators have carriers which are not defined:
-Index([&#39;boiler 0&#39;, &#39;boiler 1&#39;, &#39;boiler 2&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
-WARNING:pypsa.consistency:The following links have carriers which are not defined:
-Index([&#39;heat pump 0&#39;, &#39;heat pump 1&#39;, &#39;heat pump 2&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
-WARNING:pypsa.consistency:The following lines have carriers which are not defined:
-Index([&#39;line 0&#39;, &#39;line 1&#39;, &#39;line 2&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
-WARNING:pypsa.consistency:The following lines have zero r, which could break the linear load flow:
-Index([&#39;line 0&#39;, &#39;line 1&#39;, &#39;line 2&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
-INFO:linopy.model: Solve problem using Highs solver
-INFO:linopy.io: Writing time: 0.59s
-INFO:linopy.constants: Optimization successful: 
-Status: ok
-Termination condition: optimal
-Solution: 10 primals, 27 duals
-Objective: 2.50e+03
-Solver model: available
-Solver message: Optimal
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.12.0 (git hash: n/a): Copyright (c) 2025 HiGHS under MIT licence terms
-LP linopy-problem-uolxb8d7 has 27 rows; 10 cols; 39 nonzeros
-Coefficient ranges:
-  Matrix  [1e+00, 2e+01]
-  Cost    [2e+01, 5e+01]
-  Bound   [0e+00, 0e+00]
-  RHS     [1e+01, 1e+03]
-Presolving model
-4 rows, 7 cols, 13 nonzeros  0s
-3 rows, 6 cols, 11 nonzeros  0s
-2 rows, 5 cols, 7 nonzeros  0s
-1 rows, 4 cols, 4 nonzeros  0s
-0 rows, 0 cols, 0 nonzeros  0s
-Presolve reductions: rows 0(-27); columns 0(-10); nonzeros 0(-39) - Reduced to empty
-Performed postsolve
-Solving the original LP from the solution after postsolve
-
-Model name          : linopy-problem-uolxb8d7
-Model status        : Optimal
-Objective value     :  2.5000000000e+03
-P-D objective error :  9.0931283921e-17
-HiGHS run time      :          0.00
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-fix-p-lower, Generator-fix-p-upper, Line-fix-s-lower, Line-fix-s-upper, Link-fix-p-lower, Link-fix-p-upper, Kirchhoff-Voltage-Law were not assigned to the network.
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;ok&#39;, &#39;optimal&#39;)
-</pre></div>
-</div>
-</div>
-</div>
-<p>We can calculate and plot the energy produced by every boiler, heat pumps and trasmitted through the lines</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">demands</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">loads_t</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;now&quot;</span><span class="p">]</span>
-<span class="n">generators</span> <span class="o">=</span>  <span class="n">network</span><span class="o">.</span><span class="n">generators_t</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;now&quot;</span><span class="p">]</span>
-<span class="n">links</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">links_t</span><span class="o">.</span><span class="n">p0</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;now&quot;</span><span class="p">]</span>
-<span class="n">lines</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">lines_t</span><span class="o">.</span><span class="n">p0</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;now&quot;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generators</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;name&#39;&gt;
-</pre></div>
-</div>
-<img alt="../_images/1e8d6c3efab7bf95e8b477ed0d7aa128f118df68e09bd5e87127bb7e0b86f1d0.png" src="../_images/1e8d6c3efab7bf95e8b477ed0d7aa128f118df68e09bd5e87127bb7e0b86f1d0.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">links</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;name&#39;&gt;
-</pre></div>
-</div>
-<img alt="../_images/20ed9d50aa3be8c73d218822f6740635adbc2fea8265b4b555983bd95c321192.png" src="../_images/20ed9d50aa3be8c73d218822f6740635adbc2fea8265b4b555983bd95c321192.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lines</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;name&#39;&gt;
-</pre></div>
-</div>
-<img alt="../_images/e273819bffb1fe3be134d1ab2a88fe589d2137b79141891f073a276beab7e620.png" src="../_images/e273819bffb1fe3be134d1ab2a88fe589d2137b79141891f073a276beab7e620.png" />
-</div>
-</div>
-<p><strong>(b) Repeat (a) assuming that the marginal cost of heat pumps is 10 EUR/MWh.</strong></p>
-<p>We update the marginal cost of heat pumps and redo the optimization</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">marginal_cost</span> <span class="o">=</span> <span class="mi">10</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
-
-<span class="n">demands</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">loads_t</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;now&quot;</span><span class="p">]</span>
-<span class="n">generators</span> <span class="o">=</span>  <span class="n">network</span><span class="o">.</span><span class="n">generators_t</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;now&quot;</span><span class="p">]</span>
-<span class="n">links</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">links_t</span><span class="o">.</span><span class="n">p0</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;now&quot;</span><span class="p">]</span>
-<span class="n">lines</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">lines_t</span><span class="o">.</span><span class="n">p0</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;now&quot;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.consistency:The following buses have carriers which are not defined:
-Index([&#39;electric bus 0&#39;, &#39;heat bus 0&#39;, &#39;electric bus 1&#39;, &#39;heat bus 1&#39;,
-       &#39;electric bus 2&#39;, &#39;heat bus 2&#39;],
-      dtype=&#39;object&#39;, name=&#39;name&#39;)
-WARNING:pypsa.consistency:The following generators have carriers which are not defined:
-Index([&#39;boiler 0&#39;, &#39;boiler 1&#39;, &#39;boiler 2&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
-WARNING:pypsa.consistency:The following links have carriers which are not defined:
-Index([&#39;heat pump 0&#39;, &#39;heat pump 1&#39;, &#39;heat pump 2&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
-WARNING:pypsa.consistency:The following lines have carriers which are not defined:
-Index([&#39;line 0&#39;, &#39;line 1&#39;, &#39;line 2&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
-WARNING:pypsa.consistency:The following lines have zero r, which could break the linear load flow:
-Index([&#39;line 0&#39;, &#39;line 1&#39;, &#39;line 2&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
-WARNING:pypsa.consistency:The following sub_networks have carriers which are not defined:
-Index([&#39;0&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
-INFO:linopy.model: Solve problem using Highs solver
-INFO:linopy.io: Writing time: 0.51s
-INFO:linopy.constants: Optimization successful: 
-Status: ok
-Termination condition: optimal
-Solution: 10 primals, 27 duals
-Objective: 2.70e+03
-Solver model: available
-Solver message: Optimal
-
-INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-fix-p-lower, Generator-fix-p-upper, Line-fix-s-lower, Line-fix-s-upper, Link-fix-p-lower, Link-fix-p-upper, Kirchhoff-Voltage-Law were not assigned to the network.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.12.0 (git hash: n/a): Copyright (c) 2025 HiGHS under MIT licence terms
-LP linopy-problem-dg83ga85 has 27 rows; 10 cols; 39 nonzeros
-Coefficient ranges:
-  Matrix  [1e+00, 2e+01]
-  Cost    [1e+01, 5e+01]
-  Bound   [0e+00, 0e+00]
-  RHS     [1e+01, 1e+03]
-Presolving model
-4 rows, 7 cols, 13 nonzeros  0s
-3 rows, 6 cols, 11 nonzeros  0s
-2 rows, 5 cols, 7 nonzeros  0s
-1 rows, 4 cols, 4 nonzeros  0s
-0 rows, 0 cols, 0 nonzeros  0s
-Presolve reductions: rows 0(-27); columns 0(-10); nonzeros 0(-39) - Reduced to empty
-Performed postsolve
-Solving the original LP from the solution after postsolve
-
-Model name          : linopy-problem-dg83ga85
-Model status        : Optimal
-Objective value     :  2.7000000000e+03
-P-D objective error :  0.0000000000e+00
-HiGHS run time      :          0.00
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generators</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;name&#39;&gt;
-</pre></div>
-</div>
-<img alt="../_images/db1af3792618206705f361526f3a26ac41ef79910f8efac93f4eeaccd4704e36.png" src="../_images/db1af3792618206705f361526f3a26ac41ef79910f8efac93f4eeaccd4704e36.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">links</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;name&#39;&gt;
-</pre></div>
-</div>
-<img alt="../_images/5f10840244c35aae86617a92da72d6456b9e5d16bb1a0ba48fd109f3924098ff.png" src="../_images/5f10840244c35aae86617a92da72d6456b9e5d16bb1a0ba48fd109f3924098ff.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lines</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;name&#39;&gt;
-</pre></div>
-</div>
-<img alt="../_images/3dd836a3e9ba91901cec7241bf44434dfa20f57e0569df31583ffcee4f3a4f4a.png" src="../_images/3dd836a3e9ba91901cec7241bf44434dfa20f57e0569df31583ffcee4f3a4f4a.png" />
 </div>
 </div>
 </section>
