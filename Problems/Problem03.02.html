@@ -64,6 +64,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction to networkx" href="../intro-networkx.html" />
+    <link rel="prev" title="Problem 3.1" href="Problem03.01.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -126,8 +128,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -183,7 +183,7 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../intro-install.html">Python and Conda</a></li>
 
 
@@ -206,6 +206,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../intro-linopy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">linopy</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="Problem02.02.html">Problem 2.2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Problem02.03.html">Problem 2.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem03.01.html">Problem 3.1</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Problem 3.2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-networkx.html">Introduction to <code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-pypsa.html">Introduction to <code class="docutils literal notranslate"><span class="pre">pypsa</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-gurobipy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">gurobipy</span></code></a></li>
@@ -458,9 +460,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="problem-3-2">
 <h1>Problem 3.2<a class="headerlink" href="#problem-3-2" title="Link to this heading">#</a></h1>
 <p><strong>Integrated Energy Grids</strong></p>
-<p><strong>Optimise the model described in Problem 3.1 without the CCGT generator.</strong></p>
-<p><strong>a) Calculate the revenues collected by the OCGT plant throughout the year and show that their sum is equal to its costs.</strong></p>
-<p><strong>b) Solve the problem for different CO<span class="math notranslate nohighlight">\(_2\)</span> values ranging from 5 MtCO2/year to zero. Plot the total system cost and the required CO<span class="math notranslate nohighlight">\(_2\)</span> prices as a function of the emissions allowance.</strong></p>
+<p><strong>Optimise the model described in Problem 3.1 without the CCGT generator. Calculate the revenues collected by the OCGT plant throughout the year and show that their sum is equal to its costs.</strong></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you have not yet set up Python on your computer, you can execute this tutorial in your browser via <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>. Click on the rocket in the top right corner and launch “Colab”. If that doesn’t work download the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file and import it in <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>.</p>
@@ -496,7 +496,7 @@ Academic license - for non-commercial use only - expires 2027-01-20
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">year</span> <span class="o">=</span> <span class="mi">2030</span>
-<span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://raw.githubusercontent.com/PyPSA/technology-data/master/outputs/costs_</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">.csv&quot;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://raw.githubusercontent.com/PyPSA/technology-data/v0.11.0/outputs/costs_</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">.csv&quot;</span>
 <span class="n">costs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -514,15 +514,12 @@ Academic license - for non-commercial use only - expires 2027-01-20
     <span class="s2">&quot;fuel&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">&quot;investment&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">&quot;lifetime&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
-    <span class="s2">&quot;CO2 intensity&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">&quot;discount rate&quot;</span><span class="p">:</span> <span class="mf">0.07</span><span class="p">,</span>
 <span class="p">}</span>
 <span class="n">costs</span> <span class="o">=</span> <span class="n">costs</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">defaults</span><span class="p">)</span>
 
 <span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;OCGT&quot;</span><span class="p">,</span> <span class="s2">&quot;fuel&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;gas&quot;</span><span class="p">,</span> <span class="s2">&quot;fuel&quot;</span><span class="p">]</span>
 <span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;CCGT&quot;</span><span class="p">,</span> <span class="s2">&quot;fuel&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;gas&quot;</span><span class="p">,</span> <span class="s2">&quot;fuel&quot;</span><span class="p">]</span>
-<span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;OCGT&quot;</span><span class="p">,</span> <span class="s2">&quot;CO2 intensity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;gas&quot;</span><span class="p">,</span> <span class="s2">&quot;CO2 intensity&quot;</span><span class="p">]</span>
-<span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;CCGT&quot;</span><span class="p">,</span> <span class="s2">&quot;CO2 intensity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;gas&quot;</span><span class="p">,</span> <span class="s2">&quot;CO2 intensity&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -597,18 +594,6 @@ a(r, n) = \frac{r}{1-(1+r)^{-n}}
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(51346.82981964593)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;OCGT&quot;</span><span class="p">,</span> <span class="s2">&quot;CO2 intensity&quot;</span><span class="p">]</span> <span class="c1">#tCO2/MWh_th</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.198)
 </pre></div>
 </div>
 </div>
@@ -883,15 +868,13 @@ The Pandas package is used as a convenient way of managing the datasets.</p>
     <span class="s2">&quot;onwind&quot;</span><span class="p">,</span>
     <span class="s2">&quot;solar&quot;</span><span class="p">,</span>
     <span class="s2">&quot;OCGT&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;CCGT&quot;</span><span class="p">,</span>
     <span class="s2">&quot;battery storage&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
     <span class="s2">&quot;Carrier&quot;</span><span class="p">,</span>
     <span class="n">carriers</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;dodgerblue&quot;</span><span class="p">,</span> <span class="s2">&quot;gold&quot;</span><span class="p">,</span> <span class="s2">&quot;indianred&quot;</span><span class="p">,</span><span class="s2">&quot;yellow-green&quot;</span><span class="p">,</span> <span class="s2">&quot;brown&quot;</span><span class="p">],</span>
-    <span class="n">co2_emissions</span><span class="o">=</span><span class="p">[</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="s2">&quot;CO2 intensity&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">carriers</span><span class="p">],</span>
+    <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;dodgerblue&quot;</span><span class="p">,</span> <span class="s2">&quot;gold&quot;</span><span class="p">,</span> <span class="s2">&quot;indianred&quot;</span><span class="p">,</span> <span class="s2">&quot;brown&quot;</span><span class="p">],</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -1005,21 +988,7 @@ The Pandas package is used as a convenient way of managing the datasets.</p>
 </section>
 <section id="model-run">
 <h3>Model Run<a class="headerlink" href="#model-run" title="Link to this heading">#</a></h3>
-<p>Before solving the problem we add a CO<span class="math notranslate nohighlight">\(_2\)</span> emission limit as global constraint:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
-    <span class="s2">&quot;GlobalConstraint&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;CO2Limit&quot;</span><span class="p">,</span>
-    <span class="n">carrier_attribute</span><span class="o">=</span><span class="s2">&quot;co2_emissions&quot;</span><span class="p">,</span>
-    <span class="n">sense</span><span class="o">=</span><span class="s2">&quot;&lt;=&quot;</span><span class="p">,</span>
-    <span class="n">constant</span><span class="o">=</span><span class="mi">5000000</span><span class="p">,</span> <span class="c1">#5MtCO2</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>We can already solved the model using the open-solver “highs” or the commercial solver “gurobi” with the academic license</p>
+<p>We can already solve the model using the open-solver “highs” or the commercial solver “gurobi” with the academic license</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">solver_name</span><span class="o">=</span><span class="s2">&quot;highs&quot;</span><span class="p">)</span>
@@ -1031,56 +1000,52 @@ The Pandas package is used as a convenient way of managing the datasets.</p>
 Index([&#39;electricity&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
 INFO:linopy.model: Solve problem using Highs solver
 INFO:linopy.io:Writing objective.
-Writing constraints.: 100%|██████████| 13/13 [00:00&lt;00:00, 39.10it/s]
-Writing continuous variables.: 100%|██████████| 6/6 [00:00&lt;00:00, 208.27it/s]
-INFO:linopy.io: Writing time: 0.4s
+Writing constraints.: 100%|██████████| 12/12 [00:00&lt;00:00, 98.91it/s] 
+Writing continuous variables.: 100%|██████████| 6/6 [00:00&lt;00:00, 643.22it/s]
+INFO:linopy.io: Writing time: 0.16s
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.12.0 (git hash: n/a): Copyright (c) 2025 HiGHS under MIT licence terms
-LP linopy-problem-xoq0exi7 has 122645 rows; 52564 cols; 240922 nonzeros
+LP linopy-problem-30llxduv has 122644 rows; 52564 cols; 232162 nonzeros
 Coefficient ranges:
   Matrix  [1e-03, 2e+00]
   Cost    [1e-02, 1e+05]
   Bound   [0e+00, 0e+00]
-  RHS     [3e+03, 5e+06]
-WARNING: Problem has some excessively large row bounds
-WARNING:    Consider scaling the    bounds by 1e-1, or setting the user_bound_scale option to -3
+  RHS     [3e+03, 9e+03]
 Presolving model
-65719 rows, 48202 cols, 179634 nonzeros  0s
+65718 rows, 48202 cols, 170874 nonzeros  0s
 Dependent equations search running on 17520 equations with time limit of 1000.00s
 Dependent equations search removed 0 rows and 0 nonzeros in 0.00s (limit = 1000.00s)
-65719 rows, 48202 cols, 179634 nonzeros  0s
-Presolve reductions: rows 65719(-56926); columns 48202(-4362); nonzeros 179634(-61288) 
+65718 rows, 48202 cols, 170874 nonzeros  0s
+Presolve reductions: rows 65718(-56926); columns 48202(-4362); nonzeros 170874(-61288) 
 Solving the presolved LP
 Using EKK dual simplex solver - serial
   Iteration        Objective     Infeasibilities num(sum)
           0     0.0000000000e+00 Pr: 8760(4.89297e+07) 0s
-      28897     2.2959038837e+09 Pr: 11445(2.00766e+08); Du: 0(2.11026e-07) 5s
-      47025     3.4196838906e+09 Pr: 39682(1.01297e+09); Du: 0(6.57671e-08) 10s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:linopy.constants: Optimization successful: 
 Status: ok
 Termination condition: optimal
-Solution: 52564 primals, 122645 duals
-Objective: 3.48e+09
+Solution: 52564 primals, 122644 duals
+Objective: 3.10e+09
 Solver model: available
 Solver message: Optimal
 
 INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-ext-p-lower, Generator-ext-p-upper, StorageUnit-ext-p_dispatch-lower, StorageUnit-ext-p_dispatch-upper, StorageUnit-ext-p_store-lower, StorageUnit-ext-p_store-upper, StorageUnit-ext-state_of_charge-lower, StorageUnit-ext-state_of_charge-upper, StorageUnit-energy_balance were not assigned to the network.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      51357     3.4750583556e+09 Pr: 0(0); Du: 0(2.43844e-10) 13s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      50549     3.1045882797e+09 Pr: 0(0); Du: 0(8.6763e-12) 2s
 
 Performed postsolve
 Solving the original LP from the solution after postsolve
 
-Model name          : linopy-problem-xoq0exi7
+Model name          : linopy-problem-30llxduv
 Model status        : Optimal
-Simplex   iterations: 51357
-Objective value     :  3.4750583556e+09
-P-D objective error :  5.6945064046e-15
-HiGHS run time      :         13.04
+Simplex   iterations: 50549
+Objective value     :  3.1045882797e+09
+P-D objective error :  5.5292799386e-15
+HiGHS run time      :          2.30
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;ok&#39;, &#39;optimal&#39;)
@@ -1096,71 +1061,12 @@ HiGHS run time      :         13.04
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.4750583556344865
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.104588279721309
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">global_constraints</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>type</th>
-      <th>investment_period</th>
-      <th>bus</th>
-      <th>carrier_attribute</th>
-      <th>sense</th>
-      <th>constant</th>
-      <th>mu</th>
-    </tr>
-    <tr>
-      <th>name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>CO2Limit</th>
-      <td>primary_energy</td>
-      <td>NaN</td>
-      <td></td>
-      <td>co2_emissions</td>
-      <td>&lt;=</td>
-      <td>5000000.0</td>
-      <td>-107.043318</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<p><strong>a) Calculate the revenues collected by the OCGT plant throughout the year and show that their sum is equal to its costs.</strong></p>
+<p><strong>Calculate the revenues collected by the OCGT plant throughout the year and show that their sum is equal to its costs.</strong></p>
 <p>To calculate the revenues collected by every technology, we multiply the energy generated in every hour by the electricity price in that hour and sum for the entire year.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1170,30 +1076,15 @@ HiGHS run time      :         13.04
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>name
-OCGT      1419.474028
-onwind    1346.159208
-solar      673.717868
+OCGT      2110.448407
+onwind     534.317737
+solar      440.925417
 dtype: float64
 </pre></div>
 </div>
 </div>
 </div>
-<p>To calculate the tax paid by the OCGT generator, we mutiply the sum of the energy generated by its emission factor, and the CO2 price.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="o">.</span><span class="n">global_constraints</span><span class="o">.</span><span class="n">mu</span><span class="p">)</span><span class="o">*</span><span class="n">n</span><span class="o">.</span><span class="n">generators_t</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">sum</span><span class="p">()[</span><span class="s1">&#39;OCGT&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;OCGT&quot;</span><span class="p">,</span> <span class="s2">&quot;CO2 intensity&quot;</span><span class="p">]</span><span class="o">/</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;OCGT&quot;</span><span class="p">,</span> <span class="s2">&quot;efficiency&quot;</span><span class="p">]</span><span class="o">*</span><span class="mf">0.000001</span> <span class="c1">#tCO2/MtCO2</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>name
-CO2Limit    535.21659
-Name: mu, dtype: float64
-</pre></div>
-</div>
-</div>
-</div>
-<p>The market revenues, minus what is paid in CO2 tax,corresponds to the total cost for OCGT, which we can also read using the statistics module:</p>
+<p>The market revenues correspond to the total cost for OCGT, which we can also read using the statistics module:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">capex</span><span class="p">()</span> <span class="o">+</span> <span class="n">n</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">opex</span><span class="p">())</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="mf">1e6</span><span class="p">)</span>
@@ -1202,9 +1093,9 @@ Name: mu, dtype: float64
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>component    carrier        
-Generator    OCGT                884.257438
-             onwind             1346.159208
-             solar               673.717868
+Generator    OCGT               2110.448407
+             onwind              534.317737
+             solar               440.925417
 StorageUnit  battery storage            NaN
 dtype: float64
 </pre></div>
@@ -1245,6 +1136,24 @@ dtype: float64
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="Problem03.01.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Problem 3.1</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../intro-networkx.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction to <code class="docutils literal notranslate"><span class="pre">networkx</span></code></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
