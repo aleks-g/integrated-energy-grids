@@ -4,7 +4,7 @@
 \usepackage{hyperref}
 \title{IEG_Problems_Lecture1}
 \author{martavictoriaperez }
-\date{January 2025}
+\date{February 2026}
 
 \usepackage[margin=1in]{geometry} 
 \usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
@@ -17,14 +17,14 @@
 
 \begin{document}
  
-\title{\textbf{Lecture 4: DC Optimal Power Flow}}
+\title{\textbf{Lecture 5: DC Optimal Power Flow}}
 \author{
 %Your name\\
 DTU Course 46770: Integrated Energy Grids }
 \maketitle
-\begin{problem}{4.1}
+\begin{problem}{5.1}
 
-This is a continuation of Problem 3.2 from Lecture 3.
+This is a continuation of Problem 4.2 from Lecture 4.
 
 Let us assume now that we are in an hour with an excess of wind generation in Denmark and a deficit in other countries so that the power injection $p_i$ of the different countries is as follows:
 
@@ -38,7 +38,7 @@ Determine the voltage angles $\theta_i$  and the flows $p_l$ in the lines of the
 
 \
 
-\textit{Hint 1: Remember the relations between power injection $p_i$ in every node and power flows $p_l$ presented in Lecture 4.}
+\textit{Hint 1: Remember the relations between power injection $p_i$ in every node and power flows $p_l$ presented in Lecture 5.}
 
 $p_i=\sum_j {L_{ij} \theta_j } $
 
@@ -60,15 +60,15 @@ Hint 2: you can use \href{https://numpy.org/doc/2.1/reference/generated/numpy.li
 
 \
 
-\begin{problem}{4.2}
+\begin{problem}{5.2}
 
-This is a continuation of Problem 3.2 from Lecture 3.
+This is a continuation of Problem 4.2 from Lecture 4.
 
 \begin{itemize}
 
 \item[a)] Assuming that the reactance in the links is $x_l$=1, calculate the Power Transfer Distribution Factor (PTDF) matrix.
 
-\item[b)] Assuming the power injection pattern described in Problem 4.1 determine the flows in the lines of the network. 
+\item[b)] Assuming the power injection pattern described in Problem 5.1 determine the flows in the lines of the network. 
 
 \end{itemize}
 
@@ -77,14 +77,14 @@ This is a continuation of Problem 3.2 from Lecture 3.
 \
 
 
-\begin{problem}{4.3}
-This is a continuation of Problem 3.3 from Lecture 3.
+\begin{problem}{5.3}
+This is a continuation of Problem 4.3 from Lecture 4.
 Using the Python package \href{https://networkx.org/}{networkX}.
 
 \begin{itemize}
 \item[a)] Assuming that the reactance in the links is $x_l$=1, calculate the Power Transfer Distribution Factor (PTDF) matrix.
 
-\item[b)] Assuming the power injection pattern described in Problem 4.1 determine the power flows in the lines of the network and plot them.
+\item[b)] Assuming the power injection pattern described in Problem 5.1 determine the power flows in the lines of the network and plot them.
 
 \item[c)] Assume now that the links unitary reactance is $x_{l}$=[1, 0.5, 0.5, 0.5, 1], calculate the weighted Laplacian (or susceptance matrix),  the PTDF matrix, the power flows and plot them. 
 
@@ -94,8 +94,8 @@ Using the Python package \href{https://networkx.org/}{networkX}.
 
 \
 
-\begin{problem}{4.4}
-This is a continuation of Problem 3.4 from Lecture 3. For the synchronous zone corresponding to Scandinavia:
+\begin{problem}{5.4}
+This is a continuation of Problem 4.4 from Lecture 4. For the synchronous zone corresponding to Scandinavia:
 
 \begin{itemize}
 \item[a)] Add to the network object the information on the links susceptance, calculate the weighted Laplacian (or susceptance matrix), and the Power Transfer Distribution Factor (PTDF) matrix.
@@ -114,4 +114,3 @@ This is a continuation of Problem 3.4 from Lecture 3. For the synchronous zone c
 
 
  
-
