@@ -210,6 +210,10 @@
 <li class="toctree-l1"><a class="reference internal" href="Problem03.02.html">Problem 3.2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-networkx.html">Introduction to <code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-pypsa.html">Introduction to <code class="docutils literal notranslate"><span class="pre">pypsa</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.01.html">Problem 4.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.02.html">Problem 4.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.03.html">Problem 4.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.04.html">Problem 4.4</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-gurobipy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">gurobipy</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="IEG_course_project.html">Course project</a></li>
 
@@ -490,11 +494,11 @@ Academic license - for non-commercial use only - expires 2027-01-20
 </div>
 <section id="prerequisites-handling-technology-data-and-costs">
 <h2>Prerequisites: handling technology data and costs<a class="headerlink" href="#prerequisites-handling-technology-data-and-costs" title="Link to this heading">#</a></h2>
-<p>We maintain a database (<a class="github reference external" href="https://github.com/PyPSA/technology-data">PyPSA/technology-data</a>) which collects assumptions and projections for energy system technologies (such as costs, efficiencies, lifetimes, etc.) for given years, which we can load into a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>. This requires some pre-processing to load (e.g. converting units, setting defaults, re-arranging dimensions):</p>
+<p>We maintain a database (<a class="github reference external" href="https://github.com/PyPSA/technology-data/tree/v0.11.0">PyPSA/technology-data</a>, v0.11.0) which collects assumptions and projections for energy system technologies (such as costs, efficiencies, lifetimes, etc.) for given years, which we can load into a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>. This requires some pre-processing to load (e.g. converting units, setting defaults, re-arranging dimensions):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">year</span> <span class="o">=</span> <span class="mi">2030</span>
-<span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://raw.githubusercontent.com/PyPSA/technology-data/master/outputs/costs_</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">.csv&quot;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://raw.githubusercontent.com/PyPSA/technology-data/v0.11.0/outputs/costs_</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">.csv&quot;</span>
 <span class="n">costs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -880,17 +884,15 @@ WARNING:pypsa.consistency:The following links have carriers which are not define
 Index([&#39;electrolysis&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
 WARNING:pypsa.consistency:The following stores have carriers which are not defined:
 Index([&#39;hydrogen store&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:linopy.model: Solve problem using Highs solver
+INFO:linopy.model: Solve problem using Highs solver
 INFO:linopy.io:Writing objective.
-Writing constraints.: 100%|██████████| 11/11 [00:00&lt;00:00, 11.26it/s]
-Writing continuous variables.: 100%|██████████| 7/7 [00:00&lt;00:00, 105.77it/s]
-INFO:linopy.io: Writing time: 1.24s
+Writing constraints.: 100%|██████████| 11/11 [00:00&lt;00:00, 68.38it/s]
+Writing continuous variables.: 100%|██████████| 7/7 [00:00&lt;00:00, 533.05it/s]
+INFO:linopy.io: Writing time: 0.3s
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.12.0 (git hash: n/a): Copyright (c) 2025 HiGHS under MIT licence terms
-LP linopy-problem-_plxxc4z has 78843 rows; 35043 cols; 140163 nonzeros
+LP linopy-problem-tb_anm0b has 78843 rows; 35043 cols; 140163 nonzeros
 Coefficient ranges:
   Matrix  [3e-03, 1e+00]
   Cost    [2e-02, 2e+05]
@@ -906,22 +908,7 @@ Solving the presolved LP
 Using EKK dual simplex solver - serial
   Iteration        Objective     Infeasibilities num(sum)
           0     0.0000000000e+00 Pr: 8760(200000) 0s
-       7875     4.5185530675e+03 Pr: 5916(5.49299e+07) 5s
-      12932     1.0221487803e+04 Pr: 3381(5.44112e+07) 10s
-      16855     1.8491863054e+04 Pr: 666(5.68404e+06) 15s
-      18284     2.0416651462e+07 Pr: 7064(321699) 21s
-      18984     2.5679870050e+07 Pr: 637(18654.3) 26s
-      19987     2.7120673406e+07 Pr: 0(0) 28s
-
-Performed postsolve
-Solving the original LP from the solution after postsolve
-
-Model name          : linopy-problem-_plxxc4z
-Model status        : Optimal
-Simplex   iterations: 19987
-Objective value     :  2.7120673406e+07
-P-D objective error :  1.1600034969e-13
-HiGHS run time      :         28.26
+      17734     1.7208919678e+07 Pr: 7618(321764) 5s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:linopy.constants: Optimization successful: 
@@ -933,6 +920,19 @@ Solver model: available
 Solver message: Optimal
 
 INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-ext-p-lower, Generator-ext-p-upper, Link-ext-p-lower, Link-ext-p-upper, Store-ext-e-lower, Store-ext-e-upper, Store-energy_balance were not assigned to the network.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      19987     2.7120673406e+07 Pr: 0(0) 9s
+
+Performed postsolve
+Solving the original LP from the solution after postsolve
+
+Model name          : linopy-problem-tb_anm0b
+Model status        : Optimal
+Simplex   iterations: 19987
+Objective value     :  2.7120673406e+07
+P-D objective error :  1.1600034969e-13
+HiGHS run time      :          8.86
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;ok&#39;, &#39;optimal&#39;)

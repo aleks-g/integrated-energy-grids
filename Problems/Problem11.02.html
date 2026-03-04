@@ -210,6 +210,10 @@
 <li class="toctree-l1"><a class="reference internal" href="Problem03.02.html">Problem 3.2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-networkx.html">Introduction to <code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-pypsa.html">Introduction to <code class="docutils literal notranslate"><span class="pre">pypsa</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.01.html">Problem 4.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.02.html">Problem 4.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.03.html">Problem 4.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.04.html">Problem 4.4</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-gurobipy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">gurobipy</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="IEG_course_project.html">Course project</a></li>
 
@@ -490,11 +494,11 @@ Academic license - for non-commercial use only - expires 2027-01-20
 </div>
 <section id="prerequisites-handling-technology-data-and-costs">
 <h2>Prerequisites: handling technology data and costs<a class="headerlink" href="#prerequisites-handling-technology-data-and-costs" title="Link to this heading">#</a></h2>
-<p>We maintain a database (<a class="github reference external" href="https://github.com/PyPSA/technology-data">PyPSA/technology-data</a>) which collects assumptions and projections for energy system technologies (such as costs, efficiencies, lifetimes, etc.) for given years, which we can load into a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>. This requires some pre-processing to load (e.g. converting units, setting defaults, re-arranging dimensions):</p>
+<p>We maintain a database (<a class="github reference external" href="https://github.com/PyPSA/technology-data/tree/v0.11.0">PyPSA/technology-data</a>, v0.11.0) which collects assumptions and projections for energy system technologies (such as costs, efficiencies, lifetimes, etc.) for given years, which we can load into a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>. This requires some pre-processing to load (e.g. converting units, setting defaults, re-arranging dimensions):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">year</span> <span class="o">=</span> <span class="mi">2030</span>
-<span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://raw.githubusercontent.com/PyPSA/technology-data/master/outputs/costs_</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">.csv&quot;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://raw.githubusercontent.com/PyPSA/technology-data/v0.11.0/outputs/costs_</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">.csv&quot;</span>
 <span class="n">costs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -856,9 +860,7 @@ The Pandas package is used as a convenient way of managing the datasets.</p>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.consistency:The following buses have carriers which are not defined:
 Index([&#39;electricity&#39;, &#39;EV&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.consistency:The following generators have carriers which are not defined:
+WARNING:pypsa.consistency:The following generators have carriers which are not defined:
 Index([&#39;onwind&#39;, &#39;solar&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
 WARNING:pypsa.consistency:The following links have carriers which are not defined:
 Index([&#39;EV charger&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
@@ -866,13 +868,13 @@ WARNING:pypsa.consistency:The following storage_units have carriers which are no
 Index([&#39;battery storage&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
 INFO:linopy.model: Solve problem using Highs solver
 INFO:linopy.io:Writing objective.
-Writing constraints.: 100%|██████████| 14/14 [00:01&lt;00:00, 10.51it/s]
-Writing continuous variables.: 100%|██████████| 7/7 [00:00&lt;00:00, 41.76it/s]
-INFO:linopy.io: Writing time: 1.6s
+Writing constraints.: 100%|██████████| 14/14 [00:00&lt;00:00, 87.14it/s]
+Writing continuous variables.: 100%|██████████| 7/7 [00:00&lt;00:00, 639.63it/s]
+INFO:linopy.io: Writing time: 0.2s
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.12.0 (git hash: n/a): Copyright (c) 2025 HiGHS under MIT licence terms
-LP linopy-problem-0oc5cj9x has 131403 rows; 52563 cols; 232161 nonzeros
+LP linopy-problem-st5hped8 has 131403 rows; 52563 cols; 232161 nonzeros
 Coefficient ranges:
   Matrix  [1e-03, 6e+00]
   Cost    [1e-02, 1e+05]
@@ -888,40 +890,34 @@ Solving the presolved LP
 Using EKK dual simplex solver - serial
   Iteration        Objective     Infeasibilities num(sum)
           0     0.0000000000e+00 Pr: 8760(7.05381e+07) 0s
-       8817     2.4519276869e+09 Pr: 10410(3.33954e+10) 5s
-      12924     2.4527268747e+09 Pr: 11609(9.25352e+10) 10s
-      16008     2.4535407749e+09 Pr: 12483(1.52389e+11) 16s
-      19042     2.4545150586e+09 Pr: 13398(2.25163e+11) 21s
-      21479     2.4555620317e+09 Pr: 13994(3.02754e+11) 26s
-      24179     2.5495307030e+09 Pr: 14028(1.70942e+11) 32s
-      27396     2.5555337071e+09 Pr: 14027(1.65295e+11) 37s
-      31343     3.1116597326e+09 Pr: 26564(2.51065e+10) 42s
-      36613     3.5480277339e+09 Pr: 30347(1.76582e+10) 47s
+      15995     2.4415985363e+09 Pr: 12480(1.52189e+11) 5s
+      23102     2.5348778524e+09 Pr: 14028(1.75793e+11) 10s
+      29734     2.5470480589e+09 Pr: 14027(2.10807e+11) 15s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:linopy.constants: Optimization successful: 
 Status: ok
 Termination condition: optimal
 Solution: 52563 primals, 131403 duals
-Objective: 8.01e+09
+Objective: 8.00e+09
 Solver model: available
 Solver message: Optimal
+
+INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-ext-p-lower, Generator-ext-p-upper, Link-fix-p-lower, Link-fix-p-upper, StorageUnit-ext-p_dispatch-lower, StorageUnit-ext-p_dispatch-upper, StorageUnit-ext-p_store-lower, StorageUnit-ext-p_store-upper, StorageUnit-ext-state_of_charge-lower, StorageUnit-ext-state_of_charge-upper, StorageUnit-energy_balance were not assigned to the network.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      50043     8.0098604804e+09 Pr: 0(0); Du: 0(4.36166e-12) 49s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      49153     7.9889726745e+09 Pr: 363(287204); Du: 0(1.23782e-16) 20s
+      49549     7.9955958949e+09 Pr: 0(0); Du: 0(3.43894e-14) 20s
 
 Performed postsolve
 Solving the original LP from the solution after postsolve
 
-Model name          : linopy-problem-0oc5cj9x
+Model name          : linopy-problem-st5hped8
 Model status        : Optimal
-Simplex   iterations: 50043
-Objective value     :  8.0098604804e+09
-P-D objective error :  1.7859380672e-15
-HiGHS run time      :         49.11
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-ext-p-lower, Generator-ext-p-upper, Link-fix-p-lower, Link-fix-p-upper, StorageUnit-ext-p_dispatch-lower, StorageUnit-ext-p_dispatch-upper, StorageUnit-ext-p_store-lower, StorageUnit-ext-p_store-upper, StorageUnit-ext-state_of_charge-lower, StorageUnit-ext-state_of_charge-upper, StorageUnit-energy_balance were not assigned to the network.
+Simplex   iterations: 49549
+Objective value     :  7.9955958949e+09
+P-D objective error :  2.1469491355e-15
+HiGHS run time      :         20.40
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;ok&#39;, &#39;optimal&#39;)
@@ -937,7 +933,7 @@ HiGHS run time      :         49.11
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.009860480420603
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.9955958948516415
 </pre></div>
 </div>
 </div>
@@ -949,7 +945,7 @@ HiGHS run time      :         49.11
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(117.14221228849199)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(116.93359628138286)
 </pre></div>
 </div>
 </div>
@@ -1114,17 +1110,15 @@ WARNING:pypsa.consistency:The following storage_units have carriers which are no
 Index([&#39;battery storage&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
 WARNING:pypsa.consistency:The following sub_networks have carriers which are not defined:
 Index([&#39;0&#39;, &#39;1&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:linopy.model: Solve problem using Highs solver
+INFO:linopy.model: Solve problem using Highs solver
 INFO:linopy.io:Writing objective.
-Writing constraints.: 100%|██████████| 17/17 [00:00&lt;00:00, 33.67it/s]
-Writing continuous variables.: 100%|██████████| 9/9 [00:00&lt;00:00, 171.09it/s]
-INFO:linopy.io: Writing time: 0.64s
+Writing constraints.: 100%|██████████| 17/17 [00:00&lt;00:00, 94.68it/s] 
+Writing continuous variables.: 100%|██████████| 9/9 [00:00&lt;00:00, 609.38it/s]
+INFO:linopy.io: Writing time: 0.2s
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.12.0 (git hash: n/a): Copyright (c) 2025 HiGHS under MIT licence terms
-LP linopy-problem-gg1zqnnd has 157683 rows; 70083 cols; 284721 nonzeros
+LP linopy-problem-4no7rhw7 has 157683 rows; 70083 cols; 284721 nonzeros
 Coefficient ranges:
   Matrix  [1e-03, 6e+00]
   Cost    [1e-02, 1e+05]
@@ -1139,32 +1133,31 @@ Presolve reductions: rows 65718(-91965); columns 56961(-13122); nonzeros 179634(
 Solving the presolved LP
 Using EKK dual simplex solver - serial
   Iteration        Objective     Infeasibilities num(sum)
-          0     1.0343263383e+03 Pr: 17520(2.19648e+08) 0s
+          0     1.0330648860e+03 Pr: 17520(2.19648e+08) 0s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:linopy.constants: Optimization successful: 
 Status: ok
 Termination condition: optimal
 Solution: 70083 primals, 157683 duals
-Objective: 6.58e+09
+Objective: 6.57e+09
 Solver model: available
 Solver message: Optimal
+
+INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-ext-p-lower, Generator-ext-p-upper, Link-fix-p-lower, Link-fix-p-upper, Store-fix-e-lower, Store-fix-e-upper, StorageUnit-ext-p_dispatch-lower, StorageUnit-ext-p_dispatch-upper, StorageUnit-ext-p_store-lower, StorageUnit-ext-p_store-upper, StorageUnit-ext-state_of_charge-lower, StorageUnit-ext-state_of_charge-upper, StorageUnit-energy_balance, Store-energy_balance were not assigned to the network.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      55003     6.5754013742e+09 Pr: 0(0); Du: 0(1.00226e-11) 4s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      53256     6.5680413337e+09 Pr: 0(0); Du: 0(3.49459e-12) 2s
 
 Performed postsolve
 Solving the original LP from the solution after postsolve
 
-Model name          : linopy-problem-gg1zqnnd
+Model name          : linopy-problem-4no7rhw7
 Model status        : Optimal
-Simplex   iterations: 55003
-Objective value     :  6.5754013742e+09
-P-D objective error :  1.4503666956e-15
-HiGHS run time      :          3.74
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-ext-p-lower, Generator-ext-p-upper, Link-fix-p-lower, Link-fix-p-upper, Store-fix-e-lower, Store-fix-e-upper, StorageUnit-ext-p_dispatch-lower, StorageUnit-ext-p_dispatch-upper, StorageUnit-ext-p_store-lower, StorageUnit-ext-p_store-upper, StorageUnit-ext-state_of_charge-lower, StorageUnit-ext-state_of_charge-upper, StorageUnit-energy_balance, Store-energy_balance were not assigned to the network.
+Simplex   iterations: 53256
+Objective value     :  6.5680413337e+09
+P-D objective error :  1.4519919530e-15
+HiGHS run time      :          2.39
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;ok&#39;, &#39;optimal&#39;)
@@ -1179,7 +1172,7 @@ HiGHS run time      :          3.74
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.57540137418277
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.568041333708535
 </pre></div>
 </div>
 </div>
@@ -1191,7 +1184,7 @@ HiGHS run time      :          3.74
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(96.1636055383718)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(96.05596678164284)
 </pre></div>
 </div>
 </div>
@@ -1327,13 +1320,13 @@ WARNING:pypsa.consistency:The following sub_networks have carriers which are not
 Index([&#39;0&#39;, &#39;1&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
 INFO:linopy.model: Solve problem using Highs solver
 INFO:linopy.io:Writing objective.
-Writing constraints.: 100%|██████████| 17/17 [00:00&lt;00:00, 20.48it/s]
-Writing continuous variables.: 100%|██████████| 9/9 [00:00&lt;00:00, 24.36it/s]
-INFO:linopy.io: Writing time: 1.24s
+Writing constraints.: 100%|██████████| 17/17 [00:00&lt;00:00, 97.46it/s] 
+Writing continuous variables.: 100%|██████████| 9/9 [00:00&lt;00:00, 577.33it/s]
+INFO:linopy.io: Writing time: 0.2s
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.12.0 (git hash: n/a): Copyright (c) 2025 HiGHS under MIT licence terms
-LP linopy-problem-nt2bem33 has 175203 rows; 78843 cols; 319761 nonzeros
+LP linopy-problem-p73w8dn1 has 175203 rows; 78843 cols; 319761 nonzeros
 Coefficient ranges:
   Matrix  [1e-03, 6e+00]
   Cost    [1e-02, 1e+05]
@@ -1348,32 +1341,31 @@ Presolve reductions: rows 65718(-109485); columns 65721(-13122); nonzeros 197154
 Solving the presolved LP
 Using EKK dual simplex solver - serial
   Iteration        Objective     Infeasibilities num(sum)
-          0     1.0379487399e+03 Pr: 17520(2.19648e+08) 0s
-      60975     6.5386015410e+09 Pr: 1129(2.57604e+06); Du: 0(3.69229e-07) 5s
-      62605     6.5753004797e+09 Pr: 0(0); Du: 0(1.31143e-11) 6s
-
-Performed postsolve
-Solving the original LP from the solution after postsolve
+          0     1.0366828697e+03 Pr: 17520(2.19648e+08) 0s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:linopy.constants: Optimization successful: 
 Status: ok
 Termination condition: optimal
 Solution: 78843 primals, 175203 duals
-Objective: 6.58e+09
+Objective: 6.57e+09
 Solver model: available
 Solver message: Optimal
+
+INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-ext-p-lower, Generator-ext-p-upper, Link-fix-p-lower, Link-fix-p-upper, Store-fix-e-lower, Store-fix-e-upper, StorageUnit-ext-p_dispatch-lower, StorageUnit-ext-p_dispatch-upper, StorageUnit-ext-p_store-lower, StorageUnit-ext-p_store-upper, StorageUnit-ext-state_of_charge-lower, StorageUnit-ext-state_of_charge-upper, StorageUnit-energy_balance, Store-energy_balance were not assigned to the network.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model name          : linopy-problem-nt2bem33
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      58953     6.5679404392e+09 Pr: 0(0); Du: 0(1.49866e-11) 3s
+
+Performed postsolve
+Solving the original LP from the solution after postsolve
+
+Model name          : linopy-problem-p73w8dn1
 Model status        : Optimal
-Simplex   iterations: 62605
-Objective value     :  6.5753004797e+09
-P-D objective error :  1.1603111606e-15
-HiGHS run time      :          5.68
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-ext-p-lower, Generator-ext-p-upper, Link-fix-p-lower, Link-fix-p-upper, Store-fix-e-lower, Store-fix-e-upper, StorageUnit-ext-p_dispatch-lower, StorageUnit-ext-p_dispatch-upper, StorageUnit-ext-p_store-lower, StorageUnit-ext-p_store-upper, StorageUnit-ext-state_of_charge-lower, StorageUnit-ext-state_of_charge-upper, StorageUnit-energy_balance, Store-energy_balance were not assigned to the network.
+Simplex   iterations: 58953
+Objective value     :  6.5679404392e+09
+P-D objective error :  9.4380926770e-16
+HiGHS run time      :          2.76
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;ok&#39;, &#39;optimal&#39;)
@@ -1388,7 +1380,7 @@ HiGHS run time      :          5.68
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.575300479655761
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.567940439181523
 </pre></div>
 </div>
 </div>
@@ -1400,7 +1392,7 @@ HiGHS run time      :          5.68
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(96.16212998107207)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(96.0544912243431)
 </pre></div>
 </div>
 </div>

@@ -210,6 +210,10 @@
 <li class="toctree-l1"><a class="reference internal" href="Problem03.02.html">Problem 3.2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-networkx.html">Introduction to <code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-pypsa.html">Introduction to <code class="docutils literal notranslate"><span class="pre">pypsa</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.01.html">Problem 4.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.02.html">Problem 4.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.03.html">Problem 4.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.04.html">Problem 4.4</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-gurobipy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">gurobipy</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="IEG_course_project.html">Course project</a></li>
 
@@ -481,21 +485,14 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set parameter Username
-Set parameter LicenseID to value 2767832
-Academic license - for non-commercial use only - expires 2027-01-20
-</pre></div>
-</div>
-</div>
 </div>
 <section id="prerequisites-handling-technology-data-and-costs">
 <h2>Prerequisites: handling technology data and costs<a class="headerlink" href="#prerequisites-handling-technology-data-and-costs" title="Link to this heading">#</a></h2>
-<p>We maintain a database (<a class="github reference external" href="https://github.com/PyPSA/technology-data">PyPSA/technology-data</a>) which collects assumptions and projections for energy system technologies (such as costs, efficiencies, lifetimes, etc.) for given years, which we can load into a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>. This requires some pre-processing to load (e.g. converting units, setting defaults, re-arranging dimensions):</p>
+<p>We maintain a database (<a class="github reference external" href="https://github.com/PyPSA/technology-data/tree/v0.11.0">PyPSA/technology-data</a>, v0.11.0) which collects assumptions and projections for energy system technologies (such as costs, efficiencies, lifetimes, etc.) for given years, which we can load into a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>. This requires some pre-processing to load (e.g. converting units, setting defaults, re-arranging dimensions):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">year</span> <span class="o">=</span> <span class="mi">2030</span>
-<span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://raw.githubusercontent.com/PyPSA/technology-data/master/outputs/costs_</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">.csv&quot;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://raw.githubusercontent.com/PyPSA/technology-data/v0.11.0/outputs/costs_</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">.csv&quot;</span>
 <span class="n">costs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -952,25 +949,24 @@ We add a “free” store in the hydrogen, methanol and CO2 buses.</p>
 Index([&#39;electricity&#39;, &#39;hydrogen&#39;, &#39;methanol&#39;, &#39;heat&#39;, &#39;co2&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
 WARNING:pypsa.consistency:The following links have carriers which are not defined:
 Index([&#39;electrolysis&#39;, &#39;methanolisation&#39;, &#39;DAC&#39;, &#39;heat pump&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
-WARNING:pypsa.consistency:Encountered nan&#39;s in static data for columns [&#39;efficiency2&#39;, &#39;efficiency3&#39;] of component &#39;Link&#39;.
 WARNING:pypsa.consistency:The following stores have carriers which are not defined:
 Index([&#39;hydrogen store&#39;, &#39;methanol store&#39;, &#39;co2 store&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
 INFO:linopy.model: Solve problem using Highs solver
 INFO:linopy.io:Writing objective.
-Writing constraints.: 100%|██████████| 11/11 [00:00&lt;00:00, 13.05it/s]
-Writing continuous variables.: 100%|██████████| 7/7 [00:00&lt;00:00, 113.85it/s]
-INFO:linopy.io: Writing time: 0.95s
+Writing constraints.: 100%|██████████| 11/11 [00:00&lt;00:00, 47.07it/s]
+Writing continuous variables.: 100%|██████████| 7/7 [00:00&lt;00:00, 436.00it/s]
+INFO:linopy.io: Writing time: 0.35s
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.12.0 (git hash: n/a): Copyright (c) 2025 HiGHS under MIT licence terms
-LP linopy-problem-vfsqt0ue has 210248 rows; 96368 cols; 420488 nonzeros
+LP linopy-problem-pmydfm32 has 210248 rows; 96368 cols; 420488 nonzeros
 Coefficient ranges:
   Matrix  [3e-03, 3e+00]
-  Cost    [2e-02, 2e+06]
+  Cost    [2e-02, 3e+06]
   Bound   [0e+00, 0e+00]
   RHS     [2e+01, 2e+01]
 WARNING: Problem has some excessively large costs
-WARNING:    Consider scaling the objective by 1e-1, or setting the user_objective_scale option to -1
+WARNING:    Consider scaling the objective by 1e-1, or setting the user_objective_scale option to -2
 Presolving model
 96360 rows, 78845 cols, 254040 nonzeros  0s
 70080 rows, 52565 cols, 201480 nonzeros  0s
@@ -981,28 +977,21 @@ Presolve reductions: rows 70080(-140168); columns 52565(-43803); nonzeros 201480
 Solving the presolved LP
 Using EKK dual simplex solver - serial
   Iteration        Objective     Infeasibilities num(sum)
-          0     0.0000000000e+00 Pr: 8760(200000) 1s
-       9186     2.6677979565e+03 Pr: 7762(4.44948e+07) 6s
-      13219     5.0504222476e+03 Pr: 6374(3.31996e+07) 11s
-      16560     7.5521885640e+03 Pr: 3765(200000) 16s
-      19392     1.0239255435e+04 Pr: 2938(200000) 21s
-      22717     1.3668489172e+04 Pr: 6375(2.15519e+08) 26s
-      26457     1.8011686247e+04 Pr: 1272(1.04104e+06) 32s
-      29631     2.2623280694e+04 Pr: 6374(4.46435e+08) 37s
-      33048     3.3882609837e+04 Pr: 6374(4.63872e+08) 42s
-      35417     2.2112144912e+07 Pr: 17151(419406) 49s
-      36066     2.5866696241e+07 Pr: 16527(419535) 54s
-      36580     2.9600564592e+07 Pr: 19632(6.78019e+06) 59s
-      38567     3.6269213950e+07 Pr: 11269(90847.7) 66s
-      43332     3.6271322104e+07 Pr: 7102(90847.7) 74s
-      46814     3.6273952682e+07 Pr: 4503(90847.7) 81s
-      49450     4.3997970813e+07 Pr: 12115(5.40277e+07); Du: 0(5.33244e-08) 86s
-      51885     4.3998555482e+07 Pr: 12525(1.23763e+08) 92s
-      54326     4.4010778789e+07 Pr: 4427(1.11956e+06) 97s
-      56130     5.1338100067e+07 Pr: 16963(693209) 103s
-      57546     5.1841585503e+07 Pr: 8054(14246.5) 109s
-      57996     5.1857937362e+07 Pr: 0(0) 110s
-      57996     5.1857937362e+07 Pr: 0(0) 110s
+          0     0.0000000000e+00 Pr: 8760(200000) 0s
+      14414     6.6764423563e+03 Pr: 4435(200000) 5s
+      22533     1.5466074119e+04 Pr: 6263(1.91035e+08) 10s
+      28468     2.4501549706e+04 Pr: 6263(3.82012e+08) 15s
+      34575     2.0272202989e+06 Pr: 17992(1.67534e+06) 21s
+      36322     2.7599976927e+07 Pr: 17381(937474) 27s
+      37278     3.6145220662e+07 Pr: 15383(432400) 32s
+      41664     3.6271260799e+07 Pr: 8592(90847.7) 39s
+      46901     3.6275544338e+07 Pr: 5790(4.57066e+06) 46s
+      50181     4.3917421576e+07 Pr: 12169(6.84979e+07) 51s
+      52952     4.3918116822e+07 Pr: 12801(1.75188e+08) 56s
+      55584     5.9403720283e+07 Pr: 10298(61354.2) 62s
+      57405     6.0555639502e+07 Pr: 825(25657.5) 67s
+      57723     6.0569702771e+07 Pr: 0(0) 68s
+      57723     6.0569702771e+07 Pr: 0(0) 68s
 
 Performed postsolve
 Solving the original LP from the solution after postsolve
@@ -1012,20 +1001,19 @@ Solving the original LP from the solution after postsolve
 Status: ok
 Termination condition: optimal
 Solution: 96368 primals, 210248 duals
-Objective: 5.19e+07
+Objective: 6.06e+07
 Solver model: available
 Solver message: Optimal
+
+INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-ext-p-lower, Generator-ext-p-upper, Link-ext-p-lower, Link-ext-p-upper, Store-ext-e-lower, Store-ext-e-upper, Store-energy_balance were not assigned to the network.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model name          : linopy-problem-vfsqt0ue
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model name          : linopy-problem-pmydfm32
 Model status        : Optimal
-Simplex   iterations: 57996
-Objective value     :  5.1857937362e+07
-P-D objective error :  2.3131337758e-14
-HiGHS run time      :        110.65
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-ext-p-lower, Generator-ext-p-upper, Link-ext-p-lower, Link-ext-p-upper, Store-ext-e-lower, Store-ext-e-upper, Store-energy_balance were not assigned to the network.
+Simplex   iterations: 57723
+Objective value     :  6.0569702771e+07
+P-D objective error :  9.8652714410e-14
+HiGHS run time      :         68.08
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;ok&#39;, &#39;optimal&#39;)
@@ -1041,7 +1029,7 @@ HiGHS run time      :        110.65
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.05185793736246648
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.060569702771330974
 </pre></div>
 </div>
 </div>
@@ -1056,7 +1044,7 @@ HiGHS run time      :        110.65
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>name
-offwind    140.893299
+offwind    141.073203
 Name: p_nom_opt, dtype: float64
 </pre></div>
 </div>
@@ -1070,10 +1058,10 @@ Name: p_nom_opt, dtype: float64
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>name
-electrolysis       79.988255
-methanolisation    30.614457
-DAC                 5.986756
-heat pump           5.079672
+electrolysis       79.546158
+methanolisation    30.563912
+DAC                 5.981633
+heat pump           4.959132
 Name: p_nom_opt, dtype: float64
 </pre></div>
 </div>
@@ -1088,9 +1076,9 @@ Name: p_nom_opt, dtype: float64
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>name
-hydrogen store    20489.674837
-methanol store     8364.534882
-co2 store          1399.919184
+hydrogen store    20381.605625
+methanol store     8278.219097
+co2 store          1389.205380
 Name: e_nom_opt, dtype: float64
 </pre></div>
 </div>
@@ -1104,7 +1092,7 @@ Name: e_nom_opt, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.04182267441186107)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.04139109548522561)
 </pre></div>
 </div>
 </div>
@@ -1117,7 +1105,7 @@ Name: e_nom_opt, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.0900213863955104)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.08954658431521222)
 </pre></div>
 </div>
 </div>
@@ -1130,7 +1118,7 @@ Name: e_nom_opt, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.028223070709639326)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.028007075067569658)
 </pre></div>
 </div>
 </div>
@@ -1154,10 +1142,10 @@ Name: e_nom_opt, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x321090050&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x32afc5450&gt;
 </pre></div>
 </div>
-<img alt="../_images/3f2bd305199bc5df2841998be0ebf0c170f5f80a951e62ef954bd951407aa828.png" src="../_images/3f2bd305199bc5df2841998be0ebf0c170f5f80a951e62ef954bd951407aa828.png" />
+<img alt="../_images/67273ce132cd36e66fc0f18e98ec1450a8ad0c2c1730f2783f8a9b7cd1b41caa.png" src="../_images/67273ce132cd36e66fc0f18e98ec1450a8ad0c2c1730f2783f8a9b7cd1b41caa.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1167,7 +1155,7 @@ Name: e_nom_opt, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.5224902306787395)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.5253940930617353)
 </pre></div>
 </div>
 </div>
@@ -1179,7 +1167,7 @@ Name: e_nom_opt, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.8487087885004408)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.8501123551379268)
 </pre></div>
 </div>
 </div>
@@ -1191,7 +1179,7 @@ Name: e_nom_opt, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.9458081519881767)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.9466181466608595)
 </pre></div>
 </div>
 </div>
@@ -1205,7 +1193,7 @@ Name: e_nom_opt, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(259.2896868123324)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(302.84851385665485)
 </pre></div>
 </div>
 </div>
@@ -1217,7 +1205,7 @@ Name: e_nom_opt, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(259.28968681236256)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(302.84851385662546)
 </pre></div>
 </div>
 </div>

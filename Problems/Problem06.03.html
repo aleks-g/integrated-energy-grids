@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Problem 5.3 &#8212; integrated-energy-grids</title>
+    <title>Problem 6.3 &#8212; integrated-energy-grids</title>
   
   
   
@@ -208,6 +208,10 @@
 <li class="toctree-l1"><a class="reference internal" href="Problem03.02.html">Problem 3.2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-networkx.html">Introduction to <code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-pypsa.html">Introduction to <code class="docutils literal notranslate"><span class="pre">pypsa</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.01.html">Problem 4.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.02.html">Problem 4.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.03.html">Problem 4.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.04.html">Problem 4.4</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-gurobipy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">gurobipy</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="IEG_course_project.html">Course project</a></li>
 
@@ -426,7 +430,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Problem 5.3</h1>
+    <h1>Problem 6.3</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -440,10 +444,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="problem-5-3">
-<h1>Problem 5.3<a class="headerlink" href="#problem-5-3" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="problem-6-3">
+<h1>Problem 6.3<a class="headerlink" href="#problem-6-3" title="Link to this heading">#</a></h1>
 <p><strong>Integrated Energy Grids</strong></p>
-<p><strong>Problem 5.3</strong></p>
+<p><strong>Problem 6.3</strong></p>
 <p><em>Note: This is equivalent to Problem 2.2 which we solved using linopy, but here we will use PyPSA.</em></p>
 <p><strong>Consider the following economic dispatch problem:</strong></p>
 <p><strong>• we have three generators: solar, wind and gas</strong></p>
@@ -451,7 +455,7 @@ document.write(`
 <p><strong>• we need to cover a electricity demand of 13.2 MWh</strong></p>
 <p><strong>• the installed capacities are 15 MW, 20 MW and 20 MW for wind, solar, and gas, respectively</strong></p>
 <p><strong>• assume the capacity factor for solar is 0.17 and for wind 0.33.</strong></p>
-<p><strong>Use PYPSA to find the optimal solution as well and obtain the electricity price (Lagrange multiplier for the energy balance constraint)</strong></p>
+<p><strong>Use PyPSA to find the optimal solution as well and obtain the electricity price (Lagrange multiplier for the energy balance constraint)</strong></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you have not yet set up Python on your computer, you can execute this tutorial in your browser via <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>. Click on the rocket in the top right corner and launch “Colab”. If that doesn’t work download the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file and import it in <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>.</p>

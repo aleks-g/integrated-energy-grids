@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Problem 6.3 &#8212; integrated-energy-grids</title>
+    <title>Problem 7.3 &#8212; integrated-energy-grids</title>
   
   
   
@@ -210,6 +210,10 @@
 <li class="toctree-l1"><a class="reference internal" href="Problem03.02.html">Problem 3.2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-networkx.html">Introduction to <code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-pypsa.html">Introduction to <code class="docutils literal notranslate"><span class="pre">pypsa</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.01.html">Problem 4.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.02.html">Problem 4.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.03.html">Problem 4.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.04.html">Problem 4.4</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-gurobipy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">gurobipy</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="IEG_course_project.html">Course project</a></li>
 
@@ -428,7 +432,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Problem 6.3</h1>
+    <h1>Problem 7.3</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -442,10 +446,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="problem-6-3">
-<h1>Problem 6.3<a class="headerlink" href="#problem-6-3" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="problem-7-3">
+<h1>Problem 7.3<a class="headerlink" href="#problem-7-3" title="Link to this heading">#</a></h1>
 <p><strong>Integrated Energy Grids</strong></p>
-<p><strong>Problem 6.3</strong></p>
+<p><strong>Problem 7.3</strong></p>
 <p><strong>Assume the gas transport system that is shown in Figure 2. Gas can be injected in Node 1 at a marginal price of 10 EUR/kg or at Node 5 at 15 EUR/kg. There is a demand of 2·<span class="math notranslate nohighlight">\(10^8\)</span> kg/s in Node 3. Finally, Node 2-3 represents a pumping station where gas pressure can be increased by <span class="math notranslate nohighlight">\(k_{23}\)</span>=1.2 at a cost that is proportional to the mass flow <span class="math notranslate nohighlight">\(m_{23}\)</span> by a constant <span class="math notranslate nohighlight">\(o_{23}\)</span> =5 EUR/kg.</strong></p>
 <p><strong>To calculate the speed of sound in gas <span class="math notranslate nohighlight">\(c\)</span>, assume the universal gas constant <span class="math notranslate nohighlight">\(R\)</span>=8.314 J/molK, the molar mass of methane <span class="math notranslate nohighlight">\(M\)</span>=16 g/mol, compression factor <span class="math notranslate nohighlight">\(Z\)</span>=1.31, and temperature T=25<span class="math notranslate nohighlight">\(^{\circ}\)</span>C. Assume the diameter of the pipelines is <span class="math notranslate nohighlight">\(D\)</span> = 1000 mm, the length <span class="math notranslate nohighlight">\(L_{12}\)</span>=<span class="math notranslate nohighlight">\(L_{34}\)</span>=<span class="math notranslate nohighlight">\(L_{45}\)</span>=100 km, and calculate the Darcy friction  coefficient <span class="math notranslate nohighlight">\(f_{D}\)</span> assuming fully-turbulent flow and roughness <span class="math notranslate nohighlight">\(\epsilon\)</span>=0.001m.</strong></p>
 <p><strong>(a) Write the equations of the optimization problem that minimizes the total system cost and use the Weymouth equation to represent pressure drop in the pipelines as a function of the mass flow <span class="math notranslate nohighlight">\(m_{ij}\)</span>.</strong></p>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Problem 7.3 &#8212; integrated-energy-grids</title>
+    <title>Problem 8.3 &#8212; integrated-energy-grids</title>
   
   
   
@@ -208,6 +208,10 @@
 <li class="toctree-l1"><a class="reference internal" href="Problem03.02.html">Problem 3.2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-networkx.html">Introduction to <code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-pypsa.html">Introduction to <code class="docutils literal notranslate"><span class="pre">pypsa</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.01.html">Problem 4.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.02.html">Problem 4.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.03.html">Problem 4.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.04.html">Problem 4.4</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-gurobipy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">gurobipy</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="IEG_course_project.html">Course project</a></li>
 
@@ -426,7 +430,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Problem 7.3</h1>
+    <h1>Problem 8.3</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -440,14 +444,13 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="problem-7-3">
-<h1>Problem 7.3<a class="headerlink" href="#problem-7-3" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="problem-8-3">
+<h1>Problem 8.3<a class="headerlink" href="#problem-8-3" title="Link to this heading">#</a></h1>
 <p><strong>Integrated Energy Grids</strong></p>
-<p><strong>Problem 7.3</strong></p>
+<p><strong>Problem 8.3</strong></p>
 <p><strong>Assume that we have three locations (1,2,3) with an electric bus and a heating bus. The electricity loads are [0, 10, 20] MWh and the heating loads are [30, 20, 10] MWh. The electric buses are connected with transmission lines in a ring and there is a gas power generator at node 1 with an efficiency of 0.3 and a marginal cost of 50 EUR/MWh. At each location the electric and heating buses are connected with heat pumps with a coefficient of performance (COP) of 3; heat can also be supplied to every heat bus with a gas boiler with an efficiency of 0.9 and a marginal cost of 20 EUR/MWh.</strong></p>
 <p><strong>(a) Calculate the optimal heat generation by every component and the optical power flowing through the lines.</strong></p>
 <p><strong>(b) Repeat (a) assuming that the marginal cost of heat pumps is 10 EUR/MWh.</strong></p>
-<p><em>Note: This problem is based on the PyPSA example <a class="reference external" href="https://pypsa.readthedocs.io/en/stable/examples/lopf-with-heating.html">LOPF with coupling to heating sector</a>.</em></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you have not yet set up Python on your computer, you can execute this tutorial in your browser via <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>. Click on the rocket in the top right corner and launch “Colab”. If that doesn’t work download the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file and import it in <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>.</p>

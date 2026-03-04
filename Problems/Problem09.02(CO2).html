@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Problem 9.1 &#8212; integrated-energy-grids</title>
+    <title>Problem 9.2 &#8212; integrated-energy-grids</title>
   
   
   
@@ -210,6 +210,10 @@
 <li class="toctree-l1"><a class="reference internal" href="Problem03.02.html">Problem 3.2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-networkx.html">Introduction to <code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-pypsa.html">Introduction to <code class="docutils literal notranslate"><span class="pre">pypsa</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.01.html">Problem 4.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.02.html">Problem 4.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.03.html">Problem 4.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.04.html">Problem 4.4</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-gurobipy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">gurobipy</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="IEG_course_project.html">Course project</a></li>
 
@@ -430,7 +434,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Problem 9.1</h1>
+    <h1>Problem 9.2</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -457,8 +461,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="problem-9-1">
-<h1>Problem 9.1<a class="headerlink" href="#problem-9-1" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="problem-9-2">
+<h1>Problem 9.2<a class="headerlink" href="#problem-9-2" title="Link to this heading">#</a></h1>
 <p><strong>Integrated Energy Grids</strong></p>
 <p><strong>Problem 9.2. Join capacity and dispatch optimization with storage and CO2 emissions limits.</strong></p>
 <p><strong>Use the model built in PyPSA described in Problem 8.2 and assume that methane gas emits 0.198 tCO2 per MWh of thermal energy contained in the gas. Limit the maximum CO2 emissions to 5 MtCO2/year.</strong></p>
@@ -485,21 +489,14 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set parameter Username
-Set parameter LicenseID to value 2767832
-Academic license - for non-commercial use only - expires 2027-01-20
-</pre></div>
-</div>
-</div>
 </div>
 <section id="prerequisites-handling-technology-data-and-costs">
 <h2>Prerequisites: handling technology data and costs<a class="headerlink" href="#prerequisites-handling-technology-data-and-costs" title="Link to this heading">#</a></h2>
-<p>We maintain a database (<a class="github reference external" href="https://github.com/PyPSA/technology-data">PyPSA/technology-data</a>) which collects assumptions and projections for energy system technologies (such as costs, efficiencies, lifetimes, etc.) for given years, which we can load into a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>. This requires some pre-processing to load (e.g. converting units, setting defaults, re-arranging dimensions):</p>
+<p>We maintain a database (<a class="github reference external" href="https://github.com/PyPSA/technology-data/tree/v0.11.0">PyPSA/technology-data</a>, v0.11.0) which collects assumptions and projections for energy system technologies (such as costs, efficiencies, lifetimes, etc.) for given years, which we can load into a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>. This requires some pre-processing to load (e.g. converting units, setting defaults, re-arranging dimensions):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">year</span> <span class="o">=</span> <span class="mi">2030</span>
-<span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://raw.githubusercontent.com/PyPSA/technology-data/master/outputs/costs_</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">.csv&quot;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://raw.githubusercontent.com/PyPSA/technology-data/v0.11.0/outputs/costs_</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">.csv&quot;</span>
 <span class="n">costs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -606,12 +603,60 @@ a(r, n) = \frac{r}{1-(1+r)^{-n}}
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;OCGT&quot;</span><span class="p">,</span> <span class="s2">&quot;capital_cost&quot;</span><span class="p">]</span> <span class="c1">#EUR/MW/a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(47718.67056370105)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;CCGT&quot;</span><span class="p">,</span> <span class="s2">&quot;capital_cost&quot;</span><span class="p">]</span> <span class="c1">#EUR/MW/a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(104788.02078332388)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;CCGT&quot;</span><span class="p">,</span> <span class="s2">&quot;CO2 intensity&quot;</span><span class="p">]</span> <span class="c1">#tCO2/MWh_th</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.198)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;CCGT&quot;</span><span class="p">,</span> <span class="s2">&quot;marginal_cost&quot;</span><span class="p">]</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(46.803120689655174)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;OCGT&quot;</span><span class="p">,</span> <span class="s2">&quot;marginal_cost&quot;</span><span class="p">]</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(64.6839512195122)
 </pre></div>
 </div>
 </div>
@@ -1051,13 +1096,13 @@ The Pandas package is used as a convenient way of managing the datasets.</p>
 Index([&#39;electricity&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
 INFO:linopy.model: Solve problem using Highs solver
 INFO:linopy.io:Writing objective.
-Writing constraints.: 100%|██████████| 15/15 [00:02&lt;00:00,  6.35it/s]
-Writing continuous variables.: 100%|██████████| 6/6 [00:00&lt;00:00, 155.21it/s]
-INFO:linopy.io: Writing time: 2.47s
+Writing constraints.: 100%|██████████| 15/15 [00:00&lt;00:00, 76.07it/s]
+Writing continuous variables.: 100%|██████████| 6/6 [00:00&lt;00:00, 582.97it/s]
+INFO:linopy.io: Writing time: 0.3s
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.12.0 (git hash: n/a): Copyright (c) 2025 HiGHS under MIT licence terms
-LP linopy-problem-r_t95njn has 140165 rows; 61324 cols; 275962 nonzeros
+LP linopy-problem-2k2ybsez has 140165 rows; 61324 cols; 275962 nonzeros
 Coefficient ranges:
   Matrix  [1e-03, 2e+00]
   Cost    [1e-02, 1e+05]
@@ -1074,19 +1119,9 @@ Presolve reductions: rows 65719(-74446); columns 56962(-4362); nonzeros 197154(-
 Solving the presolved LP
 Using EKK dual simplex solver - serial
   Iteration        Objective     Infeasibilities num(sum)
-          0     0.0000000000e+00 Pr: 8760(4.89297e+07) 1s
-      15906     9.1940602692e+08 Pr: 15371(6.49639e+07) 6s
-      32829     2.1299466599e+09 Pr: 25683(1.51646e+08); Du: 0(7.17811e-09) 11s
-      34209     2.3806790908e+09 Pr: 28850(1.02065e+08); Du: 0(1.27476e-07) 17s
-      36224     2.4943267161e+09 Pr: 7475(4.92129e+07); Du: 0(2.75948e-07) 24s
-      38561     2.5577576572e+09 Pr: 14714(1.85932e+08); Du: 0(1.8186e-07) 29s
-      41041     2.6093473864e+09 Pr: 5359(1.71112e+07); Du: 0(1.07966e-07) 35s
-      43483     2.7138437751e+09 Pr: 11761(8.51602e+07); Du: 0(7.1914e-08) 41s
-      46084     2.7529286011e+09 Pr: 2829(4.96879e+06); Du: 0(1.51004e-08) 46s
-      47873     2.7611963275e+09 Pr: 0(0); Du: 0(2.70257e-11) 49s
-
-Performed postsolve
-Solving the original LP from the solution after postsolve
+          0     0.0000000000e+00 Pr: 8760(4.89297e+07) 0s
+      35027     2.3705361982e+09 Pr: 39910(4.86689e+09); Du: 0(8.03264e-09) 5s
+      42697     2.6934958459e+09 Pr: 17453(2.09919e+08); Du: 0(4.68328e-08) 10s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:linopy.constants: Optimization successful: 
@@ -1096,16 +1131,22 @@ Solution: 61324 primals, 140165 duals
 Objective: 2.76e+09
 Solver model: available
 Solver message: Optimal
-
-INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-fix-p-lower, Generator-fix-p-upper, Generator-ext-p-lower, Generator-ext-p-upper, StorageUnit-ext-p_dispatch-lower, StorageUnit-ext-p_dispatch-upper, StorageUnit-ext-p_store-lower, StorageUnit-ext-p_store-upper, StorageUnit-ext-state_of_charge-lower, StorageUnit-ext-state_of_charge-upper, StorageUnit-energy_balance were not assigned to the network.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model name          : linopy-problem-r_t95njn
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      48059     2.7599916471e+09 Pr: 0(0); Du: 0(8.90469e-10) 13s
+
+Performed postsolve
+Solving the original LP from the solution after postsolve
+
+Model name          : linopy-problem-2k2ybsez
 Model status        : Optimal
-Simplex   iterations: 47873
-Objective value     :  2.7611963275e+09
-P-D objective error :  9.0663422053e-15
-HiGHS run time      :         49.30
+Simplex   iterations: 48059
+Objective value     :  2.7599916471e+09
+P-D objective error :  4.9238768605e-15
+HiGHS run time      :         13.40
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-fix-p-lower, Generator-fix-p-upper, Generator-ext-p-lower, Generator-ext-p-upper, StorageUnit-ext-p_dispatch-lower, StorageUnit-ext-p_dispatch-upper, StorageUnit-ext-p_store-lower, StorageUnit-ext-p_store-upper, StorageUnit-ext-state_of_charge-lower, StorageUnit-ext-state_of_charge-upper, StorageUnit-energy_balance were not assigned to the network.
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;ok&#39;, &#39;optimal&#39;)
@@ -1121,7 +1162,7 @@ HiGHS run time      :         49.30
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.761196327509703
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.7599916471150183
 </pre></div>
 </div>
 </div>
@@ -1136,8 +1177,8 @@ HiGHS run time      :         49.30
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>name
 OCGT      -0.000000
-onwind    12.548370
-solar     10.281573
+onwind    12.476224
+solar     10.342911
 CCGT       6.000000
 Name: p_nom_opt, dtype: float64
 </pre></div>
@@ -1152,7 +1193,7 @@ Name: p_nom_opt, dtype: float64
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>name
-battery storage    4.830266
+battery storage    4.915387
 Name: p_nom_opt, dtype: float64
 </pre></div>
 </div>
@@ -1168,8 +1209,8 @@ Name: p_nom_opt, dtype: float64
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>name
 OCGT       0.000000
-onwind    19.021846
-solar     15.491719
+onwind    18.934473
+solar     15.583091
 CCGT      14.646465
 dtype: float64
 </pre></div>
@@ -1187,7 +1228,7 @@ dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;snapshot&#39;, ylabel=&#39;dispatch&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/aeb6d96c416532c078b3fb606d3ab3494c4c745bedc7cca16ef9686c2ffc86c4.png" src="../_images/aeb6d96c416532c078b3fb606d3ab3494c4c745bedc7cca16ef9686c2ffc86c4.png" />
+<img alt="../_images/156ea71a31caca7b95b691fa3bb8529dd222be7bba981ff3b805a1bc2e3c0110.png" src="../_images/156ea71a31caca7b95b691fa3bb8529dd222be7bba981ff3b805a1bc2e3c0110.png" />
 </div>
 </div>
 <p>We can also plot the charging and discharging of the battery</p>
@@ -1201,7 +1242,7 @@ dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;snapshot&#39;, ylabel=&#39;battery&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/c1a715d03b65280783840470fe6149aeb014fef4526b30727d7d140030e494ad.png" src="../_images/c1a715d03b65280783840470fe6149aeb014fef4526b30727d7d140030e494ad.png" />
+<img alt="../_images/4cf3359e4def1561073559d64884bbdd18b61e557c1b7a06ed3d474b9ddf6a01.png" src="../_images/4cf3359e4def1561073559d64884bbdd18b61e557c1b7a06ed3d474b9ddf6a01.png" />
 </div>
 </div>
 <p><strong>b) What is the CO2 tax required to attain such CO2 emissions limit?</strong></p>
@@ -1259,7 +1300,7 @@ dtype: float64
       <td>co2_emissions</td>
       <td>&lt;=</td>
       <td>5000000.0</td>
-      <td>-190.502335</td>
+      <td>-189.568204</td>
     </tr>
   </tbody>
 </table>

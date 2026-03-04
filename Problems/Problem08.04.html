@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Problem 7.4 &#8212; integrated-energy-grids</title>
+    <title>Problem 8.4 &#8212; integrated-energy-grids</title>
   
   
   
@@ -210,6 +210,10 @@
 <li class="toctree-l1"><a class="reference internal" href="Problem03.02.html">Problem 3.2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-networkx.html">Introduction to <code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-pypsa.html">Introduction to <code class="docutils literal notranslate"><span class="pre">pypsa</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.01.html">Problem 4.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.02.html">Problem 4.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.03.html">Problem 4.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.04.html">Problem 4.4</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-gurobipy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">gurobipy</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="IEG_course_project.html">Course project</a></li>
 
@@ -430,7 +434,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Problem 7.4</h1>
+    <h1>Problem 8.4</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -452,14 +456,14 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="problem-7-4">
-<h1>Problem 7.4<a class="headerlink" href="#problem-7-4" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="problem-8-4">
+<h1>Problem 8.4<a class="headerlink" href="#problem-8-4" title="Link to this heading">#</a></h1>
 <p><strong>Integrated Energy Grids</strong></p>
-<p><strong>Problem 7.4</strong></p>
+<p><strong>Problem 8.4</strong></p>
 <p><strong>In this problem, we will model a node that contains an electricity, a gas and a heat bus. There is a demand of 50 MWh of electricity and 40 MWh of heat. Electricity can be produced using an Open Cycle Gas Turbine (OCGT) with an efficiency of 0.35 or using a Combined Heat and Power (CHP) unit. Heat can be produced with the CHP unit or with a gas boiler. The gas boiler has an efficiency of 0.9. The OCGT, gas boiler and CHP unit have a marginal cost due to the fuel cost of 20 EUR/MWh<span class="math notranslate nohighlight">\(_{th}\)</span></strong></p>
 <p><strong>(a) In this section, we assume that the CHP has a fixed efficiency of 0.3 when producing electricity and 0.3 when producing heat. Model the OCGT and gas boiler, using a link and the CHP unit using and multilink element in PyPSA. Add a gas store to the gas bus that represents an unlimited supply of gas. Optimize the system and calculate which technologies are supplying the electricity and heat demand.</strong></p>
 <p><strong>(b) In this section, we assume that the CHP unit can be operated either in condensing mode or in back-pressure mode. In practice, this means the feasible space for operating the CHP unit is determined by the iso-fuel lines (with constant <span class="math notranslate nohighlight">\(c_v\)</span>=-0.15) and the back-pressure line (with constant <span class="math notranslate nohighlight">\(c_m\)</span>=0.75). Optimize the system and calculate which technologies are supplying the electricity and heat demand.</strong></p>
-<p><em>Note: This problem is based on the PyPSA examples <a class="reference external" href="https://pypsa.readthedocs.io/en/stable/examples/chp-fixed-heat-power-ratio.html">Multi-Link usage: CHP with fixed heat-power ratio</a> and <a class="reference external" href="https://pypsa.readthedocs.io/en/stable/examples/power-to-gas-boiler-chp.html">Power to Gas with Heat Coupling</a></em></p>
+<p><em>Note: This problem is based on the PyPSA exampler <a class="reference external" href="https://docs.pypsa.org/latest/examples/chp-fixed-heat-power-ratio/">Backpressure CHP</a> and <a class="reference external" href="https://docs.pypsa.org/latest/examples/power-to-gas-boiler-chp/#results">Extraction-condensing CHP</a></em></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you have not yet set up Python on your computer, you can execute this tutorial in your browser via <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>. Click on the rocket in the top right corner and launch “Colab”. If that doesn’t work download the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file and import it in <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>.</p>

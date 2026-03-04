@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Problem 6.1 &#8212; integrated-energy-grids</title>
+    <title>Problem 7.1 &#8212; integrated-energy-grids</title>
   
   
   
@@ -210,6 +210,10 @@
 <li class="toctree-l1"><a class="reference internal" href="Problem03.02.html">Problem 3.2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-networkx.html">Introduction to <code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-pypsa.html">Introduction to <code class="docutils literal notranslate"><span class="pre">pypsa</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.01.html">Problem 4.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.02.html">Problem 4.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.03.html">Problem 4.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.04.html">Problem 4.4</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-gurobipy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">gurobipy</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="IEG_course_project.html">Course project</a></li>
 
@@ -428,7 +432,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Problem 6.1</h1>
+    <h1>Problem 7.1</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -442,10 +446,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="problem-6-1">
-<h1>Problem 6.1<a class="headerlink" href="#problem-6-1" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="problem-7-1">
+<h1>Problem 7.1<a class="headerlink" href="#problem-7-1" title="Link to this heading">#</a></h1>
 <p><strong>Integrated Energy Grids</strong></p>
-<p><strong>Problem 6.1</strong></p>
+<p><strong>Problem 7.1</strong></p>
 <p><strong>Consider the simplified network plotted in Fig. 1, which represents Denmark and its neighbouring countries. Assume that the nodes are connected using transmission methane gas pipelines.</strong></p>
 <p><strong>(a) Calculate the capacity of every pipeline (in MW) assuming that they operate at a pressure <span class="math notranslate nohighlight">\(P\)</span>=50 bar, the average gas flow velocity is <span class="math notranslate nohighlight">\(u\)</span> = 15 m/s, the diameter of the pipes is <span class="math notranslate nohighlight">\(D\)</span> = 600mm and the energy content of methane is 50 GJ/tonne. To calculate the speed of sound in gas <span class="math notranslate nohighlight">\(c\)</span>, assume the universal gas constant <span class="math notranslate nohighlight">\(R\)</span>=8.314 J/molK, the molar mass of methane <span class="math notranslate nohighlight">\(M\)</span>=16 g/mol, compression factor <span class="math notranslate nohighlight">\(Z\)</span>=1.31, and temperature <span class="math notranslate nohighlight">\(T\)</span>=25<span class="math notranslate nohighlight">\(^{\circ}\)</span>C.</strong></p>
 <div class="admonition note">
