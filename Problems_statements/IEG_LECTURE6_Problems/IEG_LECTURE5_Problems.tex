@@ -17,12 +17,12 @@
 
 \begin{document}
  
-\title{\textbf{Lecture 5: AC Optimal Power Flow}}
+\title{\textbf{Lecture 6: AC Optimal Power Flow}}
 \author{
 %Your name\\
 DTU Course 46770: Integrated Energy Grids }
 \maketitle
-\begin{problem}{5.1}
+\begin{problem}{6.1}
 Assume we have three buses (Denmark, Netherlands and Germany) with nominal voltage $V_{nom}$= 2000 V connected by three transmission lines. In the bus Denmark, there is a wind generator that is producing 100 MW. In the bus Germany, there is a load that is consuming 100 MW of active power and 100 MVAR of reactive power. The transmission lines DK-NL and NL-DE have a unitary resistance $r$=0.01 and reactance $x$=0.1. The transmission lines DK-DE has a unitary resistance $r$=0.02 and reactance $x$=0.1. Using Python for Power System Analysis (PyPSA):
 
 \begin{itemize}
@@ -31,13 +31,13 @@ Assume we have three buses (Denmark, Netherlands and Germany) with nominal volta
 \item[b)]  Calculate the power flows along the transmission lines using a linearized approximation (also known as DC optimal power flow) and discuss the results.
 \end{itemize}
 
-\textit{Hint: It is recommended to follow the} \href{https://martavp.github.io/integrated-energy-grids/intro-pypsa.html#}{PyPSA tutorial} \textit{before trying this problem.}
+\textit{Hint: It is recommended to follow the} \href{https://aleks-g.github.io/integrated-energy-grids/intro-pypsa.html#}{PyPSA tutorial} \textit{before trying this problem.}
 
 \end{problem}
 
 \
 
-\begin{problem}{5.2}
+\begin{problem}{6.2}
 
 Assume we have one bus (Denmark) in which there is a gas power generator whose variable cost is 50 EUR/MWh and installed capacity is 50 MW, and a wind generator whose variable cost is zero and whose installed capacity is 30 MW. Using Python for Power System Analysis (PyPSA):
 
@@ -53,7 +53,7 @@ Assume we have one bus (Denmark) in which there is a gas power generator whose v
 
 \
 
-\begin{problem}{5.3}
+\begin{problem}{6.3}
 
 \textit{Note: This is equivalent to Problem 2.2 which we solved using Linopy, but here we will use PyPSA.}
 
@@ -78,7 +78,7 @@ Use PyPSA to find the optimal solution as well and obtain the electricity price 
 
 \
 
-\begin{problem}{5.4}
+\begin{problem}{6.4}
 Assume we have three buses (Denmark, Sweden, and Norway) with nominal voltage $V_{nom}$= 2000 V connected by three transmission lines. In each of the buses, there is a gas power generator whose variable cost is 50 EUR/MWh and installed capacity is 50 MW. In the Denmark bus, there is a wind generator whose variable cost is zero and whose installed capacity is 200 MW. The transmission lines have a unitary resistance $r$=0.01 and reactance $x$=0.1, and nominal capacity $S_{nom}=100$ VA. The demand is 50 MW for Denmark and Sweden and 30 MW for Norway. Using Python for Power System Analysis (PyPSA):
 
 \begin{itemize}
