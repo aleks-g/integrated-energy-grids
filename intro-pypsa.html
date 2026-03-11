@@ -64,7 +64,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Problem 4.1" href="Problems/Problem04.01.html" />
+    <link rel="next" title="PyPSA Tutorial (March 11, 2026)" href="tutorial-pypsa.html" />
     <link rel="prev" title="Introduction to networkx" href="intro-networkx.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -210,10 +210,15 @@
 <li class="toctree-l1"><a class="reference internal" href="Problems/Problem03.02.html">Problem 3.2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="intro-networkx.html">Introduction to <code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction to <code class="docutils literal notranslate"><span class="pre">pypsa</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-pypsa.html">PyPSA Tutorial (March 11, 2026)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Problems/Problem04.01.html">Problem 4.1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Problems/Problem04.02.html">Problem 4.2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Problems/Problem04.03.html">Problem 4.3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Problems/Problem04.04.html">Problem 4.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problems/Problem05.01.html">Problem 5.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problems/Problem05.02.html">Problem 5.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problems/Problem05.03.html">Problem 4.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problems/Problem05.04.html">Problem 5.4</a></li>
 <li class="toctree-l1"><a class="reference internal" href="intro-gurobipy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">gurobipy</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="Problems/IEG_course_project.html">Course project</a></li>
 
@@ -587,13 +592,13 @@ document.write(`
 <h2>From structured data to optimisation<a class="headerlink" href="#from-structured-data-to-optimisation" title="Link to this heading">#</a></h2>
 <p>The design principle of PyPSA is that basically each component is associated with a set of variables and constraints that will be added to the optimisation model based on the input data stored for the components.</p>
 <p>For an <em>hourly</em> electricity market simulation, PyPSA will solve an optimisation problem that looks like this</p>
-<div class="amsmath math notranslate nohighlight" id="equation-abb4a741-cd71-4609-9283-6db912400a06">
-<span class="eqno">(1)<a class="headerlink" href="#equation-abb4a741-cd71-4609-9283-6db912400a06" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4421dc8c-d4af-45c5-9661-2368c1bcbd59">
+<span class="eqno">(1)<a class="headerlink" href="#equation-4421dc8c-d4af-45c5-9661-2368c1bcbd59" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \min_{g_{i,s,t}; f_{\ell,t}; g_{i,r,t,\text{charge}}; g_{i,r,t,\text{discharge}}; e_{i,r,t}} \sum_s o_{s} g_{i,s,t}
 \end{equation}\]</div>
 <p>such that</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d843fd12-53af-4ccf-a1a5-62de14bc2dbe">
-<span class="eqno">(2)<a class="headerlink" href="#equation-d843fd12-53af-4ccf-a1a5-62de14bc2dbe" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-e1c99c9e-4fd3-448c-b068-03f1a72bedd0">
+<span class="eqno">(2)<a class="headerlink" href="#equation-e1c99c9e-4fd3-448c-b068-03f1a72bedd0" title="Permalink to this equation">#</a></span>\[\begin{align}
 0 &amp; \leq g_{i,s,t} \leq \hat{g}_{i,s,t} G_{i,s}  &amp; \text{generation limits : generator} \\
 -P_\ell &amp;\leq p_{\ell,t} \leq P_\ell &amp; \text{transmission limits : line}  \\
 d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{i,r,t,\text{charge}} - \sum_\ell K_{i\ell} p_{\ell,t} &amp; \text{KCL : bus} \\
@@ -630,13 +635,13 @@ d_{i,t} &amp;= \sum_s g_{i,s,t} + \sum_r g_{i,r,t,\text{discharge}} - \sum_r g_{
 <section id="simple-electricity-market-economic-dispatch-example">
 <h2>Simple electricity market (economic dispatch) example<a class="headerlink" href="#simple-electricity-market-economic-dispatch-example" title="Link to this heading">#</a></h2>
 <p>Let’s assume we want to minimise the operational cost of an electricity system representing South Africa and Mozambique subject to generator limits and meeting the loads:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-119ab1e7-21a8-40d0-b782-7ca113cefe26">
-<span class="eqno">(3)<a class="headerlink" href="#equation-119ab1e7-21a8-40d0-b782-7ca113cefe26" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b19de13d-dd09-4b59-bc3c-8c2fc67eeb2f">
+<span class="eqno">(3)<a class="headerlink" href="#equation-b19de13d-dd09-4b59-bc3c-8c2fc67eeb2f" title="Permalink to this equation">#</a></span>\[\begin{equation}
   \min_{g_s} \sum_s o_s g_s
 \end{equation}\]</div>
 <p>such that</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bfeccc4e-1ce9-4767-bd22-d68f6b52632d">
-<span class="eqno">(4)<a class="headerlink" href="#equation-bfeccc4e-1ce9-4767-bd22-d68f6b52632d" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-d9d5203f-e664-4072-9eb3-fb69c9989b01">
+<span class="eqno">(4)<a class="headerlink" href="#equation-d9d5203f-e664-4072-9eb3-fb69c9989b01" title="Permalink to this equation">#</a></span>\[\begin{align}
   \sum_s g_s &amp;= d \\
   g_s &amp;\leq G_s \\
   g_s &amp;\geq 0 
@@ -2762,11 +2767,11 @@ HiGHS run time      :          2.90
       </div>
     </a>
     <a class="right-next"
-       href="Problems/Problem04.01.html"
+       href="tutorial-pypsa.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Problem 4.1</p>
+        <p class="prev-next-title">PyPSA Tutorial (March 11, 2026)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

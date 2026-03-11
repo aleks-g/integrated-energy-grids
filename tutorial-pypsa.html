@@ -1,0 +1,3285 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>PyPSA Tutorial (March 11, 2026) &#8212; integrated-energy-grids</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=6c5579ca" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial-pypsa';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Problem 4.1" href="Problems/Problem04.01.html" />
+    <link rel="prev" title="Introduction to pypsa" href="intro-pypsa.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/DTUlogo_red.png" class="logo__image only-light" alt="integrated-energy-grids - Home"/>
+    <script>document.write(`<img src="_static/DTUlogo_red.png" class="logo__image only-dark" alt="integrated-energy-grids - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="intro-install.html">Python and Conda</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="intro-gurobi.html">Gurobi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro-python.html">Introduction to <code class="docutils literal notranslate"><span class="pre">Python</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro-numpy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">numpy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro-matplotlib.html">Introduction to <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro-pandas.html">Introduction to <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problems/Problem01.01.html">Problem 1.1</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Problems/Problem01.03.html">Problem 1.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problems/Problem01.04.html">Problem 1.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problems/Problem01.05.html">Problem 1.5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problems/Problem02.01.html">Problem 2.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro-linopy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">linopy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problems/Problem02.02.html">Problem 2.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problems/Problem02.03.html">Problem 2.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problems/Problem03.01.html">Problem 3.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problems/Problem03.02.html">Problem 3.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro-networkx.html">Introduction to <code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro-pypsa.html">Introduction to <code class="docutils literal notranslate"><span class="pre">pypsa</span></code></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">PyPSA Tutorial (March 11, 2026)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problems/Problem04.01.html">Problem 4.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problems/Problem04.02.html">Problem 4.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problems/Problem04.03.html">Problem 4.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problems/Problem04.04.html">Problem 4.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problems/Problem05.01.html">Problem 5.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problems/Problem05.02.html">Problem 5.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problems/Problem05.03.html">Problem 4.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problems/Problem05.04.html">Problem 5.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro-gurobipy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">gurobipy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problems/IEG_course_project.html">Course project</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/aleks-g/integrated-energy-grids/blob/main/integrated-energy-grids/tutorial-pypsa.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/aleks-g/integrated-energy-grids" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/aleks-g/integrated-energy-grids/issues/new?title=Issue%20on%20page%20%2Ftutorial-pypsa.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/tutorial-pypsa.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>PyPSA Tutorial (March 11, 2026)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dispatch-capacity-expansion-revisiting-lecture-3">1. Dispatch + Capacity Expansion: Revisiting lecture 3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#single-node-drawing-pypsa-components">2. Single-Node Drawing → PyPSA Components</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-nodes-dk-and-de">3. Two Nodes: DK and DE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#under-the-hood-pypsa-architecture-and-model-internals">4. Under the Hood: PyPSA Architecture and Model Internals</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-big-picture-how-pypsa-connects-several-steps-into-one-mathematical-model-and-package">The big picture: how PyPSA connects several steps into one mathematical model and package</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-the-linopy-model">Inspecting the linopy model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#retrieve-results-pandas-dataframes">Retrieve results (pandas DataFrames)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#n-pf-and-n-lpf"><code class="docutils literal notranslate"><span class="pre">n.pf()</span></code> and <code class="docutils literal notranslate"><span class="pre">n.lpf()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistics-and-plotting">5. Statistics and Plotting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#capacity">Capacity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-flows">Energy flows</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#economics">Economics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#marginal-prices">Marginal prices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further reading</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="pypsa-tutorial-march-11-2026">
+<h1>PyPSA Tutorial (March 11, 2026)<a class="headerlink" href="#pypsa-tutorial-march-11-2026" title="Link to this heading">#</a></h1>
+<p>This tutorial connects the optimisation problems we introduced in Lectures 3 and 4 to <strong>PyPSA</strong> — Python for Power System Analysis. This tutorial covers some basic concepts of PyPSA, and accompanies the more hands-on introduction in the <a class="reference internal" href="#./introduction-to-pypsa.ipynb"><span class="xref myst">introduction to PyPSA notebook</span></a>.</p>
+<section id="dispatch-capacity-expansion-revisiting-lecture-3">
+<h2>1. Dispatch + Capacity Expansion: Revisiting lecture 3<a class="headerlink" href="#dispatch-capacity-expansion-revisiting-lecture-3" title="Link to this heading">#</a></h2>
+<p>The core optimisation problem (single node, joint dispatch and capacity expansion) is</p>
+<p><img alt="image.png" src="attachment:image.png" /></p>
+<p><img alt="image-2.png" src="attachment:image-2.png" /></p>
+<p>(and further constraints: storage consistency, line limits, etc.)</p>
+<p>Each part maps directly to a PyPSA concept:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Math</p></th>
+<th class="head"><p>Meaning</p></th>
+<th class="head"><p>PyPSA</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(t\)</span></p></td>
+<td><p>Each time step (hour)</p></td>
+<td><p><strong>Snapshot</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>one node</p></td>
+<td><p>System node / representation</p></td>
+<td><p><strong>Bus</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(d_t\)</span></p></td>
+<td><p>Electricity demand</p></td>
+<td><p><strong>Load</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(g_{s,t}\)</span></p></td>
+<td><p>Generator dispatch</p></td>
+<td><p><strong>Generator</strong> (result: <code class="docutils literal notranslate"><span class="pre">n.generators_t.p</span></code>)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Remaining important ingredients:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Math</p></th>
+<th class="head"><p>Meaning</p></th>
+<th class="head"><p>PyPSA</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(G_s\)</span></p></td>
+<td><p>Installed capacity</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">p_nom</span></code> (fixed) or <code class="docutils literal notranslate"><span class="pre">p_nom_extendable=True</span></code> and <code class="docutils literal notranslate"><span class="pre">p_nom_opt</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(g_{s,t}\)</span></p></td>
+<td><p>Generation limited by the CF</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">p_max_pu</span></code> time series</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(c_s\)</span></p></td>
+<td><p>Marginal cost</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">marginal_cost</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(C_s\)</span></p></td>
+<td><p>Investment cost</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">capital_cost</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Energy balance</p></td>
+<td><p>Demand = Supply</p></td>
+<td><p>Built into <strong>Bus</strong> automatically</p></td>
+</tr>
+<tr class="row-odd"><td><p>Generation limits</p></td>
+<td><p>Upper bound on dispatch</p></td>
+<td><p>Built into <strong>Generator</strong> automatically</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="single-node-drawing-pypsa-components">
+<h2>2. Single-Node Drawing → PyPSA Components<a class="headerlink" href="#single-node-drawing-pypsa-components" title="Link to this heading">#</a></h2>
+<p>Consider a single-node representation of Denmark (<strong>DK</strong>) with three components:</p>
+<p><img alt="PyPSA Network" src="_images/dk_pypsa.png" /></p>
+<p>Each physical element maps to a PyPSA component:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>ESM concept</p></th>
+<th class="head"><p>PyPSA component</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Variable generator (wind/solar)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Generator</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">p_max_pu</span></code> = capacity factor time series</p></td>
+</tr>
+<tr class="row-odd"><td><p>Storage</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Store</span></code> + <code class="docutils literal notranslate"><span class="pre">Link</span></code> <em>or</em> <code class="docutils literal notranslate"><span class="pre">StorageUnit</span></code></p></td>
+<td><p>Use <code class="docutils literal notranslate"><span class="pre">StorageUnit</span></code> for fixed E/P ratio (e.g. battery); <code class="docutils literal notranslate"><span class="pre">Store</span></code> for flexible energy capacity and Link for (dis-)charging</p></td>
+</tr>
+<tr class="row-even"><td><p>Demand (load)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Load</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">p_set</span></code> can be constant or a time series</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The <strong>bus</strong> (<code class="docutils literal notranslate"><span class="pre">Bus</span></code>) is the node itself — it enforces the energy balance for everything attached to it.</p>
+<p>We want to construct a single-node representation of Denmark in PyPSA, with a wind generator, a battery, and a load. Usually we would start with an empty network and add components one by one, but for “simple” networks there is a nice visual tool that can help us in this:</p>
+<p><a class="reference external" href="https://nimabahrami.github.io/pypsa-drawer/">https://nimabahrami.github.io/pypsa-drawer/</a></p>
+<p>We need to create the following components:</p>
+<ul class="simple">
+<li><p>carriers for AC (for load), wind, and storage</p></li>
+<li><p>a bus for DK</p></li>
+<li><p>a load for DK</p></li>
+<li><p>a generator for DK (wind)</p></li>
+<li><p>a storage unit for DK (battery)</p></li>
+</ul>
+<p>We will do this for one day (24 hours), and we will use the real wind capacity factors for Denmark on 2015-01-01 (24 hours) that we introduced in Lecture 3.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pypsa</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># --- Real wind capacity factors: Denmark, 2015-01-03 (24 hours) ---</span>
+<span class="n">wind</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Problems/data/onshore_wind.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">wind</span> <span class="o">=</span> <span class="n">wind</span><span class="o">.</span><span class="n">tz_convert</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">wind_dnk</span> <span class="o">=</span> <span class="n">wind</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;2015-01-03&quot;</span><span class="p">,</span> <span class="s2">&quot;DNK&quot;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DNK wind capacity factors on 2015-01-03:&quot;</span><span class="p">)</span>
+<span class="n">wind_dnk</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set parameter Username
+Set parameter LicenseID to value 2767832
+Academic license - for non-commercial use only - expires 2027-01-20
+DNK wind capacity factors on 2015-01-03:
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;utc_time&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/6f9c116d5a6a24aefe1b019aaad7d1b726bfe3ea5c4e733966be18be02a3a7f6.png" src="_images/6f9c116d5a6a24aefe1b019aaad7d1b726bfe3ea5c4e733966be18be02a3a7f6.png" />
+</div>
+</div>
+<p>Let’s use the PyPSA drawer to create the network above visually:</p>
+<p><a class="reference external" href="https://nimabahrami.github.io/pypsa-drawer/">https://nimabahrami.github.io/pypsa-drawer/</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create network</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">pypsa</span><span class="o">.</span><span class="n">Network</span><span class="p">()</span>
+<span class="n">n</span><span class="o">.</span><span class="n">set_snapshots</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">24</span><span class="p">))</span>  <span class="c1"># Adjust as needed</span>
+
+<span class="c1"># --- Carriers ---</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;Carrier&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Wind&quot;</span><span class="p">,</span>
+    <span class="n">co2_emissions</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">nice_name</span><span class="o">=</span><span class="s2">&quot;Onshore wind&quot;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0000FF&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;Carrier&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AC&quot;</span><span class="p">,</span>
+    <span class="n">co2_emissions</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;Carrier&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;battery&quot;</span><span class="p">,</span>
+    <span class="n">co2_emissions</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="c1"># --- Buses ---</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;Bus&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DK&quot;</span><span class="p">,</span>
+    <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;AC&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># --- Generators ---</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;Generator&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DK wind&quot;</span><span class="p">,</span>
+    <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;DK&quot;</span><span class="p">,</span>
+    <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;Wind&quot;</span><span class="p">,</span>
+    <span class="n">p_nom</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">marginal_cost</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">capital_cost</span><span class="o">=</span><span class="mi">101644</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># --- Loads ---</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;Load&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DK load&quot;</span><span class="p">,</span>
+    <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;DK&quot;</span><span class="p">,</span>
+    <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;AC&quot;</span><span class="p">,</span>
+    <span class="n">p_set</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># --- Storage Units ---</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;StorageUnit&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DK storage&quot;</span><span class="p">,</span>
+    <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;DK&quot;</span><span class="p">,</span>
+    <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;battery&quot;</span><span class="p">,</span>
+    <span class="n">p_nom</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">max_hours</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># --- Solve ---</span>
+<span class="c1"># n.optimize(solver_name=&quot;highs&quot;)  # Uncomment to solve</span>
+<span class="c1"># n.statistics()  # View results</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can inspect the network to see what we added:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PyPSA Network &#39;Unnamed Network&#39;
+-------------------------------
+Components:
+ - Bus: 1
+ - Carrier: 3
+ - Generator: 1
+ - Load: 1
+ - StorageUnit: 1
+Snapshots: 24
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can check which generators we have, their names, buses, carriers, current capacities (<code class="docutils literal notranslate"><span class="pre">p_nom</span></code>), capacity factors (<code class="docutils literal notranslate"><span class="pre">p_max_pu</span></code>),  capital and marginal costs (and other parameters):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">generators</span><span class="p">[[</span><span class="s2">&quot;bus&quot;</span><span class="p">,</span> <span class="s2">&quot;carrier&quot;</span><span class="p">,</span> <span class="s2">&quot;p_nom&quot;</span><span class="p">,</span> <span class="s2">&quot;p_max_pu&quot;</span><span class="p">,</span> <span class="s2">&quot;capital_cost&quot;</span><span class="p">,</span> <span class="s2">&quot;marginal_cost&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>name</th>
+      <th>DK wind</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>bus</th>
+      <td>DK</td>
+    </tr>
+    <tr>
+      <th>carrier</th>
+      <td>Wind</td>
+    </tr>
+    <tr>
+      <th>p_nom</th>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>p_max_pu</th>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>capital_cost</th>
+      <td>101644.0</td>
+    </tr>
+    <tr>
+      <th>marginal_cost</th>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>At this point, we want to add the capacity factors from before, so we will actually regenerate the network similarly, but including snapshots and time series data. We will also reuse the costs we have used in the exercises for both battery storage and onshore wind. We assume a fixed energy to power ratio of 6 hours for the battery, so we can use a <code class="docutils literal notranslate"><span class="pre">StorageUnit</span></code> instead of a <code class="docutils literal notranslate"><span class="pre">Store</span></code> + <code class="docutils literal notranslate"><span class="pre">Link</span></code> combination.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create network</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">pypsa</span><span class="o">.</span><span class="n">Network</span><span class="p">()</span>
+<span class="c1"># Add snapshot (time steps) to the network:</span>
+<span class="n">n</span><span class="o">.</span><span class="n">set_snapshots</span><span class="p">(</span><span class="n">wind_dnk</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>  <span class="c1"># NOTE THE DIFFERENCE</span>
+
+<span class="c1"># --- Carriers ---</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;Carrier&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Wind&quot;</span><span class="p">,</span>
+    <span class="n">co2_emissions</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="c1"># not needed at this point, but we will introduce CO2 limits later in Lecture 9</span>
+    <span class="n">nice_name</span><span class="o">=</span><span class="s2">&quot;Onshore wind&quot;</span><span class="p">,</span> <span class="c1"># for plotting purposes</span>
+<span class="p">)</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;Carrier&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AC&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;Carrier&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;battery&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="c1"># --- Buses ---</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;Bus&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DK&quot;</span><span class="p">,</span>
+    <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;AC&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># --- Generators ---</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;Generator&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DK wind&quot;</span><span class="p">,</span>
+    <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;DK&quot;</span><span class="p">,</span>
+    <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;Wind&quot;</span><span class="p">,</span>
+    <span class="n">p_nom</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">marginal_cost</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">capital_cost</span><span class="o">=</span><span class="mi">101644</span><span class="p">,</span>
+    <span class="n">p_max_pu</span><span class="o">=</span><span class="n">wind_dnk</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="c1"># NOTE THE DIFFERENCE, we add the capacity factors</span>
+    <span class="n">p_nom_extendable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="c1"># Allow capacity expansion</span>
+<span class="p">)</span>
+
+<span class="c1"># --- Loads ---</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;Load&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DK load&quot;</span><span class="p">,</span>
+    <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;DK&quot;</span><span class="p">,</span>
+    <span class="n">p_set</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">wind_dnk</span><span class="o">.</span><span class="n">index</span><span class="p">),</span>  <span class="c1"># NOTE THE DIFFERENCE, we add a time series of demand, here it is fixed</span>
+<span class="p">)</span>
+
+<span class="c1"># --- Storage Units ---</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;StorageUnit&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DK storage&quot;</span><span class="p">,</span>
+    <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;DK&quot;</span><span class="p">,</span>
+    <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;battery&quot;</span><span class="p">,</span>
+    <span class="n">p_nom</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">max_hours</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="c1"># fixed ratio of energy capacity to power capacity: 6 hours of storage at full power</span>
+    <span class="n">capital_cost</span><span class="o">=</span><span class="mi">102042</span><span class="p">,</span>
+    <span class="n">marginal_cost</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">p_nom_extendable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># Allow capacity expansion</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">generators</span><span class="p">[[</span><span class="s2">&quot;bus&quot;</span><span class="p">,</span> <span class="s2">&quot;carrier&quot;</span><span class="p">,</span> <span class="s2">&quot;p_nom&quot;</span><span class="p">,</span> <span class="s2">&quot;p_max_pu&quot;</span><span class="p">,</span> <span class="s2">&quot;capital_cost&quot;</span><span class="p">,</span> <span class="s2">&quot;marginal_cost&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>name</th>
+      <th>DK wind</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>bus</th>
+      <td>DK</td>
+    </tr>
+    <tr>
+      <th>carrier</th>
+      <td>Wind</td>
+    </tr>
+    <tr>
+      <th>p_nom</th>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>p_max_pu</th>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>capital_cost</th>
+      <td>101644.0</td>
+    </tr>
+    <tr>
+      <th>marginal_cost</th>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We can now check whether the capacity factors were added correctly:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">generators_t</span><span class="o">.</span><span class="n">p_max_pu</span><span class="p">)</span>
+
+<span class="n">n</span><span class="o">.</span><span class="n">generators_t</span><span class="o">.</span><span class="n">p_max_pu</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>name                  DK wind
+snapshot                     
+2015-01-03 00:00:00  0.775336
+2015-01-03 01:00:00  0.784170
+2015-01-03 02:00:00  0.757938
+2015-01-03 03:00:00  0.740065
+2015-01-03 04:00:00  0.711429
+2015-01-03 05:00:00  0.679621
+2015-01-03 06:00:00  0.612471
+2015-01-03 07:00:00  0.578539
+2015-01-03 08:00:00  0.560825
+2015-01-03 09:00:00  0.554192
+2015-01-03 10:00:00  0.556877
+2015-01-03 11:00:00  0.567621
+2015-01-03 12:00:00  0.498158
+2015-01-03 13:00:00  0.538912
+2015-01-03 14:00:00  0.541701
+2015-01-03 15:00:00  0.539283
+2015-01-03 16:00:00  0.539980
+2015-01-03 17:00:00  0.534161
+2015-01-03 18:00:00  0.506076
+2015-01-03 19:00:00  0.516142
+2015-01-03 20:00:00  0.503830
+2015-01-03 21:00:00  0.501798
+2015-01-03 22:00:00  0.500812
+2015-01-03 23:00:00  0.503667
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;snapshot&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/fce9c2b46f95eb9ec62439426107e8b99a604fe03efd3e3399b706f076884d81.png" src="_images/fce9c2b46f95eb9ec62439426107e8b99a604fe03efd3e3399b706f076884d81.png" />
+</div>
+</div>
+<p>Same for the load:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">loads_t</span><span class="o">.</span><span class="n">p_set</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>name                 DK load
+snapshot                    
+2015-01-03 00:00:00   1000.0
+2015-01-03 01:00:00   1000.0
+2015-01-03 02:00:00   1000.0
+2015-01-03 03:00:00   1000.0
+2015-01-03 04:00:00   1000.0
+2015-01-03 05:00:00   1000.0
+2015-01-03 06:00:00   1000.0
+2015-01-03 07:00:00   1000.0
+2015-01-03 08:00:00   1000.0
+2015-01-03 09:00:00   1000.0
+2015-01-03 10:00:00   1000.0
+2015-01-03 11:00:00   1000.0
+2015-01-03 12:00:00   1000.0
+2015-01-03 13:00:00   1000.0
+2015-01-03 14:00:00   1000.0
+2015-01-03 15:00:00   1000.0
+2015-01-03 16:00:00   1000.0
+2015-01-03 17:00:00   1000.0
+2015-01-03 18:00:00   1000.0
+2015-01-03 19:00:00   1000.0
+2015-01-03 20:00:00   1000.0
+2015-01-03 21:00:00   1000.0
+2015-01-03 22:00:00   1000.0
+2015-01-03 23:00:00   1000.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>We now optimise the network to find the optimal dispatch and capacity expansion with <code class="docutils literal notranslate"><span class="pre">n.optimize()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">solver_name</span><span class="o">=</span><span class="s2">&quot;gurobi&quot;</span><span class="p">)</span>  <span class="c1"># Solve</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:linopy.model: Solve problem using Gurobi solver
+INFO:linopy.io: Writing time: 0.04s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set parameter Username
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Set parameter Username
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set parameter LicenseID to value 2767832
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Set parameter LicenseID to value 2767832
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Academic license - for non-commercial use only - expires 2027-01-20
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Academic license - for non-commercial use only - expires 2027-01-20
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Read LP format model from file /private/var/folders/zg/by4_k0616s98pw41wld9475c0000gp/T/linopy-problem-s_e3bvnc.lp
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Read LP format model from file /private/var/folders/zg/by4_k0616s98pw41wld9475c0000gp/T/linopy-problem-s_e3bvnc.lp
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reading time = 0.00 seconds
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Reading time = 0.00 seconds
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>obj: 242 rows, 98 columns, 457 nonzeros
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:obj: 242 rows, 98 columns, 457 nonzeros
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gurobi Optimizer version 13.0.0 build v13.0.0rc1 (mac64[arm] - Darwin 25.2.0 25C56)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Gurobi Optimizer version 13.0.0 build v13.0.0rc1 (mac64[arm] - Darwin 25.2.0 25C56)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU model: Apple M3
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:CPU model: Apple M3
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimize a model with 242 rows, 98 columns and 457 nonzeros (Min)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Optimize a model with 242 rows, 98 columns and 457 nonzeros (Min)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model fingerprint: 0x689c9207
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Model fingerprint: 0x689c9207
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model has 2 linear objective coefficients
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Model has 2 linear objective coefficients
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coefficient statistics:
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Coefficient statistics:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Matrix range     [5e-01, 6e+00]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  Matrix range     [5e-01, 6e+00]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Objective range  [1e+05, 1e+05]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  Objective range  [1e+05, 1e+05]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Bounds range     [0e+00, 0e+00]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  Bounds range     [0e+00, 0e+00]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  RHS range        [1e+03, 1e+03]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  RHS range        [1e+03, 1e+03]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Presolve removed 101 rows and 2 columns
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Presolve removed 101 rows and 2 columns
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Presolve time: 0.00s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Presolve time: 0.00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Presolved: 141 rows, 96 columns, 353 nonzeros
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Presolved: 141 rows, 96 columns, 353 nonzeros
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration    Objective       Primal Inf.    Dual Inf.      Time
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Iteration    Objective       Primal Inf.    Dual Inf.      Time
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       0    1.3096551e+08   1.728171e+03   0.000000e+00      0s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:       0    1.3096551e+08   1.728171e+03   0.000000e+00      0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      49    1.9626514e+08   0.000000e+00   0.000000e+00      0s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:      49    1.9626514e+08   0.000000e+00   0.000000e+00      0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Solved in 49 iterations and 0.00 seconds (0.00 work units)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Solved in 49 iterations and 0.00 seconds (0.00 work units)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimal objective  1.962651445e+08
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Optimal objective  1.962651445e+08
+INFO:linopy.constants: Optimization successful: 
+Status: ok
+Termination condition: optimal
+Solution: 98 primals, 242 duals
+Objective: 1.96e+08
+Solver model: available
+Solver message: 2
+
+INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-ext-p-lower, Generator-ext-p-upper, StorageUnit-ext-p_dispatch-lower, StorageUnit-ext-p_dispatch-upper, StorageUnit-ext-p_store-lower, StorageUnit-ext-p_store-upper, StorageUnit-ext-state_of_charge-lower, StorageUnit-ext-state_of_charge-upper, StorageUnit-energy_balance were not assigned to the network.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;ok&#39;, &#39;optimal&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that it outputs the optimal objective (total system costs), but it also saved shadow prices (dual variables / KKT or Lagrange multipliers). What is their meaning? Which one of them corresponds to the electricity price?</p>
+<p>Furthermore we have outputs such like <code class="docutils literal notranslate"><span class="pre">termination</span> <span class="pre">condition:</span> <span class="pre">optimal</span></code> or <code class="docutils literal notranslate"><span class="pre">('ok',</span> <span class="pre">'optimal')</span></code>. This signifies that the optimisation problem was solve to optimality (and therefore also was feasible).</p>
+<p>Let’s plot the dispatch and behaviour of storage, generation, and load:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+
+<span class="c1"># In order to create a stackplot we need to separate the positive and negative parts, using the clip method.</span>
+<span class="n">bat_dis</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">storage_units_t</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">lower</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># positive: discharge</span>
+<span class="n">bat_ch</span>  <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">storage_units_t</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">upper</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># negative: charging</span>
+
+<span class="c1"># Note that p &gt; 0 in a bus means injection into the bus (i.e. generation or in this case discharge from the battery into the bus).</span>
+
+<span class="c1"># Stack wind + battery discharge together above 0</span>
+<span class="n">supply</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span>
+    <span class="n">bat_dis</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;DK storage&quot;</span><span class="p">:</span> <span class="s2">&quot;Battery discharge&quot;</span><span class="p">}),</span>
+    <span class="n">n</span><span class="o">.</span><span class="n">generators_t</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;DK wind&quot;</span><span class="p">:</span> <span class="s2">&quot;Wind&quot;</span><span class="p">}),</span>
+<span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">supply</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">area</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;#2ca02c&quot;</span><span class="p">,</span> <span class="s2">&quot;#1f77b4&quot;</span><span class="p">])</span>
+
+<span class="c1"># Battery charging below 0 (separate call is fine here — it naturally starts from 0 and goes negative)</span>
+<span class="n">bat_ch</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;DK storage&quot;</span><span class="p">:</span> <span class="s2">&quot;Battery charge&quot;</span><span class="p">})</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">area</span><span class="p">(</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;#ff7f0e&quot;</span><span class="p">])</span>
+
+<span class="c1"># Demand (constant)</span>
+<span class="n">n</span><span class="o">.</span><span class="n">loads_t</span><span class="o">.</span><span class="n">p_set</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Demand&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;MW&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">200</span><span class="p">,</span> <span class="mi">1200</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/homebrew/Caskroom/miniforge/base/envs/integrated-energy-grids/lib/python3.13/site-packages/pandas/plotting/_matplotlib/core.py:1800: UserWarning:
+
+Attempting to set identical low and high ylims makes transformation singular; automatically expanding.
+</pre></div>
+</div>
+<img alt="_images/ca345cb0bd85ad95cb470eea44b0e66414a46a0acca9e85e5a0d638507364d63.png" src="_images/ca345cb0bd85ad95cb470eea44b0e66414a46a0acca9e85e5a0d638507364d63.png" />
+</div>
+</div>
+</section>
+<section id="two-nodes-dk-and-de">
+<h2>3. Two Nodes: DK and DE<a class="headerlink" href="#two-nodes-dk-and-de" title="Link to this heading">#</a></h2>
+<p>Following up on the last lectures where we introduced networks, we so far used networkX to represent the topology. We can keep using PyPSA which has a network representation that utilises networkX under the hood. The convenient thing is that much of the physical properties (power flow, later other flows) are automatically taken care of.</p>
+<p><img alt="PyPSA Network" src="_images/deu-dnk.png" /></p>
+<p>Each physical element maps to a PyPSA component:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>D ESM concept</p></th>
+<th class="head"><p>PyPSA component</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Generator</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">p_max_pu</span></code> = capacity factor time series</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Storage</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Store</span></code> + <code class="docutils literal notranslate"><span class="pre">Link</span></code> <em>or</em> <code class="docutils literal notranslate"><span class="pre">StorageUnit</span></code></p></td>
+<td><p>Use <code class="docutils literal notranslate"><span class="pre">StorageUnit</span></code> for fixed E/P ratio (e.g. battery); <code class="docutils literal notranslate"><span class="pre">Store</span></code> for flexible energy capacity</p></td>
+</tr>
+<tr class="row-even"><td><p>Demand (load)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Load</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">p_set</span></code> can be constant or a time series</p></td>
+</tr>
+<tr class="row-odd"><td><p>AC transmission with KVL</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Line</span></code></p></td>
+<td><p>Meshed grids, requires reactance <code class="docutils literal notranslate"><span class="pre">x</span></code>; linearised power flow</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>In general, we can decide whether to use linearised or optimal power flow in PyPSA</strong> (see our discussions in the lecture).</p>
+<p>In this specific example where we have one line connecting two nodes, we can actually just use <strong>net-transfer capacities (NTC)</strong>.</p>
+<p>The energy balance now holds <strong>at each bus separately</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\sum_s g_{i,s,t} + f_{\ell,t} = d_{i,t} \qquad \forall i \in \{\text{DK, DE}\},\; \forall t\]</div>
+<p>where <span class="math notranslate nohighlight">\(f_{\ell,t}\)</span> is the net power injected at bus <span class="math notranslate nohighlight">\(i\)</span> from the line (positive = import, negative = export), subject to</p>
+<div class="math notranslate nohighlight">
+\[|f_{\ell,t}| \leq F_\ell\]</div>
+<p>PyPSA writes both constraints automatically from the network topology. You only need to specify which bus each component is attached to.</p>
+<p>Let’s add the second bus for Germany, with a higher load, battery storage and a generator (wind):</p>
+<p>We update the wind time series to include both DK and DE:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- Real wind capacity factors: Denmark and Germany, 2015-01-03 (24 hours) ---</span>
+<span class="n">wind</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Problems/data/onshore_wind.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">wind</span> <span class="o">=</span> <span class="n">wind</span><span class="o">.</span><span class="n">tz_convert</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">wind_dnk_deu</span> <span class="o">=</span> <span class="n">wind</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;2015-01-03&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;DNK&quot;</span><span class="p">,</span> <span class="s2">&quot;DEU&quot;</span><span class="p">]]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DNK, DEU wind capacity factors on 2015-01-03:&quot;</span><span class="p">)</span>
+<span class="n">wind_dnk_deu</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DNK, DEU wind capacity factors on 2015-01-03:
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;utc_time&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/cfcded7d84cffd7a0dab02b1b96ead729cb404c329c9b597771b4a7f6e507cdb.png" src="_images/cfcded7d84cffd7a0dab02b1b96ead729cb404c329c9b597771b4a7f6e507cdb.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create network</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">pypsa</span><span class="o">.</span><span class="n">Network</span><span class="p">()</span>
+<span class="n">n</span><span class="o">.</span><span class="n">set_snapshots</span><span class="p">(</span><span class="n">wind_dnk_deu</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>  <span class="c1"># Adjust as needed</span>
+
+<span class="c1"># --- Carriers ---</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;Carrier&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Wind&quot;</span><span class="p">,</span>
+    <span class="n">nice_name</span><span class="o">=</span><span class="s2">&quot;Onshore wind&quot;</span><span class="p">,</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;Carrier&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AC&quot;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;Carrier&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;battery&quot;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># --- Buses ---</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;Bus&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DK&quot;</span><span class="p">,</span>
+    <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;AC&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;Bus&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DE&quot;</span><span class="p">,</span>
+    <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;AC&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># --- Generators ---</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;Generator&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DK wind&quot;</span><span class="p">,</span>
+    <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;DK&quot;</span><span class="p">,</span>
+    <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;Wind&quot;</span><span class="p">,</span>
+    <span class="n">p_nom</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">p_nom_extendable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">p_max_pu</span><span class="o">=</span><span class="n">wind_dnk_deu</span><span class="p">[</span><span class="s2">&quot;DNK&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+    <span class="n">marginal_cost</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">capital_cost</span><span class="o">=</span><span class="mi">101644</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;Generator&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DE wind&quot;</span><span class="p">,</span>
+    <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;DE&quot;</span><span class="p">,</span>
+    <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;Wind&quot;</span><span class="p">,</span>
+    <span class="n">p_nom</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">p_nom_extendable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">p_max_pu</span><span class="o">=</span><span class="n">wind_dnk_deu</span><span class="p">[</span><span class="s2">&quot;DEU&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+    <span class="n">marginal_cost</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">capital_cost</span><span class="o">=</span><span class="mi">101644</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># --- Loads ---</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;Load&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DK load&quot;</span><span class="p">,</span>
+    <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;DK&quot;</span><span class="p">,</span>
+    <span class="n">p_set</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">wind_dnk_deu</span><span class="o">.</span><span class="n">index</span><span class="p">),</span>  <span class="c1"># NOTE THE DIFFERENCE</span>
+<span class="p">)</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;Load&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DE load&quot;</span><span class="p">,</span>
+    <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;DE&quot;</span><span class="p">,</span>
+    <span class="n">p_set</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="mi">5000</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">wind_dnk_deu</span><span class="o">.</span><span class="n">index</span><span class="p">),</span>  <span class="c1"># NOTE THE DIFFERENCE</span>
+<span class="p">)</span>
+
+<span class="c1"># --- Storage Units ---</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;StorageUnit&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DK storage&quot;</span><span class="p">,</span>
+    <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;DK&quot;</span><span class="p">,</span>
+    <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;battery&quot;</span><span class="p">,</span>
+    <span class="n">p_nom</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">p_nom_extendable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">max_hours</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+    <span class="n">capital_cost</span><span class="o">=</span><span class="mi">102042</span><span class="p">,</span>
+    <span class="n">marginal_cost</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;StorageUnit&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DE storage&quot;</span><span class="p">,</span>
+    <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;DE&quot;</span><span class="p">,</span>
+    <span class="n">carrier</span><span class="o">=</span><span class="s2">&quot;battery&quot;</span><span class="p">,</span>
+    <span class="n">p_nom</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">max_hours</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+    <span class="n">capital_cost</span><span class="o">=</span><span class="mi">102042</span><span class="p">,</span>
+    <span class="n">marginal_cost</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">p_nom_extendable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># Allow capacity expansion</span>
+<span class="p">)</span>
+
+<span class="c1"># --- Lines ---</span>
+<span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s2">&quot;Line&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DK-DE&quot;</span><span class="p">,</span>
+    <span class="n">bus0</span><span class="o">=</span><span class="s2">&quot;DK&quot;</span><span class="p">,</span>
+    <span class="n">bus1</span><span class="o">=</span><span class="s2">&quot;DE&quot;</span><span class="p">,</span>
+    <span class="n">s_nom</span><span class="o">=</span><span class="mi">1500</span><span class="p">,</span>       <span class="c1"># MW: allow some fixed capacity. Do not allow for capacity expansion at this point.</span>
+<span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">solver_name</span><span class="o">=</span><span class="s2">&quot;gurobi&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.consistency:The following lines have zero x, which could break the linear load flow:
+Index([&#39;DK-DE&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
+WARNING:pypsa.consistency:The following lines have zero r, which could break the linear load flow:
+Index([&#39;DK-DE&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
+INFO:linopy.model: Solve problem using Gurobi solver
+INFO:linopy.io: Writing time: 0.04s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set parameter Username
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Set parameter Username
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set parameter LicenseID to value 2767832
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Set parameter LicenseID to value 2767832
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Academic license - for non-commercial use only - expires 2027-01-20
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Academic license - for non-commercial use only - expires 2027-01-20
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Read LP format model from file /private/var/folders/zg/by4_k0616s98pw41wld9475c0000gp/T/linopy-problem-pt8g_r4a.lp
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Read LP format model from file /private/var/folders/zg/by4_k0616s98pw41wld9475c0000gp/T/linopy-problem-pt8g_r4a.lp
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reading time = 0.00 seconds
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Reading time = 0.00 seconds
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>obj: 532 rows, 220 columns, 1010 nonzeros
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:obj: 532 rows, 220 columns, 1010 nonzeros
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gurobi Optimizer version 13.0.0 build v13.0.0rc1 (mac64[arm] - Darwin 25.2.0 25C56)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Gurobi Optimizer version 13.0.0 build v13.0.0rc1 (mac64[arm] - Darwin 25.2.0 25C56)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU model: Apple M3
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:CPU model: Apple M3
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimize a model with 532 rows, 220 columns and 1010 nonzeros (Min)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Optimize a model with 532 rows, 220 columns and 1010 nonzeros (Min)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model fingerprint: 0x5c25bca3
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Model fingerprint: 0x5c25bca3
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model has 4 linear objective coefficients
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Model has 4 linear objective coefficients
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coefficient statistics:
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Coefficient statistics:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Matrix range     [4e-01, 6e+00]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  Matrix range     [4e-01, 6e+00]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Objective range  [1e+05, 1e+05]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  Objective range  [1e+05, 1e+05]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Bounds range     [0e+00, 0e+00]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  Bounds range     [0e+00, 0e+00]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  RHS range        [1e+03, 5e+03]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  RHS range        [1e+03, 5e+03]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Presolve removed 249 rows and 5 columns
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Presolve removed 249 rows and 5 columns
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Presolve time: 0.00s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Presolve time: 0.00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Presolved: 283 rows, 215 columns, 752 nonzeros
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Presolved: 283 rows, 215 columns, 752 nonzeros
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration    Objective       Primal Inf.    Dual Inf.      Time
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Iteration    Objective       Primal Inf.    Dual Inf.      Time
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       0    6.3215053e+08   1.756294e+04   0.000000e+00      0s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:       0    6.3215053e+08   1.756294e+04   0.000000e+00      0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     187    1.2839720e+09   0.000000e+00   0.000000e+00      0s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:     187    1.2839720e+09   0.000000e+00   0.000000e+00      0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Solved in 187 iterations and 0.01 seconds (0.00 work units)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Solved in 187 iterations and 0.01 seconds (0.00 work units)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimal objective  1.283971973e+09
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Optimal objective  1.283971973e+09
+INFO:linopy.constants: Optimization successful: 
+Status: ok
+Termination condition: optimal
+Solution: 220 primals, 532 duals
+Objective: 1.28e+09
+Solver model: available
+Solver message: 2
+
+INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-ext-p-lower, Generator-ext-p-upper, Line-fix-s-lower, Line-fix-s-upper, StorageUnit-ext-p_dispatch-lower, StorageUnit-ext-p_dispatch-upper, StorageUnit-ext-p_store-lower, StorageUnit-ext-p_store-upper, StorageUnit-ext-state_of_charge-lower, StorageUnit-ext-state_of_charge-upper, StorageUnit-energy_balance were not assigned to the network.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;ok&#39;, &#39;optimal&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="under-the-hood-pypsa-architecture-and-model-internals">
+<h2>4. Under the Hood: PyPSA Architecture and Model Internals<a class="headerlink" href="#under-the-hood-pypsa-architecture-and-model-internals" title="Link to this heading">#</a></h2>
+<p>We just called <code class="docutils literal notranslate"><span class="pre">n.optimize(solver_name=&quot;gurobi&quot;)</span></code> — it skips a lot of steps which took us some time before and different packages.</p>
+<section id="the-big-picture-how-pypsa-connects-several-steps-into-one-mathematical-model-and-package">
+<h3>The big picture: how PyPSA connects several steps into one mathematical model and package<a class="headerlink" href="#the-big-picture-how-pypsa-connects-several-steps-into-one-mathematical-model-and-package" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  Inputs (pandas)                          constraints
+  - weather / capacity factors             by default
+  - costs, tech parameters   ──────►  Mathematical model  ──────►  Optimisation  ──────►  Optimal    ──────►  Analysis    ──────► Plotting
+                                       of an energy network        problem                 system              (pandas)          (matplotlib)
+  Inputs (networkX topology)                                        Gurobi / HiGHS
+  - buses, links, lines       ──────►                              via linopy
+                                                                    (n.model)
+                                                                         │
+                                                               n.pf()   n.lpf()
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">pandas</span></code></strong> carries all time-series and static data (capacity factors, demand, costs).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">networkX</span></code></strong>-style topology is encoded in <code class="docutils literal notranslate"><span class="pre">n.buses</span></code>, <code class="docutils literal notranslate"><span class="pre">n.lines</span></code>, <code class="docutils literal notranslate"><span class="pre">n.links</span></code>, etc.</p></li>
+<li><p>PyPSA translates your network description into a <strong>linopy</strong> <code class="docutils literal notranslate"><span class="pre">Model</span></code> object (<code class="docutils literal notranslate"><span class="pre">n.model</span></code>).</p></li>
+<li><p>The solver (Gurobi or HiGHS) solves the LP/MILP and results land back in pandas DataFrames.</p></li>
+<li><p>In the capacity expansion and dispatch optimisation, we use <code class="docutils literal notranslate"><span class="pre">n.lpf()</span></code> (linearised DC), as the PyPSA optimisation problem is linear. Only after dispatch we can also use <code class="docutils literal notranslate"><span class="pre">n.pf()</span></code> (full AC) for power flow analysis .</p></li>
+</ul>
+</section>
+<section id="inspecting-the-linopy-model">
+<h3>Inspecting the linopy model<a class="headerlink" href="#inspecting-the-linopy-model" title="Link to this heading">#</a></h3>
+<p>After <code class="docutils literal notranslate"><span class="pre">n.optimize()</span></code>, the linopy <code class="docutils literal notranslate"><span class="pre">Model</span></code> is stored at <code class="docutils literal notranslate"><span class="pre">n.model</span></code>. We can inspect its variables, constraints and objective without re-solving:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">model</span>          <span class="c1"># linopy.Model — already built by n.optimize()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;linopy.model.Model&#39;&gt;
+Linopy LP model
+===============
+
+Variables:
+----------
+ * Generator-p_nom (name)
+ * StorageUnit-p_nom (name)
+ * Generator-p (snapshot, name)
+ * Line-s (snapshot, name)
+ * StorageUnit-p_dispatch (snapshot, name)
+ * StorageUnit-p_store (snapshot, name)
+ * StorageUnit-state_of_charge (snapshot, name)
+
+Constraints:
+------------
+ * Generator-ext-p_nom-lower (name)
+ * StorageUnit-ext-p_nom-lower (name)
+ * Generator-ext-p-lower (snapshot, name)
+ * Generator-ext-p-upper (snapshot, name)
+ * Line-fix-s-lower (snapshot, name)
+ * Line-fix-s-upper (snapshot, name)
+ * StorageUnit-ext-p_dispatch-lower (snapshot, name)
+ * StorageUnit-ext-p_dispatch-upper (snapshot, name)
+ * StorageUnit-ext-p_store-lower (snapshot, name)
+ * StorageUnit-ext-p_store-upper (snapshot, name)
+ * StorageUnit-ext-state_of_charge-lower (snapshot, name)
+ * StorageUnit-ext-state_of_charge-upper (snapshot, name)
+ * Bus-nodal_balance (name, snapshot)
+ * StorageUnit-energy_balance (snapshot, name)
+
+Status:
+-------
+ok
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># All decision variables</span>
+<span class="n">m</span><span class="o">.</span><span class="n">variables</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>linopy.model.Variables
+----------------------
+ * Generator-p_nom (name)
+ * StorageUnit-p_nom (name)
+ * Generator-p (snapshot, name)
+ * Line-s (snapshot, name)
+ * StorageUnit-p_dispatch (snapshot, name)
+ * StorageUnit-p_store (snapshot, name)
+ * StorageUnit-state_of_charge (snapshot, name)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generator dispatch variable: shape = (snapshots × generators)</span>
+<span class="n">m</span><span class="p">[</span><span class="s1">&#39;Generator-p&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variable (snapshot: 24, name: 2)
+--------------------------------
+[2015-01-03 00:00:00, DK wind]: Generator-p[2015-01-03 00:00:00, DK wind] ∈ [-inf, inf]
+[2015-01-03 00:00:00, DE wind]: Generator-p[2015-01-03 00:00:00, DE wind] ∈ [-inf, inf]
+[2015-01-03 01:00:00, DK wind]: Generator-p[2015-01-03 01:00:00, DK wind] ∈ [-inf, inf]
+[2015-01-03 01:00:00, DE wind]: Generator-p[2015-01-03 01:00:00, DE wind] ∈ [-inf, inf]
+[2015-01-03 02:00:00, DK wind]: Generator-p[2015-01-03 02:00:00, DK wind] ∈ [-inf, inf]
+[2015-01-03 02:00:00, DE wind]: Generator-p[2015-01-03 02:00:00, DE wind] ∈ [-inf, inf]
+[2015-01-03 03:00:00, DK wind]: Generator-p[2015-01-03 03:00:00, DK wind] ∈ [-inf, inf]
+		...
+[2015-01-03 20:00:00, DE wind]: Generator-p[2015-01-03 20:00:00, DE wind] ∈ [-inf, inf]
+[2015-01-03 21:00:00, DK wind]: Generator-p[2015-01-03 21:00:00, DK wind] ∈ [-inf, inf]
+[2015-01-03 21:00:00, DE wind]: Generator-p[2015-01-03 21:00:00, DE wind] ∈ [-inf, inf]
+[2015-01-03 22:00:00, DK wind]: Generator-p[2015-01-03 22:00:00, DK wind] ∈ [-inf, inf]
+[2015-01-03 22:00:00, DE wind]: Generator-p[2015-01-03 22:00:00, DE wind] ∈ [-inf, inf]
+[2015-01-03 23:00:00, DK wind]: Generator-p[2015-01-03 23:00:00, DK wind] ∈ [-inf, inf]
+[2015-01-03 23:00:00, DE wind]: Generator-p[2015-01-03 23:00:00, DE wind] ∈ [-inf, inf]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># All automatically generated constraints</span>
+<span class="n">m</span><span class="o">.</span><span class="n">constraints</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>linopy.model.Constraints
+------------------------
+ * Generator-ext-p_nom-lower (name)
+ * StorageUnit-ext-p_nom-lower (name)
+ * Generator-ext-p-lower (snapshot, name)
+ * Generator-ext-p-upper (snapshot, name)
+ * Line-fix-s-lower (snapshot, name)
+ * Line-fix-s-upper (snapshot, name)
+ * StorageUnit-ext-p_dispatch-lower (snapshot, name)
+ * StorageUnit-ext-p_dispatch-upper (snapshot, name)
+ * StorageUnit-ext-p_store-lower (snapshot, name)
+ * StorageUnit-ext-p_store-upper (snapshot, name)
+ * StorageUnit-ext-state_of_charge-lower (snapshot, name)
+ * StorageUnit-ext-state_of_charge-upper (snapshot, name)
+ * Bus-nodal_balance (name, snapshot)
+ * StorageUnit-energy_balance (snapshot, name)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Nodal energy balance — one equation per bus per snapshot</span>
+<span class="n">m</span><span class="o">.</span><span class="n">constraints</span><span class="p">[</span><span class="s1">&#39;Bus-nodal_balance&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Constraint `Bus-nodal_balance` [name: 2, snapshot: 24]:
+-------------------------------------------------------
+[DK, 2015-01-03 00:00:00]: +1 Generator-p[2015-01-03 00:00:00, DK wind] + 1 StorageUnit-p_dispatch[2015-01-03 00:00:00, DK storage] - 1 StorageUnit-p_store[2015-01-03 00:00:00, DK storage] - 1 Line-s[2015-01-03 00:00:00, DK-DE] = 1000.0
+[DK, 2015-01-03 01:00:00]: +1 Generator-p[2015-01-03 01:00:00, DK wind] + 1 StorageUnit-p_dispatch[2015-01-03 01:00:00, DK storage] - 1 StorageUnit-p_store[2015-01-03 01:00:00, DK storage] - 1 Line-s[2015-01-03 01:00:00, DK-DE] = 1000.0
+[DK, 2015-01-03 02:00:00]: +1 Generator-p[2015-01-03 02:00:00, DK wind] + 1 StorageUnit-p_dispatch[2015-01-03 02:00:00, DK storage] - 1 StorageUnit-p_store[2015-01-03 02:00:00, DK storage] - 1 Line-s[2015-01-03 02:00:00, DK-DE] = 1000.0
+[DK, 2015-01-03 03:00:00]: +1 Generator-p[2015-01-03 03:00:00, DK wind] + 1 StorageUnit-p_dispatch[2015-01-03 03:00:00, DK storage] - 1 StorageUnit-p_store[2015-01-03 03:00:00, DK storage] - 1 Line-s[2015-01-03 03:00:00, DK-DE] = 1000.0
+[DK, 2015-01-03 04:00:00]: +1 Generator-p[2015-01-03 04:00:00, DK wind] + 1 StorageUnit-p_dispatch[2015-01-03 04:00:00, DK storage] - 1 StorageUnit-p_store[2015-01-03 04:00:00, DK storage] - 1 Line-s[2015-01-03 04:00:00, DK-DE] = 1000.0
+[DK, 2015-01-03 05:00:00]: +1 Generator-p[2015-01-03 05:00:00, DK wind] + 1 StorageUnit-p_dispatch[2015-01-03 05:00:00, DK storage] - 1 StorageUnit-p_store[2015-01-03 05:00:00, DK storage] - 1 Line-s[2015-01-03 05:00:00, DK-DE] = 1000.0
+[DK, 2015-01-03 06:00:00]: +1 Generator-p[2015-01-03 06:00:00, DK wind] + 1 StorageUnit-p_dispatch[2015-01-03 06:00:00, DK storage] - 1 StorageUnit-p_store[2015-01-03 06:00:00, DK storage] - 1 Line-s[2015-01-03 06:00:00, DK-DE] = 1000.0
+		...
+[DE, 2015-01-03 17:00:00]: +1 Generator-p[2015-01-03 17:00:00, DE wind] + 1 StorageUnit-p_dispatch[2015-01-03 17:00:00, DE storage] - 1 StorageUnit-p_store[2015-01-03 17:00:00, DE storage] + 1 Line-s[2015-01-03 17:00:00, DK-DE] = 5000.0
+[DE, 2015-01-03 18:00:00]: +1 Generator-p[2015-01-03 18:00:00, DE wind] + 1 StorageUnit-p_dispatch[2015-01-03 18:00:00, DE storage] - 1 StorageUnit-p_store[2015-01-03 18:00:00, DE storage] + 1 Line-s[2015-01-03 18:00:00, DK-DE] = 5000.0
+[DE, 2015-01-03 19:00:00]: +1 Generator-p[2015-01-03 19:00:00, DE wind] + 1 StorageUnit-p_dispatch[2015-01-03 19:00:00, DE storage] - 1 StorageUnit-p_store[2015-01-03 19:00:00, DE storage] + 1 Line-s[2015-01-03 19:00:00, DK-DE] = 5000.0
+[DE, 2015-01-03 20:00:00]: +1 Generator-p[2015-01-03 20:00:00, DE wind] + 1 StorageUnit-p_dispatch[2015-01-03 20:00:00, DE storage] - 1 StorageUnit-p_store[2015-01-03 20:00:00, DE storage] + 1 Line-s[2015-01-03 20:00:00, DK-DE] = 5000.0
+[DE, 2015-01-03 21:00:00]: +1 Generator-p[2015-01-03 21:00:00, DE wind] + 1 StorageUnit-p_dispatch[2015-01-03 21:00:00, DE storage] - 1 StorageUnit-p_store[2015-01-03 21:00:00, DE storage] + 1 Line-s[2015-01-03 21:00:00, DK-DE] = 5000.0
+[DE, 2015-01-03 22:00:00]: +1 Generator-p[2015-01-03 22:00:00, DE wind] + 1 StorageUnit-p_dispatch[2015-01-03 22:00:00, DE storage] - 1 StorageUnit-p_store[2015-01-03 22:00:00, DE storage] + 1 Line-s[2015-01-03 22:00:00, DK-DE] = 5000.0
+[DE, 2015-01-03 23:00:00]: +1 Generator-p[2015-01-03 23:00:00, DE wind] + 1 StorageUnit-p_dispatch[2015-01-03 23:00:00, DE storage] - 1 StorageUnit-p_store[2015-01-03 23:00:00, DE storage] + 1 Line-s[2015-01-03 23:00:00, DK-DE] = 5000.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="retrieve-results-pandas-dataframes">
+<h3>Retrieve results (pandas DataFrames)<a class="headerlink" href="#retrieve-results-pandas-dataframes" title="Link to this heading">#</a></h3>
+<p>Note that the marginal prices in a capacity expansion problems are stil the dual variables of the energy balance constraint, but include the value of the capacity expansion decision as well. Therefore we cannot directly interpret them as the electricity price like in the dispatch optimisation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generator dispatch [MW] — first 6 snapshots:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">generators_t</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Line flow DK→DE [MW] — first 6 snapshots: Positive values indicate injection into the line, i.e. flow from DK to DE.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">lines_t</span><span class="o">.</span><span class="n">p0</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Marginal prices [EUR/MWh] — first 6 snapshots:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">buses_t</span><span class="o">.</span><span class="n">marginal_price</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generator dispatch [MW] — first 6 snapshots:
+name                 DK wind  DE wind
+snapshot                             
+2015-01-03 00:00:00   2530.8   3921.2
+2015-01-03 01:00:00   2772.6   3892.4
+2015-01-03 02:00:00   2772.6   3715.6
+2015-01-03 03:00:00   2772.6   3710.4
+2015-01-03 04:00:00   2772.6   3676.7
+2015-01-03 05:00:00   2772.6   3736.3
+
+Line flow DK→DE [MW] — first 6 snapshots: Positive values indicate injection into the line, i.e. flow from DK to DE.
+name                  DK-DE
+snapshot                   
+2015-01-03 00:00:00  1500.0
+2015-01-03 01:00:00  1500.0
+2015-01-03 02:00:00  1500.0
+2015-01-03 03:00:00  1500.0
+2015-01-03 04:00:00  1500.0
+2015-01-03 05:00:00  1500.0
+
+Marginal prices [EUR/MWh] — first 6 snapshots:
+name                  DK       DE
+snapshot                         
+2015-01-03 00:00:00  0.0  2244.34
+2015-01-03 01:00:00  0.0  2244.34
+2015-01-03 02:00:00  0.0  2244.34
+2015-01-03 03:00:00  0.0  2244.34
+2015-01-03 04:00:00  0.0  2244.34
+2015-01-03 05:00:00  0.0  2244.34
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="n-pf-and-n-lpf">
+<h3><code class="docutils literal notranslate"><span class="pre">n.pf()</span></code> and <code class="docutils literal notranslate"><span class="pre">n.lpf()</span></code><a class="headerlink" href="#n-pf-and-n-lpf" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Physics</p></th>
+<th class="head"><p>When to use</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">n.pf()</span></code></p></td>
+<td><p>Full AC (Newton–Raphson): voltages, reactive power, line loading</p></td>
+<td><p>Lecture 6 — OPF; detailed operations</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">n.lpf()</span></code></p></td>
+<td><p>Linearised DC: active power only</p></td>
+<td><p>What <code class="docutils literal notranslate"><span class="pre">n.optimize()</span></code> uses internally; fast</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">pf</span><span class="p">()</span>              <span class="c1"># requires dispatch to be fixed first</span>
+<span class="n">n</span><span class="o">.</span><span class="n">buses_t</span><span class="o">.</span><span class="n">v_mag_pu</span>  <span class="c1"># voltage magnitudes</span>
+<span class="n">n</span><span class="o">.</span><span class="n">lines_t</span><span class="o">.</span><span class="n">p0</span>        <span class="c1"># active power flows</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="statistics-and-plotting">
+<h2>5. Statistics and Plotting<a class="headerlink" href="#statistics-and-plotting" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">n.statistics</span></code> provides a consistent pandas API for post-processing. Every method returns a <code class="docutils literal notranslate"><span class="pre">pandas.Series</span></code> and accepts <code class="docutils literal notranslate"><span class="pre">groupby</span></code>, <code class="docutils literal notranslate"><span class="pre">comps</span></code> and <code class="docutils literal notranslate"><span class="pre">carrier</span></code> filters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">statistics</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>Optimal Capacity</th>
+      <th>Installed Capacity</th>
+      <th>Supply</th>
+      <th>Withdrawal</th>
+      <th>Energy Balance</th>
+      <th>Transmission</th>
+      <th>Capacity Factor</th>
+      <th>Curtailment</th>
+      <th>Capital Expenditure</th>
+      <th>Operational Expenditure</th>
+      <th>Revenue</th>
+      <th>Market Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Generator</th>
+      <th>Onshore wind</th>
+      <td>11375.87284</td>
+      <td>0.0</td>
+      <td>144000.0000</td>
+      <td>0.00000</td>
+      <td>144000.00000</td>
+      <td>0.00000</td>
+      <td>0.527432</td>
+      <td>3185.08535</td>
+      <td>1.156289e+09</td>
+      <td>0.0</td>
+      <td>1.156289e+09</td>
+      <td>8029.786244</td>
+    </tr>
+    <tr>
+      <th>Line</th>
+      <th>AC</th>
+      <td>1500.00000</td>
+      <td>1500.0</td>
+      <td>0.0000</td>
+      <td>34887.96337</td>
+      <td>-34887.96337</td>
+      <td>34887.96337</td>
+      <td>0.969110</td>
+      <td>0.00000</td>
+      <td>0.000000e+00</td>
+      <td>0.0</td>
+      <td>-2.795126e+08</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Load</th>
+      <th>-</th>
+      <td>0.00000</td>
+      <td>0.0</td>
+      <td>0.0000</td>
+      <td>144000.00000</td>
+      <td>-144000.00000</td>
+      <td>0.00000</td>
+      <td>NaN</td>
+      <td>0.00000</td>
+      <td>0.000000e+00</td>
+      <td>0.0</td>
+      <td>-1.331103e+09</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>StorageUnit</th>
+      <th>battery</th>
+      <td>1251.27647</td>
+      <td>0.0</td>
+      <td>7600.2249</td>
+      <td>7600.22490</td>
+      <td>0.00000</td>
+      <td>0.00000</td>
+      <td>0.506165</td>
+      <td>30030.63524</td>
+      <td>1.276828e+08</td>
+      <td>0.0</td>
+      <td>1.276828e+08</td>
+      <td>16799.865010</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="capacity">
+<h3>Capacity<a class="headerlink" href="#capacity" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">optimal_capacity</span><span class="p">(</span><span class="n">components</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Generator&quot;</span><span class="p">,</span> <span class="s2">&quot;StorageUnit&quot;</span><span class="p">],</span> <span class="n">groupby</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;bus&quot;</span><span class="p">,</span> <span class="s2">&quot;carrier&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;barh&quot;</span><span class="p">,</span> <span class="n">xlabel</span> <span class="o">=</span> <span class="s2">&quot;Caps [MW]&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/baacaebe5668568d085e36faadfdba651c13ecd0dd4ebdf3004c05699ef40c00.png" src="_images/baacaebe5668568d085e36faadfdba651c13ecd0dd4ebdf3004c05699ef40c00.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">optimal_capacity</span><span class="p">(</span><span class="n">groupby</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;bus&quot;</span><span class="p">,</span> <span class="s2">&quot;carrier&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>component    bus  carrier     
+Generator    DE   Onshore wind    6974.65393
+             DK   Onshore wind    4401.21892
+Line         DK   AC              1500.00000
+StorageUnit  DE   battery          978.62773
+             DK   battery          272.64874
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">capacity_factor</span><span class="p">(</span><span class="n">components</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Generator&quot;</span><span class="p">,</span> <span class="s2">&quot;StorageUnit&quot;</span><span class="p">,</span> <span class="s2">&quot;Line&quot;</span><span class="p">],</span> <span class="n">groupby</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;bus&quot;</span><span class="p">,</span> <span class="s2">&quot;carrier&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>component    bus  carrier     
+Generator    DE   Onshore wind    0.508460
+             DK   Onshore wind    0.557497
+StorageUnit  DE   battery         0.500000
+             DK   battery         0.528292
+Line         DK   AC              0.969110
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">curtailment</span><span class="p">(</span><span class="n">groupby</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;bus&quot;</span><span class="p">,</span> <span class="s2">&quot;carrier&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>component    bus  carrier     
+Generator    DK   Onshore wind     3185.08535
+StorageUnit  DE   battery         23487.06559
+             DK   battery          6543.56965
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="energy-flows">
+<h3>Energy flows<a class="headerlink" href="#energy-flows" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">supply</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>component    carrier     
+Generator    Onshore wind    144000.00000
+Line         AC               34887.96337
+StorageUnit  battery           7600.22490
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">supply</span><span class="p">(</span><span class="n">groupby</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;bus&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>component    bus
+Generator    DE     85112.03663
+             DK     58887.96337
+Line         DE     34887.96337
+StorageUnit  DE      5871.76640
+             DK      1728.45850
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">withdrawal</span><span class="p">(</span><span class="n">groupby</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;bus&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>component    bus
+Line         DK      34887.96337
+Load         DE     120000.00000
+             DK      24000.00000
+StorageUnit  DE       5871.76640
+             DK       1728.45850
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">energy_balance</span><span class="p">(</span><span class="n">groupby</span><span class="o">=</span><span class="s2">&quot;bus&quot;</span><span class="p">,</span> <span class="n">groupby_time</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>snapshot</th>
+      <th>2015-01-03 00:00:00</th>
+      <th>2015-01-03 01:00:00</th>
+      <th>2015-01-03 02:00:00</th>
+      <th>2015-01-03 03:00:00</th>
+      <th>2015-01-03 04:00:00</th>
+      <th>2015-01-03 05:00:00</th>
+      <th>2015-01-03 06:00:00</th>
+      <th>2015-01-03 07:00:00</th>
+      <th>2015-01-03 08:00:00</th>
+      <th>2015-01-03 09:00:00</th>
+      <th>...</th>
+      <th>2015-01-03 14:00:00</th>
+      <th>2015-01-03 15:00:00</th>
+      <th>2015-01-03 16:00:00</th>
+      <th>2015-01-03 17:00:00</th>
+      <th>2015-01-03 18:00:00</th>
+      <th>2015-01-03 19:00:00</th>
+      <th>2015-01-03 20:00:00</th>
+      <th>2015-01-03 21:00:00</th>
+      <th>2015-01-03 22:00:00</th>
+      <th>2015-01-03 23:00:00</th>
+    </tr>
+    <tr>
+      <th>component</th>
+      <th>bus</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">Generator</th>
+      <th>DE</th>
+      <td>3921.18531</td>
+      <td>3892.41486</td>
+      <td>3715.56554</td>
+      <td>3710.39034</td>
+      <td>3676.68184</td>
+      <td>3736.31513</td>
+      <td>3887.11413</td>
+      <td>4236.23043</td>
+      <td>4430.56521</td>
+      <td>4419.05703</td>
+      <td>...</td>
+      <td>3351.60717</td>
+      <td>3137.84798</td>
+      <td>2994.93034</td>
+      <td>2910.02788</td>
+      <td>2521.37227</td>
+      <td>2692.69767</td>
+      <td>2885.49105</td>
+      <td>2997.51794</td>
+      <td>3098.11337</td>
+      <td>3190.68098</td>
+    </tr>
+    <tr>
+      <th>DK</th>
+      <td>2530.75299</td>
+      <td>2772.64874</td>
+      <td>2772.64874</td>
+      <td>2772.64874</td>
+      <td>2772.64874</td>
+      <td>2772.64874</td>
+      <td>2695.61895</td>
+      <td>2546.27679</td>
+      <td>2468.31360</td>
+      <td>2439.12031</td>
+      <td>...</td>
+      <td>2384.14469</td>
+      <td>2373.50254</td>
+      <td>2376.57019</td>
+      <td>2350.95950</td>
+      <td>2227.35126</td>
+      <td>2271.65393</td>
+      <td>2217.46613</td>
+      <td>2208.52285</td>
+      <td>2204.18325</td>
+      <td>2216.74873</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">Line</th>
+      <th>DK</th>
+      <td>-1500.00000</td>
+      <td>-1500.00000</td>
+      <td>-1500.00000</td>
+      <td>-1500.00000</td>
+      <td>-1500.00000</td>
+      <td>-1500.00000</td>
+      <td>-1500.00000</td>
+      <td>-1500.00000</td>
+      <td>-1500.00000</td>
+      <td>-1500.00000</td>
+      <td>...</td>
+      <td>-1500.00000</td>
+      <td>-1500.00000</td>
+      <td>-1500.00000</td>
+      <td>-1500.00000</td>
+      <td>-1500.00000</td>
+      <td>-1328.67460</td>
+      <td>-1490.11486</td>
+      <td>-1335.57677</td>
+      <td>-1476.83198</td>
+      <td>-1216.74873</td>
+    </tr>
+    <tr>
+      <th>DE</th>
+      <td>1500.00000</td>
+      <td>1500.00000</td>
+      <td>1500.00000</td>
+      <td>1500.00000</td>
+      <td>1500.00000</td>
+      <td>1500.00000</td>
+      <td>1500.00000</td>
+      <td>1500.00000</td>
+      <td>1500.00000</td>
+      <td>1500.00000</td>
+      <td>...</td>
+      <td>1500.00000</td>
+      <td>1500.00000</td>
+      <td>1500.00000</td>
+      <td>1500.00000</td>
+      <td>1500.00000</td>
+      <td>1328.67460</td>
+      <td>1490.11486</td>
+      <td>1335.57677</td>
+      <td>1476.83198</td>
+      <td>1216.74873</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">Load</th>
+      <th>DE</th>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>...</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+    </tr>
+    <tr>
+      <th>DK</th>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>...</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">StorageUnit</th>
+      <th>DE</th>
+      <td>-421.18531</td>
+      <td>-392.41486</td>
+      <td>-215.56554</td>
+      <td>-210.39034</td>
+      <td>-176.68184</td>
+      <td>-236.31513</td>
+      <td>-387.11413</td>
+      <td>-736.23043</td>
+      <td>-930.56521</td>
+      <td>-919.05703</td>
+      <td>...</td>
+      <td>148.39283</td>
+      <td>362.15202</td>
+      <td>505.06966</td>
+      <td>589.97212</td>
+      <td>978.62773</td>
+      <td>978.62773</td>
+      <td>624.39409</td>
+      <td>666.90529</td>
+      <td>425.05464</td>
+      <td>592.57029</td>
+    </tr>
+    <tr>
+      <th>DK</th>
+      <td>-30.75299</td>
+      <td>-272.64874</td>
+      <td>-272.64874</td>
+      <td>-272.64874</td>
+      <td>-272.64874</td>
+      <td>-272.64874</td>
+      <td>-195.61895</td>
+      <td>-46.27679</td>
+      <td>31.68640</td>
+      <td>60.87969</td>
+      <td>...</td>
+      <td>115.85531</td>
+      <td>126.49746</td>
+      <td>123.42981</td>
+      <td>149.04050</td>
+      <td>272.64874</td>
+      <td>57.02067</td>
+      <td>272.64874</td>
+      <td>127.05392</td>
+      <td>272.64874</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>8 rows × 24 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">energy_balance</span><span class="p">(</span><span class="n">groupby</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;bus&quot;</span><span class="p">,</span> <span class="s2">&quot;carrier&quot;</span><span class="p">],</span> <span class="n">groupby_time</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>snapshot</th>
+      <th>2015-01-03 00:00:00</th>
+      <th>2015-01-03 01:00:00</th>
+      <th>2015-01-03 02:00:00</th>
+      <th>2015-01-03 03:00:00</th>
+      <th>2015-01-03 04:00:00</th>
+      <th>2015-01-03 05:00:00</th>
+      <th>2015-01-03 06:00:00</th>
+      <th>2015-01-03 07:00:00</th>
+      <th>2015-01-03 08:00:00</th>
+      <th>2015-01-03 09:00:00</th>
+      <th>...</th>
+      <th>2015-01-03 14:00:00</th>
+      <th>2015-01-03 15:00:00</th>
+      <th>2015-01-03 16:00:00</th>
+      <th>2015-01-03 17:00:00</th>
+      <th>2015-01-03 18:00:00</th>
+      <th>2015-01-03 19:00:00</th>
+      <th>2015-01-03 20:00:00</th>
+      <th>2015-01-03 21:00:00</th>
+      <th>2015-01-03 22:00:00</th>
+      <th>2015-01-03 23:00:00</th>
+    </tr>
+    <tr>
+      <th>component</th>
+      <th>bus</th>
+      <th>carrier</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">Generator</th>
+      <th>DE</th>
+      <th>Onshore wind</th>
+      <td>3921.18531</td>
+      <td>3892.41486</td>
+      <td>3715.56554</td>
+      <td>3710.39034</td>
+      <td>3676.68184</td>
+      <td>3736.31513</td>
+      <td>3887.11413</td>
+      <td>4236.23043</td>
+      <td>4430.56521</td>
+      <td>4419.05703</td>
+      <td>...</td>
+      <td>3351.60717</td>
+      <td>3137.84798</td>
+      <td>2994.93034</td>
+      <td>2910.02788</td>
+      <td>2521.37227</td>
+      <td>2692.69767</td>
+      <td>2885.49105</td>
+      <td>2997.51794</td>
+      <td>3098.11337</td>
+      <td>3190.68098</td>
+    </tr>
+    <tr>
+      <th>DK</th>
+      <th>Onshore wind</th>
+      <td>2530.75299</td>
+      <td>2772.64874</td>
+      <td>2772.64874</td>
+      <td>2772.64874</td>
+      <td>2772.64874</td>
+      <td>2772.64874</td>
+      <td>2695.61895</td>
+      <td>2546.27679</td>
+      <td>2468.31360</td>
+      <td>2439.12031</td>
+      <td>...</td>
+      <td>2384.14469</td>
+      <td>2373.50254</td>
+      <td>2376.57019</td>
+      <td>2350.95950</td>
+      <td>2227.35126</td>
+      <td>2271.65393</td>
+      <td>2217.46613</td>
+      <td>2208.52285</td>
+      <td>2204.18325</td>
+      <td>2216.74873</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">Line</th>
+      <th>DK</th>
+      <th>AC</th>
+      <td>-1500.00000</td>
+      <td>-1500.00000</td>
+      <td>-1500.00000</td>
+      <td>-1500.00000</td>
+      <td>-1500.00000</td>
+      <td>-1500.00000</td>
+      <td>-1500.00000</td>
+      <td>-1500.00000</td>
+      <td>-1500.00000</td>
+      <td>-1500.00000</td>
+      <td>...</td>
+      <td>-1500.00000</td>
+      <td>-1500.00000</td>
+      <td>-1500.00000</td>
+      <td>-1500.00000</td>
+      <td>-1500.00000</td>
+      <td>-1328.67460</td>
+      <td>-1490.11486</td>
+      <td>-1335.57677</td>
+      <td>-1476.83198</td>
+      <td>-1216.74873</td>
+    </tr>
+    <tr>
+      <th>DE</th>
+      <th>AC</th>
+      <td>1500.00000</td>
+      <td>1500.00000</td>
+      <td>1500.00000</td>
+      <td>1500.00000</td>
+      <td>1500.00000</td>
+      <td>1500.00000</td>
+      <td>1500.00000</td>
+      <td>1500.00000</td>
+      <td>1500.00000</td>
+      <td>1500.00000</td>
+      <td>...</td>
+      <td>1500.00000</td>
+      <td>1500.00000</td>
+      <td>1500.00000</td>
+      <td>1500.00000</td>
+      <td>1500.00000</td>
+      <td>1328.67460</td>
+      <td>1490.11486</td>
+      <td>1335.57677</td>
+      <td>1476.83198</td>
+      <td>1216.74873</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">Load</th>
+      <th>DE</th>
+      <th>-</th>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>...</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+      <td>-5000.00000</td>
+    </tr>
+    <tr>
+      <th>DK</th>
+      <th>-</th>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>...</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+      <td>-1000.00000</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">StorageUnit</th>
+      <th>DE</th>
+      <th>battery</th>
+      <td>-421.18531</td>
+      <td>-392.41486</td>
+      <td>-215.56554</td>
+      <td>-210.39034</td>
+      <td>-176.68184</td>
+      <td>-236.31513</td>
+      <td>-387.11413</td>
+      <td>-736.23043</td>
+      <td>-930.56521</td>
+      <td>-919.05703</td>
+      <td>...</td>
+      <td>148.39283</td>
+      <td>362.15202</td>
+      <td>505.06966</td>
+      <td>589.97212</td>
+      <td>978.62773</td>
+      <td>978.62773</td>
+      <td>624.39409</td>
+      <td>666.90529</td>
+      <td>425.05464</td>
+      <td>592.57029</td>
+    </tr>
+    <tr>
+      <th>DK</th>
+      <th>battery</th>
+      <td>-30.75299</td>
+      <td>-272.64874</td>
+      <td>-272.64874</td>
+      <td>-272.64874</td>
+      <td>-272.64874</td>
+      <td>-272.64874</td>
+      <td>-195.61895</td>
+      <td>-46.27679</td>
+      <td>31.68640</td>
+      <td>60.87969</td>
+      <td>...</td>
+      <td>115.85531</td>
+      <td>126.49746</td>
+      <td>123.42981</td>
+      <td>149.04050</td>
+      <td>272.64874</td>
+      <td>57.02067</td>
+      <td>272.64874</td>
+      <td>127.05392</td>
+      <td>272.64874</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>8 rows × 24 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">transmission</span><span class="p">(</span><span class="n">groupby_time</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>snapshot</th>
+      <th>2015-01-03 00:00:00</th>
+      <th>2015-01-03 01:00:00</th>
+      <th>2015-01-03 02:00:00</th>
+      <th>2015-01-03 03:00:00</th>
+      <th>2015-01-03 04:00:00</th>
+      <th>2015-01-03 05:00:00</th>
+      <th>2015-01-03 06:00:00</th>
+      <th>2015-01-03 07:00:00</th>
+      <th>2015-01-03 08:00:00</th>
+      <th>2015-01-03 09:00:00</th>
+      <th>...</th>
+      <th>2015-01-03 14:00:00</th>
+      <th>2015-01-03 15:00:00</th>
+      <th>2015-01-03 16:00:00</th>
+      <th>2015-01-03 17:00:00</th>
+      <th>2015-01-03 18:00:00</th>
+      <th>2015-01-03 19:00:00</th>
+      <th>2015-01-03 20:00:00</th>
+      <th>2015-01-03 21:00:00</th>
+      <th>2015-01-03 22:00:00</th>
+      <th>2015-01-03 23:00:00</th>
+    </tr>
+    <tr>
+      <th>component</th>
+      <th>carrier</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Line</th>
+      <th>AC</th>
+      <td>1500.0</td>
+      <td>1500.0</td>
+      <td>1500.0</td>
+      <td>1500.0</td>
+      <td>1500.0</td>
+      <td>1500.0</td>
+      <td>1500.0</td>
+      <td>1500.0</td>
+      <td>1500.0</td>
+      <td>1500.0</td>
+      <td>...</td>
+      <td>1500.0</td>
+      <td>1500.0</td>
+      <td>1500.0</td>
+      <td>1500.0</td>
+      <td>1500.0</td>
+      <td>1328.6746</td>
+      <td>1490.11486</td>
+      <td>1335.57677</td>
+      <td>1476.83198</td>
+      <td>1216.74873</td>
+    </tr>
+  </tbody>
+</table>
+<p>1 rows × 24 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">transmission</span><span class="p">(</span><span class="n">groupby_time</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Exports from DK to DE [MW]&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;snapshot&#39;, ylabel=&#39;Exports from DK to DE [MW]&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/b93e57ebbc38b43ea12ed4c11c1fed7e1f8857d9c5cd28b6848ff69426628773.png" src="_images/b93e57ebbc38b43ea12ed4c11c1fed7e1f8857d9c5cd28b6848ff69426628773.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">snapshots</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DatetimeIndex([&#39;2015-01-03 00:00:00&#39;, &#39;2015-01-03 01:00:00&#39;,
+               &#39;2015-01-03 02:00:00&#39;, &#39;2015-01-03 03:00:00&#39;,
+               &#39;2015-01-03 04:00:00&#39;, &#39;2015-01-03 05:00:00&#39;,
+               &#39;2015-01-03 06:00:00&#39;, &#39;2015-01-03 07:00:00&#39;,
+               &#39;2015-01-03 08:00:00&#39;, &#39;2015-01-03 09:00:00&#39;,
+               &#39;2015-01-03 10:00:00&#39;, &#39;2015-01-03 11:00:00&#39;,
+               &#39;2015-01-03 12:00:00&#39;, &#39;2015-01-03 13:00:00&#39;,
+               &#39;2015-01-03 14:00:00&#39;, &#39;2015-01-03 15:00:00&#39;,
+               &#39;2015-01-03 16:00:00&#39;, &#39;2015-01-03 17:00:00&#39;,
+               &#39;2015-01-03 18:00:00&#39;, &#39;2015-01-03 19:00:00&#39;,
+               &#39;2015-01-03 20:00:00&#39;, &#39;2015-01-03 21:00:00&#39;,
+               &#39;2015-01-03 22:00:00&#39;, &#39;2015-01-03 23:00:00&#39;],
+              dtype=&#39;datetime64[ns]&#39;, name=&#39;snapshot&#39;, freq=None)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">n</span><span class="o">.</span><span class="n">storage_units_t</span><span class="o">.</span><span class="n">p</span><span class="p">[</span><span class="s2">&quot;DK storage&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">xmin</span><span class="o">=</span><span class="n">n</span><span class="o">.</span><span class="n">snapshots</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xmax</span><span class="o">=</span><span class="n">n</span><span class="o">.</span><span class="n">snapshots</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">ls</span> <span class="o">=</span> <span class="s2">&quot;dashed&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">bat_dis</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Discharge&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">bat_ch</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="o">-</span><span class="mi">300</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Charge&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x317d3f610&gt;
+</pre></div>
+</div>
+<img alt="_images/5b740979f617d5f4399739b3c8fbed2d513563a13448afe1d6b8c6494e6b4c25.png" src="_images/5b740979f617d5f4399739b3c8fbed2d513563a13448afe1d6b8c6494e6b4c25.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">prices</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>name
+DK    7842.54255
+DE    9125.27870
+Name: objective, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add dispatch plot (DK) and include exports to DE.</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">bat_dis</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">storage_units_t</span><span class="o">.</span><span class="n">p</span><span class="p">[</span><span class="s2">&quot;DK storage&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">lower</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># positive: discharge</span>
+<span class="n">bat_ch</span>  <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">storage_units_t</span><span class="o">.</span><span class="n">p</span><span class="p">[</span><span class="s2">&quot;DK storage&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">upper</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># negative: charging</span>
+<span class="n">exports</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">lines_t</span><span class="o">.</span><span class="n">p0</span><span class="p">[</span><span class="s2">&quot;DK-DE&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">lower</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># positive values mean exports</span>
+<span class="n">imports</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">lines_t</span><span class="o">.</span><span class="n">p0</span><span class="p">[</span><span class="s2">&quot;DK-DE&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">upper</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># negative values mean imports</span>
+<span class="c1"># Stack wind + OCGT + battery discharge together above 0</span>
+<span class="n">supply</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">bat_dis</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;DK storage&quot;</span><span class="p">:</span> <span class="s2">&quot;Battery discharge&quot;</span><span class="p">}),</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">generators_t</span><span class="o">.</span><span class="n">p</span><span class="p">[</span><span class="s2">&quot;DK wind&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;DK wind&quot;</span><span class="p">:</span> <span class="s2">&quot;Wind&quot;</span><span class="p">}),</span>
+<span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">supply</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">area</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;#2ca02c&quot;</span><span class="p">,</span> <span class="s2">&quot;#1f77b4&quot;</span><span class="p">,</span> <span class="s2">&quot;#d62728&quot;</span><span class="p">])</span>
+<span class="c1"># Battery charging below 0 (separate call is fine here — it naturally starts from 0 and goes negative)</span>
+<span class="n">withdrawal</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">bat_ch</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;DK storage&quot;</span><span class="p">:</span> <span class="s2">&quot;Battery charge&quot;</span><span class="p">}),</span>
+    <span class="o">-</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">exports</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;DK-DE&quot;</span><span class="p">:</span> <span class="s2">&quot;Exports to DE&quot;</span><span class="p">}),</span> <span class="c1"># exports mean withdrawal</span>
+<span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">withdrawal</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">area</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;#ff7f0e&quot;</span><span class="p">,</span> <span class="s2">&quot;#d62728&quot;</span><span class="p">])</span>
+<span class="c1"># Demand</span>
+<span class="n">n</span><span class="o">.</span><span class="n">loads_t</span><span class="o">.</span><span class="n">p_set</span><span class="p">[</span><span class="s2">&quot;DK load&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Demand&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;MW&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">2500</span><span class="p">,</span> <span class="mi">3500</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/homebrew/Caskroom/miniforge/base/envs/integrated-energy-grids/lib/python3.13/site-packages/pandas/plotting/_matplotlib/core.py:1800: UserWarning:
+
+Attempting to set identical low and high ylims makes transformation singular; automatically expanding.
+</pre></div>
+</div>
+<img alt="_images/caf90bcf8aac1ba1417dd7b575816b74b2df7c26cf2e43f0643d6e3c26f2539c.png" src="_images/caf90bcf8aac1ba1417dd7b575816b74b2df7c26cf2e43f0643d6e3c26f2539c.png" />
+</div>
+</div>
+<p>For the total system we can use a simpler area plot as well (or with some modifications we can also do the same for the upper):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">energy_balance</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">area</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Figure size 745.25x300 with 1 Axes&gt;,
+ &lt;Axes: xlabel=&#39;snapshot&#39;, ylabel=&#39;Energy Balance&#39;&gt;,
+ &lt;seaborn.axisgrid.FacetGrid at 0x317bbfe00&gt;)
+</pre></div>
+</div>
+<img alt="_images/5dc51bb4a3629e85a8cddc498bce1e5d0ac488b9ac4f5086d458a29c1f9c40b4.png" src="_images/5dc51bb4a3629e85a8cddc498bce1e5d0ac488b9ac4f5086d458a29c1f9c40b4.png" />
+</div>
+</div>
+</section>
+<section id="economics">
+<h3>Economics<a class="headerlink" href="#economics" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">system_cost</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(1283971972.5246902)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">capex</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>component    carrier     
+Generator    Onshore wind    1.156289e+09
+StorageUnit  battery         1.276828e+08
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">opex</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Series([], dtype: float64)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">revenue</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>component    carrier     
+Generator    Onshore wind    1.156289e+09
+Line         AC              4.713123e+07
+Load         -              -1.331103e+09
+StorageUnit  battery         1.276828e+08
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="marginal-prices">
+<h3>Marginal prices<a class="headerlink" href="#marginal-prices" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">n</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">prices</span><span class="p">(</span><span class="n">groupby_time</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;EUR/MWh&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Locational marginal prices&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7b69f6a21de50c176e2547f97aa5c13ee60770ede1a81e5cc12820a515e850db.png" src="_images/7b69f6a21de50c176e2547f97aa5c13ee60770ede1a81e5cc12820a515e850db.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">buses_t</span><span class="o">.</span><span class="n">marginal_price</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>name</th>
+      <th>DK</th>
+      <th>DE</th>
+    </tr>
+    <tr>
+      <th>snapshot</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2015-01-03 00:00:00</th>
+      <td>0.000000</td>
+      <td>2244.344241</td>
+    </tr>
+    <tr>
+      <th>2015-01-03 01:00:00</th>
+      <td>0.000000</td>
+      <td>2244.344241</td>
+    </tr>
+    <tr>
+      <th>2015-01-03 02:00:00</th>
+      <td>0.000000</td>
+      <td>2244.344241</td>
+    </tr>
+    <tr>
+      <th>2015-01-03 03:00:00</th>
+      <td>0.000000</td>
+      <td>2244.344241</td>
+    </tr>
+    <tr>
+      <th>2015-01-03 04:00:00</th>
+      <td>0.000000</td>
+      <td>2244.344241</td>
+    </tr>
+    <tr>
+      <th>2015-01-03 05:00:00</th>
+      <td>0.000000</td>
+      <td>2244.344241</td>
+    </tr>
+    <tr>
+      <th>2015-01-03 06:00:00</th>
+      <td>0.000000</td>
+      <td>2244.344241</td>
+    </tr>
+    <tr>
+      <th>2015-01-03 07:00:00</th>
+      <td>0.000000</td>
+      <td>2244.344241</td>
+    </tr>
+    <tr>
+      <th>2015-01-03 08:00:00</th>
+      <td>2244.344241</td>
+      <td>2244.344241</td>
+    </tr>
+    <tr>
+      <th>2015-01-03 09:00:00</th>
+      <td>2244.344241</td>
+      <td>2244.344241</td>
+    </tr>
+    <tr>
+      <th>2015-01-03 10:00:00</th>
+      <td>2244.344241</td>
+      <td>2244.344241</td>
+    </tr>
+    <tr>
+      <th>2015-01-03 11:00:00</th>
+      <td>2244.344241</td>
+      <td>2244.344241</td>
+    </tr>
+    <tr>
+      <th>2015-01-03 12:00:00</th>
+      <td>14107.856748</td>
+      <td>14107.856748</td>
+    </tr>
+    <tr>
+      <th>2015-01-03 13:00:00</th>
+      <td>14107.856748</td>
+      <td>14107.856748</td>
+    </tr>
+    <tr>
+      <th>2015-01-03 14:00:00</th>
+      <td>14107.856748</td>
+      <td>14107.856748</td>
+    </tr>
+    <tr>
+      <th>2015-01-03 15:00:00</th>
+      <td>14107.856748</td>
+      <td>14107.856748</td>
+    </tr>
+    <tr>
+      <th>2015-01-03 16:00:00</th>
+      <td>14107.856748</td>
+      <td>14107.856748</td>
+    </tr>
+    <tr>
+      <th>2015-01-03 17:00:00</th>
+      <td>14107.856748</td>
+      <td>14107.856748</td>
+    </tr>
+    <tr>
+      <th>2015-01-03 18:00:00</th>
+      <td>31502.716261</td>
+      <td>44968.781708</td>
+    </tr>
+    <tr>
+      <th>2015-01-03 19:00:00</th>
+      <td>14107.856748</td>
+      <td>14107.856748</td>
+    </tr>
+    <tr>
+      <th>2015-01-03 20:00:00</th>
+      <td>14107.856748</td>
+      <td>14107.856748</td>
+    </tr>
+    <tr>
+      <th>2015-01-03 21:00:00</th>
+      <td>14107.856748</td>
+      <td>14107.856748</td>
+    </tr>
+    <tr>
+      <th>2015-01-03 22:00:00</th>
+      <td>14107.856748</td>
+      <td>14107.856748</td>
+    </tr>
+    <tr>
+      <th>2015-01-03 23:00:00</th>
+      <td>14107.856748</td>
+      <td>14107.856748</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="further-reading">
+<h3>Further reading<a class="headerlink" href="#further-reading" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://pypsa.readthedocs.io">PyPSA documentation</a></p></li>
+<li><p>Statistics API: <code class="docutils literal notranslate"><span class="pre">n.statistics.capex()</span></code>, <code class="docutils literal notranslate"><span class="pre">n.statistics.market_value()</span></code>, <code class="docutils literal notranslate"><span class="pre">n.statistics.curtailment()</span></code></p></li>
+<li><p><a class="reference external" href="https://docs.pypsa.org/latest/user-guide/statistics/#expressions">PyPSA Statistics Module</a></p></li>
+<li><p><a class="reference external" href="https://docs.pypsa.org/latest/user-guide/plotting/charts/">PyPSA Statistics Plotting</a></p></li>
+<li><p>Large-scale studies: <a class="reference external" href="https://pypsa-eur.readthedocs.io">PyPSA-Eur</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro-pypsa.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to <code class="docutils literal notranslate"><span class="pre">pypsa</span></code></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Problems/Problem04.01.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Problem 4.1</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dispatch-capacity-expansion-revisiting-lecture-3">1. Dispatch + Capacity Expansion: Revisiting lecture 3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#single-node-drawing-pypsa-components">2. Single-Node Drawing → PyPSA Components</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-nodes-dk-and-de">3. Two Nodes: DK and DE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#under-the-hood-pypsa-architecture-and-model-internals">4. Under the Hood: PyPSA Architecture and Model Internals</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-big-picture-how-pypsa-connects-several-steps-into-one-mathematical-model-and-package">The big picture: how PyPSA connects several steps into one mathematical model and package</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-the-linopy-model">Inspecting the linopy model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#retrieve-results-pandas-dataframes">Retrieve results (pandas DataFrames)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#n-pf-and-n-lpf"><code class="docutils literal notranslate"><span class="pre">n.pf()</span></code> and <code class="docutils literal notranslate"><span class="pre">n.lpf()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistics-and-plotting">5. Statistics and Plotting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#capacity">Capacity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-flows">Energy flows</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#economics">Economics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#marginal-prices">Marginal prices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further reading</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Marta Victoria, Aleksander Grochowicz
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
