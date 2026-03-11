@@ -22,14 +22,15 @@ chapters:
 - file: Problems/Problem03.02
 - file: intro-networkx
 - file: intro-pypsa
+- file: tutorial-pypsa
 - file: Problems/Problem04.01
 - file: Problems/Problem04.02
 - file: Problems/Problem04.03
 - file: Problems/Problem04.04
-# - file: Problems/Problem05.01
-# - file: Problems/Problem05.02
-# - file: Problems/Problem05.03
-# - file: Problems/Problem05.04
+- file: Problems/Problem05.01
+- file: Problems/Problem05.02
+- file: Problems/Problem05.03
+- file: Problems/Problem05.04
 # - file: Problems/Problem06.01
 # - file: Problems/Problem06.02
 - file: intro-gurobipy
