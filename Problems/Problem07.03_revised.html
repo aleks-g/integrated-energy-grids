@@ -1,0 +1,1119 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Problem 7.3 &#8212; integrated-energy-grids</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=6c5579ca" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Problems/Problem07.03_revised';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/DTUlogo_red.png" class="logo__image only-light" alt="integrated-energy-grids - Home"/>
+    <script>document.write(`<img src="../_static/DTUlogo_red.png" class="logo__image only-dark" alt="integrated-energy-grids - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../intro-install.html">Python and Conda</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../intro-gurobi.html">Gurobi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro-python.html">Introduction to <code class="docutils literal notranslate"><span class="pre">Python</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro-numpy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">numpy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro-matplotlib.html">Introduction to <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro-pandas.html">Introduction to <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem01.01.html">Problem 1.1</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Problem01.03.html">Problem 1.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem01.04.html">Problem 1.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem01.05.html">Problem 1.5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem02.01.html">Problem 2.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro-linopy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">linopy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem02.02.html">Problem 2.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem02.03.html">Problem 2.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem03.01.html">Problem 3.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem03.02.html">Problem 3.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro-networkx.html">Introduction to <code class="docutils literal notranslate"><span class="pre">networkx</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro-pypsa.html">Introduction to <code class="docutils literal notranslate"><span class="pre">pypsa</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial-pypsa.html">PyPSA Tutorial (March 11, 2026)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.01.html">Problem 4.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.02.html">Problem 4.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.03.html">Problem 4.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem04.04.html">Problem 4.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem05.01.html">Problem 5.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem05.02.html">Problem 5.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem05.03.html">Problem 5.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem05.04.html">Problem 5.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro-gurobipy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">gurobipy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem06.01.html">Problem 6.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem06.02.html">Problem 6.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem06.03.html">Problem 6.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem06.04.html">Problem 6.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IEG_course_project.html">Course project</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/aleks-g/integrated-energy-grids/blob/main/integrated-energy-grids/Problems/Problem07.03_revised.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/aleks-g/integrated-energy-grids" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/aleks-g/integrated-energy-grids/issues/new?title=Issue%20on%20page%20%2FProblems/Problem07.03_revised.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Problems/Problem07.03_revised.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Problem 7.3</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="problem-7-3">
+<h1>Problem 7.3<a class="headerlink" href="#problem-7-3" title="Link to this heading">#</a></h1>
+<p><strong>Integrated Energy Grids</strong></p>
+<p><strong>Problem 7.3</strong></p>
+<p><strong>Assume the gas transport system that is shown in Figure 2. Gas can be injected in Node 1 at a marginal price of 10 EUR/kg or at Node 5 at 15 EUR/kg. There is a demand of 400 kg/s in Node 4. Assume pressure at node 4 is to 50 bar. Finally, Node 2-3 represents a pumping station where gas pressure can be increased by <span class="math notranslate nohighlight">\(k_{23}\)</span>=1.2 at a cost that is proportional to the mass flow <span class="math notranslate nohighlight">\(m_{23}\)</span> by a constant <span class="math notranslate nohighlight">\(o_{23}\)</span> =5 EUR/kg.</strong></p>
+<p><strong>To calculate the speed of sound in gas <span class="math notranslate nohighlight">\(c\)</span>, assume the universal gas constant <span class="math notranslate nohighlight">\(R\)</span>=8.314 J/molK, the molar mass of methane <span class="math notranslate nohighlight">\(M\)</span>=16 g/mol, compression factor <span class="math notranslate nohighlight">\(Z\)</span>=1.31, and temperature T=25<span class="math notranslate nohighlight">\(^{\circ}\)</span>C. Assume the diameter of the pipelines is <span class="math notranslate nohighlight">\(D\)</span> = 1000 mm, the length <span class="math notranslate nohighlight">\(L_{12}\)</span>=<span class="math notranslate nohighlight">\(L_{34}\)</span>=<span class="math notranslate nohighlight">\(L_{45}\)</span>=1000 m, and calculate the Darcy friction  coefficient <span class="math notranslate nohighlight">\(f_{D}\)</span> assuming fully-turbulent flow and roughness <span class="math notranslate nohighlight">\(\epsilon\)</span>=0.001m.</strong></p>
+<p><strong>(a) Write the equations of the optimization problem that minimizes the total system cost and use the Weymouth equation to represent pressure drop in the pipelines as a function of the mass flow <span class="math notranslate nohighlight">\(m_{ij}\)</span>.</strong></p>
+<p>We define the pressure at differet node as <span class="math notranslate nohighlight">\(\pi_i\)</span> and the mass flow at different pipes as <span class="math notranslate nohighlight">\(m_{ij}\)</span>
+We have 9 variables (<span class="math notranslate nohighlight">\(m_{12}\)</span>, <span class="math notranslate nohighlight">\(m_{23}\)</span>, <span class="math notranslate nohighlight">\(m_{34}\)</span>, <span class="math notranslate nohighlight">\(m_{45}\)</span>, <span class="math notranslate nohighlight">\(\pi_1\)</span>, <span class="math notranslate nohighlight">\(\pi_2\)</span>, <span class="math notranslate nohighlight">\(\pi_3\)</span>, <span class="math notranslate nohighlight">\(\pi_4\)</span>, <span class="math notranslate nohighlight">\(\pi_5\)</span>).</p>
+<p>We impose the energy balance constraint in nodes 1, 4 and 5, and the pipeline mass conservation and Weymouth equation in pipelines 12, 34 and 45.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{alignat*}{3}
+\min_{x,y} \quad &amp; o_1g_1 + o_5g_5 +o_{23}m_{23} &amp; \\
+\text{s.t.} \quad &amp; g_{1}=m_{12}  \\
+\quad &amp; -d_{4}=-m_{34}+m_{45}  \\
+\quad &amp; g_{5}=-m_{45}  \\
+\quad &amp; m_{12}=m_{23}  \\
+\quad &amp; m_{23}=m_{34}  \\
+\quad &amp; m_{34}=m_{45}  \\
+\quad &amp; \pi_{3}=k_{23}\pi_{2}  \\
+\quad &amp; \pi_{1}^2-\pi_{2}^2=a_{12}m_{12} |m_{12} | \\
+\quad &amp; \pi_{3}^2-\pi_{4}^2=a_{34}m_{34} |m_{34} | \\
+\quad &amp; \pi_{4}^2-\pi_{5}^2=a_{45}m_{45} |m_{34} | \\
+\end{alignat*}\]</div>
+<p>where the coefficients <span class="math notranslate nohighlight">\(a_{ij}=\frac{Lf^Dc^2}{DA^2}\)</span> depend on the physical properties of the pipelines and the methane gas.</p>
+<p><strong>(b) Use gurobipy to formulate and solve the problem. Solve the problem for two extra cases of : <span class="math notranslate nohighlight">\(o_{23}\)</span> =1 EUR/kg and <span class="math notranslate nohighlight">\(o_{23}\)</span> =10 EUR/kg and compare the results.</strong></p>
+<p>We start by calculating the cofficients <span class="math notranslate nohighlight">\(a_{ij}\)</span> from the Weymouth equation</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The cross-sectional area <span class="math notranslate nohighlight">\(A\)</span>, and the speed of sound in gas <span class="math notranslate nohighlight">\(c\)</span>, can be calculated as</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># m</span>
+
+<span class="n">Z</span> <span class="o">=</span> <span class="mf">1.31</span>
+<span class="n">R</span> <span class="o">=</span> <span class="mf">8.314</span> <span class="c1"># J/molk</span>
+<span class="n">M</span> <span class="o">=</span> <span class="mf">0.016</span> <span class="c1"># Kg/mol</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">273</span><span class="o">+</span><span class="mi">25</span> <span class="c1"># K</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">D</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">c</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Z</span><span class="o">*</span><span class="n">R</span><span class="o">*</span><span class="n">T</span><span class="o">/</span><span class="n">M</span><span class="p">)</span>
+<span class="n">c</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>450.3900615022494
+</pre></div>
+</div>
+</div>
+</div>
+<p>The Darcy friction coefficient can be calculated as <span class="math notranslate nohighlight">\(\frac{1}{\sqrt f_D}=-2log_{10}(\frac{\epsilon}{3.7D})\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.001</span> <span class="c1">#m</span>
+
+<span class="n">f_D</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">epsilon</span><span class="o">/</span><span class="p">(</span><span class="mf">3.7</span><span class="o">*</span><span class="n">D</span><span class="p">))))</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">f_D</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0196354659355267
+</pre></div>
+</div>
+</div>
+</div>
+<p>The coefficients from the Weymouth equation can be calculated as <span class="math notranslate nohighlight">\(a_{ij}=\frac{Lf_Dc^2}{DA^2}\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="mi">1000</span> <span class="c1">#km </span>
+<span class="n">L_12</span><span class="o">=</span><span class="n">L</span>
+<span class="n">a_12</span><span class="o">=</span><span class="n">L_12</span><span class="o">*</span><span class="n">f_D</span><span class="o">*</span><span class="n">c</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="n">D</span><span class="o">*</span><span class="n">A</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">a_34</span><span class="o">=</span><span class="n">a_12</span>
+<span class="n">a_45</span><span class="o">=</span><span class="n">a_12</span>
+<span class="n">a_12</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6457122.799219107
+</pre></div>
+</div>
+</div>
+</div>
+<p>We import gurobipy and write the problem</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">gurobipy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gurobipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">GRB</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k_23</span> <span class="o">=</span> <span class="mf">1.2</span>
+<span class="n">d_4</span> <span class="o">=</span> <span class="mi">400</span> <span class="c1">#kg/s</span>
+<span class="n">o_1</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1">#EUR/kg</span>
+<span class="n">o_5</span> <span class="o">=</span> <span class="mi">15</span> <span class="c1">#EUR/kg</span>
+<span class="n">o_m23</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1">#EUR/kg   </span>
+<span class="n">p4</span><span class="o">=</span> <span class="mi">50</span><span class="o">*</span><span class="mf">1e5</span> <span class="c1">## Pa</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="s2">&quot;My_quadratic_problem&quot;</span><span class="p">)</span>
+<span class="n">g_1</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;g_1&quot;</span><span class="p">)</span>
+<span class="n">g_5</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;g_5&quot;</span><span class="p">)</span>
+
+<span class="n">m_12</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="n">d_4</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m_12&quot;</span><span class="p">)</span>
+<span class="n">m_23</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="n">d_4</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m_23&quot;</span><span class="p">)</span>
+<span class="n">m_34</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="n">d_4</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m_34&quot;</span><span class="p">)</span>
+<span class="n">m_45</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=-</span><span class="n">d_4</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>  <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m_45&quot;</span><span class="p">)</span>
+
+<span class="n">abs_m_12</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;abs_m_12&quot;</span><span class="p">)</span>
+<span class="n">abs_m_34</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;abs_m_34&quot;</span><span class="p">)</span>
+<span class="n">abs_m_45</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;abs_m_45&quot;</span><span class="p">)</span>
+
+<span class="n">p_1</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="mi">50</span><span class="o">*</span><span class="mf">1e5</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;p_1&quot;</span><span class="p">)</span>
+<span class="n">p_2</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="mi">50</span><span class="o">*</span><span class="mf">1e5</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;p_2&quot;</span><span class="p">)</span>
+<span class="n">p_3</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">50</span><span class="o">*</span><span class="mf">1e5</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;p_3&quot;</span><span class="p">)</span>
+<span class="n">p_4</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">50</span><span class="o">*</span><span class="mf">1e5</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="mi">50</span><span class="o">*</span><span class="mf">1e5</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;p_4&quot;</span><span class="p">)</span>  
+<span class="n">p_5</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">50</span><span class="o">*</span><span class="mf">1e5</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;p_5&quot;</span><span class="p">)</span> 
+
+<span class="n">model</span><span class="o">.</span><span class="n">setObjective</span><span class="p">(</span><span class="n">o_1</span><span class="o">*</span><span class="n">g_1</span> <span class="o">+</span> <span class="n">o_5</span><span class="o">*</span><span class="n">g_5</span> <span class="o">+</span> <span class="n">o_m23</span><span class="o">*</span><span class="n">m_23</span><span class="p">,</span> <span class="n">GRB</span><span class="o">.</span><span class="n">MINIMIZE</span><span class="p">)</span>
+
+<span class="n">constraint_a</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addLConstr</span><span class="p">(</span><span class="n">g_1</span> <span class="o">==</span> <span class="n">m_12</span><span class="p">)</span>
+<span class="n">constraint_b</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addLConstr</span><span class="p">(</span><span class="o">-</span><span class="n">g_5</span> <span class="o">==</span> <span class="n">m_45</span><span class="p">)</span>
+<span class="n">constraint_c</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addLConstr</span><span class="p">(</span><span class="o">-</span><span class="n">d_4</span> <span class="o">==</span> <span class="o">-</span><span class="n">m_34</span><span class="o">+</span><span class="n">m_45</span><span class="p">)</span>
+<span class="n">constraint_d</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addLConstr</span><span class="p">(</span><span class="n">m_12</span> <span class="o">==</span> <span class="n">m_23</span><span class="p">)</span>
+<span class="n">constraint_e</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addLConstr</span><span class="p">(</span><span class="n">m_12</span> <span class="o">==</span> <span class="n">m_34</span><span class="p">)</span>
+<span class="n">constraint_f</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addLConstr</span><span class="p">(</span><span class="n">p_3</span> <span class="o">==</span> <span class="n">k_23</span><span class="o">*</span><span class="n">p_2</span><span class="p">)</span>
+<span class="n">constraint_g</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addLConstr</span><span class="p">(</span><span class="n">p_4</span> <span class="o">==</span> <span class="n">p4</span><span class="p">)</span>
+
+<span class="c1"># We need to define additional constraints to use absolute values</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gurobipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">abs_</span>
+<span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">abs_m_12</span> <span class="o">==</span> <span class="n">abs_</span><span class="p">(</span><span class="n">m_12</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;abs_m_12&#39;</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">abs_m_34</span> <span class="o">==</span> <span class="n">abs_</span><span class="p">(</span><span class="n">m_34</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;abs_m_34&#39;</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">abs_m_45</span> <span class="o">==</span> <span class="n">abs_</span><span class="p">(</span><span class="n">m_45</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;abs_m_45&#39;</span><span class="p">)</span>
+<span class="n">constraint_i</span>  <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addQConstr</span><span class="p">(</span><span class="n">a_12</span><span class="o">*</span><span class="n">m_12</span><span class="o">*</span><span class="n">abs_m_12</span> <span class="o">==</span> <span class="n">p_1</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="n">p_2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">constraint_j</span>  <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addQConstr</span><span class="p">(</span><span class="n">a_34</span><span class="o">*</span><span class="n">m_34</span><span class="o">*</span><span class="n">abs_m_34</span> <span class="o">==</span> <span class="n">p_3</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="n">p_4</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">constraint_k</span>  <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addQConstr</span><span class="p">(</span><span class="n">a_45</span><span class="o">*</span><span class="n">m_45</span><span class="o">*</span><span class="n">abs_m_45</span> <span class="o">==</span> <span class="n">p_4</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="n">p_5</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="n">model</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gurobi Optimizer version 12.0.3 build v12.0.3rc0 (mac64[arm] - Darwin 24.6.0 24G419)
+
+CPU model: Apple M4
+Thread count: 10 physical cores, 10 logical processors, using up to 10 threads
+
+Optimize a model with 7 rows, 14 columns and 13 nonzeros
+Model fingerprint: 0xf835d7df
+Model has 3 quadratic constraints
+Model has 3 simple general constraints
+  3 ABS
+Variable types: 14 continuous, 0 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  QMatrix range    [1e+00, 6e+06]
+  Objective range  [1e+01, 2e+01]
+  Bounds range     [4e+02, 5e+06]
+  RHS range        [4e+02, 5e+06]
+Presolve removed 6 rows and 9 columns
+Presolve time: 0.00s
+Presolved: 19 rows, 11 columns, 37 nonzeros
+Presolved model has 5 bilinear constraint(s)
+
+Solving non-convex MIQCP
+
+Variable types: 11 continuous, 0 integer (0 binary)
+
+Root relaxation: objective 5.000000e+03, 6 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 4999.99997    0    4          - 4999.99997      -     -    0s
+     0     0 4999.99997    0    4          - 4999.99997      -     -    0s
+     0     2 4999.99997    0    5          - 4999.99997      -     -    0s
+ 1459605 14182 5647.74393   58    5          - 5647.74393      -   0.4    5s
+*1720858  1172              97    5304.6539813 5304.65398  0.00%   0.3    5s
+
+Explored 1729605 nodes (603226 simplex iterations) in 6.01 seconds (2.04 work units)
+Thread count was 10 (of 10 available processors)
+
+Solution count 1: 5304.65 
+
+Optimal solution found (tolerance 1.00e-04)
+Warning: max constraint violation (7.6408e-05) exceeds tolerance
+Best objective 5.304653981271e+03, best bound 5.304653981271e+03, gap 0.0000%
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">g_1</span><span class="o">.</span><span class="n">VarName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">g_1</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">g_5</span><span class="o">.</span><span class="n">VarName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">g_5</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">m_12</span><span class="o">.</span><span class="n">VarName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">m_12</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">m_23</span><span class="o">.</span><span class="n">VarName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">m_23</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">m_34</span><span class="o">.</span><span class="n">VarName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">m_34</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">m_45</span><span class="o">.</span><span class="n">VarName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">m_45</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+                                   
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p_1</span><span class="o">.</span><span class="n">VarName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">p_1</span><span class="o">.</span><span class="n">x</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; Pa&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p_2</span><span class="o">.</span><span class="n">VarName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">p_2</span><span class="o">.</span><span class="n">x</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; Pa&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p_3</span><span class="o">.</span><span class="n">VarName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">p_3</span><span class="o">.</span><span class="n">x</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; Pa&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p_4</span><span class="o">.</span><span class="n">VarName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">p_4</span><span class="o">.</span><span class="n">x</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; Pa&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p_5</span><span class="o">.</span><span class="n">VarName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">p_5</span><span class="o">.</span><span class="n">x</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; Pa&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>g_1 139.06920374575762
+g_5 260.93079625424235
+m_12 139.06920374575762
+m_23 139.06920374575762
+m_34 139.06920374575762
+m_45 -260.93079625424235
+p_1 4191982 Pa
+p_2 4177061 Pa
+p_3 5012473 Pa
+p_4 5000000 Pa
+p_5 5043772 Pa
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flows_g1</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">flows_g5</span><span class="o">=</span><span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">o_m23</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span> <span class="p">:</span> <span class="c1">#EUR/kg   </span>
+  <span class="c1">#model.setParam(&quot;MIPFocus&quot;, 1)</span>
+  <span class="c1">#model.setParam(&quot;Threads&quot;, 1)</span>
+  <span class="c1">#model.setParam(&quot;Seed&quot;, 0)  </span>
+  <span class="n">model</span><span class="o">.</span><span class="n">setObjective</span><span class="p">(</span><span class="n">o_1</span><span class="o">*</span><span class="n">g_1</span> <span class="o">+</span> <span class="n">o_5</span><span class="o">*</span><span class="n">g_5</span> <span class="o">+</span> <span class="n">o_m23</span><span class="o">*</span><span class="n">m_23</span><span class="p">,</span> <span class="n">GRB</span><span class="o">.</span><span class="n">MINIMIZE</span><span class="p">)</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+  <span class="n">flows_g1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">g_1</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">flows_g5</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">g_5</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gurobi Optimizer version 12.0.3 build v12.0.3rc0 (mac64[arm] - Darwin 24.6.0 24G419)
+
+CPU model: Apple M4
+Thread count: 10 physical cores, 10 logical processors, using up to 10 threads
+
+Optimize a model with 7 rows, 14 columns and 13 nonzeros
+Model fingerprint: 0xf835d7df
+Model has 3 quadratic constraints
+Model has 3 simple general constraints
+  3 ABS
+Variable types: 14 continuous, 0 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  QMatrix range    [1e+00, 6e+06]
+  Objective range  [1e+01, 2e+01]
+  Bounds range     [4e+02, 5e+06]
+  RHS range        [4e+02, 5e+06]
+
+MIP start from previous solve did not produce a new incumbent solution
+
+Presolve removed 6 rows and 9 columns
+Presolve time: 0.00s
+Presolved: 19 rows, 11 columns, 37 nonzeros
+Presolved model has 5 bilinear constraint(s)
+
+Solving non-convex MIQCP
+
+Variable types: 11 continuous, 0 integer (0 binary)
+
+Root relaxation: objective 5.000000e+03, 6 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 4999.99997    0    4          - 4999.99997      -     -    0s
+     0     0 4999.99997    0    4          - 4999.99997      -     -    0s
+     0     2 4999.99997    0    5          - 4999.99997      -     -    0s
+ 1429605 14056 infeasible   85               - 5647.74393      -   0.4    5s
+*1720858  1172              97    5304.6539813 5304.65398  0.00%   0.3    6s
+
+Explored 1729605 nodes (603226 simplex iterations) in 6.13 seconds (2.04 work units)
+Thread count was 10 (of 10 available processors)
+
+Solution count 1: 5304.65 
+
+Optimal solution found (tolerance 1.00e-04)
+Warning: max constraint violation (7.6408e-05) exceeds tolerance
+Best objective 5.304653981271e+03, best bound 5.304653981271e+03, gap 0.0000%
+Gurobi Optimizer version 12.0.3 build v12.0.3rc0 (mac64[arm] - Darwin 24.6.0 24G419)
+
+CPU model: Apple M4
+Thread count: 10 physical cores, 10 logical processors, using up to 10 threads
+
+Optimize a model with 7 rows, 14 columns and 13 nonzeros
+Model fingerprint: 0xfe942c67
+Model has 3 quadratic constraints
+Model has 3 simple general constraints
+  3 ABS
+Variable types: 14 continuous, 0 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  QMatrix range    [1e+00, 6e+06]
+  Objective range  [1e+00, 2e+01]
+  Bounds range     [4e+02, 5e+06]
+  RHS range        [4e+02, 5e+06]
+
+MIP start from previous solve did not produce a new incumbent solution
+
+Presolve removed 6 rows and 9 columns
+Presolve time: 0.00s
+Presolved: 19 rows, 11 columns, 37 nonzeros
+Presolved model has 5 bilinear constraint(s)
+
+Solving non-convex MIQCP
+
+Variable types: 11 continuous, 0 integer (0 binary)
+
+Root relaxation: objective 5.200000e+03, 6 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 5199.99997    0    4          - 5199.99997      -     -    0s
+     0     0 5199.99997    0    4          - 5199.99997      -     -    0s
+     0     2 5199.99997    0    5          - 5199.99997      -     -    0s
+*761867   929              95    5370.4130980 5370.41310  0.00%   0.4    2s
+
+Explored 763835 nodes (274435 simplex iterations) in 2.67 seconds (0.90 work units)
+Thread count was 10 (of 10 available processors)
+
+Solution count 1: 5370.41 
+
+Optimal solution found (tolerance 1.00e-04)
+Warning: max constraint violation (3.9062e-03) exceeds tolerance
+Best objective 5.370413097954e+03, best bound 5.370413097954e+03, gap 0.0000%
+Gurobi Optimizer version 12.0.3 build v12.0.3rc0 (mac64[arm] - Darwin 24.6.0 24G419)
+
+CPU model: Apple M4
+Thread count: 10 physical cores, 10 logical processors, using up to 10 threads
+
+Optimize a model with 7 rows, 14 columns and 13 nonzeros
+Model fingerprint: 0x6d33261a
+Model has 3 quadratic constraints
+Model has 3 simple general constraints
+  3 ABS
+Variable types: 14 continuous, 0 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  QMatrix range    [1e+00, 6e+06]
+  Objective range  [5e+00, 2e+01]
+  Bounds range     [4e+02, 5e+06]
+  RHS range        [4e+02, 5e+06]
+
+MIP start from previous solve did not produce a new incumbent solution
+
+Presolve removed 6 rows and 9 columns
+Presolve time: 0.00s
+Presolved: 19 rows, 11 columns, 37 nonzeros
+Presolved model has 5 bilinear constraint(s)
+
+Solving non-convex MIQCP
+
+Variable types: 11 continuous, 0 integer (0 binary)
+
+Root relaxation: objective 6.000000e+03, 6 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 6000.00000    0    4          - 6000.00000      -     -    0s
+     0     0 6000.00000    0    4          - 6000.00000      -     -    0s
+     0     2 6000.00000    0    4          - 6000.00000      -     -    0s
+ 1440838 41729          -   94               - 6000.00000      -   0.3    5s
+ 2890290 73535 6000.00000   96    5          - 6000.00000      -   0.3   10s
+*3442781  1268              88    6000.0000000 6000.00000  0.00%   0.3   12s
+
+Explored 3450232 nodes (1129387 simplex iterations) in 12.20 seconds (3.66 work units)
+Thread count was 10 (of 10 available processors)
+
+Solution count 1: 6000 
+
+Optimal solution found (tolerance 1.00e-04)
+Warning: max constraint violation (5.2133e-05) exceeds tolerance
+Best objective 6.000000000000e+03, best bound 6.000000000000e+03, gap 0.0000%
+Gurobi Optimizer version 12.0.3 build v12.0.3rc0 (mac64[arm] - Darwin 24.6.0 24G419)
+
+CPU model: Apple M4
+Thread count: 10 physical cores, 10 logical processors, using up to 10 threads
+
+Optimize a model with 7 rows, 14 columns and 13 nonzeros
+Model fingerprint: 0xa354a3d3
+Model has 3 quadratic constraints
+Model has 3 simple general constraints
+  3 ABS
+Variable types: 14 continuous, 0 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  QMatrix range    [1e+00, 6e+06]
+  Objective range  [1e+01, 2e+01]
+  Bounds range     [4e+02, 5e+06]
+  RHS range        [4e+02, 5e+06]
+
+MIP start from previous solve did not produce a new incumbent solution
+
+Presolve removed 6 rows and 9 columns
+Presolve time: 0.00s
+Presolved: 19 rows, 11 columns, 37 nonzeros
+Presolved model has 5 bilinear constraint(s)
+
+Solving non-convex MIQCP
+
+Variable types: 11 continuous, 0 integer (0 binary)
+
+Root relaxation: objective 7.000000e+03, 6 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 7000.00000    0    4          - 7000.00000      -     -    0s
+     0     0 7242.68404    0    4          - 7242.68404      -     -    0s
+     0     2 7337.34854    0    4          - 7337.34854      -     -    0s
+ 1426059  3859 infeasible   87               - 7337.34854      -   0.3    5s
+ 2845639  3423 7337.34854   45    5          - 7337.34854      -   0.3   10s
+ 4275415  3956 7337.34854   80    5          - 7337.34854      -   0.3   15s
+*5173044   781              83    7057.7926030 7057.79260  0.00%   0.3   18s
+
+Explored 5174809 nodes (1647123 simplex iterations) in 18.25 seconds (5.74 work units)
+Thread count was 10 (of 10 available processors)
+
+Solution count 1: 7057.79 
+
+Optimal solution found (tolerance 1.00e-04)
+Warning: max constraint violation (1.1360e-03) exceeds tolerance
+Best objective 7.057792603006e+03, best bound 7.057792603006e+03, gap 0.0000%
+Gurobi Optimizer version 12.0.3 build v12.0.3rc0 (mac64[arm] - Darwin 24.6.0 24G419)
+
+CPU model: Apple M4
+Thread count: 10 physical cores, 10 logical processors, using up to 10 threads
+
+Optimize a model with 7 rows, 14 columns and 13 nonzeros
+Model fingerprint: 0x47afb47b
+Model has 3 quadratic constraints
+Model has 3 simple general constraints
+  3 ABS
+Variable types: 14 continuous, 0 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  QMatrix range    [1e+00, 6e+06]
+  Objective range  [1e+01, 2e+01]
+  Bounds range     [4e+02, 5e+06]
+  RHS range        [4e+02, 5e+06]
+
+MIP start from previous solve did not produce a new incumbent solution
+
+Presolve removed 6 rows and 9 columns
+Presolve time: 0.00s
+Presolved: 19 rows, 11 columns, 37 nonzeros
+Presolved model has 5 bilinear constraint(s)
+
+Solving non-convex MIQCP
+
+Variable types: 11 continuous, 0 integer (0 binary)
+
+Root relaxation: objective 8.000000e+03, 6 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 8000.00000    0    4          - 8000.00000      -     -    0s
+     0     0 8984.39262    0    4          - 8984.39262      -     -    0s
+     0     2 9187.51410    0    4          - 9187.51410      -     -    0s
+ 1440741  3076 infeasible   96               - 9187.51410      -   0.3    5s
+ 2869750  2471 infeasible   85               - 9187.51410      -   0.3   10s
+ 4319750  3805 infeasible   95               - 9187.51410      -   0.3   15s
+ 5789563  3238 infeasible   94               - 9187.51410      -   0.3   20s
+ 7158242  3411          -  100               - 9187.51410      -   0.3   25s
+ 8607857  2196 infeasible   79               - 9187.51410      -   0.3   30s
+ 10057857  1888 9187.51410   84    5          - 9187.51410      -   0.3   35s
+ 11517013  2746 9187.51410   82    5          - 9187.51410      -   0.3   40s
+*12350113   590              97    9012.0180672 9012.01807  0.00%   0.3   42s
+
+Explored 12356828 nodes (4044527 simplex iterations) in 43.00 seconds (13.74 work units)
+Thread count was 10 (of 10 available processors)
+
+Solution count 1: 9012.02 
+
+Optimal solution found (tolerance 1.00e-04)
+Warning: max constraint violation (5.7241e-05) exceeds tolerance
+Best objective 9.012018067171e+03, best bound 9.012018067171e+03, gap 0.0000%
+Gurobi Optimizer version 12.0.3 build v12.0.3rc0 (mac64[arm] - Darwin 24.6.0 24G419)
+
+CPU model: Apple M4
+Thread count: 10 physical cores, 10 logical processors, using up to 10 threads
+
+Optimize a model with 7 rows, 14 columns and 13 nonzeros
+Model fingerprint: 0x2f0022c3
+Model has 3 quadratic constraints
+Model has 3 simple general constraints
+  3 ABS
+Variable types: 14 continuous, 0 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  QMatrix range    [1e+00, 6e+06]
+  Objective range  [1e+01, 1e+02]
+  Bounds range     [4e+02, 5e+06]
+  RHS range        [4e+02, 5e+06]
+
+MIP start from previous solve did not produce a new incumbent solution
+
+Presolve removed 6 rows and 9 columns
+Presolve time: 0.00s
+Presolved: 19 rows, 11 columns, 37 nonzeros
+Presolved model has 5 bilinear constraint(s)
+
+Solving non-convex MIQCP
+
+Variable types: 11 continuous, 0 integer (0 binary)
+
+Root relaxation: objective 2.500000e+04, 6 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 25000.0000    0    4          - 25000.0000      -     -    0s
+     0     0 34386.2701    0    4          - 34386.2701      -     -    0s
+     0     2 38537.6535    0    4          - 38537.6535      -     -    0s
+*59963   559              86    38523.802698 38523.8027  0.00%   0.4    0s
+
+Explored 65179 nodes (25665 simplex iterations) in 0.22 seconds (0.08 work units)
+Thread count was 10 (of 10 available processors)
+
+Solution count 1: 38523.8 
+
+Optimal solution found (tolerance 1.00e-04)
+Warning: max constraint violation (6.8682e-05) exceeds tolerance
+Best objective 3.852380269830e+04, best bound 3.852380269830e+04, gap 0.0000%
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span><span class="n">flows_g1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;g1 (w compressor)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span><span class="n">flows_g5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;g5&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;compressor price&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x11b33f710&gt;
+</pre></div>
+</div>
+<img alt="../_images/405dd197eeddf6420bd4934c7b1812eb1a012f3c75403e8f13dddba7f825fcf6.png" src="../_images/405dd197eeddf6420bd4934c7b1812eb1a012f3c75403e8f13dddba7f825fcf6.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Problems"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Marta Victoria, Aleksander Grochowicz
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
