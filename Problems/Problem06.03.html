@@ -62,6 +62,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Problem 6.4" href="Problem06.04.html" />
+    <link rel="prev" title="Problem 6.2" href="Problem06.02.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,8 +126,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -181,7 +181,7 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../intro-install.html">Python and Conda</a></li>
 
 
@@ -218,6 +218,10 @@
 <li class="toctree-l1"><a class="reference internal" href="Problem05.03.html">Problem 5.3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Problem05.04.html">Problem 5.4</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-gurobipy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">gurobipy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem06.01.html">Problem 6.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem06.02.html">Problem 6.2</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Problem 6.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem06.04.html">Problem 6.4</a></li>
 <li class="toctree-l1"><a class="reference internal" href="IEG_course_project.html">Course project</a></li>
 
 
@@ -576,14 +580,14 @@ Academic license - for non-commercial use only - expires 2027-01-20
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Generator&quot;</span><span class="p">,</span> 
             <span class="s2">&quot;solar&quot;</span><span class="p">,</span> 
             <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;my bus&quot;</span><span class="p">,</span> 
-            <span class="n">p_nom</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> 
+            <span class="n">p_nom</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> 
             <span class="n">p_max_pu</span><span class="o">=</span><span class="mf">0.17</span><span class="p">,</span> <span class="c1">#capacity factor</span>
             <span class="n">marginal_cost</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> 
     
 <span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Generator&quot;</span><span class="p">,</span> 
             <span class="s2">&quot;wind&quot;</span><span class="p">,</span> 
             <span class="n">bus</span><span class="o">=</span><span class="s2">&quot;my bus&quot;</span><span class="p">,</span> 
-            <span class="n">p_nom</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> 
+            <span class="n">p_nom</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> 
             <span class="n">p_max_pu</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span> <span class="c1">#capacity factor</span>
             <span class="n">marginal_cost</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> 
 
@@ -668,7 +672,7 @@ Academic license - for non-commercial use only - expires 2027-01-20
       <td>my bus</td>
       <td>PQ</td>
       <td></td>
-      <td>15.0</td>
+      <td>20.0</td>
       <td>0.0</td>
       <td>False</td>
       <td>0.0</td>
@@ -692,7 +696,7 @@ Academic license - for non-commercial use only - expires 2027-01-20
       <td>my bus</td>
       <td>PQ</td>
       <td></td>
-      <td>20.0</td>
+      <td>15.0</td>
       <td>0.0</td>
       <td>False</td>
       <td>0.0</td>
@@ -815,12 +819,12 @@ Academic license - for non-commercial use only - expires 2027-01-20
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.consistency:The following buses have carriers which are not defined:
 Index([&#39;my bus&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
 INFO:linopy.model: Solve problem using Highs solver
-INFO:linopy.io: Writing time: 0.15s
+INFO:linopy.io: Writing time: 0.14s
 INFO:linopy.constants: Optimization successful: 
 Status: ok
 Termination condition: optimal
 Solution: 3 primals, 7 duals
-Objective: 2.43e+02
+Objective: 2.91e+02
 Solver model: available
 Solver message: Optimal
 
@@ -828,7 +832,7 @@ INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.12.0 (git hash: n/a): Copyright (c) 2025 HiGHS under MIT licence terms
-LP linopy-problem-whn1l2lr has 7 rows; 3 cols; 9 nonzeros
+LP linopy-problem-tmi5uzqu has 7 rows; 3 cols; 9 nonzeros
 Coefficient ranges:
   Matrix  [1e+00, 1e+00]
   Cost    [6e+01, 6e+01]
@@ -841,10 +845,10 @@ Presolve reductions: rows 0(-7); columns 0(-3); nonzeros 0(-9) - Reduced to empt
 Performed postsolve
 Solving the original LP from the solution after postsolve
 
-Model name          : linopy-problem-whn1l2lr
+Model name          : linopy-problem-tmi5uzqu
 Model status        : Optimal
-Objective value     :  2.4300000000e+02
-P-D objective error :  2.3344319861e-16
+Objective value     :  2.9100000000e+02
+P-D objective error :  1.9500315218e-16
 HiGHS run time      :          0.00
 </pre></div>
 </div>
@@ -893,9 +897,9 @@ HiGHS run time      :          0.00
   <tbody>
     <tr>
       <th>now</th>
-      <td>2.55</td>
-      <td>6.6</td>
-      <td>4.05</td>
+      <td>3.4</td>
+      <td>4.95</td>
+      <td>4.85</td>
     </tr>
   </tbody>
 </table>
@@ -974,6 +978,24 @@ HiGHS run time      :          0.00
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="Problem06.02.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Problem 6.2</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Problem06.04.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Problem 6.4</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
