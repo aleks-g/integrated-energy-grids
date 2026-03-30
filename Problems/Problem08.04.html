@@ -224,6 +224,9 @@
 <li class="toctree-l1"><a class="reference internal" href="Problem06.02.html">Problem 6.2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Problem06.03.html">Problem 6.3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Problem06.04.html">Problem 6.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem07.01.html">Problem 7.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem07.02.html">Problem 7.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem07.03.html">Problem 7.3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="IEG_course_project.html">Course project</a></li>
 
 
@@ -1235,15 +1238,15 @@ HiGHS run time      :          0.00
 
 <span class="c1"># Guarantees back-pressure line</span>
 <span class="n">model</span><span class="o">.</span><span class="n">add_constraints</span><span class="p">(</span>
-    <span class="n">c_m</span> <span class="o">*</span> <span class="n">network</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;CHP boiler&quot;</span><span class="p">,</span> <span class="s2">&quot;efficiency&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">link_p</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;CHP boiler&quot;</span><span class="p">)</span>
-    <span class="o">-</span> <span class="n">network</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;CHP generator&quot;</span><span class="p">,</span> <span class="s2">&quot;efficiency&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">link_p</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;CHP generator&quot;</span><span class="p">)</span>
+    <span class="n">c_m</span> <span class="o">*</span> <span class="n">network</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;CHP boiler&quot;</span><span class="p">,</span> <span class="s2">&quot;efficiency&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">link_p</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">Link</span><span class="o">=</span><span class="s2">&quot;CHP boiler&quot;</span><span class="p">)</span>
+    <span class="o">-</span> <span class="n">network</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;CHP generator&quot;</span><span class="p">,</span> <span class="s2">&quot;efficiency&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">link_p</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">Link</span><span class="o">=</span><span class="s2">&quot;CHP generator&quot;</span><span class="p">)</span>
     <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">,</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;backpressure&quot;</span><span class="p">,)</span>
 
 
 <span class="c1"># Guarantees top iso fuel line</span>
 <span class="n">model</span><span class="o">.</span><span class="n">add_constraints</span><span class="p">(</span>
-    <span class="n">link_p</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;CHP boiler&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">link_p</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;CHP generator&quot;</span><span class="p">)</span>
+    <span class="n">link_p</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">Link</span><span class="o">=</span><span class="s2">&quot;CHP boiler&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">link_p</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">Link</span><span class="o">=</span><span class="s2">&quot;CHP generator&quot;</span><span class="p">)</span>
     <span class="o">-</span> <span class="n">network</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s2">&quot;CHP generator&quot;</span><span class="p">,</span> <span class="s2">&quot;p_nom&quot;</span><span class="p">]</span>
     <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">,</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;top_iso_fuel_line&quot;</span><span class="p">,</span>

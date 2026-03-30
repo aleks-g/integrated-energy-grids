@@ -64,6 +64,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Course project" href="IEG_course_project.html" />
+    <link rel="prev" title="Problem 7.2" href="Problem07.02.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -126,8 +128,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -183,7 +183,7 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../intro-install.html">Python and Conda</a></li>
 
 
@@ -224,6 +224,9 @@
 <li class="toctree-l1"><a class="reference internal" href="Problem06.02.html">Problem 6.2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Problem06.03.html">Problem 6.3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Problem06.04.html">Problem 6.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem07.01.html">Problem 7.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem07.02.html">Problem 7.2</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Problem 7.3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="IEG_course_project.html">Course project</a></li>
 
 
@@ -459,8 +462,8 @@ document.write(`
 <h1>Problem 7.3<a class="headerlink" href="#problem-7-3" title="Link to this heading">#</a></h1>
 <p><strong>Integrated Energy Grids</strong></p>
 <p><strong>Problem 7.3</strong></p>
-<p><strong>Assume the gas transport system that is shown in Figure 2. Gas can be injected in Node 1 at a marginal price of 10 EUR/kg or at Node 5 at 15 EUR/kg. There is a demand of 2·<span class="math notranslate nohighlight">\(10^8\)</span> kg/s in Node 3. Finally, Node 2-3 represents a pumping station where gas pressure can be increased by <span class="math notranslate nohighlight">\(k_{23}\)</span>=1.2 at a cost that is proportional to the mass flow <span class="math notranslate nohighlight">\(m_{23}\)</span> by a constant <span class="math notranslate nohighlight">\(o_{23}\)</span> =5 EUR/kg.</strong></p>
-<p><strong>To calculate the speed of sound in gas <span class="math notranslate nohighlight">\(c\)</span>, assume the universal gas constant <span class="math notranslate nohighlight">\(R\)</span>=8.314 J/molK, the molar mass of methane <span class="math notranslate nohighlight">\(M\)</span>=16 g/mol, compression factor <span class="math notranslate nohighlight">\(Z\)</span>=1.31, and temperature T=25<span class="math notranslate nohighlight">\(^{\circ}\)</span>C. Assume the diameter of the pipelines is <span class="math notranslate nohighlight">\(D\)</span> = 1000 mm, the length <span class="math notranslate nohighlight">\(L_{12}\)</span>=<span class="math notranslate nohighlight">\(L_{34}\)</span>=<span class="math notranslate nohighlight">\(L_{45}\)</span>=100 km, and calculate the Darcy friction  coefficient <span class="math notranslate nohighlight">\(f_{D}\)</span> assuming fully-turbulent flow and roughness <span class="math notranslate nohighlight">\(\epsilon\)</span>=0.001m.</strong></p>
+<p><strong>[This problem has been slightly modified from the exercise sheet to alleviate solve issues.] Assume the gas transport system that is shown in Figure 2. Gas can be injected in Node 1 at a marginal price of 10 EUR/kg or at Node 5 at 15 EUR/kg. There is a demand of 400 kg/s in Node 4. Finally, Node 2-3 represents a pumping station where gas pressure can be increased by <span class="math notranslate nohighlight">\(k_{23}\)</span>=1.2 at a cost that is proportional to the mass flow <span class="math notranslate nohighlight">\(m_{23}\)</span> by a constant <span class="math notranslate nohighlight">\(o_{23}\)</span> =5 EUR/kg.</strong></p>
+<p><strong>To calculate the speed of sound in gas <span class="math notranslate nohighlight">\(c\)</span>, assume the universal gas constant <span class="math notranslate nohighlight">\(R\)</span>=8.314 J/molK, the molar mass of methane <span class="math notranslate nohighlight">\(M\)</span>=16 g/mol, compression factor <span class="math notranslate nohighlight">\(Z\)</span>=1.31, and temperature T=25<span class="math notranslate nohighlight">\(^{\circ}\)</span>C. Assume the diameter of the pipelines is <span class="math notranslate nohighlight">\(D\)</span> = 1000 mm, the length <span class="math notranslate nohighlight">\(L_{12}\)</span>=<span class="math notranslate nohighlight">\(L_{34}\)</span>=<span class="math notranslate nohighlight">\(L_{45}\)</span>=1000 m, and calculate the Darcy friction  coefficient <span class="math notranslate nohighlight">\(f_{D}\)</span> assuming fully-turbulent flow and roughness <span class="math notranslate nohighlight">\(\epsilon\)</span>=0.001m.</strong></p>
 <p><strong>(a) Write the equations of the optimization problem that minimizes the total system cost and use the Weymouth equation to represent pressure drop in the pipelines as a function of the mass flow <span class="math notranslate nohighlight">\(m_{ij}\)</span>.</strong></p>
 <p>We define the pressure at differet node as <span class="math notranslate nohighlight">\(\pi_i\)</span> and the mass flow at different pipes as <span class="math notranslate nohighlight">\(m_{ij}\)</span>
 We have 9 variables (<span class="math notranslate nohighlight">\(m_{12}\)</span>, <span class="math notranslate nohighlight">\(m_{23}\)</span>, <span class="math notranslate nohighlight">\(m_{34}\)</span>, <span class="math notranslate nohighlight">\(m_{45}\)</span>, <span class="math notranslate nohighlight">\(\pi_1\)</span>, <span class="math notranslate nohighlight">\(\pi_2\)</span>, <span class="math notranslate nohighlight">\(\pi_3\)</span>, <span class="math notranslate nohighlight">\(\pi_4\)</span>, <span class="math notranslate nohighlight">\(\pi_5\)</span>).</p>
@@ -480,7 +483,8 @@ We have 9 variables (<span class="math notranslate nohighlight">\(m_{12}\)</span
 \quad &amp; \pi_{4}^2-\pi_{5}^2=a_{45}m_{45} |m_{34} | \\
 \end{alignat*}\]</div>
 <p>where the coefficients <span class="math notranslate nohighlight">\(a_{ij}=\frac{Lf^Dc^2}{DA^2}\)</span> depend on the physical properties of the pipelines and the methane gas.</p>
-<p><strong>(b) Use gurobipy to formulate and solve the problem</strong></p>
+<p><strong>(b) Use gurobipy to formulate and solve the problem. Solve the problem for two extra cases of : <span class="math notranslate nohighlight">\(o_{23}\)</span> =1 EUR/kg and <span class="math notranslate nohighlight">\(o_{23}\)</span> =10 EUR/kg and compare the results.</strong></p>
+<p><strong>Hint: It is usefull to define logical boundaries for the problem to make the optimisation faster. For example, we assume the pressure at all nodes to be between [0, 100 kPa], which is an acceptable range as pressure in gas pipelines is usually in the range of 30-100 kpa.</strong></p>
 <p>We start by calculating the cofficients <span class="math notranslate nohighlight">\(a_{ij}\)</span> from the Weymouth equation</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -514,7 +518,7 @@ We have 9 variables (<span class="math notranslate nohighlight">\(m_{12}\)</span
 <p>The Darcy friction coefficient can be calculated as <span class="math notranslate nohighlight">\(\frac{1}{\sqrt f_D}=-2log_{10}(\frac{\epsilon}{3.7D})\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.001</span> <span class="c1"># m</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.001</span> <span class="c1">#m</span>
 
 <span class="n">f_D</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">epsilon</span><span class="o">/</span><span class="p">(</span><span class="mf">3.7</span><span class="o">*</span><span class="n">D</span><span class="p">))))</span><span class="o">**</span><span class="mi">2</span>
 <span class="n">f_D</span>
@@ -530,7 +534,7 @@ We have 9 variables (<span class="math notranslate nohighlight">\(m_{12}\)</span
 <p>The coefficients from the Weymouth equation can be calculated as <span class="math notranslate nohighlight">\(a_{ij}=\frac{Lf_Dc^2}{DA^2}\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="mi">100</span><span class="o">*</span><span class="mi">1000</span> <span class="c1"># km -&gt; m</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="mi">1000</span> <span class="c1">#km </span>
 <span class="n">L_12</span><span class="o">=</span><span class="n">L</span>
 <span class="n">a_12</span><span class="o">=</span><span class="n">L_12</span><span class="o">*</span><span class="n">f_D</span><span class="o">*</span><span class="n">c</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="n">D</span><span class="o">*</span><span class="n">A</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">a_34</span><span class="o">=</span><span class="n">a_12</span>
@@ -540,7 +544,7 @@ We have 9 variables (<span class="math notranslate nohighlight">\(m_{12}\)</span
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>645712279.9219108
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6457122.799219107
 </pre></div>
 </div>
 </div>
@@ -557,29 +561,29 @@ We have 9 variables (<span class="math notranslate nohighlight">\(m_{12}\)</span
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k_23</span> <span class="o">=</span> <span class="mf">1.2</span>
-<span class="n">d_4</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="mi">100000000</span> <span class="c1">#kg/s</span>
+<span class="n">d_4</span> <span class="o">=</span> <span class="mi">400</span> <span class="c1">#kg/s</span>
 <span class="n">o_1</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1">#EUR/kg</span>
 <span class="n">o_5</span> <span class="o">=</span> <span class="mi">15</span> <span class="c1">#EUR/kg</span>
-<span class="n">o_m23</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1">#EUR/kg</span>
+<span class="n">o_m23</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1">#EUR/kg   </span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="s2">&quot;My_quadratic_problem&quot;</span><span class="p">)</span>
 <span class="n">g_1</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;g_1&quot;</span><span class="p">)</span>
 <span class="n">g_5</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;g_5&quot;</span><span class="p">)</span>
 
-<span class="n">m_12</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m_12&quot;</span><span class="p">)</span>
-<span class="n">m_23</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m_23&quot;</span><span class="p">)</span>
-<span class="n">m_34</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m_34&quot;</span><span class="p">)</span>
-<span class="n">m_45</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=-</span><span class="mi">200000000</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m_45&quot;</span><span class="p">)</span>
+<span class="n">m_12</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="n">d_4</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m_12&quot;</span><span class="p">)</span>
+<span class="n">m_23</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="n">d_4</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m_23&quot;</span><span class="p">)</span>
+<span class="n">m_34</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="n">d_4</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m_34&quot;</span><span class="p">)</span>
+<span class="n">m_45</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=-</span><span class="n">d_4</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>  <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m_45&quot;</span><span class="p">)</span>
 
 <span class="n">abs_m_12</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;abs_m_12&quot;</span><span class="p">)</span>
 <span class="n">abs_m_34</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;abs_m_34&quot;</span><span class="p">)</span>
 <span class="n">abs_m_45</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;abs_m_45&quot;</span><span class="p">)</span>
 
-<span class="n">p_1</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;p_1&quot;</span><span class="p">)</span>
-<span class="n">p_2</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;p_2&quot;</span><span class="p">)</span>
-<span class="n">p_3</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;p_3&quot;</span><span class="p">)</span>
-<span class="n">p_4</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;p_4&quot;</span><span class="p">)</span>
-<span class="n">p_5</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;p_5&quot;</span><span class="p">)</span>
+<span class="n">p_1</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="mi">100</span><span class="o">*</span><span class="mf">1e5</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;p_1&quot;</span><span class="p">)</span>  
+<span class="n">p_2</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="mi">100</span><span class="o">*</span><span class="mf">1e5</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;p_2&quot;</span><span class="p">)</span>
+<span class="n">p_3</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="mi">100</span><span class="o">*</span><span class="mf">1e5</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;p_3&quot;</span><span class="p">)</span>
+<span class="n">p_4</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="mi">100</span><span class="o">*</span><span class="mf">1e5</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;p_4&quot;</span><span class="p">)</span>  
+<span class="n">p_5</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="mi">100</span><span class="o">*</span><span class="mf">1e5</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;p_5&quot;</span><span class="p">)</span> 
 
 <span class="n">model</span><span class="o">.</span><span class="n">setObjective</span><span class="p">(</span><span class="n">o_1</span><span class="o">*</span><span class="n">g_1</span> <span class="o">+</span> <span class="n">o_5</span><span class="o">*</span><span class="n">g_5</span> <span class="o">+</span> <span class="n">o_m23</span><span class="o">*</span><span class="n">m_23</span><span class="p">,</span> <span class="n">GRB</span><span class="o">.</span><span class="n">MINIMIZE</span><span class="p">)</span>
 
@@ -589,82 +593,93 @@ We have 9 variables (<span class="math notranslate nohighlight">\(m_{12}\)</span
 <span class="n">constraint_d</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addLConstr</span><span class="p">(</span><span class="n">m_12</span> <span class="o">==</span> <span class="n">m_23</span><span class="p">)</span>
 <span class="n">constraint_e</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addLConstr</span><span class="p">(</span><span class="n">m_12</span> <span class="o">==</span> <span class="n">m_34</span><span class="p">)</span>
 <span class="n">constraint_f</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addLConstr</span><span class="p">(</span><span class="n">p_3</span> <span class="o">==</span> <span class="n">k_23</span><span class="o">*</span><span class="n">p_2</span><span class="p">)</span>
+<span class="c1">#constraint_g = model.addLConstr(p_4 == p4)</span>
 
 <span class="c1"># We need to define additional constraints to use absolute values</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">gurobipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">abs_</span>
 <span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">abs_m_12</span> <span class="o">==</span> <span class="n">abs_</span><span class="p">(</span><span class="n">m_12</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;abs_m_12&#39;</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">abs_m_34</span> <span class="o">==</span> <span class="n">abs_</span><span class="p">(</span><span class="n">m_34</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;abs_m_34&#39;</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">abs_m_45</span> <span class="o">==</span> <span class="n">abs_</span><span class="p">(</span><span class="n">m_45</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;abs_m_45&#39;</span><span class="p">)</span>
-<span class="n">constraint_g</span>  <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addQConstr</span><span class="p">(</span><span class="n">a_12</span><span class="o">*</span><span class="n">m_12</span><span class="o">*</span><span class="n">abs_m_12</span> <span class="o">==</span> <span class="n">p_1</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="n">p_2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">constraint_h</span>  <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addQConstr</span><span class="p">(</span><span class="n">a_34</span><span class="o">*</span><span class="n">m_34</span><span class="o">*</span><span class="n">abs_m_34</span> <span class="o">==</span> <span class="n">p_3</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="n">p_4</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">constraint_i</span>  <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addQConstr</span><span class="p">(</span><span class="n">a_45</span><span class="o">*</span><span class="n">m_45</span><span class="o">*</span><span class="n">abs_m_45</span> <span class="o">==</span> <span class="n">p_4</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="n">p_5</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">constraint_h</span>  <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addQConstr</span><span class="p">(</span><span class="n">a_12</span><span class="o">*</span><span class="n">m_12</span><span class="o">*</span><span class="n">abs_m_12</span> <span class="o">==</span> <span class="n">p_1</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="n">p_2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">constraint_j</span>  <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addQConstr</span><span class="p">(</span><span class="n">a_34</span><span class="o">*</span><span class="n">m_34</span><span class="o">*</span><span class="n">abs_m_34</span> <span class="o">==</span> <span class="n">p_3</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="n">p_4</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">constraint_k</span>  <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addQConstr</span><span class="p">(</span><span class="n">a_45</span><span class="o">*</span><span class="n">m_45</span><span class="o">*</span><span class="n">abs_m_45</span> <span class="o">==</span> <span class="n">p_4</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="n">p_5</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
+<span class="n">model</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;Method&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># We use the barrier method, Barrier is ideal for quadratic / conic problems and numerically unstable models</span>
 <span class="n">model</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set parameter Username
-Set parameter LicenseID to value 2604332
-Academic license - for non-commercial use only - expires 2025-12-30
-Gurobi Optimizer version 12.0.0 build v12.0.0rc1 (win64 - Windows 11.0 (26100.2))
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set parameter TokenServer to value &quot;sophia1.hpc.ait.dtu.dk&quot;
+Set parameter Method to value 2
+Gurobi Optimizer version 11.0.2 build v11.0.2rc0 (linux64 - &quot;CentOS Linux 7 (Core)&quot;)
 
-CPU model: Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz, instruction set [SSE2|AVX|AVX2]
-Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+CPU model: AMD EPYC 7351 16-Core Processor, instruction set [SSE2|AVX|AVX2]
+Thread count: 32 physical cores, 32 logical processors, using up to 32 threads
 
 Optimize a model with 6 rows, 14 columns and 12 nonzeros
-Model fingerprint: 0x2eae29bb
+Model fingerprint: 0xac4bb344
 Model has 3 quadratic constraints
-Model has 3 simple general constraints
-  3 ABS
+Model has 3 general constraints
 Variable types: 14 continuous, 0 integer (0 binary)
 Coefficient statistics:
   Matrix range     [1e+00, 1e+00]
-  QMatrix range    [1e+00, 6e+08]
+  QMatrix range    [1e+00, 6e+06]
   Objective range  [5e+00, 2e+01]
-  Bounds range     [2e+08, 2e+08]
-  RHS range        [2e+08, 2e+08]
-Warning: Quadratic constraints contain large coefficients
-         Consider reformulating model or setting NumericFocus parameter
-         to avoid numerical issues.
+  Bounds range     [4e+02, 1e+07]
+  RHS range        [4e+02, 4e+02]
 Presolve removed 5 rows and 8 columns
-Presolve time: 0.05s
-Presolved: 22 rows, 13 columns, 41 nonzeros
+Presolve time: 0.00s
+Presolved: 22 rows, 12 columns, 41 nonzeros
 Presolved model has 6 bilinear constraint(s)
-Warning: Model contains variables with very large bounds participating
-         in product terms.
-         Presolve was not able to compute smaller bounds for these variables.
-         Consider bounding these variables or reformulating the model.
-
 
 Solving non-convex MIQCP
 
-Variable types: 13 continuous, 0 integer (0 binary)
+Variable types: 12 continuous, 0 integer (0 binary)
+Root barrier log...
 
-Root relaxation: objective 3.000000e+09, 1 iterations, 0.01 seconds (0.00 work units)
+Ordering time: 0.00s
+
+Barrier statistics:
+ AA&#39; NZ     : 6.000e+00
+ Factor NZ  : 1.000e+01
+ Factor Ops : 3.000e+01 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   6.00000000e+03 -6.31598434e+03  6.79e+04 0.00e+00  7.31e+03     0s
+   1   6.00000000e+03 -3.40669849e+03  0.00e+00 6.94e-18  9.41e+02     0s
+   2   6.00000000e+03  5.99059330e+03  0.00e+00 6.94e-18  9.41e-01     0s
+   3   6.00000000e+03  5.99999059e+03  0.00e+00 0.00e+00  9.41e-04     0s
+   4   6.00000000e+03  5.99999999e+03  0.00e+00 4.37e-24  9.41e-07     0s
+   5   6.00000000e+03  6.00000000e+03  0.00e+00 3.04e-24  9.41e-10     0s
+
+Barrier solved model in 5 iterations and 0.09 seconds (0.00 work units)
+Optimal objective 6.00000000e+03
+
+
+Root relaxation: objective 6.000000e+03, 4 iterations, 0.01 seconds (0.00 work units)
 
     Nodes    |    Current Node    |     Objective Bounds      |     Work
  Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
 
-     0     0 3.0000e+09    0    1          - 3.0000e+09      -     -    0s
-     0     0 3.0000e+09    0    1          - 3.0000e+09      -     -    0s
-     0     2 3.0000e+09    0    1          - 3.0000e+09      -     -    0s
- 226599  5403 3.0000e+09  433    2          - 3.0000e+09      -   0.3    5s
- 497882  5766 infeasible  293               - 3.0000e+09      -   0.4   10s
-H598724   378                    3.000000e+09 3.0000e+09  0.00%   0.4   11s
+     0     0 6000.00000    0    6          - 6000.00000      -     -    0s
+     0     0 6000.00000    0    6          - 6000.00000      -     -    0s
+     0     2 6000.00000    0    6          - 6000.00000      -     -    0s
+H  192   100                    6000.0000000 6000.00000  0.00%   1.3    0s
 
-Explored 601882 nodes (215779 simplex iterations) in 11.72 seconds (0.69 work units)
-Thread count was 8 (of 8 available processors)
+Explored 245 nodes (312 simplex iterations) in 0.15 seconds (0.00 work units)
+Thread count was 32 (of 32 available processors)
 
-Solution count 1: 3e+09 
+Solution count 1: 6000 
 
 Optimal solution found (tolerance 1.00e-04)
-Best objective 3.000000000000e+09, best bound 3.000000000000e+09, gap 0.0000%
+Best objective 6.000000000000e+03, best bound 6.000000000000e+03, gap 0.0000%
 </pre></div>
 </div>
 </div>
 </div>
-<p>We print the values of the variables in the solution</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">g_1</span><span class="o">.</span><span class="n">VarName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">g_1</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
@@ -684,19 +699,713 @@ Best objective 3.000000000000e+09, best bound 3.000000000000e+09, gap 0.0000%
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>g_1 0.0023753316709413195
-g_5 199999999.99762452
-m_12 0.0023753316709413195
-m_23 0.0023753316709413195
-m_34 0.0023753316709413195
-m_45 -199999999.99762452
-p_1 79 Pa
-p_2 50 Pa
-p_3 60 Pa
-p_4 0 Pa
-p_5 5082173865214 Pa
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>g_1 200.0
+g_5 200.0
+m_12 200.0
+m_23 200.0
+m_34 200.0
+m_45 -200.0
+p_1 2170327 Pa
+p_2 2109985 Pa
+p_3 2531981 Pa
+p_4 2480453 Pa
+p_5 2531981 Pa
 </pre></div>
 </div>
+</div>
+</div>
+<p>We can also solve for different compressor costs:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flows_g1</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">flows_g5</span><span class="o">=</span><span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">o_m23</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span> <span class="p">,</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span> <span class="p">:</span> <span class="c1">#EUR/kg   </span>
+    <span class="c1">#model.setParam(&quot;MIPFocus&quot;, 1)</span>
+    <span class="c1">#model.setParam(&quot;Threads&quot;, 1)</span>
+    <span class="c1">#model.setParam(&quot;Seed&quot;, 0)  </span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="s2">&quot;My_quadratic_problem&quot;</span><span class="p">)</span>
+    <span class="n">g_1</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;g_1&quot;</span><span class="p">)</span>
+    <span class="n">g_5</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;g_5&quot;</span><span class="p">)</span>
+    
+    <span class="n">m_12</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="n">d_4</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m_12&quot;</span><span class="p">)</span>
+    <span class="n">m_23</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="n">d_4</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m_23&quot;</span><span class="p">)</span>
+    <span class="n">m_34</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="n">d_4</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m_34&quot;</span><span class="p">)</span>
+    <span class="n">m_45</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=-</span><span class="n">d_4</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>  <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m_45&quot;</span><span class="p">)</span>
+    
+    <span class="n">abs_m_12</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;abs_m_12&quot;</span><span class="p">)</span>
+    <span class="n">abs_m_34</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;abs_m_34&quot;</span><span class="p">)</span>
+    <span class="n">abs_m_45</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;abs_m_45&quot;</span><span class="p">)</span>
+    
+    <span class="n">p_1</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="mi">100</span><span class="o">*</span><span class="mf">1e5</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;p_1&quot;</span><span class="p">)</span>
+    <span class="n">p_2</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="mi">100</span><span class="o">*</span><span class="mf">1e5</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;p_2&quot;</span><span class="p">)</span>
+    <span class="n">p_3</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="mi">100</span><span class="o">*</span><span class="mf">1e5</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;p_3&quot;</span><span class="p">)</span>
+    <span class="n">p_4</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="mi">100</span><span class="o">*</span><span class="mf">1e5</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;p_4&quot;</span><span class="p">)</span>  
+    <span class="n">p_5</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="mi">100</span><span class="o">*</span><span class="mf">1e5</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;p_5&quot;</span><span class="p">)</span> 
+    
+    <span class="n">model</span><span class="o">.</span><span class="n">setObjective</span><span class="p">(</span><span class="n">o_1</span><span class="o">*</span><span class="n">g_1</span> <span class="o">+</span> <span class="n">o_5</span><span class="o">*</span><span class="n">g_5</span> <span class="o">+</span> <span class="n">o_m23</span><span class="o">*</span><span class="n">m_23</span><span class="p">,</span> <span class="n">GRB</span><span class="o">.</span><span class="n">MINIMIZE</span><span class="p">)</span>
+    
+    <span class="n">constraint_a</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addLConstr</span><span class="p">(</span><span class="n">g_1</span> <span class="o">==</span> <span class="n">m_12</span><span class="p">)</span>
+    <span class="n">constraint_b</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addLConstr</span><span class="p">(</span><span class="o">-</span><span class="n">g_5</span> <span class="o">==</span> <span class="n">m_45</span><span class="p">)</span>
+    <span class="n">constraint_c</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addLConstr</span><span class="p">(</span><span class="o">-</span><span class="n">d_4</span> <span class="o">==</span> <span class="o">-</span><span class="n">m_34</span><span class="o">+</span><span class="n">m_45</span><span class="p">)</span>
+    <span class="n">constraint_d</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addLConstr</span><span class="p">(</span><span class="n">m_12</span> <span class="o">==</span> <span class="n">m_23</span><span class="p">)</span>
+    <span class="n">constraint_e</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addLConstr</span><span class="p">(</span><span class="n">m_12</span> <span class="o">==</span> <span class="n">m_34</span><span class="p">)</span>
+    <span class="n">constraint_f</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addLConstr</span><span class="p">(</span><span class="n">p_3</span> <span class="o">==</span> <span class="n">k_23</span><span class="o">*</span><span class="n">p_2</span><span class="p">)</span>
+    <span class="c1">#constraint_g = model.addLConstr(p_4 == p4)</span>
+    
+    <span class="c1"># We need to define additional constraints to use absolute values</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">gurobipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">abs_</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">abs_m_12</span> <span class="o">==</span> <span class="n">abs_</span><span class="p">(</span><span class="n">m_12</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;abs_m_12&#39;</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">abs_m_34</span> <span class="o">==</span> <span class="n">abs_</span><span class="p">(</span><span class="n">m_34</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;abs_m_34&#39;</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">abs_m_45</span> <span class="o">==</span> <span class="n">abs_</span><span class="p">(</span><span class="n">m_45</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;abs_m_45&#39;</span><span class="p">)</span>
+    <span class="n">constraint_h</span>  <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addQConstr</span><span class="p">(</span><span class="n">a_12</span><span class="o">*</span><span class="n">m_12</span><span class="o">*</span><span class="n">abs_m_12</span> <span class="o">==</span> <span class="n">p_1</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="n">p_2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">constraint_j</span>  <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addQConstr</span><span class="p">(</span><span class="n">a_34</span><span class="o">*</span><span class="n">m_34</span><span class="o">*</span><span class="n">abs_m_34</span> <span class="o">==</span> <span class="n">p_3</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="n">p_4</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">constraint_k</span>  <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addQConstr</span><span class="p">(</span><span class="n">a_45</span><span class="o">*</span><span class="n">m_45</span><span class="o">*</span><span class="n">abs_m_45</span> <span class="o">==</span> <span class="n">p_4</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="n">p_5</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    
+    <span class="n">model</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;Method&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># barrier</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+    <span class="n">flows_g1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">g_1</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">flows_g5</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">g_5</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set parameter Method to value 2
+Gurobi Optimizer version 11.0.2 build v11.0.2rc0 (linux64 - &quot;CentOS Linux 7 (Core)&quot;)
+
+CPU model: AMD EPYC 7351 16-Core Processor, instruction set [SSE2|AVX|AVX2]
+Thread count: 32 physical cores, 32 logical processors, using up to 32 threads
+
+Optimize a model with 6 rows, 14 columns and 12 nonzeros
+Model fingerprint: 0xcf560096
+Model has 3 quadratic constraints
+Model has 3 general constraints
+Variable types: 14 continuous, 0 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  QMatrix range    [1e+00, 6e+06]
+  Objective range  [1e+01, 2e+01]
+  Bounds range     [4e+02, 1e+07]
+  RHS range        [4e+02, 4e+02]
+Presolve removed 5 rows and 8 columns
+Presolve time: 0.00s
+Presolved: 22 rows, 12 columns, 41 nonzeros
+Presolved model has 6 bilinear constraint(s)
+
+Solving non-convex MIQCP
+
+Variable types: 12 continuous, 0 integer (0 binary)
+Root barrier log...
+
+Ordering time: 0.00s
+
+Barrier statistics:
+ AA&#39; NZ     : 6.000e+00
+ Factor NZ  : 1.000e+01
+ Factor Ops : 3.000e+01 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   5.35609179e+03 -8.31598434e+03  8.21e+04 0.00e+00  8.00e+03     0s
+   1   4.89547077e+03 -5.52790984e+03  0.00e+00 6.94e-18  1.04e+03     0s
+   2   4.71641154e+03  3.85457112e+03  0.00e+00 0.00e+00  8.62e+01     0s
+   3   4.01781083e+03  3.97814377e+03  0.00e+00 1.83e-19  3.97e+00     0s
+   4   4.00001744e+03  3.99997777e+03  0.00e+00 2.39e-18  3.97e-03     0s
+   5   4.00000002e+03  3.99999998e+03  0.00e+00 6.61e-19  3.97e-06     0s
+   6   4.00000000e+03  4.00000000e+03  0.00e+00 1.73e-18  3.97e-09     0s
+   7   4.00000000e+03  4.00000000e+03  0.00e+00 0.00e+00  3.97e-12     0s
+
+Barrier solved model in 7 iterations and 0.02 seconds (0.00 work units)
+Optimal objective 4.00000000e+03
+
+Extra simplex iterations after uncrush: 1
+
+Root relaxation: objective 4.000000e+03, 5 iterations, 0.01 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 4000.00000    0    4          - 4000.00000      -     -    0s
+     0     0 4000.00000    0    4          - 4000.00000      -     -    0s
+     0     2 4000.00000    0    4          - 4000.00000      -     -    0s
+* 5709  4512              86    4001.2022489 4000.00000  0.03%   1.6    0s
+* 8022  4512              75    4001.1937597 4000.00000  0.03%   1.6    0s
+H 9520  3579                    4000.0000000 4000.00000  0.00%   1.6    0s
+
+Explored 9520 nodes (15651 simplex iterations) in 0.29 seconds (0.01 work units)
+Thread count was 32 (of 32 available processors)
+
+Solution count 3: 4000 4001.19 4001.2 
+
+Optimal solution found (tolerance 1.00e-04)
+Warning: max constraint violation (7.8125e-03) exceeds tolerance
+Best objective 4.000000000002e+03, best bound 4.000000000000e+03, gap 0.0000%
+Set parameter Method to value 2
+Gurobi Optimizer version 11.0.2 build v11.0.2rc0 (linux64 - &quot;CentOS Linux 7 (Core)&quot;)
+
+CPU model: AMD EPYC 7351 16-Core Processor, instruction set [SSE2|AVX|AVX2]
+Thread count: 32 physical cores, 32 logical processors, using up to 32 threads
+
+Optimize a model with 6 rows, 14 columns and 12 nonzeros
+Model fingerprint: 0x66dccb5e
+Model has 3 quadratic constraints
+Model has 3 general constraints
+Variable types: 14 continuous, 0 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  QMatrix range    [1e+00, 6e+06]
+  Objective range  [1e+00, 2e+01]
+  Bounds range     [4e+02, 1e+07]
+  RHS range        [4e+02, 4e+02]
+Presolve removed 5 rows and 8 columns
+Presolve time: 0.00s
+Presolved: 22 rows, 12 columns, 41 nonzeros
+Presolved model has 6 bilinear constraint(s)
+
+Solving non-convex MIQCP
+
+Variable types: 12 continuous, 0 integer (0 binary)
+Root barrier log...
+
+Ordering time: 0.00s
+
+Barrier statistics:
+ AA&#39; NZ     : 6.000e+00
+ Factor NZ  : 1.000e+01
+ Factor Ops : 3.000e+01 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   5.48366463e+03 -7.91598434e+03  8.18e+04 0.00e+00  7.98e+03     0s
+   1   5.12990779e+03 -5.26355510e+03  0.00e+00 1.04e-17  1.04e+03     0s
+   2   5.01409384e+03  4.27185040e+03  0.00e+00 3.47e-18  7.42e+01     0s
+   3   4.41859263e+03  4.37739470e+03  0.00e+00 1.73e-18  4.12e+00     0s
+   4   4.40001817e+03  4.39997693e+03  0.00e+00 2.17e-19  4.12e-03     0s
+   5   4.40000002e+03  4.39999998e+03  0.00e+00 4.70e-13  4.12e-06     0s
+   6   4.40000000e+03  4.40000000e+03  0.00e+00 4.98e-16  4.12e-09     0s
+   7   4.40000000e+03  4.40000000e+03  0.00e+00 1.08e-18  4.12e-12     0s
+
+Barrier solved model in 7 iterations and 0.02 seconds (0.00 work units)
+Optimal objective 4.40000000e+03
+
+Extra simplex iterations after uncrush: 1
+
+Root relaxation: objective 4.400000e+03, 5 iterations, 0.01 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 4400.00000    0    4          - 4400.00000      -     -    0s
+     0     0 4400.00000    0    4          - 4400.00000      -     -    0s
+H    0     0                    4400.0067500 4400.00000  0.00%     -    0s
+
+Explored 1 nodes (5 simplex iterations) in 0.03 seconds (0.00 work units)
+Thread count was 32 (of 32 available processors)
+
+Solution count 1: 4400.01 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.400006749972e+03, best bound 4.400000000000e+03, gap 0.0002%
+Set parameter Method to value 2
+Gurobi Optimizer version 11.0.2 build v11.0.2rc0 (linux64 - &quot;CentOS Linux 7 (Core)&quot;)
+
+CPU model: AMD EPYC 7351 16-Core Processor, instruction set [SSE2|AVX|AVX2]
+Thread count: 32 physical cores, 32 logical processors, using up to 32 threads
+
+Optimize a model with 6 rows, 14 columns and 12 nonzeros
+Model fingerprint: 0xa6aa52a3
+Model has 3 quadratic constraints
+Model has 3 general constraints
+Variable types: 14 continuous, 0 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  QMatrix range    [1e+00, 6e+06]
+  Objective range  [2e+00, 2e+01]
+  Bounds range     [4e+02, 1e+07]
+  RHS range        [4e+02, 4e+02]
+Presolve removed 5 rows and 8 columns
+Presolve time: 0.00s
+Presolved: 22 rows, 12 columns, 41 nonzeros
+Presolved model has 6 bilinear constraint(s)
+
+Solving non-convex MIQCP
+
+Variable types: 12 continuous, 0 integer (0 binary)
+Root barrier log...
+
+Ordering time: 0.00s
+
+Barrier statistics:
+ AA&#39; NZ     : 6.000e+00
+ Factor NZ  : 1.000e+01
+ Factor Ops : 3.000e+01 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   5.61130636e+03 -7.51598434e+03  8.14e+04 0.00e+00  7.95e+03     0s
+   1   5.35762853e+03 -4.99243168e+03  0.00e+00 6.94e-18  1.04e+03     0s
+   2   5.29184568e+03  4.69491452e+03  0.00e+00 0.00e+00  5.97e+01     0s
+   3   4.81814867e+03  4.77608199e+03  0.00e+00 3.25e-19  4.21e+00     0s
+   4   4.80001789e+03  4.79997550e+03  0.00e+00 1.63e-18  4.24e-03     0s
+   5   4.80000002e+03  4.79999998e+03  0.00e+00 6.88e-19  4.24e-06     0s
+   6   4.80000000e+03  4.80000000e+03  0.00e+00 0.00e+00  4.24e-09     0s
+   7   4.80000000e+03  4.80000000e+03  0.00e+00 3.87e-19  4.24e-12     0s
+
+Barrier solved model in 7 iterations and 0.02 seconds (0.00 work units)
+Optimal objective 4.80000000e+03
+
+Extra simplex iterations after uncrush: 1
+
+Root relaxation: objective 4.800000e+03, 5 iterations, 0.01 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 4800.00000    0    4          - 4800.00000      -     -    0s
+     0     0 4800.00000    0    4          - 4800.00000      -     -    0s
+     0     2 4800.00000    0    4          - 4800.00000      -     -    0s
+* 8908  4732              76    4800.6758245 4800.00000  0.01%   1.6    0s
+
+Explored 10351 nodes (16856 simplex iterations) in 0.25 seconds (0.01 work units)
+Thread count was 32 (of 32 available processors)
+
+Solution count 1: 4800.68 
+
+Optimal solution found (tolerance 1.00e-04)
+Warning: max constraint violation (2.4414e-04) exceeds tolerance
+Best objective 4.800675824507e+03, best bound 4.800675824507e+03, gap 0.0000%
+Set parameter Method to value 2
+Gurobi Optimizer version 11.0.2 build v11.0.2rc0 (linux64 - &quot;CentOS Linux 7 (Core)&quot;)
+
+CPU model: AMD EPYC 7351 16-Core Processor, instruction set [SSE2|AVX|AVX2]
+Thread count: 32 physical cores, 32 logical processors, using up to 32 threads
+
+Optimize a model with 6 rows, 14 columns and 12 nonzeros
+Model fingerprint: 0xf89c6754
+Model has 3 quadratic constraints
+Model has 3 general constraints
+Variable types: 14 continuous, 0 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  QMatrix range    [1e+00, 6e+06]
+  Objective range  [3e+00, 2e+01]
+  Bounds range     [4e+02, 1e+07]
+  RHS range        [4e+02, 4e+02]
+Presolve removed 5 rows and 8 columns
+Presolve time: 0.00s
+Presolved: 22 rows, 12 columns, 41 nonzeros
+Presolved model has 6 bilinear constraint(s)
+
+Solving non-convex MIQCP
+
+Variable types: 12 continuous, 0 integer (0 binary)
+Root barrier log...
+
+Ordering time: 0.00s
+
+Barrier statistics:
+ AA&#39; NZ     : 6.000e+00
+ Factor NZ  : 1.000e+01
+ Factor Ops : 3.000e+01 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   5.73910355e+03 -7.11598434e+03  8.07e+04 0.00e+00  7.90e+03     0s
+   1   5.57850009e+03 -4.70322109e+03  0.00e+00 1.39e-17  1.03e+03     0s
+   2   5.54896076e+03  5.12499969e+03  0.00e+00 6.94e-18  4.24e+01     0s
+   3   5.21555996e+03  5.18053470e+03  0.00e+00 2.17e-19  3.50e+00     0s
+   4   5.20001580e+03  5.19998001e+03  0.00e+00 2.53e-19  3.58e-03     0s
+   5   5.20000002e+03  5.19999998e+03  0.00e+00 3.68e-13  3.58e-06     0s
+   6   5.20000000e+03  5.20000000e+03  0.00e+00 4.58e-16  3.58e-09     0s
+   7   5.20000000e+03  5.20000000e+03  0.00e+00 4.34e-19  3.58e-12     0s
+
+Barrier solved model in 7 iterations and 0.02 seconds (0.00 work units)
+Optimal objective 5.20000000e+03
+
+Extra simplex iterations after uncrush: 1
+
+Root relaxation: objective 5.200000e+03, 5 iterations, 0.01 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 5200.00000    0    4          - 5200.00000      -     -    0s
+     0     0 5200.00000    0    4          - 5200.00000      -     -    0s
+     0     2 5200.00000    0    4          - 5200.00000      -     -    0s
+* 4948  5005             118    5200.0000000 5200.00000  0.00%   1.6    0s
+
+Explored 11567 nodes (18646 simplex iterations) in 0.25 seconds (0.01 work units)
+Thread count was 32 (of 32 available processors)
+
+Solution count 1: 5200 
+
+Optimal solution found (tolerance 1.00e-04)
+Warning: max constraint violation (3.8147e-04) exceeds tolerance
+Best objective 5.200000000021e+03, best bound 5.200000000021e+03, gap 0.0000%
+Set parameter Method to value 2
+Gurobi Optimizer version 11.0.2 build v11.0.2rc0 (linux64 - &quot;CentOS Linux 7 (Core)&quot;)
+
+CPU model: AMD EPYC 7351 16-Core Processor, instruction set [SSE2|AVX|AVX2]
+Thread count: 32 physical cores, 32 logical processors, using up to 32 threads
+
+Optimize a model with 6 rows, 14 columns and 12 nonzeros
+Model fingerprint: 0xcee932d4
+Model has 3 quadratic constraints
+Model has 3 general constraints
+Variable types: 14 continuous, 0 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  QMatrix range    [1e+00, 6e+06]
+  Objective range  [4e+00, 2e+01]
+  Bounds range     [4e+02, 1e+07]
+  RHS range        [4e+02, 4e+02]
+Presolve removed 5 rows and 8 columns
+Presolve time: 0.00s
+Presolved: 22 rows, 12 columns, 41 nonzeros
+Presolved model has 6 bilinear constraint(s)
+
+Solving non-convex MIQCP
+
+Variable types: 12 continuous, 0 integer (0 binary)
+Root barrier log...
+
+Ordering time: 0.00s
+
+Barrier statistics:
+ AA&#39; NZ     : 6.000e+00
+ Factor NZ  : 1.000e+01
+ Factor Ops : 3.000e+01 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   5.86739250e+03 -6.71598434e+03  7.89e+04 0.00e+00  7.81e+03     0s
+   1   5.79243327e+03 -4.35146449e+03  0.00e+00 4.51e-17  1.01e+03     0s
+   2   5.78491928e+03  5.56129062e+03  0.00e+00 6.29e-18  2.24e+01     0s
+   3   5.60951100e+03  5.58885407e+03  0.00e+00 0.00e+00  2.07e+00     0s
+   4   5.60001029e+03  5.59998854e+03  0.00e+00 3.25e-19  2.18e-03     0s
+   5   5.60000001e+03  5.59999999e+03  0.00e+00 6.27e-13  2.18e-06     0s
+   6   5.60000000e+03  5.60000000e+03  0.00e+00 7.72e-16  2.18e-09     0s
+   7   5.60000000e+03  5.60000000e+03  0.00e+00 8.67e-19  2.18e-12     0s
+
+Barrier solved model in 7 iterations and 0.02 seconds (0.00 work units)
+Optimal objective 5.60000000e+03
+
+Extra simplex iterations after uncrush: 1
+
+Root relaxation: objective 5.600000e+03, 5 iterations, 0.01 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 5600.00000    0    4          - 5600.00000      -     -    0s
+     0     0 5600.00000    0    4          - 5600.00000      -     -    0s
+     0     2 5600.00000    0    4          - 5600.00000      -     -    0s
+H 4467  1927                    5600.0006928 5600.00000  0.00%   1.6    0s
+
+Explored 4467 nodes (7189 simplex iterations) in 0.19 seconds (0.01 work units)
+Thread count was 32 (of 32 available processors)
+
+Solution count 1: 5600 
+
+Optimal solution found (tolerance 1.00e-04)
+Warning: max constraint violation (3.9062e-03) exceeds tolerance
+Best objective 5.600000692807e+03, best bound 5.600000000000e+03, gap 0.0000%
+Set parameter Method to value 2
+Gurobi Optimizer version 11.0.2 build v11.0.2rc0 (linux64 - &quot;CentOS Linux 7 (Core)&quot;)
+
+CPU model: AMD EPYC 7351 16-Core Processor, instruction set [SSE2|AVX|AVX2]
+Thread count: 32 physical cores, 32 logical processors, using up to 32 threads
+
+Optimize a model with 6 rows, 14 columns and 12 nonzeros
+Model fingerprint: 0xac4bb344
+Model has 3 quadratic constraints
+Model has 3 general constraints
+Variable types: 14 continuous, 0 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  QMatrix range    [1e+00, 6e+06]
+  Objective range  [5e+00, 2e+01]
+  Bounds range     [4e+02, 1e+07]
+  RHS range        [4e+02, 4e+02]
+Presolve removed 5 rows and 8 columns
+Presolve time: 0.00s
+Presolved: 22 rows, 12 columns, 41 nonzeros
+Presolved model has 6 bilinear constraint(s)
+
+Solving non-convex MIQCP
+
+Variable types: 12 continuous, 0 integer (0 binary)
+Root barrier log...
+
+Ordering time: 0.00s
+
+Barrier statistics:
+ AA&#39; NZ     : 6.000e+00
+ Factor NZ  : 1.000e+01
+ Factor Ops : 3.000e+01 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   6.00000000e+03 -6.31598434e+03  6.79e+04 0.00e+00  7.31e+03     0s
+   1   6.00000000e+03 -3.40669849e+03  0.00e+00 6.94e-18  9.41e+02     0s
+   2   6.00000000e+03  5.99059330e+03  0.00e+00 6.94e-18  9.41e-01     0s
+   3   6.00000000e+03  5.99999059e+03  0.00e+00 0.00e+00  9.41e-04     0s
+   4   6.00000000e+03  5.99999999e+03  0.00e+00 4.37e-24  9.41e-07     0s
+   5   6.00000000e+03  6.00000000e+03  0.00e+00 3.04e-24  9.41e-10     0s
+
+Barrier solved model in 5 iterations and 0.01 seconds (0.00 work units)
+Optimal objective 6.00000000e+03
+
+
+Root relaxation: objective 6.000000e+03, 4 iterations, 0.01 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 6000.00000    0    6          - 6000.00000      -     -    0s
+     0     0 6000.00000    0    6          - 6000.00000      -     -    0s
+     0     2 6000.00000    0    6          - 6000.00000      -     -    0s
+H  192   100                    6000.0000000 6000.00000  0.00%   1.3    0s
+
+Explored 245 nodes (312 simplex iterations) in 0.05 seconds (0.00 work units)
+Thread count was 32 (of 32 available processors)
+
+Solution count 1: 6000 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.000000000000e+03, best bound 6.000000000000e+03, gap 0.0000%
+Set parameter Method to value 2
+Gurobi Optimizer version 11.0.2 build v11.0.2rc0 (linux64 - &quot;CentOS Linux 7 (Core)&quot;)
+
+CPU model: AMD EPYC 7351 16-Core Processor, instruction set [SSE2|AVX|AVX2]
+Thread count: 32 physical cores, 32 logical processors, using up to 32 threads
+
+Optimize a model with 6 rows, 14 columns and 12 nonzeros
+Model fingerprint: 0x1c94ba1b
+Model has 3 quadratic constraints
+Model has 3 general constraints
+Variable types: 14 continuous, 0 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  QMatrix range    [1e+00, 6e+06]
+  Objective range  [6e+00, 2e+01]
+  Bounds range     [4e+02, 1e+07]
+  RHS range        [4e+02, 4e+02]
+Presolve removed 5 rows and 8 columns
+Presolve time: 0.00s
+Presolved: 22 rows, 12 columns, 41 nonzeros
+Presolved model has 6 bilinear constraint(s)
+
+Solving non-convex MIQCP
+
+Variable types: 12 continuous, 0 integer (0 binary)
+Root barrier log...
+
+Ordering time: 0.00s
+
+Barrier statistics:
+ AA&#39; NZ     : 6.000e+00
+ Factor NZ  : 1.000e+01
+ Factor Ops : 3.000e+01 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   6.14782407e+03 -5.91598434e+03  6.65e+04 1.95e-03  7.23e+03     0s
+   1   6.20341015e+03 -3.06879754e+03  0.00e+00 1.04e-17  9.27e+02     0s
+   2   6.19527275e+03  5.95560926e+03  0.00e+00 0.00e+00  2.40e+01     0s
+   3   6.02018308e+03  5.97508089e+03  0.00e+00 0.00e+00  4.51e+00     0s
+   4   6.00021295e+03  5.99996873e+03  0.00e+00 2.68e-19  2.44e-02     0s
+   5   6.00000021e+03  5.99999999e+03  0.00e+00 8.91e-11  2.44e-05     0s
+   6   6.00000000e+03  6.00000000e+03  0.00e+00 9.59e-14  2.44e-08     0s
+   7   6.00000000e+03  6.00000000e+03  0.00e+00 9.58e-17  2.44e-11     0s
+
+Barrier solved model in 7 iterations and 0.02 seconds (0.00 work units)
+Optimal objective 6.00000000e+03
+
+Extra simplex iterations after uncrush: 1
+
+Root relaxation: objective 6.000000e+03, 5 iterations, 0.01 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 6000.00000    0    4          - 6000.00000      -     -    0s
+     0     0 6000.00000    0    4          - 6000.00000      -     -    0s
+H    0     0                    6000.0067499 6000.00000  0.00%     -    0s
+
+Explored 1 nodes (5 simplex iterations) in 0.03 seconds (0.00 work units)
+Thread count was 32 (of 32 available processors)
+
+Solution count 1: 6000.01 
+
+Optimal solution found (tolerance 1.00e-04)
+Warning: max constraint violation (3.9062e-03) exceeds tolerance
+Best objective 6.000006749886e+03, best bound 6.000000000000e+03, gap 0.0001%
+Set parameter Method to value 2
+Gurobi Optimizer version 11.0.2 build v11.0.2rc0 (linux64 - &quot;CentOS Linux 7 (Core)&quot;)
+
+CPU model: AMD EPYC 7351 16-Core Processor, instruction set [SSE2|AVX|AVX2]
+Thread count: 32 physical cores, 32 logical processors, using up to 32 threads
+
+Optimize a model with 6 rows, 14 columns and 12 nonzeros
+Model fingerprint: 0xb4494f8e
+Model has 3 quadratic constraints
+Model has 3 general constraints
+Variable types: 14 continuous, 0 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  QMatrix range    [1e+00, 6e+06]
+  Objective range  [1e+01, 2e+01]
+  Bounds range     [4e+02, 1e+07]
+  RHS range        [4e+02, 4e+02]
+Presolve removed 5 rows and 8 columns
+Presolve time: 0.00s
+Presolved: 22 rows, 12 columns, 41 nonzeros
+Presolved model has 6 bilinear constraint(s)
+
+Solving non-convex MIQCP
+
+Variable types: 12 continuous, 0 integer (0 binary)
+Root barrier log...
+
+Ordering time: 0.00s
+
+Barrier statistics:
+ AA&#39; NZ     : 6.000e+00
+ Factor NZ  : 1.000e+01
+ Factor Ops : 3.000e+01 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   6.73912034e+03 -4.31598434e+03  6.65e+04 9.77e-03  7.19e+03     0s
+   1   6.94437023e+03 -2.13574332e+03  0.00e+00 6.94e-18  9.08e+02     0s
+   2   6.74363195e+03  5.93954897e+03  0.00e+00 9.54e-18  8.04e+01     0s
+   3   6.00795756e+03  5.96047329e+03  0.00e+00 8.67e-19  4.75e+00     0s
+   4   6.00000812e+03  5.99996016e+03  0.00e+00 1.67e-18  4.80e-03     0s
+   5   6.00000001e+03  5.99999996e+03  0.00e+00 4.34e-19  4.80e-06     0s
+   6   6.00000000e+03  6.00000000e+03  0.00e+00 0.00e+00  4.80e-09     0s
+
+Barrier solved model in 6 iterations and 0.02 seconds (0.00 work units)
+Optimal objective 6.00000000e+03
+
+Extra simplex iterations after uncrush: 1
+
+Root relaxation: objective 6.000000e+03, 5 iterations, 0.01 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 6000.00000    0    4          - 6000.00000      -     -    0s
+     0     0 6000.00000    0    4          - 6000.00000      -     -    0s
+H    0     0                    6000.0000000 6000.00000  0.00%     -    0s
+     0     0 6000.00000    0    4 6000.00000 6000.00000  0.00%     -    0s
+
+Explored 1 nodes (5 simplex iterations) in 0.03 seconds (0.00 work units)
+Thread count was 32 (of 32 available processors)
+
+Solution count 1: 6000 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.000000000002e+03, best bound 6.000000000002e+03, gap 0.0000%
+Set parameter Method to value 2
+Gurobi Optimizer version 11.0.2 build v11.0.2rc0 (linux64 - &quot;CentOS Linux 7 (Core)&quot;)
+
+CPU model: AMD EPYC 7351 16-Core Processor, instruction set [SSE2|AVX|AVX2]
+Thread count: 32 physical cores, 32 logical processors, using up to 32 threads
+
+Optimize a model with 6 rows, 14 columns and 12 nonzeros
+Model fingerprint: 0xacefb630
+Model has 3 quadratic constraints
+Model has 3 general constraints
+Variable types: 14 continuous, 0 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  QMatrix range    [1e+00, 6e+06]
+  Objective range  [1e+01, 2e+01]
+  Bounds range     [4e+02, 1e+07]
+  RHS range        [4e+02, 4e+02]
+Presolve removed 5 rows and 8 columns
+Presolve time: 0.00s
+Presolved: 22 rows, 12 columns, 41 nonzeros
+Presolved model has 6 bilinear constraint(s)
+
+Solving non-convex MIQCP
+
+Variable types: 12 continuous, 0 integer (0 binary)
+Root barrier log...
+
+Ordering time: 0.00s
+
+Barrier statistics:
+ AA&#39; NZ     : 6.000e+00
+ Factor NZ  : 1.000e+01
+ Factor Ops : 3.000e+01 (less than 1 second per iteration)
+ Threads    : 1
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0   7.47824067e+03 -2.31598434e+03  6.65e+04 1.95e-02  7.14e+03     0s
+   1   7.69605683e+03 -1.01943136e+03  0.00e+00 1.73e-17  8.72e+02     0s
+   2   6.96692162e+03  5.95616533e+03  0.00e+00 6.94e-18  1.01e+02     0s
+   3   6.00230082e+03  5.99002797e+03  0.00e+00 8.67e-19  1.23e+00     0s
+   4   6.00000228e+03  5.99999001e+03  0.00e+00 6.98e-19  1.23e-03     0s
+   5   6.00000000e+03  5.99999999e+03  0.00e+00 0.00e+00  1.23e-06     0s
+   6   6.00000000e+03  6.00000000e+03  0.00e+00 0.00e+00  1.23e-09     0s
+
+Barrier solved model in 6 iterations and 0.02 seconds (0.00 work units)
+Optimal objective 6.00000000e+03
+
+Extra simplex iterations after uncrush: 1
+
+Root relaxation: objective 6.000000e+03, 5 iterations, 0.01 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 6000.00000    0    4          - 6000.00000      -     -    0s
+     0     0 6000.00000    0    4          - 6000.00000      -     -    0s
+     0     2 6000.00000    0    4          - 6000.00000      -     -    0s
+* 3830  3154              88    6000.3514970 6000.00000  0.01%   1.5    0s
+
+Explored 6989 nodes (10653 simplex iterations) in 0.15 seconds (0.00 work units)
+Thread count was 32 (of 32 available processors)
+
+Solution count 1: 6000.35 
+
+Optimal solution found (tolerance 1.00e-04)
+Warning: max constraint violation (3.0518e-05) exceeds tolerance
+Best objective 6.000351497047e+03, best bound 6.000000000000e+03, gap 0.0059%
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span><span class="n">flows_g1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;g1 (w compressor)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span><span class="n">flows_g5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;g5&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;compressor price&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7ffea7d285c0&gt;
+</pre></div>
+</div>
+<img alt="../_images/f82ac6639b5e177b8bd0729f0d822a83e49d59e69e1398cceeeaf29c7410191d.png" src="../_images/f82ac6639b5e177b8bd0729f0d822a83e49d59e69e1398cceeeaf29c7410191d.png" />
 </div>
 </div>
 </section>
@@ -731,6 +1440,24 @@ p_5 5082173865214 Pa
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="Problem07.02.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Problem 7.2</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="IEG_course_project.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Course project</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
