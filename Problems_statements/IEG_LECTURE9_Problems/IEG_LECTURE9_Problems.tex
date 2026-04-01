@@ -2,7 +2,7 @@
 \usepackage{graphicx} % Required for inserting images
 \usepackage{url}
 \usepackage{hyperref}
-\title{IEG_Problems_Lecture8}
+\title{IEG_Problems_Lecture9}
 \author{martavictoriaperez }
 \date{April 2026}
 
@@ -45,17 +45,17 @@ Emissions (tCO2/MWh thermal energy)	& 0.336	& 0.198 \\
 \
 
 \begin{problem}{9.2}
-Use the model built in PyPSA described in Problem 8.2 and assume that methane gas emits 0.198 tCO2 per MWh of thermal energy contained in the gas. 
+Build the model of Portugal described in Problem 3.1 in PyPSA and assume that methane gas emits 0.198 tCO2 per MWh of thermal energy contained in the gas. 
 
-Consider the annualized capital costs and marginal generation costs for the different technologies in the following table.
+Consider the annualised capital costs and marginal generation costs for the different technologies in the following table.
 
 \begin{table}[h]
     \centering
     \begin{tabular}{|c|c|c|}
     \hline
-        Technology & Annualized capital costs (EUR/MW/a) & Marginal generation costs (EUR/MWh) \\
+        Technology & Annualised capital costs (EUR/MW/a) & Marginal generation costs (EUR/MWh) \\
     \hline
-    Onshower Wind &  101,644 & 0 \\
+    	Onshore Wind &  101,644 & 0 \\
          Solar PV &  51,346 & 0 \\
          OCGT & 47,718 &  64.7  \\
          CCGT & 104,788 &  46.8   \\
@@ -81,12 +81,14 @@ Limit the maximum CO$_2$ emissions to 5 MtCO2/year.
 
 \begin{problem}{9.3}
 
-For the model built in PyPSA described in Problem 9.2 but not including the CCGT generator with exogenous capacity.
+Build the model described in Problem 3.2 in PyPSA (i.e. the problem above but not including the CCGT generator with exogenous capacity).
 
 \begin{itemize}
-\item[a)] Calculate the revenues collected by the OCGT plant throughout the year and show that their sum is equal to its costs.
-\item[b)] Solve the problem for different CO$_2$ values ranging from 5 MtCO2/year to zero. Plot the total system cost and the required CO$_2$ prices as a function of the emissions allowance.
+	\item[a)] Solve the problem for different CO$_2$ values ranging from 5 MtCO2/year to zero. Plot the total system cost and the required CO$_2$ prices as a function of the emissions allowance.
+	\item[b)] Show that setting a CO$_2$ limit is equivalent to a carbon tax. Use your results from a) for the appropriate carbon taxes. Compare total system costs, emissions, and costs for carbon.
 \end{itemize}
+
+
 
 \end{problem}
 
