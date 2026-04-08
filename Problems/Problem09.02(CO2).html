@@ -227,6 +227,10 @@
 <li class="toctree-l1"><a class="reference internal" href="Problem07.01.html">Problem 7.1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Problem07.02.html">Problem 7.2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Problem07.03.html">Problem 7.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem08.01.html">Problem 8.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem08.02.html">Problem 8.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem08.03.html">Problem 8.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem08.04.html">Problem 8.4</a></li>
 <li class="toctree-l1"><a class="reference internal" href="IEG_course_project.html">Course project</a></li>
 
 
@@ -476,8 +480,8 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="problem-9-2">
 <h1>Problem 9.2<a class="headerlink" href="#problem-9-2" title="Link to this heading">#</a></h1>
 <p><strong>Integrated Energy Grids</strong></p>
-<p><strong>Problem 9.2. Join capacity and dispatch optimization with storage and CO2 emissions limits.</strong></p>
-<p><strong>Use the model built in PyPSA described in Problem 8.2 and assume that methane gas emits 0.198 tCO2 per MWh of thermal energy contained in the gas. Limit the maximum CO2 emissions to 5 MtCO2/year.</strong></p>
+<p><strong>Problem 9.2. Joint capacity and dispatch optimization with storage and CO2 emissions limits.</strong></p>
+<p><strong>Build the model of Portugal described in Problem 3.1 in PyPSA and assume that methane gas emits 0.198 tCO2 per MWh of thermal energy contained in the gas. Limit the maximum CO<span class="math notranslate nohighlight">\(_2\)</span> emissions to 5 MtCO2/year.</strong></p>
 <p><strong>a) Calculate the optimal installed capacities and plot the hourly generation and demand during January.</strong></p>
 <p><strong>b) What is the CO2 tax required to attain such CO2 emissions limit?</strong></p>
 <div class="admonition note">
@@ -498,6 +502,13 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pypsa</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set parameter Username
+Set parameter LicenseID to value 2767832
+Academic license - for non-commercial use only - expires 2027-01-20
 </pre></div>
 </div>
 </div>
@@ -950,7 +961,7 @@ The Pandas package is used as a convenient way of managing the datasets.</p>
 <span class="n">n</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
     <span class="s2">&quot;Carrier&quot;</span><span class="p">,</span>
     <span class="n">carriers</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;dodgerblue&quot;</span><span class="p">,</span> <span class="s2">&quot;gold&quot;</span><span class="p">,</span> <span class="s2">&quot;indianred&quot;</span><span class="p">,</span><span class="s2">&quot;yellow-green&quot;</span><span class="p">,</span> <span class="s2">&quot;brown&quot;</span><span class="p">],</span>
+    <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;dodgerblue&quot;</span><span class="p">,</span> <span class="s2">&quot;gold&quot;</span><span class="p">,</span> <span class="s2">&quot;indianred&quot;</span><span class="p">,</span><span class="s2">&quot;#a85522&quot;</span><span class="p">,</span> <span class="s2">&quot;brown&quot;</span><span class="p">],</span>
     <span class="n">co2_emissions</span><span class="o">=</span><span class="p">[</span><span class="n">costs</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="s2">&quot;CO2 intensity&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">carriers</span><span class="p">],</span>
 <span class="p">)</span>
 </pre></div>
@@ -1099,66 +1110,627 @@ The Pandas package is used as a convenient way of managing the datasets.</p>
 <p>We can already solved the model using the open-solver “highs” or the commercial solver “gurobi” with the academic license</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">solver_name</span><span class="o">=</span><span class="s2">&quot;highs&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">solver_name</span><span class="o">=</span><span class="s2">&quot;gurobi&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:pypsa.consistency:The following buses have carriers which are not defined:
 Index([&#39;electricity&#39;], dtype=&#39;object&#39;, name=&#39;name&#39;)
-INFO:linopy.model: Solve problem using Highs solver
+INFO:linopy.model: Solve problem using Gurobi solver
 INFO:linopy.io:Writing objective.
-Writing constraints.: 100%|██████████| 15/15 [00:00&lt;00:00, 76.07it/s]
-Writing continuous variables.: 100%|██████████| 6/6 [00:00&lt;00:00, 582.97it/s]
-INFO:linopy.io: Writing time: 0.3s
+Writing constraints.: 100%|██████████| 15/15 [00:00&lt;00:00, 70.68it/s]
+Writing continuous variables.: 100%|██████████| 6/6 [00:00&lt;00:00, 365.94it/s]
+INFO:linopy.io: Writing time: 0.29s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running HiGHS 1.12.0 (git hash: n/a): Copyright (c) 2025 HiGHS under MIT licence terms
-LP linopy-problem-2k2ybsez has 140165 rows; 61324 cols; 275962 nonzeros
-Coefficient ranges:
-  Matrix  [1e-03, 2e+00]
-  Cost    [1e-02, 1e+05]
-  Bound   [0e+00, 0e+00]
-  RHS     [3e+03, 5e+06]
-WARNING: Problem has some excessively large row bounds
-WARNING:    Consider scaling the    bounds by 1e-1, or setting the user_bound_scale option to -3
-Presolving model
-65719 rows, 56962 cols, 197154 nonzeros  0s
-Dependent equations search running on 17520 equations with time limit of 1000.00s
-Dependent equations search removed 0 rows and 0 nonzeros in 0.00s (limit = 1000.00s)
-65719 rows, 56962 cols, 197154 nonzeros  0s
-Presolve reductions: rows 65719(-74446); columns 56962(-4362); nonzeros 197154(-78808) 
-Solving the presolved LP
-Using EKK dual simplex solver - serial
-  Iteration        Objective     Infeasibilities num(sum)
-          0     0.0000000000e+00 Pr: 8760(4.89297e+07) 0s
-      35027     2.3705361982e+09 Pr: 39910(4.86689e+09); Du: 0(8.03264e-09) 5s
-      42697     2.6934958459e+09 Pr: 17453(2.09919e+08); Du: 0(4.68328e-08) 10s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set parameter Username
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:linopy.constants: Optimization successful: 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Set parameter Username
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set parameter LicenseID to value 2767832
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Set parameter LicenseID to value 2767832
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Academic license - for non-commercial use only - expires 2027-01-20
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Academic license - for non-commercial use only - expires 2027-01-20
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Read LP format model from file /private/var/folders/zg/by4_k0616s98pw41wld9475c0000gp/T/linopy-problem-3wfjioln.lp
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Read LP format model from file /private/var/folders/zg/by4_k0616s98pw41wld9475c0000gp/T/linopy-problem-3wfjioln.lp
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reading time = 0.14 seconds
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Reading time = 0.14 seconds
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>obj: 140165 rows, 61324 columns, 275962 nonzeros
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:obj: 140165 rows, 61324 columns, 275962 nonzeros
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gurobi Optimizer version 13.0.0 build v13.0.0rc1 (mac64[arm] - Darwin 25.3.0 25D2128)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Gurobi Optimizer version 13.0.0 build v13.0.0rc1 (mac64[arm] - Darwin 25.3.0 25D2128)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU model: Apple M3
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:CPU model: Apple M3
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimize a model with 140165 rows, 61324 columns and 275962 nonzeros (Min)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Optimize a model with 140165 rows, 61324 columns and 275962 nonzeros (Min)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model fingerprint: 0xab1a659f
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Model fingerprint: 0xab1a659f
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model has 35044 linear objective coefficients
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Model has 35044 linear objective coefficients
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coefficient statistics:
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Coefficient statistics:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Matrix range     [1e-03, 2e+00]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  Matrix range     [1e-03, 2e+00]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Objective range  [1e-02, 1e+05]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  Objective range  [1e-02, 1e+05]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Bounds range     [0e+00, 0e+00]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  Bounds range     [0e+00, 0e+00]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  RHS range        [3e+03, 5e+06]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  RHS range        [3e+03, 5e+06]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Presolve removed 74446 rows and 4362 columns
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Presolve removed 74446 rows and 4362 columns
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Presolve time: 0.06s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Presolve time: 0.06s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Presolved: 65719 rows, 56962 columns, 197154 nonzeros
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Presolved: 65719 rows, 56962 columns, 197154 nonzeros
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Showing barrier log only...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Showing barrier log only...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ordering time: 0.01s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Ordering time: 0.01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Barrier statistics:
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Barrier statistics:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Dense cols : 4
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy: Dense cols : 4
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> AA&#39; NZ     : 1.577e+05
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy: AA&#39; NZ     : 1.577e+05
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Factor NZ  : 7.408e+05 (roughly 60 MB of memory)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy: Factor NZ  : 7.408e+05 (roughly 60 MB of memory)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Factor Ops : 8.664e+06 (less than 1 second per iteration)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy: Factor Ops : 8.664e+06 (less than 1 second per iteration)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Threads    : 1
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy: Threads    : 1
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                  Objective                Residual
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:                  Objective                Residual
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iter       Primal          Dual         Primal    Dual     Compl     Time
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Iter       Primal          Dual         Primal    Dual     Compl     Time
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   0   5.26767651e+11 -2.68683502e+11  7.87e+09 1.56e-13  1.37e+09     0s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:   0   5.26767651e+11 -2.68683502e+11  7.87e+09 1.56e-13  1.37e+09     0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   1   5.57687789e+11 -3.45835111e+11  1.26e+09 5.14e+02  2.76e+08     0s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:   1   5.57687789e+11 -3.45835111e+11  1.26e+09 5.14e+02  2.76e+08     0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   2   5.01540495e+11 -2.96262362e+11  1.13e+08 6.98e+01  3.95e+07     0s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:   2   5.01540495e+11 -2.96262362e+11  1.13e+08 6.98e+01  3.95e+07     0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   3   1.77766588e+11 -1.02571523e+11  6.28e-08 3.31e+00  3.69e+06     0s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:   3   1.77766588e+11 -1.02571523e+11  6.28e-08 3.31e+00  3.69e+06     0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   4   5.76707291e+10 -1.40657402e+10  2.24e-07 2.83e-01  7.17e+05     0s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:   4   5.76707291e+10 -1.40657402e+10  2.24e-07 2.83e-01  7.17e+05     0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   5   1.58902629e+10 -8.05701714e+08  1.23e-07 1.60e-13  1.49e+05     0s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:   5   1.58902629e+10 -8.05701714e+08  1.23e-07 1.60e-13  1.49e+05     0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   6   9.18000665e+09  5.94356513e+08  1.04e-07 9.82e-11  7.58e+04     0s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:   6   9.18000665e+09  5.94356513e+08  1.04e-07 9.82e-11  7.58e+04     0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   7   5.54220688e+09  1.11980427e+09  1.79e-07 5.53e-10  3.89e+04     0s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:   7   5.54220688e+09  1.11980427e+09  1.79e-07 5.53e-10  3.89e+04     0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   8   4.30191392e+09  1.51420269e+09  3.46e-07 5.82e-10  2.45e+04     0s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:   8   4.30191392e+09  1.51420269e+09  3.46e-07 5.82e-10  2.45e+04     0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   9   3.75813449e+09  1.75111367e+09  1.23e-07 1.75e-10  1.76e+04     0s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:   9   3.75813449e+09  1.75111367e+09  1.23e-07 1.75e-10  1.76e+04     0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  10   3.51789605e+09  1.95521462e+09  1.15e-07 5.82e-11  1.37e+04     0s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  10   3.51789605e+09  1.95521462e+09  1.15e-07 5.82e-11  1.37e+04     0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  11   3.14237311e+09  2.29915698e+09  3.73e-09 3.78e-10  7.41e+03     0s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  11   3.14237311e+09  2.29915698e+09  3.73e-09 3.78e-10  7.41e+03     0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  12   2.97098384e+09  2.53321290e+09  1.83e-07 1.31e-09  3.84e+03     0s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  12   2.97098384e+09  2.53321290e+09  1.83e-07 1.31e-09  3.84e+03     0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  13   2.93124630e+09  2.60631533e+09  1.68e-07 2.91e-10  2.85e+03     0s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  13   2.93124630e+09  2.60631533e+09  1.68e-07 2.91e-10  2.85e+03     0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  14   2.89065030e+09  2.62732281e+09  2.46e-07 9.60e-10  2.31e+03     0s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  14   2.89065030e+09  2.62732281e+09  2.46e-07 9.60e-10  2.31e+03     0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  15   2.88231447e+09  2.65051594e+09  1.30e-07 2.36e-10  2.04e+03     0s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  15   2.88231447e+09  2.65051594e+09  1.30e-07 2.36e-10  2.04e+03     0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  16   2.85646273e+09  2.68354358e+09  5.40e-07 1.75e-10  1.52e+03     0s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  16   2.85646273e+09  2.68354358e+09  5.40e-07 1.75e-10  1.52e+03     0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  17   2.82256244e+09  2.70122014e+09  4.32e-07 2.33e-10  1.07e+03     0s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  17   2.82256244e+09  2.70122014e+09  4.32e-07 2.33e-10  1.07e+03     0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  18   2.81602828e+09  2.70708808e+09  1.30e-07 1.02e-09  9.56e+02     0s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  18   2.81602828e+09  2.70708808e+09  1.30e-07 1.02e-09  9.56e+02     0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  19   2.80072265e+09  2.71557043e+09  8.87e-07 7.28e-12  7.48e+02     0s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  19   2.80072265e+09  2.71557043e+09  8.87e-07 7.28e-12  7.48e+02     0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  20   2.78973630e+09  2.72503455e+09  1.41e-06 1.02e-09  5.68e+02     1s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  20   2.78973630e+09  2.72503455e+09  1.41e-06 1.02e-09  5.68e+02     1s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  21   2.78506795e+09  2.72833800e+09  9.16e-07 2.18e-11  4.98e+02     1s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  21   2.78506795e+09  2.72833800e+09  9.16e-07 2.18e-11  4.98e+02     1s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  22   2.77957631e+09  2.73584285e+09  8.05e-07 2.33e-10  3.84e+02     1s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  22   2.77957631e+09  2.73584285e+09  8.05e-07 2.33e-10  3.84e+02     1s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  23   2.77616369e+09  2.74193244e+09  6.85e-07 6.75e-14  3.01e+02     1s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  23   2.77616369e+09  2.74193244e+09  6.85e-07 6.75e-14  3.01e+02     1s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  24   2.77014702e+09  2.74636894e+09  9.09e-07 6.69e-10  2.09e+02     1s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  24   2.77014702e+09  2.74636894e+09  9.09e-07 6.69e-10  2.09e+02     1s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  25   2.76847539e+09  2.75209491e+09  1.66e-06 1.16e-10  1.44e+02     1s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  25   2.76847539e+09  2.75209491e+09  1.66e-06 1.16e-10  1.44e+02     1s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  26   2.76270770e+09  2.75570757e+09  2.93e-06 7.28e-10  6.15e+01     1s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  26   2.76270770e+09  2.75570757e+09  2.93e-06 7.28e-10  6.15e+01     1s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  27   2.76144523e+09  2.75693169e+09  1.12e-06 9.09e-11  3.96e+01     1s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  27   2.76144523e+09  2.75693169e+09  1.12e-06 9.09e-11  3.96e+01     1s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  28   2.76106435e+09  2.75746927e+09  1.61e-06 8.73e-10  3.16e+01     1s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  28   2.76106435e+09  2.75746927e+09  1.61e-06 8.73e-10  3.16e+01     1s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  29   2.76062616e+09  2.75825524e+09  5.96e-07 1.35e-10  2.08e+01     1s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  29   2.76062616e+09  2.75825524e+09  5.96e-07 1.35e-10  2.08e+01     1s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  30   2.76046591e+09  2.75864329e+09  1.27e-06 4.07e-10  1.60e+01     1s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  30   2.76046591e+09  2.75864329e+09  1.27e-06 4.07e-10  1.60e+01     1s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  31   2.76032698e+09  2.75900056e+09  1.88e-06 2.44e-10  1.16e+01     1s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  31   2.76032698e+09  2.75900056e+09  1.88e-06 2.44e-10  1.16e+01     1s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  32   2.76005922e+09  2.75977852e+09  1.49e-07 2.33e-10  2.46e+00     1s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  32   2.76005922e+09  2.75977852e+09  1.49e-07 2.33e-10  2.46e+00     1s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  33   2.76001518e+09  2.75991761e+09  2.60e-06 1.75e-10  8.57e-01     1s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  33   2.76001518e+09  2.75991761e+09  2.60e-06 1.75e-10  8.57e-01     1s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  34   2.76000406e+09  2.75994071e+09  1.25e-06 1.16e-10  5.56e-01     1s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  34   2.76000406e+09  2.75994071e+09  1.25e-06 1.16e-10  5.56e-01     1s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  35   2.75999882e+09  2.75997512e+09  1.34e-07 3.78e-10  2.08e-01     1s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  35   2.75999882e+09  2.75997512e+09  1.34e-07 3.78e-10  2.08e-01     1s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  36   2.75999202e+09  2.75999124e+09  6.93e-07 7.57e-10  6.88e-03     1s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  36   2.75999202e+09  2.75999124e+09  6.93e-07 7.57e-10  6.88e-03     1s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  37   2.75999166e+09  2.75999164e+09  9.31e-08 8.44e-10  1.67e-04     1s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  37   2.75999166e+09  2.75999164e+09  9.31e-08 8.44e-10  1.67e-04     1s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  38   2.75999165e+09  2.75999165e+09  3.95e-07 8.75e-09  2.36e-07     1s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  38   2.75999165e+09  2.75999165e+09  3.95e-07 8.75e-09  2.36e-07     1s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  39   2.75999165e+09  2.75999165e+09  2.64e-07 4.97e-09  5.85e-10     1s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  39   2.75999165e+09  2.75999165e+09  2.64e-07 4.97e-09  5.85e-10     1s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Barrier solved model in 39 iterations and 1.07 seconds (1.30 work units)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Barrier solved model in 39 iterations and 1.07 seconds (1.30 work units)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimal objective 2.75999165e+09
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Optimal objective 2.75999165e+09
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crossover log...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Crossover log...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    8836 DPushes remaining with DInf 0.0000000e+00                 1s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:    8836 DPushes remaining with DInf 0.0000000e+00                 1s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       0 DPushes remaining with DInf 0.0000000e+00                 1s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:       0 DPushes remaining with DInf 0.0000000e+00                 1s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning: Markowitz tolerance tightened to 0.5
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Warning: Markowitz tolerance tightened to 0.5
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    7784 PPushes remaining with PInf 0.0000000e+00                 1s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:    7784 PPushes remaining with PInf 0.0000000e+00                 1s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       0 PPushes remaining with PInf 0.0000000e+00                 3s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:       0 PPushes remaining with PInf 0.0000000e+00                 3s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Push phase complete: Pinf 0.0000000e+00, Dinf 1.8156943e-09      3s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:  Push phase complete: Pinf 0.0000000e+00, Dinf 1.8156943e-09      3s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crossover time: 1.59 seconds (5.76 work units)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Crossover time: 1.59 seconds (5.76 work units)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Solved with barrier
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Solved with barrier
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration    Objective       Primal Inf.    Dual Inf.      Time
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Iteration    Objective       Primal Inf.    Dual Inf.      Time
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    7863    2.7599916e+09   0.000000e+00   0.000000e+00      3s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:    7863    2.7599916e+09   0.000000e+00   0.000000e+00      3s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Solved in 7863 iterations and 2.74 seconds (7.35 work units)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Solved in 7863 iterations and 2.74 seconds (7.35 work units)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimal objective  2.759991647e+09
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:gurobipy:Optimal objective  2.759991647e+09
+INFO:linopy.constants: Optimization successful: 
 Status: ok
 Termination condition: optimal
 Solution: 61324 primals, 140165 duals
 Objective: 2.76e+09
 Solver model: available
-Solver message: Optimal
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      48059     2.7599916471e+09 Pr: 0(0); Du: 0(8.90469e-10) 13s
+Solver message: 2
 
-Performed postsolve
-Solving the original LP from the solution after postsolve
-
-Model name          : linopy-problem-2k2ybsez
-Model status        : Optimal
-Simplex   iterations: 48059
-Objective value     :  2.7599916471e+09
-P-D objective error :  4.9238768605e-15
-HiGHS run time      :         13.40
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-fix-p-lower, Generator-fix-p-upper, Generator-ext-p-lower, Generator-ext-p-upper, StorageUnit-ext-p_dispatch-lower, StorageUnit-ext-p_dispatch-upper, StorageUnit-ext-p_store-lower, StorageUnit-ext-p_store-upper, StorageUnit-ext-state_of_charge-lower, StorageUnit-ext-state_of_charge-upper, StorageUnit-energy_balance were not assigned to the network.
+INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-fix-p-lower, Generator-fix-p-upper, Generator-ext-p-lower, Generator-ext-p-upper, StorageUnit-ext-p_dispatch-lower, StorageUnit-ext-p_dispatch-upper, StorageUnit-ext-p_store-lower, StorageUnit-ext-p_store-upper, StorageUnit-ext-state_of_charge-lower, StorageUnit-ext-state_of_charge-upper, StorageUnit-energy_balance were not assigned to the network.
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;ok&#39;, &#39;optimal&#39;)
@@ -1174,7 +1746,7 @@ HiGHS run time      :         13.40
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.7599916471150183
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.7599916471150063
 </pre></div>
 </div>
 </div>
@@ -1188,7 +1760,7 @@ HiGHS run time      :         13.40
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>name
-OCGT      -0.000000
+OCGT       0.000000
 onwind    12.476224
 solar     10.342911
 CCGT       6.000000
@@ -1232,7 +1804,7 @@ dtype: float64
 <p>We can plot the dispatch of every generator thoughout January</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">generators_t</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;2015-01&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">area</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;dispatch&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">generators_t</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;2015-01&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">area</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;dispatch&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">n</span><span class="o">.</span><span class="n">generators_t</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">carriers</span><span class="o">.</span><span class="n">color</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1240,7 +1812,7 @@ dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;snapshot&#39;, ylabel=&#39;dispatch&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/156ea71a31caca7b95b691fa3bb8529dd222be7bba981ff3b805a1bc2e3c0110.png" src="../_images/156ea71a31caca7b95b691fa3bb8529dd222be7bba981ff3b805a1bc2e3c0110.png" />
+<img alt="../_images/4c48edc86bc4b768d2e3144f81219b3d5cd11266da124df41dd644f0087ad4f6.png" src="../_images/4c48edc86bc4b768d2e3144f81219b3d5cd11266da124df41dd644f0087ad4f6.png" />
 </div>
 </div>
 <p>We can also plot the charging and discharging of the battery</p>
@@ -1254,7 +1826,7 @@ dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;snapshot&#39;, ylabel=&#39;battery&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/4cf3359e4def1561073559d64884bbdd18b61e557c1b7a06ed3d474b9ddf6a01.png" src="../_images/4cf3359e4def1561073559d64884bbdd18b61e557c1b7a06ed3d474b9ddf6a01.png" />
+<img alt="../_images/49dd5a756d825c1bcb45c2c82139f7628604251b65c55d69f14719adcf0127c5.png" src="../_images/49dd5a756d825c1bcb45c2c82139f7628604251b65c55d69f14719adcf0127c5.png" />
 </div>
 </div>
 <p><strong>b) What is the CO2 tax required to attain such CO2 emissions limit?</strong></p>
