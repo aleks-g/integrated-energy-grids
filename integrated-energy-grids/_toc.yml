@@ -44,8 +44,9 @@ chapters:
 - file: Problems/Problem08.02
 - file: Problems/Problem08.03
 - file: Problems/Problem08.04
-# - file: Problems/Problem09.02(CO2)
-# - file: Problems/Problem09.03(CO2)
+- file: Problems/Problem09.01(CO2)
+- file: Problems/Problem09.02(CO2)
+- file: Problems/Problem09.03(CO2)
 # - file: Problems/Problem10.01
 # - file: Problems/Problem10.02
 # - file: Problems/Problem11.01
