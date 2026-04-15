@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Problem 5.2 &#8212; integrated-energy-grids</title>
+    <title>Problem 9.1 &#8212; integrated-energy-grids</title>
   
   
   
@@ -60,12 +60,12 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Problems/Problem05.02';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Problems/Problem09.01(CO2)';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Problem 5.3" href="Problem05.03.html" />
-    <link rel="prev" title="Problem 5.1" href="Problem05.01.html" />
+    <link rel="next" title="Problem 9.2" href="Problem09.02%28CO2%29.html" />
+    <link rel="prev" title="Problem 8.4" href="Problem08.04.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -216,7 +216,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Problem04.03.html">Problem 4.3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Problem04.04.html">Problem 4.4</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Problem05.01.html">Problem 5.1</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Problem 5.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Problem05.02.html">Problem 5.2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Problem05.03.html">Problem 5.3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Problem05.04.html">Problem 5.4</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro-gurobipy.html">Introduction to <code class="docutils literal notranslate"><span class="pre">gurobipy</span></code></a></li>
@@ -231,7 +231,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Problem08.02.html">Problem 8.2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Problem08.03.html">Problem 8.3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Problem08.04.html">Problem 8.4</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Problem09.01%28CO2%29.html">Problem 9.1</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Problem 9.1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Problem09.02%28CO2%29.html">Problem 9.2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Problem09.03%28CO2%29.html">Problem 9.3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="IEG_course_project.html">Course project</a></li>
@@ -291,7 +291,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/aleks-g/integrated-energy-grids/blob/main/integrated-energy-grids/Problems/Problem05.02.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/aleks-g/integrated-energy-grids/blob/main/integrated-energy-grids/Problems/Problem09.01(CO2).ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -339,7 +339,7 @@
       
       
       
-      <li><a href="https://github.com/aleks-g/integrated-energy-grids/issues/new?title=Issue%20on%20page%20%2FProblems/Problem05.02.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/aleks-g/integrated-energy-grids/issues/new?title=Issue%20on%20page%20%2FProblems/Problem09.01(CO2).html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -369,7 +369,7 @@
       
       
       
-      <li><a href="../_sources/Problems/Problem05.02.ipynb" target="_blank"
+      <li><a href="../_sources/Problems/Problem09.01(CO2).ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -451,7 +451,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Problem 5.2</h1>
+    <h1>Problem 9.1</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -465,132 +465,105 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="problem-5-2">
-<h1>Problem 5.2<a class="headerlink" href="#problem-5-2" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="problem-9-1">
+<h1>Problem 9.1<a class="headerlink" href="#problem-9-1" title="Link to this heading">#</a></h1>
 <p><strong>Integrated Energy Grids</strong></p>
-<p><strong>Problem 5.2</strong></p>
-<p><strong>This is a continuation of Problem 4.2 from Lecture 4.</strong></p>
-<p><strong>a) Assuming that the reactance in the links is <span class="math notranslate nohighlight">\(x_l\)</span>=1, calculate the Power Transfer Distribution Factor (PTDF) matrix</strong></p>
-<p>We will use the package <a class="reference external" href="https://numpy.org/">numpy</a> to operate with matrices.</p>
+<p><strong>Problem 9.1</strong></p>
+<p><strong>Producing electricity in coal and gas power plants entails the efficiency, CO2emissions and
+fuel cost shown in Table 1. What is the cheapest option to produce electricity? Which CO2 tax would be
+necessary to alter the merit order of the two technologies and incentivise lower CO2 emissions per MWh of
+produced electricity?</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy.linalg</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Calculate list of nodes, links, degree, adjacency and Laplacian matrix. (this was already implemented in Problem 4.2)</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nodes</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
-<span class="n">links</span><span class="o">=</span><span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pypsa</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)))</span>
-
-<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
-    <span class="n">D</span><span class="p">[</span><span class="n">node</span><span class="p">,</span> <span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="mi">1</span> <span class="k">if</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">link</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">links</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fuel_cost_coal</span><span class="o">=</span><span class="mf">6.2</span>    <span class="c1">#euro/MWh_th</span>
+<span class="n">efficiency_coal</span><span class="o">=</span><span class="mf">0.33</span>  <span class="c1">#MWh_el/MWh_th</span>
+<span class="n">emissions_coal</span><span class="o">=</span><span class="mf">0.336</span>  <span class="c1">#tonne/MWh_th</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)))</span>
-
-<span class="k">for</span> <span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span> <span class="ow">in</span> <span class="n">links</span><span class="p">:</span>
-    <span class="n">A</span><span class="p">[</span><span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">A</span><span class="p">[</span><span class="n">node_b</span><span class="p">,</span> <span class="n">node_a</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fuel_costs_gas</span><span class="o">=</span><span class="mf">20.1</span>   <span class="c1">#euro/MWh_th</span>
+<span class="n">efficiency_gas</span><span class="o">=</span><span class="mf">0.59</span>   <span class="c1">#MWh_el/MWh_th</span>
+<span class="n">emissions_gas</span><span class="o">=</span><span class="mf">0.198</span>   <span class="c1">#tonne/MWh_th</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="n">D</span> <span class="o">-</span> <span class="n">A</span>
-<span class="n">L</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">el_cost_coal</span> <span class="o">=</span> <span class="n">fuel_cost_coal</span> <span class="o">/</span> <span class="n">efficiency_coal</span>
+<span class="n">el_cost_coal</span>  <span class="c1">#euro/MWh_el</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1., -1.,  0.,  0.,  0.],
-       [-1.,  4., -1., -1., -1.],
-       [ 0., -1.,  2.,  0., -1.],
-       [ 0., -1.,  0.,  1.,  0.],
-       [ 0., -1., -1.,  0.,  2.]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18.78787878787879
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">links</span><span class="p">)))</span>
-
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">links</span><span class="p">):</span>
-    <span class="n">K</span><span class="p">[</span><span class="n">node_a</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">K</span><span class="p">[</span><span class="n">node_b</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-    
-<span class="n">K</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">el_cost_gas</span> <span class="o">=</span> <span class="n">fuel_costs_gas</span> <span class="o">/</span> <span class="n">efficiency_gas</span>
+<span class="n">el_cost_gas</span>  <span class="c1">#euro/MWh_el</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.,  0.,  0.,  0.,  0.],
-       [-1.,  1.,  1.,  1.,  0.],
-       [ 0., -1.,  0.,  0.,  1.],
-       [ 0.,  0., -1.,  0.,  0.],
-       [ 0.,  0.,  0., -1., -1.]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>34.067796610169495
 </pre></div>
 </div>
 </div>
 </div>
-<p>The <strong>PTDF</strong> matrix measures the sensitivity of power flows in each transmission line relative to incremental changes in nodal power injections or withdrawals throughout the electricity network.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">emissions_coal_per_MWh_el</span> <span class="o">=</span> <span class="n">emissions_coal</span> <span class="o">/</span> <span class="n">efficiency_coal</span>
+<span class="n">emissions_coal_per_MWh_el</span>  <span class="c1">#tonne/MWh_el</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0181818181818183
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">emissions_gas_per_MWh_el</span> <span class="o">=</span> <span class="n">emissions_gas</span> <span class="o">/</span> <span class="n">efficiency_gas</span>
+<span class="n">emissions_gas_per_MWh_el</span>  <span class="c1">#tonne/MWh_el</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.3355932203389831
+</pre></div>
+</div>
+</div>
+</div>
+<p>The tax value must be the equal or higher than the one that makes the cost of electricity from gas lower or equal to the cost of electricity from coal.</p>
 <div class="math notranslate nohighlight">
-\[p_\ell = \frac{1}{x_\ell}\sum_{i,j} K_{i\ell}  (L^{-1})_{ij} p_j\]</div>
-<div class="math notranslate nohighlight">
-\[p_\ell = \sum_j \text{PTDF}_{\ell j} p_j\]</div>
-<p>The Power Transfer Distribution Factor (PTDF) matrix can be calculated as
-<span class="math notranslate nohighlight">\(PTDF_{li}=K_{il}(L^{-1})_{ij}\)</span></p>
+\[el\_cost\_gas + emissions\_gas\_per\_MWh\_el \cdot tax \leq el\_cost\_coal + emissions\_coal\_per\_MWh\_el \cdot tax\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PTDF</span><span class="o">=</span><span class="n">K</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">L</span><span class="p">))</span>
-<span class="n">PTDF</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tax</span><span class="o">=</span><span class="p">(</span><span class="n">el_cost_gas</span> <span class="o">-</span> <span class="n">el_cost_coal</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">emissions_coal_per_MWh_el</span> <span class="o">-</span> <span class="n">emissions_gas_per_MWh_el</span><span class="p">)</span>
+<span class="n">tax</span>  <span class="c1">#euro/tonne</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 8.00000000e-01, -2.00000000e-01, -2.00000000e-01,
-        -2.00000000e-01, -2.00000000e-01],
-       [ 2.00000000e-01,  2.00000000e-01, -4.66666667e-01,
-         2.00000000e-01, -1.33333333e-01],
-       [ 2.00000000e-01,  2.00000000e-01,  2.00000000e-01,
-        -8.00000000e-01,  2.00000000e-01],
-       [ 2.00000000e-01,  2.00000000e-01, -1.33333333e-01,
-         2.00000000e-01, -4.66666667e-01],
-       [-2.77555756e-17, -2.08166817e-17,  3.33333333e-01,
-         0.00000000e+00, -3.33333333e-01]])
-</pre></div>
-</div>
-</div>
-</div>
-<p><strong>b) Assuming the power injection pattern described in Problem 5.1 determine the flows in the lines of the network.</strong></p>
-<p>The power flows <span class="math notranslate nohighlight">\(p_l\)</span> in the lines of the network can be determined knowing the power injection pattern for the nodes <span class="math notranslate nohighlight">\(p_i\)</span> and the PTDF matrix.</p>
-<p><span class="math notranslate nohighlight">\(p_l=PTDF_{li}p_i\)</span></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_i</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">p_l</span><span class="o">=</span><span class="n">PTDF</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">p_i</span><span class="p">)</span>
-<span class="n">p_l</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-2.        , -3.66666667,  8.        , -1.33333333,  2.33333333])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>22.385252069224983
 </pre></div>
 </div>
 </div>
@@ -628,20 +601,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Problem05.01.html"
+       href="Problem08.04.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Problem 5.1</p>
+        <p class="prev-next-title">Problem 8.4</p>
       </div>
     </a>
     <a class="right-next"
-       href="Problem05.03.html"
+       href="Problem09.02%28CO2%29.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Problem 5.3</p>
+        <p class="prev-next-title">Problem 9.2</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
